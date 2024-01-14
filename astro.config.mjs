@@ -15,8 +15,5 @@ if (isBuild) {
 // https://astro.build/config
 export default defineConfig({
     server: { port: SERVER_PORT },
-    site: BASE_URL,
-    base: '/JJonnick.github.io',
-    outDir: 'public',
-    publicDir: 'static',
+    site: BASE_URL
 });
