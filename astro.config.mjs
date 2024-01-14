@@ -16,6 +16,7 @@ if (isBuild) {
 export default defineConfig({
     server: { port: SERVER_PORT },
     site: BASE_URL,
+    base: '/JJonnick.github.io',
     outDir: 'public',
     publicDir: 'static',
 });
