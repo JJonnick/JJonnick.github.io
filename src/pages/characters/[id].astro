@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+import Content from "../../layouts/Content.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getCharacterByIndex, getCharacters } from "../../services/json"
+
+export function getStaticPaths() {
+    const characters = getCharacters();
+
+    return characters?.map(char => ({
+        params: { id: char.id },
+        props: { char: getCharacterByIndex(char.pos) }
+    }));
+}
+
+const { char } = Astro.props
+---
+
+<Layout title={ char.name }>
+    <Content>
+        <article class="border rounded-lg border-gray-200 w-full p-4 dark:border-gray-600 dark:bg-gray-900 dark:text-white">
+            En progreso...
+        </article>
+    </Content>
+</Layout>

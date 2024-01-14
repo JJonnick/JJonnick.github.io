@@ -1,0 +1,19 @@
+---
+import { type Character } from '../types/character';
+interface Props {
+    id: string;
+    pos: number;
+    char: Character;
+}
+
+const { id, char } = Astro.props
+---
+
+<a href={ `characters/${id}` } class="transition-all flex flex-col items-center rounded-lg border border-neutral-200 dark:bg-neutral-900 hover:scale-105 hover:bg-neutral-200 dark:border-neutral-700 dark:hover:bg-neutral-700">
+    <div class="rounded overflow-hidden p-4 text-center">
+        <img class="w-auto mx-auto max-h-40 h-40 aspect-square object-contain mb-2 rounded-full" src={ char.icon } alt="" loading="lazy" decoding="async">
+        <div>
+          <div class="font-bold text-xl mb-2 text-gray-950 dark:text-white">{ char.name }</div>
+        </div>
+      </div>
+</a>
