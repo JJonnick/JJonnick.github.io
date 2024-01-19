@@ -1,0 +1,21 @@
+---
+import Oculi from './Oculi.astro'
+
+interface Props {
+    anemo: number
+    dendro: number
+    electro: number
+    geo: number
+    hydro: number
+}
+
+const { anemo, dendro, electro, geo, hydro } = Astro.props
+---
+
+<div class="grid sm:grid-cols-5 gap-4">
+    <Oculi quantity={ anemo } image="/oculis/anemoculus.webp" />
+    <Oculi quantity={ geo } image="/oculis/geoculus.webp" />
+    <Oculi quantity={ electro } image="/oculis/electroculus.webp" />
+    <Oculi quantity={ dendro } image="/oculis/dendroculus.webp" />
+    <Oculi quantity={ hydro } image="/oculis/hydroculus.webp" />
+</div>

@@ -1,5 +1,5 @@
 import json from "../../DATA.json";
-import { type CharacterJson } from "../types/character";
+import { type CharacterJson, type Stats } from "@/types";
 
 export const getCharacters = (): CharacterJson[] => {
     const { characters } = json;
@@ -18,7 +18,7 @@ export const getCharacterByIndex = (index: number) => {
     return characters[index];
 }
 
-export const getStats = () => {
+export const getStats = (): Stats => {
     const { accounts, stats } = json;
 
     return {
