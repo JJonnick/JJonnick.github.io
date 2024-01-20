@@ -1,5 +1,9 @@
 ---
 import Chest from './Chest.astro'
+import commonChestImg from '@assets/chests/common.webp'
+import exquisiteChestImg from '@assets/chests/exquisite.webp'
+import preciousChestImg from '@assets/chests/precious.webp'
+import luxuriousChestImg from '@assets/chests/luxurious.webp'
 
 interface Props {
     common: number
@@ -12,8 +16,8 @@ const { common, exquisite, precious, luxurious } = Astro.props
 ---
 
 <div class="grid sm:grid-cols-2 gap-4">
-    <Chest quantity={ common } image="/chests/common.webp" />
-    <Chest quantity={ exquisite } image="/chests/exquisite.webp" />
-    <Chest quantity={ precious } image="/chests/precious.webp" />
-    <Chest quantity={ luxurious } image="/chests/luxurious.webp" />
+    <Chest quantity={ common } image={ commonChestImg } />
+    <Chest quantity={ exquisite } image={ exquisiteChestImg } />
+    <Chest quantity={ precious } image={ preciousChestImg } />
+    <Chest quantity={ luxurious } image={ luxuriousChestImg } />
 </div>
