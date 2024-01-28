@@ -999,5 +999,205 @@
         "luxurious_chests": 230,
         "unlocked_waypoints": 400,
         "unlocked_domains": 55
-    }
+    },
+    "explorations": [
+        {
+            "id": 9,
+            "parent_id": 0,
+            "name": "Fontaine",
+            "raw_explored": 840,
+            "type": "Reputation",
+            "level": 10,
+            "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Fengdan.png",
+            "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_Fengdan.png",
+            "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_Fengdan.png",
+            "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_Fengdan.png",
+            "map_url": "",
+            "offerings": [
+                {
+                    "name": "Fountain of Lucine",
+                    "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterOffering_DewTemple.png",
+                    "level": 40
+                },
+                {
+                    "name": "Reputation",
+                    "icon": "",
+                    "level": 10
+                }
+            ],
+            "explored": 84.0
+        },
+        {
+            "id": 8,
+            "parent_id": 0,
+            "name": "Sumeru",
+            "raw_explored": 1000,
+            "type": "Reputation",
+            "level": 10,
+            "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Xumi.png",
+            "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_Xumi.png",
+            "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_Xumi.png",
+            "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_Xumi.png",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_heade&utm_source=hoyolab&utm_medium=battlechronicler#/map/2?shown_types=&center=3334.91,-3897.00&zoom=-1.00",
+            "offerings": [
+                {
+                    "name": "Tree of Dreams",
+                    "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterOffering_DreamTree.png",
+                    "level": 50
+                },
+                {
+                    "name": "Reputation",
+                    "icon": "",
+                    "level": 10
+                }
+            ],
+            "explored": 100.0
+        },
+        {
+            "id": 7,
+            "parent_id": 6,
+            "name": "The Chasm: Underground Mines",
+            "raw_explored": 1000,
+            "type": "Offering",
+            "level": 10,
+            "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_ChasmsMaw.png",
+            "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_ChasmsMaw.png",
+            "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_ChasmsMaw.png",
+            "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_ChasmsMaw.png",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header#/map/9?center=-71.00,32.00&zoom=-1.00&shown_types=",
+            "offerings": [
+                {
+                    "name": "Lumenstone Adjuvant",
+                    "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterOffering_Lumenstone.png",
+                    "level": 10
+                }
+            ],
+            "explored": 100.0
+        },
+        {
+            "id": 6,
+            "parent_id": 0,
+            "name": "The Chasm",
+            "raw_explored": 1000,
+            "type": "Offering",
+            "level": 10,
+            "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_ChasmsMaw.png",
+            "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_ChasmsMaw.png",
+            "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_ChasmsMaw.png",
+            "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_ChasmsMaw.png",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header#/map/9?center=-71.00,32.00&zoom=-1.00&shown_types=",
+            "offerings": [
+                {
+                    "name": "Lumenstone Adjuvant",
+                    "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterOffering_Lumenstone.png",
+                    "level": 10
+                }
+            ],
+            "explored": 100.0
+        },
+        {
+            "id": 5,
+            "parent_id": 0,
+            "name": "Enkanomiya",
+            "raw_explored": 1000,
+            "type": "Offering",
+            "level": 0,
+            "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Enkanomiya.png",
+            "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_Enkanomiya.png",
+            "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_Enkanomiya.png",
+            "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_Enkanomiya.png",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header&ts=123&lang=en-us#/map/7?shown_types=2&center=-1.00,199.00&zoom=-2.00",
+            "offerings": [],
+            "explored": 100.0
+        },
+        {
+            "id": 4,
+            "parent_id": 0,
+            "name": "Inazuma",
+            "raw_explored": 1000,
+            "type": "Reputation",
+            "level": 10,
+            "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Daoqi.png",
+            "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_Daoqi.png",
+            "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_Daoqi.png",
+            "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_Daoqi.png",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header#/map/2?shown_types=&center=5329.96,2489.19&zoom=-1.00",
+            "offerings": [
+                {
+                    "name": "Sacred Sakura's Favor",
+                    "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterOffering_Oraionokami.png",
+                    "level": 50
+                },
+                {
+                    "name": "Reputation",
+                    "icon": "",
+                    "level": 10
+                }
+            ],
+            "explored": 100.0
+        },
+        {
+            "id": 3,
+            "parent_id": 0,
+            "name": "Dragonspine",
+            "raw_explored": 1000,
+            "type": "Offering",
+            "level": 12,
+            "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Dragonspine.png",
+            "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_Dragonspine.png",
+            "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_Dragonspine.png",
+            "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_Dragonspine.png",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header#/map/2?shown_types=&center=1183.49,-116.41&zoom=0.00",
+            "offerings": [
+                {
+                    "name": "Frostbearing Tree",
+                    "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterOffering_Eldertree.png",
+                    "level": 12
+                }
+            ],
+            "explored": 100.0
+        },
+        {
+            "id": 2,
+            "parent_id": 0,
+            "name": "Liyue",
+            "raw_explored": 1000,
+            "type": "Reputation",
+            "level": 8,
+            "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Liyue.png",
+            "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_Liyue.png",
+            "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_Liyue.png",
+            "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_Liyue.png",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header#/map/2?shown_types=&center=2602.08,-1612.55&zoom=-1.00",
+            "offerings": [
+                {
+                    "name": "Reputation",
+                    "icon": "",
+                    "level": 8
+                }
+            ],
+            "explored": 100.0
+        },
+        {
+            "id": 1,
+            "parent_id": 0,
+            "name": "Mondstadt",
+            "raw_explored": 1000,
+            "type": "Reputation",
+            "level": 8,
+            "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Mengde.png",
+            "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_Mengde.png",
+            "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_Mengde.png",
+            "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_Mengde.png",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header#/map/2?shown_types=&center=-111.00,-201.00&zoom=-1.00",
+            "offerings": [
+                {
+                    "name": "Reputation",
+                    "icon": "",
+                    "level": 8
+                }
+            ],
+            "explored": 100.0
+        }
+    ]
 }
