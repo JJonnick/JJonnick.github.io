@@ -729,7 +729,7 @@
         {
             "constellation": 0,
             "element": "Geo",
-            "friendship": 8,
+            "friendship": 9,
             "icon": "https://genshin.jmp.blue/characters/albedo/icon-big",
             "level": 20,
             "name": "Albedo",
@@ -745,7 +745,7 @@
         {
             "constellation": 5,
             "element": "Pyro",
-            "friendship": 6,
+            "friendship": 7,
             "icon": "https://genshin.jmp.blue/characters/thoma/icon-big",
             "level": 20,
             "name": "Thoma",
@@ -889,7 +889,7 @@
         {
             "constellation": 6,
             "element": "Pyro",
-            "friendship": 2,
+            "friendship": 3,
             "icon": "https://genshin.jmp.blue/characters/chevreuse/icon-big",
             "level": 1,
             "name": "Chevreuse",
