@@ -1011,7 +1011,7 @@
             "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_ChenYuVale.png",
             "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_ChenYuVale.png",
             "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_ChenYuVale.png",
-            "map_url": "",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header&bbs_theme=dark&bbs_theme_device=0#/map/2?shown_types=&center=518.00,-2908.00&zoom=-1.00",
             "offerings": [],
             "explored": 100.0
         },
@@ -1026,7 +1026,7 @@
             "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_ChenYuVale.png",
             "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_ChenYuVale.png",
             "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_ChenYuVale.png",
-            "map_url": "",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header&bbs_theme=dark&bbs_theme_device=0#/map/2?shown_types=&center=518.00,-2908.00&zoom=-1.00",
             "offerings": [],
             "explored": 100.0
         },
@@ -1041,7 +1041,7 @@
             "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_ChenYuVale.png",
             "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_ChenYuVale.png",
             "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_ChenYuVale.png",
-            "map_url": "",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header&bbs_theme=dark&bbs_theme_device=0#/map/2?shown_types=&center=518.00,-2908.00&zoom=-1.00",
             "offerings": [],
             "explored": 100.0
         },
@@ -1049,7 +1049,7 @@
             "id": 9,
             "parent_id": 0,
             "name": "Fontaine",
-            "raw_explored": 840,
+            "raw_explored": 900,
             "type": "Reputation",
             "level": 10,
             "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Fengdan.png",
@@ -1061,7 +1061,7 @@
                 {
                     "name": "Fountain of Lucine",
                     "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterOffering_DewTemple.png",
-                    "level": 40
+                    "level": 47
                 },
                 {
                     "name": "Reputation",
@@ -1069,7 +1069,7 @@
                     "level": 10
                 }
             ],
-            "explored": 84.0
+            "explored": 90.0
         },
         {
             "id": 8,
@@ -1254,7 +1254,7 @@
             "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_ChenYuVale.png",
             "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_ChenYuVale.png",
             "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_ChenYuVale.png",
-            "map_url": "",
+            "map_url": "https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header&bbs_theme=dark&bbs_theme_device=0#/map/2?shown_types=&center=518.00,-2908.00&zoom=-1.00",
             "offerings": [
                 {
                     "name": "Rainjade Oblation",
