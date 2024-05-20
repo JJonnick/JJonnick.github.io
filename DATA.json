@@ -472,6 +472,22 @@
         },
         {
             "constellation": 6,
+            "element": "Pyro",
+            "friendship": 1,
+            "icon": "https://genshin.jmp.blue/characters/arlecchino/icon-big",
+            "level": 90,
+            "name": "Arlecchino",
+            "rarity": 5,
+            "weapon": {
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_u1536f/2b3bb7660e47a0e4c6348409f6efd84c.png",
+                "level": 90,
+                "name": "Crimson Moon's Semblance",
+                "rarity": 5,
+                "refinement": 5
+            }
+        },
+        {
+            "constellation": 6,
             "element": "Hydro",
             "friendship": 0,
             "icon": "https://genshin.jmp.blue/characters/traveler-hydro/icon-big-lumine",
@@ -500,22 +516,6 @@
                 "name": "Apprentice's Notes",
                 "rarity": 1,
                 "refinement": 1
-            }
-        },
-        {
-            "constellation": 6,
-            "element": "Pyro",
-            "friendship": 1,
-            "icon": "https://genshin.jmp.blue/characters/arlecchino/icon-big",
-            "level": 80,
-            "name": "Arlecchino",
-            "rarity": 5,
-            "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_u1536f/2b3bb7660e47a0e4c6348409f6efd84c.png",
-                "level": 90,
-                "name": "Crimson Moon's Semblance",
-                "rarity": 5,
-                "refinement": 5
             }
         },
         {
@@ -905,7 +905,7 @@
         {
             "constellation": 6,
             "element": "Pyro",
-            "friendship": 6,
+            "friendship": 7,
             "icon": "https://genshin.jmp.blue/characters/chevreuse/icon-big",
             "level": 1,
             "name": "Chevreuse",
@@ -921,7 +921,7 @@
         {
             "constellation": 0,
             "element": "Dendro",
-            "friendship": 3,
+            "friendship": 4,
             "icon": "https://genshin.jmp.blue/characters/tighnari/icon-big",
             "level": 1,
             "name": "Tighnari",
@@ -937,7 +937,7 @@
         {
             "constellation": 0,
             "element": "Electro",
-            "friendship": 3,
+            "friendship": 4,
             "icon": "https://genshin.jmp.blue/characters/cyno/icon-big",
             "level": 1,
             "name": "Cyno",
@@ -1297,20 +1297,20 @@
         }
     ],
     "stats": {
-        "achievements": 1189,
+        "achievements": 1199,
         "anemoculi": 66,
         "characters": 63,
         "common_chests": 2805,
-        "days_active": 1280,
+        "days_active": 1294,
         "dendroculi": 271,
         "electroculi": 181,
-        "exquisite_chests": 2187,
+        "exquisite_chests": 2188,
         "geoculi": 131,
         "hydroculi": 271,
         "luxurious_chests": 256,
         "precious_chests": 681,
-        "spiral_abyss": "11-3",
+        "spiral_abyss": "8-3",
         "unlocked_domains": 56,
-        "unlocked_waypoints": 454
+        "unlocked_waypoints": 455
     }
 }
