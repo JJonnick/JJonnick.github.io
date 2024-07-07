@@ -1,7 +1,8 @@
 {
   "name": "public",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "packageManager": "pnpm@9",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
