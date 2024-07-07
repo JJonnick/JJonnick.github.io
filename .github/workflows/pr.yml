@@ -1,0 +1,17 @@
+name: Pull request
+
+on:
+  pull_request: 
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - name: Check changes
+        run: |
+         pnpm install
+         pnpm run check

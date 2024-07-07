@@ -8,7 +8,7 @@
       "type": "node-terminal"
     },
     {
-      "command": "pnpm install && pnpm run dev",
+      "command": "pnpm run dev",
       "name": "Development server",
       "request": "launch",
       "type": "node-terminal"
