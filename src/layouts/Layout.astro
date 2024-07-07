@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import Header from '@/components/Header.astro';
+import '@fontsource-variable/exo-2';
 interface Props {
 	title: string;
 }
@@ -39,7 +40,7 @@ const { title } = Astro.props;
 		);
 	}
 	html {
-		font-family: system-ui, sans-serif;
+		font-family: 'Exo 2 Variable', sans-serif;
 	}
 	code {
 		font-family:

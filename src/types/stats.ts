@@ -9,6 +9,7 @@ export interface Stats {
     geoculi: number
     electroculi: number
     dendroculi: number
+    hydroculi: number
     common_chests: number
     exquisite_chests: number
     precious_chests: number
