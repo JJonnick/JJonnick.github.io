@@ -4,7 +4,7 @@ import Content from "../../layouts/Content.astro";
 import CardCharacter from "../../components/CardCharacter.astro";
 import { getCharacters, getCharacterByIndex } from "../../services/json";
 
-const characters = await getCharacters();
+const characters = getCharacters();
 ---
 
 <Layout title="Lista de personajes">
