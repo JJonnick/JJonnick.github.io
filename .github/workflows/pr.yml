@@ -1,0 +1,15 @@
+name: Pull request
+
+on:
+  pull_request: 
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+      - name: Install, build, and upload your site
+        run: pnpm run check
