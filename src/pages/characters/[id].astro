@@ -14,15 +14,16 @@ export function getStaticPaths() {
 }
 
 const { char } = Astro.props
+const { icon, name, rarity, element } = char
 ---
 
-<Layout title={ char.name }>
+<Layout title={ name }>
     <Content>
         <article class="relative text-center border rounded-lg border-gray-200 w-full p-4 dark:border-gray-600 dark:bg-neutral-900 dark:text-white">
-            <img loading="lazy" class="absolute left-1/2 -translate-x-1/2 -top-[40px] w-[120px] h-[120px] p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 object-contain aspect-square bg-neutral-800" src={ char.icon } alt={`${char.name} avatar`}>
-            <img loading="lazy" class="bg-neutral-700 p-1 rounded-full absolute left-[calc(50%+50px)] top-[35px] -translate-x-1/2" decoding="async" src={ `/elements/${char.element.toLowerCase()}.svg` } alt={ char.element } width="48" height="48" />
-            <h2 class="mt-[80px] text-2xl text-white font-semibold">{ char.name }</h2>
-            <Stars quantity={ char.rarity } />
+            <img transition:name={ `icon-${name}` } loading="lazy" class="absolute left-1/2 -translate-x-1/2 -top-[40px] w-[120px] h-[120px] p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 object-contain aspect-square bg-neutral-800" src={ icon } alt={`${name} avatar`}>
+            <img loading="lazy" class="bg-neutral-700 p-1 rounded-full absolute left-[calc(50%+50px)] top-[35px] -translate-x-1/2" decoding="async" src={ `/elements/${element.toLowerCase()}.svg` } alt={ element } width="48" height="48" />
+            <h2 transition:name={ `text-${name}` } class="mt-[80px] text-2xl text-white font-semibold">{ name }</h2>
+            <Stars quantity={ rarity } />
             En progreso...
         </article>
     </Content>
