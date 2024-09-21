@@ -14,11 +14,11 @@ const { href, char } = Astro.props
     <div class="rounded overflow-hidden p-4 text-center">
         <Image 
           transition:name={ `icon-${char.name}` } 
-          class="mb-2 rounded-full" 
+          class="mb-2 rounded-full min-h-[120px]" 
           src={ char.icon } 
           alt={ char.name }
-          width={ 160 }
-          height={ 160 }
+          width={ 120 }
+          height={ 120 }
           onerror="this.onerror=null; this.src='/fallbacks/icon.svg'"
         />
         <div>
