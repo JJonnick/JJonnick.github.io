@@ -4,7 +4,9 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    prefix: "chore(Actions)"
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "monthly"
+    prefix: "chore(deps)"
