@@ -15,8 +15,8 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1(astro@4.15.11(rollup@4.24.0)(typescript@5.5.3))(tailwindcss@3.4.4)
       '@fontsource-variable/exo-2':
-        specifier: ^5.0.19
-        version: 5.0.19
+        specifier: ^5.1.0
+        version: 5.1.0
       astro:
         specifier: ^4.15.11
         version: 4.15.11(rollup@4.24.0)(typescript@5.5.3)
@@ -343,8 +343,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource-variable/exo-2@5.0.19':
-    resolution: {integrity: sha512-fG/Sqk35fYjpgBlbVAYhwor1hoIl/62EzH7kEiBdK9t8w57dc/6YYO1LJ7PH2xpG5pUV+Kus+jEBv+YRandN0Q==}
+  '@fontsource-variable/exo-2@5.1.0':
+    resolution: {integrity: sha512-ApilCF1EtaTUiGYoKdvSWpE99ztL9rXZrHTQdAUDNOsyJEjKZtl1CUeFTDkCWoXYTSq5yovPHcxFehKe0fPCyQ==}
 
   '@img/sharp-darwin-arm64@0.33.4':
     resolution: {integrity: sha512-p0suNqXufJs9t3RqLBO6vvrgr5OhgbWp76s5gTRvdmxmuv9E1rcaqGUsl3l4mKVmXPkTkTErXediAui4x+8PSA==}
@@ -2505,7 +2505,7 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@fontsource-variable/exo-2@5.0.19': {}
+  '@fontsource-variable/exo-2@5.1.0': {}
 
   '@img/sharp-darwin-arm64@0.33.4':
     optionalDependencies:
