@@ -1067,7 +1067,7 @@
         {
             "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_Nata.png",
             "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_Nata.png",
-            "explored": 43.0,
+            "explored": 49.0,
             "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Nata.png",
             "id": 15,
             "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_Nata.png",
@@ -1087,7 +1087,7 @@
                 }
             ],
             "parent_id": 0,
-            "raw_explored": 430,
+            "raw_explored": 490,
             "type": "Reputation"
         },
         {
