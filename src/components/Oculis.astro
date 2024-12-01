@@ -5,6 +5,7 @@ import geoculiImg from '@assets/oculis/geoculus.webp'
 import electroculiImg from '@assets/oculis/electroculus.webp'
 import dendroculiImg from '@assets/oculis/dendroculus.webp'
 import hydroculiImg from '@assets/oculis/hydroculus.webp'
+import pyroculiImg from '@assets/oculis/pyroculus.webp'
 
 interface Props {
     anemo: number
@@ -12,15 +13,17 @@ interface Props {
     electro: number
     geo: number
     hydro: number
+    pyro: number
 }
 
-const { anemo, dendro, electro, geo, hydro } = Astro.props
+const { anemo, dendro, electro, geo, hydro, pyro } = Astro.props
 ---
 
-<div class="grid sm:grid-cols-5 gap-4">
+<div class="grid sm:grid-cols-6 gap-4">
     <Oculi quantity={ anemo } image={ anemoculiImg } />
     <Oculi quantity={ geo } image={ geoculiImg } />
     <Oculi quantity={ electro } image={ electroculiImg } />
     <Oculi quantity={ dendro } image={ dendroculiImg } />
     <Oculi quantity={ hydro } image={ hydroculiImg } />
+    <Oculi quantity={ pyro } image={ pyroculiImg } />
 </div>
