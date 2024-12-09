@@ -1,8 +1,12 @@
 {
     "accounts": [
         {
+            "game_biz": "hk4e_global",
             "level": 60,
-            "nickname": "Nep-Nep"
+            "nickname": "Nep-Nep",
+            "server": "os_euro",
+            "server_name": "Europe Server",
+            "uid": 700561736
         }
     ],
     "characters": [
@@ -1376,20 +1380,23 @@
         }
     ],
     "stats": {
-        "achievements": 1317,
+        "achievements": 1388,
         "anemoculi": 66,
         "characters": 66,
-        "common_chests": 3003,
-        "days_active": 1433,
+        "common_chests": 3070,
+        "days_active": 1502,
         "dendroculi": 271,
         "electroculi": 181,
-        "exquisite_chests": 2415,
+        "exquisite_chests": 2499,
         "geoculi": 131,
         "hydroculi": 271,
-        "luxurious_chests": 288,
-        "precious_chests": 771,
+        "luxurious_chests": 297,
+        "max_friendship_characters": 59,
+        "precious_chests": 798,
+        "pyroculi": 162,
+        "remarkable_chests": 292,
         "spiral_abyss": "8-3",
         "unlocked_domains": 61,
-        "unlocked_waypoints": 501
+        "unlocked_waypoints": 540
     }
 }
