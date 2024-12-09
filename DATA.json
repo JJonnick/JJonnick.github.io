@@ -1067,7 +1067,7 @@
         {
             "background_image": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterBackground_Nata.png",
             "cover": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterCover_Nata.png",
-            "explored": 59.0,
+            "explored": 63.0,
             "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterIcon_Nata.png",
             "id": 15,
             "inner_icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterInnerIcon_Nata.png",
@@ -1077,7 +1077,7 @@
             "offerings": [
                 {
                     "icon": "https://act-webstatic.hoyoverse.com/game_record/genshin/city_icon/UI_ChapterOffering_PaskTemple.png",
-                    "level": 20,
+                    "level": 30,
                     "name": "Tona's Flame"
                 },
                 {
@@ -1087,7 +1087,7 @@
                 }
             ],
             "parent_id": 0,
-            "raw_explored": 590,
+            "raw_explored": 630,
             "type": "Reputation"
         },
         {
@@ -1386,7 +1386,6 @@
         "exquisite_chests": 2415,
         "geoculi": 131,
         "hydroculi": 271,
-        "pyroculi": 0,
         "luxurious_chests": 288,
         "precious_chests": 771,
         "spiral_abyss": "8-3",
