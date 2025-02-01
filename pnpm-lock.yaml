@@ -10,22 +10,22 @@ importers:
     dependencies:
       '@astrojs/check':
         specifier: ^0.9.4
-        version: 0.9.4(typescript@5.7.2)
+        version: 0.9.4(typescript@5.7.3)
       '@astrojs/tailwind':
         specifier: ^5.1.5
-        version: 5.1.5(astro@5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.2)(yaml@2.5.1))(tailwindcss@3.4.17)
+        version: 5.1.5(astro@5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.3)(yaml@2.5.1))(tailwindcss@3.4.17)
       '@fontsource-variable/exo-2':
         specifier: ^5.1.1
         version: 5.1.1
       astro:
         specifier: ^5.1.10
-        version: 5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.2)(yaml@2.5.1)
+        version: 5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.3)(yaml@2.5.1)
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
       typescript:
-        specifier: ^5.7.2
-        version: 5.7.2
+        specifier: ^5.7.3
+        version: 5.7.3
     devDependencies:
       sharp:
         specifier: ^0.33.5
@@ -1709,8 +1709,8 @@ packages:
   typescript-auto-import-cache@0.3.3:
     resolution: {integrity: sha512-ojEC7+Ci1ij9eE6hp8Jl9VUNnsEKzztktP5gtYNRMrTmfXVwA1PITYYAkpxCvvupdSYa/Re51B6KMcv1CTZEUA==}
 
-  typescript@5.7.2:
-    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
+  typescript@5.7.3:
+    resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2083,12 +2083,12 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
-  '@astrojs/check@0.9.4(typescript@5.7.2)':
+  '@astrojs/check@0.9.4(typescript@5.7.3)':
     dependencies:
-      '@astrojs/language-server': 2.15.0(typescript@5.7.2)
+      '@astrojs/language-server': 2.15.0(typescript@5.7.3)
       chokidar: 4.0.1
       kleur: 4.1.5
-      typescript: 5.7.2
+      typescript: 5.7.3
       yargs: 17.7.2
     transitivePeerDependencies:
       - prettier
@@ -2098,12 +2098,12 @@ snapshots:
 
   '@astrojs/internal-helpers@0.4.2': {}
 
-  '@astrojs/language-server@2.15.0(typescript@5.7.2)':
+  '@astrojs/language-server@2.15.0(typescript@5.7.3)':
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/yaml2ts': 0.2.1
       '@jridgewell/sourcemap-codec': 1.5.0
-      '@volar/kit': 2.4.5(typescript@5.7.2)
+      '@volar/kit': 2.4.5(typescript@5.7.3)
       '@volar/language-core': 2.4.5
       '@volar/language-server': 2.4.5
       '@volar/language-service': 2.4.5
@@ -2149,9 +2149,9 @@ snapshots:
     dependencies:
       prismjs: 1.29.0
 
-  '@astrojs/tailwind@5.1.5(astro@5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.2)(yaml@2.5.1))(tailwindcss@3.4.17)':
+  '@astrojs/tailwind@5.1.5(astro@5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.3)(yaml@2.5.1))(tailwindcss@3.4.17)':
     dependencies:
-      astro: 5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.2)(yaml@2.5.1)
+      astro: 5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.3)(yaml@2.5.1)
       autoprefixer: 10.4.20(postcss@8.5.1)
       postcss: 8.5.1
       postcss-load-config: 4.0.2(postcss@8.5.1)
@@ -2528,12 +2528,12 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@volar/kit@2.4.5(typescript@5.7.2)':
+  '@volar/kit@2.4.5(typescript@5.7.3)':
     dependencies:
       '@volar/language-service': 2.4.5
       '@volar/typescript': 2.4.5
       typesafe-path: 0.2.2
-      typescript: 5.7.2
+      typescript: 5.7.3
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
 
@@ -2620,7 +2620,7 @@ snapshots:
 
   array-iterate@2.0.1: {}
 
-  astro@5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.2)(yaml@2.5.1):
+  astro@5.1.10(jiti@1.21.6)(rollup@4.24.0)(typescript@5.7.3)(yaml@2.5.1):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.2
@@ -2667,7 +2667,7 @@ snapshots:
       semver: 7.6.3
       shiki: 1.29.1
       tinyexec: 0.3.2
-      tsconfck: 3.1.4(typescript@5.7.2)
+      tsconfck: 3.1.4(typescript@5.7.3)
       ultrahtml: 1.5.3
       unist-util-visit: 5.0.0
       unstorage: 1.14.4
@@ -2680,7 +2680,7 @@ snapshots:
       yocto-spinner: 0.1.2
       zod: 3.24.1
       zod-to-json-schema: 3.24.1(zod@3.24.1)
-      zod-to-ts: 1.2.0(typescript@5.7.2)(zod@3.24.1)
+      zod-to-ts: 1.2.0(typescript@5.7.3)(zod@3.24.1)
     optionalDependencies:
       sharp: 0.33.5
     transitivePeerDependencies:
@@ -4070,9 +4070,9 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  tsconfck@3.1.4(typescript@5.7.2):
+  tsconfck@3.1.4(typescript@5.7.3):
     optionalDependencies:
-      typescript: 5.7.2
+      typescript: 5.7.3
 
   tslib@2.6.3:
     optional: true
@@ -4085,7 +4085,7 @@ snapshots:
     dependencies:
       semver: 7.6.3
 
-  typescript@5.7.2: {}
+  typescript@5.7.3: {}
 
   ufo@1.5.4: {}
 
@@ -4393,9 +4393,9 @@ snapshots:
     dependencies:
       zod: 3.24.1
 
-  zod-to-ts@1.2.0(typescript@5.7.2)(zod@3.24.1):
+  zod-to-ts@1.2.0(typescript@5.7.3)(zod@3.24.1):
     dependencies:
-      typescript: 5.7.2
+      typescript: 5.7.3
       zod: 3.24.1
 
   zod@3.24.1: {}
