@@ -21,7 +21,7 @@
             "name": "Ganyu",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/7b4cf0417e345a562a59b66bd7f26f30.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/7e1e4cc9879a7484734efd03ddfeb173.png",
                 "id": 15502,
                 "level": 90,
                 "name": "Amos' Bow",
@@ -42,7 +42,7 @@
             "name": "Yelan",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/0cc33b1418f16bbc3b34704463bd2498.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/2a9455ee9cfffe43068367d4c67dee10.png",
                 "id": 15508,
                 "level": 90,
                 "name": "Aqua Simulacra",
@@ -63,7 +63,7 @@
             "name": "Raiden Shogun",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/d4ddb8f208835a07e3ebb1a7c89bf974.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/1a3e5bfd161e6f73864d4f284afda7a1.png",
                 "id": 13509,
                 "level": 90,
                 "name": "Engulfing Lightning",
@@ -84,7 +84,7 @@
             "name": "Keqing",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/ff35bb978e5b1ed5695eb66a6f1fe8ca.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/4a7d277393f3f94a89fee76c7bad4874.png",
                 "id": 11509,
                 "level": 90,
                 "name": "Mistsplitter Reforged",
@@ -105,7 +105,7 @@
             "name": "Arlecchino",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/0cbd045f07bd5278facb6b66f8106bda.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/6b894de6e420cfca97101ced133079ed.png",
                 "id": 13512,
                 "level": 90,
                 "name": "Crimson Moon's Semblance",
@@ -126,7 +126,7 @@
             "name": "Clorinde",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/6a5e9452a139dd21a236b844f941d1ba.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/36815e76c775c2a0918da939262d8ef8.png",
                 "id": 11515,
                 "level": 90,
                 "name": "Absolution",
@@ -147,7 +147,7 @@
             "name": "Furina",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/2c69b5d44ab5150014977bbd1080ec64.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/c0c442894602235f8cc44ba10d537310.png",
                 "id": 11513,
                 "level": 90,
                 "name": "Splendor of Tranquil Waters",
@@ -168,7 +168,7 @@
             "name": "Dehya",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/29edba022906252d316a036c0388b701.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/5a087ee4d088eb06bf8d73523b098e9a.png",
                 "id": 12511,
                 "level": 90,
                 "name": "Beacon of the Reed Sea",
@@ -189,7 +189,7 @@
             "name": "Nahida",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/edc26ed80756e92bcb7f813fe36cc303.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/57eadabeada9d4d58d4b9462799ca08b.png",
                 "id": 14511,
                 "level": 90,
                 "name": "A Thousand Floating Dreams",
@@ -210,7 +210,7 @@
             "name": "Shenhe",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/17c008470998b73a18689aae2ebf38d1.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/a989ab39841b14c9552a04c594d304b8.png",
                 "id": 13507,
                 "level": 90,
                 "name": "Calamity Queller",
@@ -231,15 +231,36 @@
             "name": "Klee",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/db7dc1d7ec238ad4dd16a31598e21a64.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/724812c8d66a0c73f1f6228f9d2941b2.png",
                 "id": 14502,
                 "level": 90,
                 "name": "Lost Prayer to the Sacred Winds",
                 "rarity": 5,
-                "refinement": 2,
+                "refinement": 3,
                 "type": 10
             },
             "weapon_type": 10
+        },
+        {
+            "collab": false,
+            "constellation": 6,
+            "element": "Pyro",
+            "friendship": 5,
+            "icon": "https://enka.network/ui/UI_AvatarIcon_Mavuika.png",
+            "id": 10000106,
+            "level": 90,
+            "name": "Mavuika",
+            "rarity": 5,
+            "weapon": {
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/9f62ceaec142abce7fa646323691560e.png",
+                "id": 12514,
+                "level": 90,
+                "name": "A Thousand Blazing Suns",
+                "rarity": 5,
+                "refinement": 5,
+                "type": 11
+            },
+            "weapon_type": 11
         },
         {
             "collab": true,
@@ -252,7 +273,7 @@
             "name": "Aloy",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/d990675d8e2c89e557abd2325a67739a.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/1d003db18122bfd38cc5b458641e7e15.png",
                 "id": 15509,
                 "level": 90,
                 "name": "Thundering Pulse",
@@ -273,7 +294,7 @@
             "name": "Yae Miko",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fa2f01c0acc0002b5537ea51e653d62d.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/905a056b925487ff415aca65b960493a.png",
                 "id": 14509,
                 "level": 90,
                 "name": "Kagura's Verity",
@@ -294,11 +315,11 @@
             "name": "Eula",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/6decf8d2c5671bb0598ef42bb3b92eb4.png",
-                "id": 12101,
-                "level": 1,
-                "name": "Waster Greatsword",
-                "rarity": 1,
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/a38c67248e69675ec8d51ff9ea6020d1.png",
+                "id": 12411,
+                "level": 60,
+                "name": "Snow-Tombed Starsilver",
+                "rarity": 4,
                 "refinement": 1,
                 "type": 11
             },
@@ -315,12 +336,12 @@
             "name": "Yoimiya",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/2c9906f19ef1f48b1bb65956cf7554e3.png",
-                "id": 15101,
-                "level": 1,
-                "name": "Hunter's Bow",
-                "rarity": 1,
-                "refinement": 1,
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/7237c10374c37c313e998a397b72f7ab.png",
+                "id": 15405,
+                "level": 20,
+                "name": "Rust",
+                "rarity": 4,
+                "refinement": 5,
                 "type": 12
             },
             "weapon_type": 12
@@ -336,7 +357,7 @@
             "name": "Mona",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/f4160241348d9793f8b4663f161f5833.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/76bba66fb9669e79f56792b1c0c41850.png",
                 "id": 14201,
                 "level": 1,
                 "name": "Pocket Grimoire",
@@ -357,7 +378,7 @@
             "name": "Qiqi",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/62cd97ca3a4b513963294b3b1fe583fa.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/a983b9932bd84e0191489acd9ec737a0.png",
                 "id": 11502,
                 "level": 90,
                 "name": "Skyward Blade",
@@ -378,7 +399,7 @@
             "name": "Diluc",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/3669930d8669523d7ad11c19faee5b44.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/e18157cf28353a38be85240bc6bc4b5c.png",
                 "id": 12502,
                 "level": 90,
                 "name": "Wolf's Gravestone",
@@ -399,7 +420,7 @@
             "name": "Traveler",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/3173912ac13b0b86baa21414ca50b262.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/4f6424fb6893bc442eb4dcb182ad249c.png",
                 "id": 11428,
                 "level": 90,
                 "name": "Sword of Narzissenkreuz",
@@ -420,7 +441,7 @@
             "name": "Kachina",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/3e48c60a8d75b157c8b1e98081a0f897.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/f940002adcab8aab3ac070d81b6900f0.png",
                 "id": 13431,
                 "level": 90,
                 "name": "Footprint of the Rainbow",
@@ -441,7 +462,7 @@
             "name": "Lynette",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/112c5a769363aaad4c075840e8515ee9.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/5b4d8623a29df4b5bfb233d12781135b.png",
                 "id": 11505,
                 "level": 90,
                 "name": "Primordial Jade Cutter",
@@ -462,7 +483,7 @@
             "name": "Faruzan",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/2c9906f19ef1f48b1bb65956cf7554e3.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/e669d802d79ac4331ce570a7003c37ba.png",
                 "id": 15101,
                 "level": 1,
                 "name": "Hunter's Bow",
@@ -483,7 +504,7 @@
             "name": "Layla",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/7ba22961fc4d8c5f5443651293512a73.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/de2988a215bb7bd202a10cd0bb4f5600.png",
                 "id": 11407,
                 "level": 90,
                 "name": "Iron Sting",
@@ -504,7 +525,7 @@
             "name": "Candace",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fcc0057ad1e98c923471906a92dc7d42.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/c65c1b7fc18c6cc3881f15ae6521c463.png",
                 "id": 13101,
                 "level": 1,
                 "name": "Beginner's Protector",
@@ -525,7 +546,7 @@
             "name": "Dori",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/f28532333883cea7e2d306ef991d9252.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/356308e06d3735247f0eff8c6f53ea40.png",
                 "id": 12401,
                 "level": 90,
                 "name": "Favonius Greatsword",
@@ -546,7 +567,7 @@
             "name": "Collei",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/2c9906f19ef1f48b1bb65956cf7554e3.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/e669d802d79ac4331ce570a7003c37ba.png",
                 "id": 15101,
                 "level": 1,
                 "name": "Hunter's Bow",
@@ -567,12 +588,12 @@
             "name": "Kuki Shinobu",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fa62d8adc652fc348854c1a4aeab4a4b.png",
-                "id": 11101,
-                "level": 1,
-                "name": "Dull Blade",
-                "rarity": 1,
-                "refinement": 1,
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/756512bfd961bad14812436296ab97fe.png",
+                "id": 11422,
+                "level": 90,
+                "name": "Toukabou Shigure",
+                "rarity": 4,
+                "refinement": 5,
                 "type": 1
             },
             "weapon_type": 1
@@ -588,7 +609,7 @@
             "name": "Kirara",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/45644465ceb198419180e31f45709d20.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/58d287f5eda48d1993305a3d7c0664d5.png",
                 "id": 11401,
                 "level": 90,
                 "name": "Favonius Sword",
@@ -609,7 +630,7 @@
             "name": "Sayu",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/352ecd32c5065b4106c84701a78f0892.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/1a4892182b730ef5e7baf4be8e9ccdc9.png",
                 "id": 12501,
                 "level": 90,
                 "name": "Skyward Pride",
@@ -630,7 +651,7 @@
             "name": "Rosaria",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/618972e02b8e76134060c746a3692c06.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/65f2df5a6c37e40335b1f1985672880a.png",
                 "id": 13403,
                 "level": 90,
                 "name": "Crescent Pike",
@@ -651,7 +672,7 @@
             "name": "Sucrose",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/e6e7f896ef2d6e874d361ed95f997d07.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/9f6b8001c1349c68fd8b332fc57e07ec.png",
                 "id": 14101,
                 "level": 1,
                 "name": "Apprentice's Notes",
@@ -672,7 +693,7 @@
             "name": "Diona",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fd839d2c8e10d873fd3b3849d74626af.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/41256d8abdc1b0cf81e93ee1a4c7c09a.png",
                 "id": 15403,
                 "level": 90,
                 "name": "Sacrificial Bow",
@@ -693,7 +714,7 @@
             "name": "Fischl",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/32cec04a8227049737ed0951c7e6f3c9.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/4a482e07787398984ce48b1afc831a7a.png",
                 "id": 15501,
                 "level": 90,
                 "name": "Skyward Harp",
@@ -714,12 +735,12 @@
             "name": "Ningguang",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/e6e7f896ef2d6e874d361ed95f997d07.png",
-                "id": 14101,
-                "level": 1,
-                "name": "Apprentice's Notes",
-                "rarity": 1,
-                "refinement": 1,
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/79893f3c3d7a741210d0c2451f8f6148.png",
+                "id": 14405,
+                "level": 20,
+                "name": "Solar Pearl",
+                "rarity": 4,
+                "refinement": 5,
                 "type": 10
             },
             "weapon_type": 10
@@ -735,12 +756,12 @@
             "name": "Chevreuse",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fcc0057ad1e98c923471906a92dc7d42.png",
-                "id": 13101,
-                "level": 1,
-                "name": "Beginner's Protector",
-                "rarity": 1,
-                "refinement": 1,
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/9e27550e1173623e343f15bf498a2690.png",
+                "id": 13426,
+                "level": 90,
+                "name": "Dialogues of the Desert Sages",
+                "rarity": 4,
+                "refinement": 5,
                 "type": 13
             },
             "weapon_type": 13
@@ -756,7 +777,7 @@
             "name": "Yaoyao",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fcc0057ad1e98c923471906a92dc7d42.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/c65c1b7fc18c6cc3881f15ae6521c463.png",
                 "id": 13101,
                 "level": 1,
                 "name": "Beginner's Protector",
@@ -777,7 +798,7 @@
             "name": "Xiangling",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/908ce8304f7f587a61bfa057d4e84435.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/e9f07dbaf622bafe169a20b87524fac2.png",
                 "id": 13401,
                 "level": 50,
                 "name": "Dragon's Bane",
@@ -798,7 +819,7 @@
             "name": "Barbara",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/e6e7f896ef2d6e874d361ed95f997d07.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/9f6b8001c1349c68fd8b332fc57e07ec.png",
                 "id": 14101,
                 "level": 1,
                 "name": "Apprentice's Notes",
@@ -819,7 +840,7 @@
             "name": "Lisa",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/e6e7f896ef2d6e874d361ed95f997d07.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/9f6b8001c1349c68fd8b332fc57e07ec.png",
                 "id": 14101,
                 "level": 1,
                 "name": "Apprentice's Notes",
@@ -840,7 +861,7 @@
             "name": "Noelle",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/438ecb06c3e4585c0045d2288d1be307.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/8324ce0f6a69f97e5d3e724e3892da42.png",
                 "id": 12504,
                 "level": 90,
                 "name": "The Unforged",
@@ -861,7 +882,7 @@
             "name": "Amber",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/01045596b87577fe8f1af6fc16923a35.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/a314e3dc0f6e74e79f1c79dc973f93a4.png",
                 "id": 15301,
                 "level": 20,
                 "name": "Raven Bow",
@@ -882,7 +903,7 @@
             "name": "Kaeya",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fa62d8adc652fc348854c1a4aeab4a4b.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/3780281aeef68a85670d4d427e97c9e5.png",
                 "id": 11101,
                 "level": 1,
                 "name": "Dull Blade",
@@ -903,7 +924,7 @@
             "name": "Chongyun",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/e2f7c50d5ae4f4a95cbe8ea3b3ce8d25.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/aad72c1e8640b95dd77e10accbf8f7b5.png",
                 "id": 12406,
                 "level": 60,
                 "name": "Prototype Archaic",
@@ -924,7 +945,7 @@
             "name": "Albedo",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fa62d8adc652fc348854c1a4aeab4a4b.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/3780281aeef68a85670d4d427e97c9e5.png",
                 "id": 11101,
                 "level": 1,
                 "name": "Dull Blade",
@@ -945,7 +966,7 @@
             "name": "Shikanoin Heizou",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/e6e7f896ef2d6e874d361ed95f997d07.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/9f6b8001c1349c68fd8b332fc57e07ec.png",
                 "id": 14101,
                 "level": 1,
                 "name": "Apprentice's Notes",
@@ -966,7 +987,7 @@
             "name": "Kujou Sara",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/2c9906f19ef1f48b1bb65956cf7554e3.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/e669d802d79ac4331ce570a7003c37ba.png",
                 "id": 15101,
                 "level": 1,
                 "name": "Hunter's Bow",
@@ -987,7 +1008,7 @@
             "name": "Thoma",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fcc0057ad1e98c923471906a92dc7d42.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/c65c1b7fc18c6cc3881f15ae6521c463.png",
                 "id": 13101,
                 "level": 1,
                 "name": "Beginner's Protector",
@@ -1008,7 +1029,7 @@
             "name": "Yanfei",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/5995ab527bc97816844fd46569e20782.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/2d5c81cc514e2d40c608a5821261e11d.png",
                 "id": 14302,
                 "level": 90,
                 "name": "Thrilling Tales of Dragon Slayers",
@@ -1029,7 +1050,7 @@
             "name": "Xinyan",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/6decf8d2c5671bb0598ef42bb3b92eb4.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/ca02f13da2d90c73606c42d2b83c2b5e.png",
                 "id": 12101,
                 "level": 1,
                 "name": "Waster Greatsword",
@@ -1050,7 +1071,7 @@
             "name": "Bennett",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fa62d8adc652fc348854c1a4aeab4a4b.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/3780281aeef68a85670d4d427e97c9e5.png",
                 "id": 11101,
                 "level": 1,
                 "name": "Dull Blade",
@@ -1071,7 +1092,7 @@
             "name": "Xingqiu",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fa62d8adc652fc348854c1a4aeab4a4b.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/3780281aeef68a85670d4d427e97c9e5.png",
                 "id": 11101,
                 "level": 1,
                 "name": "Dull Blade",
@@ -1092,7 +1113,7 @@
             "name": "Beidou",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/5b053c1fb37f19a43324ec1282ff6720.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/0bd1f6e36d3b73304c3b2ea320f514b9.png",
                 "id": 12405,
                 "level": 20,
                 "name": "Rainslasher",
@@ -1113,7 +1134,7 @@
             "name": "Razor",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/799ee8fb49201a2cbda9e6a7c6c75ae1.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/fcb6fdc0748e85c60a0e5d6be0816aa7.png",
                 "id": 12403,
                 "level": 50,
                 "name": "Sacrificial Greatsword",
@@ -1134,7 +1155,7 @@
             "name": "Tartaglia",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/2c9906f19ef1f48b1bb65956cf7554e3.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/e669d802d79ac4331ce570a7003c37ba.png",
                 "id": 15101,
                 "level": 1,
                 "name": "Hunter's Bow",
@@ -1143,27 +1164,6 @@
                 "type": 12
             },
             "weapon_type": 12
-        },
-        {
-            "collab": false,
-            "constellation": 6,
-            "element": "Pyro",
-            "friendship": 2,
-            "icon": "https://enka.network/ui/UI_AvatarIcon_Mavuika.png",
-            "id": 10000106,
-            "level": 1,
-            "name": "Mavuika",
-            "rarity": 5,
-            "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/6decf8d2c5671bb0598ef42bb3b92eb4.png",
-                "id": 12101,
-                "level": 1,
-                "name": "Waster Greatsword",
-                "rarity": 1,
-                "refinement": 1,
-                "type": 11
-            },
-            "weapon_type": 11
         },
         {
             "collab": false,
@@ -1176,7 +1176,7 @@
             "name": "Wanderer",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/e6e7f896ef2d6e874d361ed95f997d07.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/9f6b8001c1349c68fd8b332fc57e07ec.png",
                 "id": 14101,
                 "level": 1,
                 "name": "Apprentice's Notes",
@@ -1197,7 +1197,7 @@
             "name": "Cyno",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fcc0057ad1e98c923471906a92dc7d42.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/c65c1b7fc18c6cc3881f15ae6521c463.png",
                 "id": 13101,
                 "level": 1,
                 "name": "Beginner's Protector",
@@ -1218,7 +1218,7 @@
             "name": "Tighnari",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/2c9906f19ef1f48b1bb65956cf7554e3.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/e669d802d79ac4331ce570a7003c37ba.png",
                 "id": 15101,
                 "level": 1,
                 "name": "Hunter's Bow",
@@ -1239,7 +1239,7 @@
             "name": "Jean",
             "rarity": 5,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fa62d8adc652fc348854c1a4aeab4a4b.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/3780281aeef68a85670d4d427e97c9e5.png",
                 "id": 11101,
                 "level": 1,
                 "name": "Dull Blade",
@@ -1260,7 +1260,7 @@
             "name": "Sethos",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/2c9906f19ef1f48b1bb65956cf7554e3.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/e669d802d79ac4331ce570a7003c37ba.png",
                 "id": 15101,
                 "level": 1,
                 "name": "Hunter's Bow",
@@ -1274,14 +1274,14 @@
             "collab": false,
             "constellation": 2,
             "element": "Pyro",
-            "friendship": 7,
+            "friendship": 8,
             "icon": "https://enka.network/ui/UI_AvatarIcon_Gaming.png",
             "id": 10000092,
             "level": 1,
             "name": "Gaming",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/6decf8d2c5671bb0598ef42bb3b92eb4.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/ca02f13da2d90c73606c42d2b83c2b5e.png",
                 "id": 12101,
                 "level": 1,
                 "name": "Waster Greatsword",
@@ -1302,7 +1302,7 @@
             "name": "Charlotte",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/e6e7f896ef2d6e874d361ed95f997d07.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/9f6b8001c1349c68fd8b332fc57e07ec.png",
                 "id": 14101,
                 "level": 1,
                 "name": "Apprentice's Notes",
@@ -1316,14 +1316,14 @@
             "collab": false,
             "constellation": 6,
             "element": "Cryo",
-            "friendship": 6,
+            "friendship": 7,
             "icon": "https://enka.network/ui/UI_AvatarIcon_Freminet.png",
             "id": 10000085,
             "level": 1,
             "name": "Freminet",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/6decf8d2c5671bb0598ef42bb3b92eb4.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/ca02f13da2d90c73606c42d2b83c2b5e.png",
                 "id": 12101,
                 "level": 1,
                 "name": "Waster Greatsword",
@@ -1344,7 +1344,7 @@
             "name": "Kaveh",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/6decf8d2c5671bb0598ef42bb3b92eb4.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/ca02f13da2d90c73606c42d2b83c2b5e.png",
                 "id": 12101,
                 "level": 1,
                 "name": "Waster Greatsword",
@@ -1365,7 +1365,7 @@
             "name": "Mika",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fcc0057ad1e98c923471906a92dc7d42.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/c65c1b7fc18c6cc3881f15ae6521c463.png",
                 "id": 13101,
                 "level": 1,
                 "name": "Beginner's Protector",
@@ -1386,7 +1386,7 @@
             "name": "Yun Jin",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/fcc0057ad1e98c923471906a92dc7d42.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/c65c1b7fc18c6cc3881f15ae6521c463.png",
                 "id": 13101,
                 "level": 1,
                 "name": "Beginner's Protector",
@@ -1407,7 +1407,7 @@
             "name": "Gorou",
             "rarity": 4,
             "weapon": {
-                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ua4fih/cff71a7818365b2261e1e49953880919.png",
+                "icon": "https://act-webstatic.hoyoverse.com/hk4e/e20200928calculate/item_icon_ub1ajh/4df614e7a5900c3e21b741671b967905.png",
                 "id": 15201,
                 "level": 1,
                 "name": "Seasoned Hunter's Bow",
@@ -1731,11 +1731,11 @@
         }
     ],
     "stats": {
-        "achievements": 1403,
+        "achievements": 1404,
         "anemoculi": 66,
         "characters": 67,
         "common_chests": 3071,
-        "days_active": 1539,
+        "days_active": 1556,
         "dendroculi": 271,
         "electroculi": 181,
         "exquisite_chests": 2502,
