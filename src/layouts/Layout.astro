@@ -1,7 +1,7 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import Header from '@/components/Header.astro';
-import '@fontsource-variable/exo-2';
+import { ClientRouter } from "astro:transitions";
+import Header from "@/components/Header.astro";
+import "@fontsource-variable/exo-2";
 interface Props {
 	title: string;
 }
@@ -18,7 +18,7 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<ViewTransitions />
+		<ClientRouter />
 	</head>
 	<body class="relative dark:bg-slate-950 min-h-dvh">
 		<Header />
@@ -40,7 +40,7 @@ const { title } = Astro.props;
 		);
 	}
 	html {
-		font-family: 'Exo 2 Variable', sans-serif;
+		font-family: "Exo 2 Variable", sans-serif;
 	}
 	code {
 		font-family:
