@@ -1,28 +1,33 @@
 ---
-import { Image } from 'astro:assets';
-import { type Character } from '../types/character'
+import { Image } from "astro:assets";
+import { type Character } from "../types/character";
 
 interface Props {
-    href: string
-    char: Character
+  href: string;
+  char: Character;
 }
 
-const { href, char } = Astro.props
+const { href, char } = Astro.props;
 ---
 
-<a href={ href } class="transition flex flex-col items-center rounded-lg border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900 hover:scale-105">
-    <div class="rounded overflow-hidden p-4 text-center">
-        <Image 
-          transition:name={ `char-icon-${char.id}` } 
-          class="mb-2 rounded-full min-h-[120px]" 
-          src={ char.icon } 
-          alt={ char.name }
-          width={ 120 }
-          height={ 120 }
-          onerror="this.onerror=null; this.src='/fallbacks/icon.svg'"
-        />
-        <div>
-          <h3 transition:name={ `char-name-${char.id}` } class="font-semibold text-xl mb-2 text-gray-950 dark:text-white">{ char.name }</h3>
-        </div>
-      </div>
+<a
+  href={href}
+  class="transition flex flex-col items-center rounded-lg border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900 hover:scale-105"
+>
+  <div class="rounded overflow-hidden p-4 text-center">
+    <Image
+      transition:name={`char-icon-${char.id}`}
+      class="mb-2 rounded-full min-h-[120px]"
+      src={char.icon}
+      alt={char.name}
+      width={120}
+      height={120}
+      onerror="this.onerror=null; this.src='/fallbacks/icon.svg'"
+    />
+    <div>
+      <h3 class="font-semibold text-xl mb-2 text-gray-950 dark:text-white">
+        {char.name}
+      </h3>
+    </div>
+  </div>
 </a>

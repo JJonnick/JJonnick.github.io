@@ -15,7 +15,7 @@ export function getStaticPaths() {
 }
 
 const { char } = Astro.props;
-const { id, icon, name, rarity, element, weapon, constellation } = char;
+const { id, icon, name, rarity, element } = char;
 ---
 
 <Layout title={name}>
@@ -40,7 +40,6 @@ const { id, icon, name, rarity, element, weapon, constellation } = char;
                 height="48"
             />
             <h2
-                transition:name={`char-name-${id}`}
                 class="mt-[80px] text-2xl text-white font-semibold w-fit mx-auto"
             >
                 {name}
