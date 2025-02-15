@@ -15,7 +15,7 @@ export function getStaticPaths() {
 }
 
 const { char } = Astro.props;
-const { icon, name, rarity, element, weapon, constellation } = char;
+const { id, icon, name, rarity, element } = char;
 ---
 
 <Layout title={name}>
@@ -24,7 +24,7 @@ const { icon, name, rarity, element, weapon, constellation } = char;
             class="relative text-center border rounded-lg border-gray-200 w-full p-4 dark:border-gray-600 dark:bg-neutral-900 dark:text-white"
         >
             <Image
-                transition:name={`icon-${name}`}
+                transition:name={`char-icon-${id}`}
                 class="absolute left-1/2 -translate-x-1/2 -top-[40px] p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 bg-neutral-800 min-h-[120px]"
                 src={icon}
                 alt={`${name} avatar`}
@@ -40,34 +40,11 @@ const { icon, name, rarity, element, weapon, constellation } = char;
                 height="48"
             />
             <h2
-                transition:name={`text-${name}`}
                 class="mt-[80px] text-2xl text-white font-semibold w-fit mx-auto"
             >
                 {name}
             </h2>
             <Stars quantity={rarity} />
-
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="text-left">
-                    <h3 class="text-xl font-semibold mb-2">
-                        Detalles del Personaje
-                    </h3>
-                    <div class="space-y-2">
-                        <p>
-                            <span class="font-medium">Arma:</span>
-                            {weapon.name}
-                        </p>
-                        <p>
-                            <span class="font-medium">Elemento:</span>
-                            {element}
-                        </p>
-                        <p>
-                            <span class="font-medium">Constelaciones:</span>
-                            {constellation}
-                        </p>
-                    </div>
-                </div>
-            </div>
         </article>
     </Content>
 </Layout>
