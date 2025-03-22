@@ -4,6 +4,11 @@ import Content from "../../layouts/Content.astro";
 import Layout from "../../layouts/Layout.astro";
 import Stars from "../../components/Stars.astro";
 import { getCharacters, getCharacterById } from "../../services/database";
+import { type Character } from "../../types/character";
+
+interface Props {
+    char: Character;
+}
 
 export async function getStaticPaths() {
     const characters = await getCharacters();
