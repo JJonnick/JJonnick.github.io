@@ -3,15 +3,17 @@ import { Image } from "astro:assets";
 import Content from "../../layouts/Content.astro";
 import Layout from "../../layouts/Layout.astro";
 import Stars from "../../components/Stars.astro";
-import { getCharacterByIndex, getCharacters } from "../../services/json";
+import { getCharacters, getCharacterById } from "../../services/database";
 
-export function getStaticPaths() {
-    const characters = getCharacters();
+export async function getStaticPaths() {
+    const characters = await getCharacters();
 
-    return characters?.map((char) => ({
+    const paths = characters?.map(async (char) => ({
         params: { id: char.id },
-        props: { char: getCharacterByIndex(char.pos) },
+        props: { char: await getCharacterById(char.id) },
     }));
+
+    return Promise.all(paths);
 }
 
 const { char } = Astro.props;

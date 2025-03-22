@@ -5,7 +5,7 @@ import Chests from "@/components/Chests.astro";
 import Oculis from "@/components/Oculis.astro";
 import { getStats } from "@/services/json";
 
-const stats = await getStats();
+const stats = getStats();
 const chests = {
     common: stats.common_chests,
     exquisite: stats.exquisite_chests,
