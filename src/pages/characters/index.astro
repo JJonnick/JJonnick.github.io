@@ -4,13 +4,13 @@ import Content from "../../layouts/Content.astro";
 import CardCharacter from "../../components/CardCharacter.astro";
 import { getCharacters, getCharacterByIndex } from "../../services/json";
 
-const characters = getCharacters();
+const characters = await getCharacters();
 ---
 
 <Layout title="Lista de personajes">
     <Content>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-5 w-full">
-            { characters.map((charPos) => <CardCharacter href={ `/characters/${charPos.id}` } char={ getCharacterByIndex(charPos.pos) } /> ) }
+            { characters.map((charPos) => <CardCharacter href={ `/characters/${charPos.id}` } char={ await getCharacterByIndex(charPos.pos) } /> ) }
         </div>
     </Content>
 </Layout>
