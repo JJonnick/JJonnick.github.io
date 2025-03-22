@@ -20,6 +20,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/tailwind": "^6.0.0",
     "@fontsource-variable/comfortaa": "^5.2.5",
+    "@supabase/supabase-js": "^2.49.1",
     "astro": "^5.5.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.2"

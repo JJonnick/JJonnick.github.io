@@ -3,15 +3,22 @@ import { Image } from "astro:assets";
 import Content from "../../layouts/Content.astro";
 import Layout from "../../layouts/Layout.astro";
 import Stars from "../../components/Stars.astro";
-import { getCharacterByIndex, getCharacters } from "../../services/json";
+import { getCharacters, getCharacterById } from "../../services/database";
+import { type Character } from "../../types/character";
 
-export function getStaticPaths() {
-    const characters = getCharacters();
+interface Props {
+    char: Character;
+}
 
-    return characters?.map((char) => ({
+export async function getStaticPaths() {
+    const characters = await getCharacters();
+
+    const paths = characters?.map(async (char) => ({
         params: { id: char.id },
-        props: { char: getCharacterByIndex(char.pos) },
+        props: { char: await getCharacterById(char.id) },
     }));
+
+    return Promise.all(paths);
 }
 
 const { char } = Astro.props;
@@ -30,7 +37,6 @@ const { id, icon, name, rarity, element } = char;
                 alt={`${name} avatar`}
                 width={120}
                 height={120}
-                onerror="this.onerror=null; this.src='/fallbacks/icon.svg'"
             />
             <Image
                 class="bg-neutral-700 p-1 rounded-full absolute left-[calc(50%+50px)] top-[35px] -translate-x-1/2"

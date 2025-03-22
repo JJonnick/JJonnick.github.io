@@ -4,6 +4,7 @@ export interface Characters {
 
 export interface Character {
     id: number;
+    collab: boolean;
     constellation: number;
     element: string;
     friendship: number;
@@ -11,7 +12,7 @@ export interface Character {
     level: number;
     name: string;
     rarity: number;
-    weapon: Weapon;
+    weapon_type: number;
 }
 
 export interface Weapon {
@@ -20,9 +21,4 @@ export interface Weapon {
     name: string;
     rarity: number;
     refinement: number;
-}
-
-export interface CharacterJson {
-    id: string;
-    pos: number;
 }
