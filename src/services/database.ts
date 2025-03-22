@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { type Character } from "@/types";
+import { type Character, type Account } from "@/types";
 
 const supabaseUrl = import.meta.env.SUPABASE_URL;
 const supabaseKey = import.meta.env.SUPABASE_KEY;
@@ -35,4 +35,14 @@ export const getCharacterById = async (id: number): Promise<Character | null> =>
     }
 
     return data ? data[0] : null;
+}
+
+export const getAccount = async (): Promise<Account> => {
+    const { data } = await supabase
+        .from('account')
+        .select('*, stats(*)')
+        .limit(1)
+        .single();
+
+    return data;
 }

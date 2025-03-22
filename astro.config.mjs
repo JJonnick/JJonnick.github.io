@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 
+import icon from "astro-icon";
+
 const SERVER_PORT = 4321;
 const LIVE_URL = 'https://JJonnick.github.io';
 const LOCAL_URL = `http://localhost:${SERVER_PORT}`;
@@ -18,5 +20,11 @@ export default defineConfig({
     port: SERVER_PORT
   },
   site: BASE_URL,
-  integrations: [tailwind()]
+  integrations: [
+    tailwind(),
+    icon({
+      include: {
+        tabler: ["home", "users", "user", "star", "calendar", "award", "map-pins", "map", "spiral", "star-filled"],
+      }
+    })]
 });

@@ -1,0 +1,16 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    icon: string;
+    label?: string;
+    value: string | number;
+}
+
+const { icon, value, label } = Astro.props;
+---
+
+<div class="flex gap-2 content-center">
+    <Icon name={icon} size={20} />
+    <span>{label ? `${label} ➜ ${value}` : value}</span>
+</div>

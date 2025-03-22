@@ -1,6 +1,13 @@
-export interface Stats {
+interface BaseAccount {
+  uid: number
   nickname: string
   level: number
+  server: string
+  server_name: string
+  game_biz: string
+}
+
+interface Stats {
   achievements: number
   days_active: number
   characters: number
@@ -17,5 +24,8 @@ export interface Stats {
   luxurious_chests: number
   unlocked_waypoints: number
   unlocked_domains: number
-  [key: string]: number | string
+}
+
+export interface Account extends BaseAccount {
+  stats: Stats
 }
