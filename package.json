@@ -22,7 +22,7 @@
     "@fontsource-variable/comfortaa": "^5.2.5",
     "@iconify-json/tabler": "^1.2.17",
     "@supabase/supabase-js": "^2.49.4",
-    "astro": "^5.7.5",
+    "astro": "^5.7.8",
     "astro-icon": "^1.1.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3"
