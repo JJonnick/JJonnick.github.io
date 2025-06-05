@@ -18,8 +18,8 @@ importers:
         specifier: ^5.2.5
         version: 5.2.5
       '@iconify-json/tabler':
-        specifier: ^1.2.18
-        version: 1.2.18
+        specifier: ^1.2.19
+        version: 1.2.19
       '@supabase/supabase-js':
         specifier: ^2.49.10
         version: 2.49.10
@@ -293,8 +293,8 @@ packages:
   '@fontsource-variable/comfortaa@5.2.5':
     resolution: {integrity: sha512-FI7FTiYcmJhVlICoXPW/6bz1C1eyUEn+v+1wTkRJVbxehs9+oxb/FKxjxTMGR75AldnvS8zvDcAZ2gZpwxep0w==}
 
-  '@iconify-json/tabler@1.2.18':
-    resolution: {integrity: sha512-W+8qiJhJpb4dmBw3P7JSM9QhGsFG8GIS3BJWAmrJ/92rzK6NPGUOPfGmswoO+/MuPzQV96ColY9lcUktUKv0pg==}
+  '@iconify-json/tabler@1.2.19':
+    resolution: {integrity: sha512-JDeQTQxHD8KE12pAbPVHX1WFVOPq8D0XfRb/LwYHwGwYE0HP9OIjJ//TKxS1Gt++RirYu6Xsx+Jm5LA5KbykoA==}
 
   '@iconify/tools@4.1.2':
     resolution: {integrity: sha512-q6NzLQYEN9zkDfcyBqD3vItHcZw97w/s++3H3TBxUORr57EfHxj6tOW6fyufDjMq+Vl56WXWaPx1csBPYlI5CA==}
@@ -2864,7 +2864,7 @@ snapshots:
 
   '@fontsource-variable/comfortaa@5.2.5': {}
 
-  '@iconify-json/tabler@1.2.18':
+  '@iconify-json/tabler@1.2.19':
     dependencies:
       '@iconify/types': 2.0.0
 
