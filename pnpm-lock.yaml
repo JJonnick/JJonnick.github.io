@@ -13,7 +13,7 @@ importers:
         version: 0.9.4(typescript@5.9.2)
       '@astrojs/tailwind':
         specifier: ^6.0.2
-        version: 6.0.2(astro@5.12.8(@types/node@24.1.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 6.0.2(astro@5.12.8(@types/node@24.2.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       '@fontsource-variable/comfortaa':
         specifier: ^5.2.6
         version: 5.2.6
@@ -21,11 +21,11 @@ importers:
         specifier: ^1.2.20
         version: 1.2.20
       '@supabase/supabase-js':
-        specifier: ^2.53.0
-        version: 2.53.0
+        specifier: ^2.53.1
+        version: 2.53.1
       astro:
         specifier: ^5.12.8
-        version: 5.12.8(@types/node@24.1.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0)
+        version: 5.12.8(@types/node@24.2.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0)
       astro-icon:
         specifier: ^1.1.5
         version: 1.1.5
@@ -734,8 +734,8 @@ packages:
   '@supabase/storage-js@2.10.4':
     resolution: {integrity: sha512-cvL02GarJVFcNoWe36VBybQqTVRq6wQSOCvTS64C+eyuxOruFIm1utZAY0xi2qKtHJO3EjKaj8iWJKySusDmAQ==}
 
-  '@supabase/supabase-js@2.53.0':
-    resolution: {integrity: sha512-Vg9sl0oFn55cCPaEOsDsRDbxOVccxRrK/cikjL1XbywHEOfyA5SOOEypidMvQLwgoAfnC2S4D9BQwJDcZs7/TQ==}
+  '@supabase/supabase-js@2.53.1':
+    resolution: {integrity: sha512-I+wfrBlBNsN7NlAp5TzhR4jtGuLbP3c5nrxGEE5loS6ltBslKuupLfQtvsq5X7dEMI2UiJBEsnwtonAiHY7Z+w==}
 
   '@swc/helpers@0.5.17':
     resolution: {integrity: sha512-5IKx/Y13RsYd+sauPb2x+U/xZikHjolzfuDgTAl/Tdf3Q8rslRvC19NKDLgAJQ6wsqADk10ntlv08nPFw/gO/A==}
@@ -770,6 +770,9 @@ packages:
 
   '@types/node@24.1.0':
     resolution: {integrity: sha512-ut5FthK5moxFKH2T1CUOC6ctR67rQRvvHdFLCD2Ql6KXmMuCrjsSsRI9UsLCm9M18BMwClv4pn327UvB7eeO1w==}
+
+  '@types/node@24.2.0':
+    resolution: {integrity: sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==}
 
   '@types/phoenix@1.6.6':
     resolution: {integrity: sha512-PIzZZlEppgrpoT2QgbnDU+MMzuR6BbCjllj0bM70lWoejMeNJAxCchxnv7J3XFkI8MpygtRpzXrIlmWUBclP5A==}
@@ -2253,6 +2256,9 @@ packages:
   undici-types@6.20.0:
     resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
+  undici-types@7.10.0:
+    resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
+
   undici-types@7.8.0:
     resolution: {integrity: sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==}
 
@@ -2732,9 +2738,9 @@ snapshots:
     dependencies:
       prismjs: 1.30.0
 
-  '@astrojs/tailwind@6.0.2(astro@5.12.8(@types/node@24.1.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0))(tailwindcss@3.4.17)':
+  '@astrojs/tailwind@6.0.2(astro@5.12.8(@types/node@24.2.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0))(tailwindcss@3.4.17)':
     dependencies:
-      astro: 5.12.8(@types/node@24.1.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0)
+      astro: 5.12.8(@types/node@24.2.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0)
       autoprefixer: 10.4.21(postcss@8.5.3)
       postcss: 8.5.3
       postcss-load-config: 4.0.2(postcss@8.5.3)
@@ -3266,7 +3272,7 @@ snapshots:
     dependencies:
       '@supabase/node-fetch': 2.6.15
 
-  '@supabase/supabase-js@2.53.0':
+  '@supabase/supabase-js@2.53.1':
     dependencies:
       '@supabase/auth-js': 2.71.1
       '@supabase/functions-js': 2.4.5
@@ -3316,6 +3322,10 @@ snapshots:
     dependencies:
       undici-types: 7.8.0
 
+  '@types/node@24.2.0':
+    dependencies:
+      undici-types: 7.10.0
+
   '@types/phoenix@1.6.6': {}
 
   '@types/tar@6.1.13':
@@ -3327,11 +3337,11 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 24.1.0
+      '@types/node': 24.2.0
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 24.1.0
+      '@types/node': 24.2.0
     optional: true
 
   '@ungap/structured-clone@1.3.0': {}
@@ -3433,7 +3443,7 @@ snapshots:
       - debug
       - supports-color
 
-  astro@5.12.8(@types/node@24.1.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0):
+  astro@5.12.8(@types/node@24.2.0)(jiti@1.21.6)(rollup@4.46.2)(typescript@5.9.2)(yaml@2.7.0):
     dependencies:
       '@astrojs/compiler': 2.12.2
       '@astrojs/internal-helpers': 0.7.1
@@ -3489,8 +3499,8 @@ snapshots:
       unist-util-visit: 5.0.0
       unstorage: 1.16.1
       vfile: 6.0.3
-      vite: 6.3.5(@types/node@24.1.0)(jiti@1.21.6)(yaml@2.7.0)
-      vitefu: 1.1.1(vite@6.3.5(@types/node@24.1.0)(jiti@1.21.6)(yaml@2.7.0))
+      vite: 6.3.5(@types/node@24.2.0)(jiti@1.21.6)(yaml@2.7.0)
+      vitefu: 1.1.1(vite@6.3.5(@types/node@24.2.0)(jiti@1.21.6)(yaml@2.7.0))
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
       yocto-spinner: 0.2.3
@@ -5270,6 +5280,8 @@ snapshots:
 
   undici-types@6.20.0: {}
 
+  undici-types@7.10.0: {}
+
   undici-types@7.8.0: {}
 
   undici@6.21.2: {}
@@ -5376,7 +5388,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@6.3.5(@types/node@24.1.0)(jiti@1.21.6)(yaml@2.7.0):
+  vite@6.3.5(@types/node@24.2.0)(jiti@1.21.6)(yaml@2.7.0):
     dependencies:
       esbuild: 0.25.8
       fdir: 6.4.6(picomatch@4.0.3)
@@ -5385,14 +5397,14 @@ snapshots:
       rollup: 4.46.2
       tinyglobby: 0.2.14
     optionalDependencies:
-      '@types/node': 24.1.0
+      '@types/node': 24.2.0
       fsevents: 2.3.3
       jiti: 1.21.6
       yaml: 2.7.0
 
-  vitefu@1.1.1(vite@6.3.5(@types/node@24.1.0)(jiti@1.21.6)(yaml@2.7.0)):
+  vitefu@1.1.1(vite@6.3.5(@types/node@24.2.0)(jiti@1.21.6)(yaml@2.7.0)):
     optionalDependencies:
-      vite: 6.3.5(@types/node@24.1.0)(jiti@1.21.6)(yaml@2.7.0)
+      vite: 6.3.5(@types/node@24.2.0)(jiti@1.21.6)(yaml@2.7.0)
 
   volar-service-css@0.0.61(@volar/language-service@2.4.5):
     dependencies:
