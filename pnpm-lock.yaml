@@ -15,8 +15,8 @@ importers:
         specifier: ^6.0.2
         version: 6.0.2(astro@5.13.7(@types/node@24.3.1)(jiti@1.21.6)(rollup@4.50.1)(typescript@5.9.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       '@fontsource-variable/comfortaa':
-        specifier: ^5.2.6
-        version: 5.2.6
+        specifier: ^5.2.7
+        version: 5.2.7
       '@iconify-json/tabler':
         specifier: ^1.2.22
         version: 1.2.22
@@ -296,8 +296,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource-variable/comfortaa@5.2.6':
-    resolution: {integrity: sha512-uWjgXWmfUhpsax7Y6lUcWNOveIgtYYw4ZPbCkvMWjGPU2aYtTUa1Q8etT3zaDmmWXJOgv677Cgchj8Fh1304EA==}
+  '@fontsource-variable/comfortaa@5.2.7':
+    resolution: {integrity: sha512-1GEWt60UQPgRg9gJkHX6jfe2wyxMn3Kzz+X5DcbLE39BRgDuehh4tAf30rM8vF0pABeqCOta8R8aF7qQKE+GXA==}
 
   '@iconify-json/tabler@1.2.22':
     resolution: {integrity: sha512-KmCtTzZyz7dtszdQGJ5wbWqko6exhI38e4aCQqWZE1Z2wGUqBsMXrRWawXkAp6/XNBebt54h0lcxFCaTYBwFJg==}
@@ -2777,7 +2777,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.9':
     optional: true
 
-  '@fontsource-variable/comfortaa@5.2.6': {}
+  '@fontsource-variable/comfortaa@5.2.7': {}
 
   '@iconify-json/tabler@1.2.22':
     dependencies:
