@@ -20,7 +20,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/comfortaa": "^5.2.7",
-    "@iconify-json/tabler": "^1.2.22",
+    "@iconify-json/tabler": "^1.2.23",
     "@supabase/supabase-js": "^2.57.4",
     "astro": "^5.13.7",
     "astro-icon": "^1.1.5",
