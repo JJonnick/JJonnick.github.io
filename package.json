@@ -21,7 +21,7 @@
     "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/comfortaa": "^5.2.8",
     "@iconify-json/tabler": "^1.2.23",
-    "@supabase/supabase-js": "^2.74.0",
+    "@supabase/supabase-js": "^2.75.0",
     "astro": "^5.14.1",
     "astro-icon": "^1.1.5",
     "tailwindcss": "^3.4.18",
