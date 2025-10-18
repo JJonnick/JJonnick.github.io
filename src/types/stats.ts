@@ -18,6 +18,7 @@ interface Stats {
   dendroculi: number
   hydroculi: number
   pyroculi: number
+  lunoculi: number
   common_chests: number
   exquisite_chests: number
   precious_chests: number
