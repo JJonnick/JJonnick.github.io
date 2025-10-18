@@ -37,7 +37,7 @@ export const getCharacterById = async (id: number): Promise<Character | null> =>
     return data ? data[0] : null;
 }
 
-export const getAccount = async (): Promise<Account> => {
+export const getAccount = async (): Promise<Account | null> => {
     const { data } = await supabase
         .from('account')
         .select('*, stats(*)')

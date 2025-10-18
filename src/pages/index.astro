@@ -4,10 +4,13 @@ import Layout from "@/layouts/Layout.astro";
 import Chests from "@/components/Chests.astro";
 import Oculis from "@/components/Oculis.astro";
 import { getAccount } from "@/services/database";
-import { Icon } from "astro-icon/components";
 import RowData from "@/components/RowData.astro";
 
 const account = await getAccount();
+
+if (!account) {
+    return Astro.redirect("/404");
+}
 
 const { stats, nickname, level } = account;
 const chests = {
