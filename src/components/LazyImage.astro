@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { src, alt, width, height, class: className, transitionName } = Astro.props;
-const uniqueId = `lazy-img-${Math.random().toString(36).substr(2, 9)}`;
+const uniqueId = `lazy-img-${Math.random().toString(36).substring(2, 11)}`;
 ---
 
 <img
@@ -24,7 +24,7 @@ const uniqueId = `lazy-img-${Math.random().toString(36).substr(2, 9)}`;
   loading="lazy"
 />
 
-<script define:vars={{ uniqueId, src }}>
+<script define:vars={{ uniqueId, src }} is:inline>
   // Use Intersection Observer for lazy loading
   const img = document.getElementById(uniqueId);
   
