@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Star } from "@lucide/astro";
 
 interface Props {
     quantity: number;
@@ -11,7 +11,7 @@ const { quantity } = Astro.props;
 <div class="flex flex-row gap-1 items-center justify-center py-2">
     {
         Array.from({ length: quantity }, () => (
-            <Icon name="tabler:star-filled" size={18} class="text-yellow-500" />
+            <Star size={18} class="text-yellow-500" />
         ))
     }
 </div>

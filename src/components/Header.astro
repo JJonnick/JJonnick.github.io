@@ -1,6 +1,6 @@
 ---
 import HeaderButton from "./HeaderButton.astro";
-import { Icon } from "astro-icon/components";
+import { House, Users } from "@lucide/astro";
 ---
 
 <header class="pt-8 px-4 mx-auto max-w-xl lg:pt-16 lg:px-6">
@@ -19,11 +19,11 @@ import { Icon } from "astro-icon/components";
         class="flex flex-col items-center gap-3 justify-between w-full md:flex-row py-4"
     >
         <HeaderButton href="/">
-            <Icon slot="before" name="tabler:home" size={24} />
+            <House slot="before" size={24} />
             Inicio
         </HeaderButton>
         <HeaderButton href="/characters">
-            <Icon slot="before" name="tabler:users" size={24} />
+            <Users slot="before" size={24} />
             Personajes
         </HeaderButton>
     </nav>

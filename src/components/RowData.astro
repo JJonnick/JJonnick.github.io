@@ -1,8 +1,9 @@
 ---
-import { Icon } from "astro-icon/components";
+import { icons } from "@lucide/astro";
+import LucideIcon from "./LucideIcon.astro";
 
 interface Props {
-    icon: string;
+    icon: keyof typeof icons;
     label?: string;
     value: string | number;
 }
@@ -10,7 +11,7 @@ interface Props {
 const { icon, value, label } = Astro.props;
 ---
 
-<div class="flex gap-2 content-center">
-    <Icon name={icon} size={20} />
+<div class="flex gap-2">
+    <LucideIcon name={icon} size={20} />
     <span>{label ? `${label} ➜ ${value}` : value}</span>
 </div>
