@@ -26,6 +26,7 @@ const { id, icon, name, rarity, element } = char;
 ---
 
 <Layout title={name}>
+    <link slot="head" rel="preload" as="image" href={icon} />
     <Content>
         <article
             class="relative text-center border rounded-lg border-gray-200 w-full p-4 dark:border-gray-600 dark:bg-neutral-900 dark:text-white"

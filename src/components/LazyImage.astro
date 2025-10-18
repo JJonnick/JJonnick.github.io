@@ -1,0 +1,53 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  class?: string;
+  transitionName?: string;
+}
+
+const { src, alt, width, height, class: className, transitionName } = Astro.props;
+const uniqueId = `lazy-img-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<img
+  id={uniqueId}
+  data-src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  class={className}
+  transition:name={transitionName}
+  style="content-visibility: auto;"
+  loading="lazy"
+/>
+
+<script define:vars={{ uniqueId, src }}>
+  // Use Intersection Observer for lazy loading
+  const img = document.getElementById(uniqueId);
+  
+  if (img && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const lazyImage = entry.target;
+          const imgSrc = lazyImage.getAttribute('data-src');
+          if (imgSrc) {
+            lazyImage.setAttribute('src', imgSrc);
+            lazyImage.removeAttribute('data-src');
+            observer.unobserve(lazyImage);
+          }
+        }
+      });
+    }, {
+      rootMargin: '50px' // Start loading 50px before the image enters the viewport
+    });
+    
+    observer.observe(img);
+  } else if (img) {
+    // Fallback for browsers without IntersectionObserver
+    img.setAttribute('src', src);
+  }
+</script>
