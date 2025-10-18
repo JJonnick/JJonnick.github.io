@@ -6,23 +6,37 @@
   "server_name": "Europe Server",
   "uid": 700561736,
   "stats": {
-    "achievements": 1404,
+    "account_uid": 700561736,
+    "achievements": 1552,
     "anemoculi": 66,
-    "characters": 68,
-    "common_chests": 3073,
-    "days_active": 1599,
+    "characters": 75,
+    "common_chests": 3301,
+    "days_active": 1787,
     "dendroculi": 271,
     "electroculi": 181,
-    "exquisite_chests": 2504,
+    "exquisite_chests": 2816,
     "geoculi": 131,
     "hydroculi": 271,
-    "luxurious_chests": 301,
-    "max_friendship_characters": 61,
-    "precious_chests": 799,
-    "pyroculi": 162,
-    "remarkable_chests": 292,
+    "lunoculi": 112,
+    "luxurious_chests": 343,
+    "max_friendship_characters": 67,
+    "precious_chests": 902,
+    "pyroculi": 271,
+    "remarkable_chests": 342,
     "spiral_abyss": "8-3",
-    "unlocked_domains": 62,
-    "unlocked_waypoints": 541
+    "stygian": {
+      "difficulty": 4,
+      "has_data": true,
+      "name": "Terrorshock Blitz",
+      "unlocked": true
+    },
+    "theater": {
+      "has_data": false,
+      "has_detail_data": false,
+      "max_act": 0,
+      "unlocked": true
+    },
+    "unlocked_domains": 67,
+    "unlocked_waypoints": 660
   }
 }
