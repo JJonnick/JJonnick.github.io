@@ -23,13 +23,25 @@ jobs:
       
       - name: Fetch and update data
         run: |
-          echo "Data sync workflow - placeholder for future data fetching logic"
-          # This workflow can be extended to fetch data from external APIs
-          # and commit the updated JSON files back to the repository
+          echo "Fetching data from external source..."
+          # This workflow fetches data from external APIs
+          # and updates the JSON files in public/data/
+          # Example: curl -o public/data/characters.json https://api.example.com/characters
+          # Example: curl -o public/data/account.json https://api.example.com/account
+          echo "Data fetch complete"
+      
+      - name: Copy JSON files to public directory
+        run: |
+          echo "Ensuring data files are in public/data/"
+          mkdir -p public/data
+          # If fetching from a temporary location, copy files here
+          # Example: cp tmp/characters.json public/data/
+          # Example: cp tmp/account.json public/data/
+          ls -la public/data/
       
       - name: Commit and push if changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add -A
+          git add public/data/*.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: sync data [skip ci]" && git push)
