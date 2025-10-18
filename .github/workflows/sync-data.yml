@@ -10,38 +10,60 @@ permissions:
   contents: write
 
 jobs:
-  sync:
+  sync-data:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Checkout JJonnick.github.io
+        uses: actions/checkout@v4
         with:
-          node-version: '22'
-      
-      - name: Fetch and update data
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout genshinStats data
+        uses: actions/checkout@v4
+        with:
+          repository: JJonnick/genshinStats
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: genshin-data
+
+      - name: Create data directory
+        run: mkdir -p public/data
+
+      - name: Copy JSON files
         run: |
-          echo "Fetching data from external source..."
-          # This workflow fetches data from external APIs
-          # and updates the JSON files in public/data/
-          # Example: curl -o public/data/characters.json https://api.example.com/characters
-          # Example: curl -o public/data/account.json https://api.example.com/account
-          echo "Data fetch complete"
-      
-      - name: Copy JSON files to public directory
+          if [ -f genshin-data/GENSHIN_DATA.json ]; then
+            cp genshin-data/GENSHIN_DATA.json public/data/genshin.json
+          elif [ -f genshin-data/DATA.json ]; then
+            cp genshin-data/DATA.json public/data/genshin.json
+          fi
+          
+          if [ -f genshin-data/HSR_DATA.json ]; then
+            cp genshin-data/HSR_DATA.json public/data/hsr.json
+          fi
+          
+          if [ -f genshin-data/ZZZ_DATA.json ]; then
+            cp genshin-data/ZZZ_DATA.json public/data/zzz.json
+          fi
+          
+          if [ -f genshin-data/codes_genshin.json ]; then
+            cp genshin-data/codes_genshin.json public/data/codes_genshin.json
+          fi
+          
+          if [ -f genshin-data/codes_starrail.json ]; then
+            cp genshin-data/codes_starrail.json public/data/codes_starrail.json
+          fi
+          
+          if [ -f genshin-data/codes_zenless.json ]; then
+            cp genshin-data/codes_zenless.json public/data/codes_zenless.json
+          fi
+
+      - name: Commit and push if changed
         run: |
-          echo "Ensuring data files are in public/data/"
-          mkdir -p public/data
-          # If fetching from a temporary location, copy files here
-          # Example: cp tmp/characters.json public/data/
-          # Example: cp tmp/account.json public/data/
-          ls -la public/data/
-      
-      - name: Commit and push if changes
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add public/data/*.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: sync data [skip ci]" && git push)
+          git config --global user.name "Sayu"
+          git config --global user.email "sayu@bot.op"
+          git add public/data/
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "🔄 Sync data from genshinStats $(date +'%Y-%m-%d %H:%M:%S')"
+            git push
+          else
+            echo "No changes detected."
+          fi
