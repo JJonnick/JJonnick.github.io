@@ -1,0 +1,26 @@
+{
+  "uid": 0,
+  "nickname": "",
+  "level": 0,
+  "server": "",
+  "server_name": "",
+  "game_biz": "",
+  "stats": {
+    "achievements": 0,
+    "days_active": 0,
+    "characters": 0,
+    "spiral_abyss": "",
+    "anemoculi": 0,
+    "geoculi": 0,
+    "electroculi": 0,
+    "dendroculi": 0,
+    "hydroculi": 0,
+    "pyroculi": 0,
+    "common_chests": 0,
+    "exquisite_chests": 0,
+    "precious_chests": 0,
+    "luxurious_chests": 0,
+    "unlocked_waypoints": 0,
+    "unlocked_domains": 0
+  }
+}

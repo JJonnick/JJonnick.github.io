@@ -1,48 +1,66 @@
-import { createClient } from '@supabase/supabase-js';
 import { type Character, type Account } from "@/types";
+import fs from 'fs';
+import path from 'path';
 
-const supabaseUrl = import.meta.env.SUPABASE_URL;
-const supabaseKey = import.meta.env.SUPABASE_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-    throw new Error('Las variables de entorno SUPABASE_URL y SUPABASE_KEY son requeridas');
+// Helper to read JSON files from public directory
+function readPublicJSON<T>(filename: string): T | null {
+    try {
+        const filePath = path.join(process.cwd(), 'public', 'data', filename);
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        return JSON.parse(fileContent) as T;
+    } catch (error) {
+        console.error(`Error reading ${filename}:`, error);
+        return null;
+    }
 }
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Type for the genshin.json structure
+interface GenshinData {
+    characters?: Character[];
+    account?: Account;
+}
 
 export const getCharacters = async (): Promise<Character[]> => {
-    const { data, error } = await supabase
-        .from('character_data')
-        .select('*');
-
-    if (error) {
+    try {
+        // Try reading from genshin.json first (new format)
+        const genshinData = readPublicJSON<GenshinData>('genshin.json');
+        if (genshinData?.characters) {
+            return genshinData.characters;
+        }
+        
+        // Fallback to characters.json (old format)
+        const data = readPublicJSON<Character[]>('characters.json');
+        return data || [];
+    } catch (error) {
         console.error('Error fetching characters:', error);
         return [];
     }
-
-    return data || [];
 }
 
 export const getCharacterById = async (id: number): Promise<Character | null> => {
-    const { data, error } = await supabase
-        .from('character_data')
-        .select('*')
-        .eq('id', id);
-
-    if (error) {
+    try {
+        const characters = await getCharacters();
+        const character = characters.find(char => char.id === id);
+        return character || null;
+    } catch (error) {
         console.error('Error fetching character:', error);
         return null;
     }
-
-    return data ? data[0] : null;
 }
 
 export const getAccount = async (): Promise<Account | null> => {
-    const { data } = await supabase
-        .from('account')
-        .select('*, stats(*)')
-        .limit(1)
-        .single();
-
-    return data;
+    try {
+        // Try reading from genshin.json first (new format)
+        const genshinData = readPublicJSON<GenshinData>('genshin.json');
+        if (genshinData?.account) {
+            return genshinData.account;
+        }
+        
+        // Fallback to account.json (old format)
+        const data = readPublicJSON<Account>('account.json');
+        return data;
+    } catch (error) {
+        console.error('Error fetching account:', error);
+        return null;
+    }
 }
