@@ -7,11 +7,11 @@
   "uid": 700561736,
   "stats": {
     "account_uid": 700561736,
-    "achievements": 1552,
+    "achievements": 1553,
     "anemoculi": 66,
-    "characters": 75,
+    "characters": 76,
     "common_chests": 3301,
-    "days_active": 1787,
+    "days_active": 1795,
     "dendroculi": 271,
     "electroculi": 181,
     "exquisite_chests": 2816,
@@ -25,9 +25,9 @@
     "remarkable_chests": 342,
     "spiral_abyss": "8-3",
     "stygian": {
-      "difficulty": 4,
-      "has_data": true,
-      "name": "Terrorshock Blitz",
+      "difficulty": 0,
+      "has_data": false,
+      "name": "Sweeping Assault",
       "unlocked": true
     },
     "theater": {
