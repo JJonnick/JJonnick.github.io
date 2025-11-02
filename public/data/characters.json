@@ -75,7 +75,7 @@
     "collab": false,
     "constellation": 2,
     "element": "Cryo",
-    "friendship": 9,
+    "friendship": 10,
     "icon": "https://enka.network/ui/UI_AvatarIcon_SkirkNew.png",
     "id": 10000114,
     "level": 90,
@@ -457,6 +457,18 @@
   },
   {
     "collab": false,
+    "constellation": 3,
+    "element": "Dendro",
+    "friendship": 2,
+    "icon": "https://enka.network/ui/UI_AvatarIcon_Nefer.png",
+    "id": 10000122,
+    "level": 80,
+    "name": "Nefer",
+    "rarity": 5,
+    "weapon_type": 10
+  },
+  {
+    "collab": false,
     "constellation": 6,
     "element": "Pyro",
     "friendship": 10,
@@ -469,7 +481,7 @@
   },
   {
     "collab": false,
-    "constellation": 4,
+    "constellation": 6,
     "element": "Dendro",
     "friendship": 10,
     "icon": "https://enka.network/ui/UI_AvatarIcon_Yaoyao.png",
@@ -745,9 +757,9 @@
   },
   {
     "collab": false,
-    "constellation": 0,
+    "constellation": 1,
     "element": "Hydro",
-    "friendship": 1,
+    "friendship": 2,
     "icon": "https://enka.network/ui/UI_AvatarIcon_Aino.png",
     "id": 10000121,
     "level": 1,
@@ -793,7 +805,7 @@
   },
   {
     "collab": false,
-    "constellation": 1,
+    "constellation": 4,
     "element": "Electro",
     "friendship": 8,
     "icon": "https://enka.network/ui/UI_AvatarIcon_Olorun.png",
