@@ -21,7 +21,7 @@
     "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/comfortaa": "^5.2.8",
     "@lucide/astro": "^0.553.0",
-    "astro": "^5.15.6",
+    "astro": "^5.15.9",
     "tailwindcss": "^3.4.18",
     "typescript": "^5.9.3"
   },
