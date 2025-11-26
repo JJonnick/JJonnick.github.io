@@ -18,8 +18,8 @@ importers:
         specifier: ^5.2.8
         version: 5.2.8
       '@lucide/astro':
-        specifier: ^0.554.0
-        version: 0.554.0(astro@5.16.0(@types/node@24.10.1)(jiti@1.21.7)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1))
+        specifier: ^0.555.0
+        version: 0.555.0(astro@5.16.0(@types/node@24.10.1)(jiti@1.21.7)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1))
       astro:
         specifier: ^5.16.0
         version: 5.16.0(@types/node@24.10.1)(jiti@1.21.7)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1)
@@ -443,8 +443,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@lucide/astro@0.554.0':
-    resolution: {integrity: sha512-OKDxbkluX4+keoX2mwORwhGEyqbSyLb1kwmaAx9KpknCFJihTzKWxw7qJ00wdlwRC3TDa+c4HbTG68Cb0R5IbQ==}
+  '@lucide/astro@0.555.0':
+    resolution: {integrity: sha512-8PxaTAT01/yzsI6Y3udGhBLf3JVjB7J9+8NwurliGufJAfxlKtjSO7rk2EQx9fMj60UstCTO9AlD7QAUBNMg1A==}
     peerDependencies:
       astro: ^4 || ^5
 
@@ -2539,7 +2539,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@lucide/astro@0.554.0(astro@5.16.0(@types/node@24.10.1)(jiti@1.21.7)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1))':
+  '@lucide/astro@0.555.0(astro@5.16.0(@types/node@24.10.1)(jiti@1.21.7)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1))':
     dependencies:
       astro: 5.16.0(@types/node@24.10.1)(jiti@1.21.7)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1)
 
