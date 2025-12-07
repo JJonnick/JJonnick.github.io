@@ -11,7 +11,7 @@
     "anemoculi": 66,
     "characters": 76,
     "common_chests": 3304,
-    "days_active": 1826,
+    "days_active": 1836,
     "dendroculi": 271,
     "electroculi": 181,
     "exquisite_chests": 2820,
@@ -27,16 +27,16 @@
     "stygian": {
       "difficulty": 0,
       "has_data": false,
-      "name": "Sweeping Assault",
+      "name": "Tremorfall Trial",
       "unlocked": true
     },
     "theater": {
-      "has_data": true,
-      "has_detail_data": true,
-      "max_act": 10,
+      "has_data": false,
+      "has_detail_data": false,
+      "max_act": 0,
       "unlocked": true
     },
     "unlocked_domains": 67,
-    "unlocked_waypoints": 660
+    "unlocked_waypoints": 661
   }
 }
