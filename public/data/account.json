@@ -7,11 +7,11 @@
   "uid": 700561736,
   "stats": {
     "account_uid": 700561736,
-    "achievements": 1569,
+    "achievements": 1574,
     "anemoculi": 66,
     "characters": 76,
     "common_chests": 3305,
-    "days_active": 1856,
+    "days_active": 1862,
     "dendroculi": 271,
     "electroculi": 181,
     "exquisite_chests": 2823,
@@ -19,7 +19,7 @@
     "hydroculi": 271,
     "lunoculi": 112,
     "luxurious_chests": 343,
-    "max_friendship_characters": 68,
+    "max_friendship_characters": 70,
     "precious_chests": 906,
     "pyroculi": 271,
     "remarkable_chests": 342,
@@ -31,9 +31,9 @@
       "unlocked": true
     },
     "theater": {
-      "has_data": false,
-      "has_detail_data": false,
-      "max_act": 0,
+      "has_data": true,
+      "has_detail_data": true,
+      "max_act": 10,
       "unlocked": true
     },
     "unlocked_domains": 67,
