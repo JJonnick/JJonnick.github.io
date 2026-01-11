@@ -145,6 +145,18 @@
   },
   {
     "collab": false,
+    "constellation": 3,
+    "element": "Dendro",
+    "friendship": 5,
+    "icon": "https://enka.network/ui/UI_AvatarIcon_Nefer.png",
+    "id": 10000122,
+    "level": 90,
+    "name": "Nefer",
+    "rarity": 5,
+    "weapon_type": 10
+  },
+  {
+    "collab": false,
     "constellation": 1,
     "element": "Dendro",
     "friendship": 10,
@@ -457,18 +469,6 @@
   },
   {
     "collab": false,
-    "constellation": 3,
-    "element": "Dendro",
-    "friendship": 5,
-    "icon": "https://enka.network/ui/UI_AvatarIcon_Nefer.png",
-    "id": 10000122,
-    "level": 80,
-    "name": "Nefer",
-    "rarity": 5,
-    "weapon_type": 10
-  },
-  {
-    "collab": false,
     "constellation": 6,
     "element": "Pyro",
     "friendship": 10,
@@ -771,7 +771,7 @@
     "collab": false,
     "constellation": 6,
     "element": "Hydro",
-    "friendship": 8,
+    "friendship": 9,
     "icon": "https://enka.network/ui/UI_AvatarIcon_Dahlia.png",
     "id": 10000115,
     "level": 1,
