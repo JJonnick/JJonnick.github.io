@@ -5,6 +5,7 @@ import Layout from "../../layouts/Layout.astro";
 import Stars from "../../components/Stars.astro";
 import { getCharacters, getCharacterById } from "../../services/database";
 import { type Character } from "../../types/character";
+import { Swords, Heart, Sparkles, Gauge } from "@lucide/astro";
 
 interface Props {
     char: Character;
@@ -13,23 +14,39 @@ interface Props {
 export async function getStaticPaths() {
     const characters = await getCharacters();
 
-    const paths = characters?.map(async (char) => ({
-        params: { id: char.id },
-        props: { char: await getCharacterById(char.id) },
-    }));
+    const results = await Promise.all(
+        characters.map(async (char) => {
+            const detail = await getCharacterById(char.id);
+            if (!detail) return null;
+            return {
+                params: { id: char.id },
+                props: { char: detail },
+            };
+        })
+    );
 
-    return Promise.all(paths);
+    return results.filter((entry) => entry !== null);
 }
 
+const weaponTypeMap: Record<number, string> = {
+    1: "Espada",
+    10: "Catalizador",
+    11: "Mandoble",
+    12: "Arco",
+    13: "Lanza",
+};
+
 const { char } = Astro.props;
-const { id, icon, name, rarity, element } = char;
+const { id, icon, name, rarity, element, level, constellation, friendship, weapon_type } = char;
+const weaponName = weaponTypeMap[weapon_type] ?? "Desconocido";
 ---
 
 <Layout title={name}>
     <link slot="head" rel="preload" as="image" href={icon} />
     <Content>
+        <!-- pt-20 accounts for the avatar icon positioned above the card -->
         <article
-            class="relative text-center border rounded-lg border-gray-200 w-full p-4 dark:border-gray-600 dark:bg-neutral-900 dark:text-white"
+            class="relative text-center border rounded-lg border-gray-200 w-full p-4 pt-20 bg-white dark:border-gray-600 dark:bg-neutral-900 dark:text-white"
         >
             <Image
                 transition:name={`char-icon-${id}`}
@@ -47,11 +64,33 @@ const { id, icon, name, rarity, element } = char;
                 height="48"
             />
             <h2
-                class="mt-[80px] text-2xl text-white font-semibold w-fit mx-auto"
+                class="text-2xl text-gray-900 dark:text-white font-semibold w-fit mx-auto"
             >
                 {name}
             </h2>
             <Stars quantity={rarity} />
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+                <div class="flex flex-col items-center gap-1 rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-neutral-800">
+                    <Gauge size={20} class="text-blue-500" />
+                    <span class="text-xs text-gray-500 dark:text-gray-400">Nivel</span>
+                    <span class="text-lg font-semibold text-gray-900 dark:text-white">{level}</span>
+                </div>
+                <div class="flex flex-col items-center gap-1 rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-neutral-800">
+                    <Sparkles size={20} class="text-purple-500" />
+                    <span class="text-xs text-gray-500 dark:text-gray-400">Constelación</span>
+                    <span class="text-lg font-semibold text-gray-900 dark:text-white">C{constellation}</span>
+                </div>
+                <div class="flex flex-col items-center gap-1 rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-neutral-800">
+                    <Heart size={20} class="text-red-500" />
+                    <span class="text-xs text-gray-500 dark:text-gray-400">Amistad</span>
+                    <span class="text-lg font-semibold text-gray-900 dark:text-white">{friendship}</span>
+                </div>
+                <div class="flex flex-col items-center gap-1 rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-neutral-800">
+                    <Swords size={20} class="text-amber-500" />
+                    <span class="text-xs text-gray-500 dark:text-gray-400">Arma</span>
+                    <span class="text-lg font-semibold text-gray-900 dark:text-white">{weaponName}</span>
+                </div>
+            </div>
         </article>
     </Content>
 </Layout>
