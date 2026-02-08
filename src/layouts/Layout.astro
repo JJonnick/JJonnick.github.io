@@ -21,6 +21,16 @@ const { title } = Astro.props;
 		<link rel="preconnect" href="https://enka.network" crossorigin />
 		<title>{title}</title>
 		<ClientRouter />
+		<script is:inline>
+			(function () {
+				const theme = localStorage.getItem("theme");
+				if (theme === "light") {
+					document.documentElement.classList.remove("dark");
+				} else {
+					document.documentElement.classList.add("dark");
+				}
+			})();
+		</script>
 		<slot name="head" />
 	</head>
 	<body class="relative dark:bg-slate-950 min-h-dvh">

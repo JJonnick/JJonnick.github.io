@@ -1,6 +1,6 @@
 ---
 import HeaderButton from "./HeaderButton.astro";
-import { House, Users } from "@lucide/astro";
+import { House, Users, Sun, Moon } from "@lucide/astro";
 ---
 
 <header class="pt-8 px-4 mx-auto max-w-xl lg:pt-16 lg:px-6">
@@ -27,4 +27,24 @@ import { House, Users } from "@lucide/astro";
             Personajes
         </HeaderButton>
     </nav>
+
+    <button
+        id="theme-toggle"
+        type="button"
+        class="absolute top-4 right-4 p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 transition-colors"
+        aria-label="Toggle theme"
+    >
+        <Sun class="hidden dark:block" size={20} />
+        <Moon class="block dark:hidden" size={20} />
+    </button>
 </header>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const toggle = document.getElementById("theme-toggle");
+        toggle?.addEventListener("click", () => {
+            const isDark = document.documentElement.classList.toggle("dark");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+    });
+</script>
