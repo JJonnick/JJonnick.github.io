@@ -7,22 +7,22 @@
   "uid": 700561736,
   "stats": {
     "account_uid": 700561736,
-    "achievements": 1576,
+    "achievements": 1593,
     "anemoculi": 66,
     "characters": 78,
-    "common_chests": 3305,
-    "days_active": 1893,
+    "common_chests": 3322,
+    "days_active": 1894,
     "dendroculi": 271,
     "electroculi": 181,
-    "exquisite_chests": 2823,
+    "exquisite_chests": 2848,
     "geoculi": 131,
     "hydroculi": 271,
-    "lunoculi": 112,
-    "luxurious_chests": 343,
+    "lunoculi": 133,
+    "luxurious_chests": 345,
     "max_friendship_characters": 71,
-    "precious_chests": 907,
+    "precious_chests": 910,
     "pyroculi": 271,
-    "remarkable_chests": 342,
+    "remarkable_chests": 344,
     "spiral_abyss": "8-3",
     "stygian": {
       "difficulty": 0,
@@ -31,12 +31,12 @@
       "unlocked": true
     },
     "theater": {
-      "has_data": true,
-      "has_detail_data": true,
-      "max_act": 10,
+      "has_data": false,
+      "has_detail_data": false,
+      "max_act": 0,
       "unlocked": true
     },
-    "unlocked_domains": 67,
-    "unlocked_waypoints": 662
+    "unlocked_domains": 69,
+    "unlocked_waypoints": 673
   }
 }
