@@ -14,12 +14,18 @@ interface Props {
 export async function getStaticPaths() {
     const characters = await getCharacters();
 
-    const paths = characters?.map(async (char) => ({
-        params: { id: char.id },
-        props: { char: await getCharacterById(char.id) },
-    }));
+    const results = await Promise.all(
+        characters.map(async (char) => {
+            const detail = await getCharacterById(char.id);
+            if (!detail) return null;
+            return {
+                params: { id: char.id },
+                props: { char: detail },
+            };
+        })
+    );
 
-    return Promise.all(paths);
+    return results.filter((entry) => entry !== null);
 }
 
 const weaponTypeMap: Record<number, string> = {
