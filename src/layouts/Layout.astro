@@ -42,8 +42,23 @@ const { title } = Astro.props;
 						document.documentElement.classList.remove("dark");
 					}
 				} catch (_) {
-					// Fallback to dark theme if localStorage is not available
-					document.documentElement.classList.add("dark");
+					// Fallback when localStorage is not available: respect system preference
+					var prefersDark = false;
+					try {
+						if (window.matchMedia) {
+							prefersDark = window
+								.matchMedia("(prefers-color-scheme: dark)")
+								.matches;
+						}
+					} catch (_e) {
+						// If matchMedia is unavailable or throws, keep default
+					}
+					
+					if (prefersDark) {
+						document.documentElement.classList.add("dark");
+					} else {
+						document.documentElement.classList.remove("dark");
+					}
 				}
 			})();
 		</script>
