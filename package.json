@@ -14,8 +14,7 @@
     "check": "astro check",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "prepare": "husky"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -27,10 +26,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.1",
-    "@commitlint/config-conventional": "^20.4.1",
     "@types/node": "^25.2.2",
-    "husky": "^9.1.7",
     "sharp": "^0.34.5"
   }
 }
