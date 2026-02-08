@@ -55,6 +55,36 @@ pnpm preview
 
 ## Coding Standards
 
+### Conventional Commits
+
+All commits should follow the [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer]
+```
+
+**Allowed types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting, etc.)
+- `refactor`: Code refactoring
+- `perf`: Performance improvements
+- `test`: Adding or updating tests
+- `build`: Build system or dependencies changes
+- `ci`: CI/CD changes
+- `chore`: Other maintenance tasks
+- `revert`: Revert a previous commit
+
+**Examples:**
+- `feat: add character details page`
+- `fix: resolve image loading issue`
+- `docs: update README with commit guidelines`
+
 ### Astro Components
 
 - Use `.astro` file extension for components
