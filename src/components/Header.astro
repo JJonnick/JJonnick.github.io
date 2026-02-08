@@ -45,7 +45,7 @@ import { House, Users, Sun, Moon } from "@lucide/astro";
         const toggle = document.getElementById("theme-toggle");
         if (!toggle) return;
 
-        // Initialize theme from localStorage or current state
+        // Initialize toggle state from current document theme
         const isDark = document.documentElement.classList.contains("dark");
         toggle.setAttribute("aria-pressed", String(isDark));
 
