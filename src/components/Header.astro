@@ -33,6 +33,7 @@ import { House, Users, Sun, Moon } from "@lucide/astro";
         type="button"
         class="absolute top-4 right-4 p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 transition-colors"
         aria-label="Toggle theme"
+        aria-pressed="false"
     >
         <Sun class="hidden dark:block" size={20} />
         <Moon class="block dark:hidden" size={20} />
@@ -42,9 +43,12 @@ import { House, Users, Sun, Moon } from "@lucide/astro";
 <script>
     document.addEventListener("astro:page-load", () => {
         const toggle = document.getElementById("theme-toggle");
-        toggle?.addEventListener("click", () => {
+        if (!toggle) return;
+        toggle.setAttribute("aria-pressed", String(document.documentElement.classList.contains("dark")));
+        toggle.addEventListener("click", () => {
             const isDark = document.documentElement.classList.toggle("dark");
             localStorage.setItem("theme", isDark ? "dark" : "light");
+            toggle.setAttribute("aria-pressed", String(isDark));
         });
     });
 </script>
