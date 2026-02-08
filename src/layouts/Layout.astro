@@ -10,7 +10,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -21,14 +21,45 @@ const { title } = Astro.props;
 		<link rel="preconnect" href="https://enka.network" crossorigin />
 		<title>{title}</title>
 		<ClientRouter />
-		<script is:inline>
+		<script is:inline data-astro-rerun="true">
 			(function () {
 				try {
 					var theme = localStorage.getItem("theme");
-					if (theme === "light") {
+					var isDark = false;
+					
+					if (theme === "dark") {
+						isDark = true;
+					} else if (theme === "light") {
+						isDark = false;
+					} else {
+						// No saved preference, check system preference
+						isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+					}
+					
+					if (isDark) {
+						document.documentElement.classList.add("dark");
+					} else {
 						document.documentElement.classList.remove("dark");
 					}
-				} catch (_) {}
+				} catch (_) {
+					// Fallback when localStorage is not available: respect system preference
+					var prefersDark = false;
+					try {
+						if (window.matchMedia) {
+							prefersDark = window
+								.matchMedia("(prefers-color-scheme: dark)")
+								.matches;
+						}
+					} catch (_e) {
+						// If matchMedia is unavailable or throws, keep default
+					}
+					
+					if (prefersDark) {
+						document.documentElement.classList.add("dark");
+					} else {
+						document.documentElement.classList.remove("dark");
+					}
+				}
 			})();
 		</script>
 		<slot name="head" />
