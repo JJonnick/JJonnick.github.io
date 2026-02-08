@@ -24,30 +24,42 @@ const uniqueId = `lazy-img-${Math.random().toString(36).substring(2, 11)}`;
   loading="lazy"
 />
 
-<script define:vars={{ uniqueId, src }} is:inline>
-  // Use Intersection Observer for lazy loading
-  const img = document.getElementById(uniqueId);
-  
-  if (img && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const lazyImage = entry.target;
-          const imgSrc = lazyImage.getAttribute('data-src');
-          if (imgSrc) {
-            lazyImage.setAttribute('src', imgSrc);
-            lazyImage.removeAttribute('data-src');
-            observer.unobserve(lazyImage);
+<script>
+  // Function to initialize lazy loading for all images
+  function initLazyImages() {
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const lazyImage = entry.target as HTMLImageElement;
+            const imgSrc = lazyImage.getAttribute('data-src');
+            if (imgSrc) {
+              lazyImage.src = imgSrc;
+              lazyImage.removeAttribute('data-src');
+              observer.unobserve(lazyImage);
+            }
           }
+        });
+      }, {
+        rootMargin: '50px' // Start loading 50px before the image enters the viewport
+      });
+      
+      lazyImages.forEach(img => observer.observe(img));
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      lazyImages.forEach(img => {
+        const imgSrc = img.getAttribute('data-src');
+        if (imgSrc) {
+          (img as HTMLImageElement).src = imgSrc;
+          img.removeAttribute('data-src');
         }
       });
-    }, {
-      rootMargin: '50px' // Start loading 50px before the image enters the viewport
-    });
-    
-    observer.observe(img);
-  } else if (img) {
-    // Fallback for browsers without IntersectionObserver
-    img.setAttribute('src', src);
+    }
   }
+
+  // Initialize on page load and after view transitions
+  initLazyImages();
+  document.addEventListener('astro:page-load', initLazyImages);
 </script>
