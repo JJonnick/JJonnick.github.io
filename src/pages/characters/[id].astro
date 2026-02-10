@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Content from "../../layouts/Content.astro";
 import Layout from "../../layouts/Layout.astro";
 import Stars from "../../components/Stars.astro";
-import { getCharacters, getCharacterById } from "../../services/database";
+import { getCharacters } from "../../services/database";
 import { type Character } from "../../types/character";
 import { Swords, Heart, Sparkles, Gauge } from "@lucide/astro";
 
@@ -14,18 +14,10 @@ interface Props {
 export async function getStaticPaths() {
     const characters = await getCharacters();
 
-    const results = await Promise.all(
-        characters.map(async (char) => {
-            const detail = await getCharacterById(char.id);
-            if (!detail) return null;
-            return {
-                params: { id: char.id },
-                props: { char: detail },
-            };
-        })
-    );
-
-    return results.filter((entry) => entry !== null);
+    return characters.map((char) => ({
+        params: { id: char.id },
+        props: { char },
+    }));
 }
 
 const weaponTypeMap: Record<number, string> = {
