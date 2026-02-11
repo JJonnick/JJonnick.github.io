@@ -9,7 +9,7 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
         class="fixed top-0 left-0 z-40 h-full w-14 bg-white dark:bg-slate-900 shadow-xl transition-[width] duration-300 flex flex-col"
     >
         <div
-            class="flex items-center justify-start h-16 border-b border-gray-200 dark:border-slate-800"
+            class="flex items-center justify-start h-16 border-b border-gray-200 dark:border-slate-800 px-2"
         >
             <button
                 id="sidebar-toggle"
@@ -47,7 +47,7 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
             >
                 <Sun class="hidden dark:block" size={18} />
                 <Moon class="block dark:hidden" size={18} />
-                <span data-label class="text-sm font-medium hidden">Tema</span>
+                <span data-label class="text-sm font-medium sr-only">Tema</span>
             </button>
         </div>
     </aside>
@@ -74,6 +74,9 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
 
         if (!sidebar || !sidebarToggle) return;
 
+        let widthTransitionHandler: ((event: TransitionEvent) => void) | null =
+            null;
+
         const updateMenuIcons = (isOpen: boolean) => {
             const openIcon = sidebarToggle.querySelector('[data-icon="open"]');
             const closeIcon = sidebarToggle.querySelector('[data-icon="close"]');
@@ -81,16 +84,45 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
             closeIcon?.classList.toggle("hidden", !isOpen);
         };
 
-        const setSidebarState = (isOpen: boolean) => {
+        const setLinkAlignment = (isOpen: boolean) => {
+            links?.forEach((link) => {
+                link.classList.toggle("justify-start", isOpen);
+                link.classList.toggle("justify-center", !isOpen);
+            });
+        };
+
+        const setSidebarState = (
+            isOpen: boolean,
+            { animated = true }: { animated?: boolean } = {},
+        ) => {
+            if (widthTransitionHandler) {
+                sidebar.removeEventListener("transitionend", widthTransitionHandler);
+                widthTransitionHandler = null;
+            }
+
             sidebar.classList.toggle("w-14", !isOpen);
             sidebar.classList.toggle("w-64", isOpen);
             labels?.forEach((label) => {
-                label.classList.toggle("hidden", !isOpen);
+                label.classList.toggle("sr-only", !isOpen);
             });
-            links?.forEach((link) => {
-                link.classList.toggle("justify-center", !isOpen);
-                link.classList.toggle("justify-start", isOpen);
-            });
+
+            if (!isOpen && animated) {
+                const handler = (event: TransitionEvent) => {
+                    if (event.target !== sidebar || event.propertyName !== "width") {
+                        return;
+                    }
+                    setLinkAlignment(false);
+                    sidebar.removeEventListener("transitionend", handler);
+                    widthTransitionHandler = null;
+                };
+
+                widthTransitionHandler = handler;
+                setLinkAlignment(true);
+                sidebar.addEventListener("transitionend", handler);
+            } else {
+                setLinkAlignment(isOpen);
+            }
+
             sidebarToggle.setAttribute("aria-expanded", String(isOpen));
             updateMenuIcons(isOpen);
         };
@@ -101,7 +133,7 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
             setSidebarState(!isOpen);
         };
 
-        setSidebarState(false);
+        setSidebarState(false, { animated: false });
 
         sidebarToggle.addEventListener("click", toggleSidebar);
         document.addEventListener("keydown", (event) => {
