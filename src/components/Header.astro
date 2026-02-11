@@ -14,7 +14,7 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
             <button
                 id="sidebar-toggle"
                 type="button"
-                class="flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-800 transition-colors"
+                class="flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-800 transition-colors h-[40px] w-[40px]"
                 aria-label="Alternar menú"
                 aria-expanded="false"
                 aria-controls="sidebar"
@@ -79,7 +79,9 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
 
         const updateMenuIcons = (isOpen: boolean) => {
             const openIcon = sidebarToggle.querySelector('[data-icon="open"]');
-            const closeIcon = sidebarToggle.querySelector('[data-icon="close"]');
+            const closeIcon = sidebarToggle.querySelector(
+                '[data-icon="close"]',
+            );
             openIcon?.classList.toggle("hidden", isOpen);
             closeIcon?.classList.toggle("hidden", !isOpen);
         };
@@ -96,7 +98,10 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
             { animated = true }: { animated?: boolean } = {},
         ) => {
             if (widthTransitionHandler) {
-                sidebar.removeEventListener("transitionend", widthTransitionHandler);
+                sidebar.removeEventListener(
+                    "transitionend",
+                    widthTransitionHandler,
+                );
                 widthTransitionHandler = null;
             }
 
@@ -108,7 +113,10 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
 
             if (!isOpen && animated) {
                 const handler = (event: TransitionEvent) => {
-                    if (event.target !== sidebar || event.propertyName !== "width") {
+                    if (
+                        event.target !== sidebar ||
+                        event.propertyName !== "width"
+                    ) {
                         return;
                     }
                     setLinkAlignment(false);
@@ -146,13 +154,15 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
 
         if (themeToggle) {
             const syncThemeState = () => {
-                const isDark = document.documentElement.classList.contains("dark");
+                const isDark =
+                    document.documentElement.classList.contains("dark");
                 themeToggle.setAttribute("aria-pressed", String(isDark));
             };
 
             syncThemeState();
             themeToggle.addEventListener("click", () => {
-                const isDark = document.documentElement.classList.toggle("dark");
+                const isDark =
+                    document.documentElement.classList.toggle("dark");
                 try {
                     localStorage.setItem("theme", isDark ? "dark" : "light");
                 } catch (_) {}
