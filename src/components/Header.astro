@@ -4,32 +4,27 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
 ---
 
 <div>
-    <div
-        id="sidebar-overlay"
-        class="fixed inset-0 z-30 bg-black/40 opacity-0 pointer-events-none transition-opacity"
-    ></div>
-
     <aside
         id="sidebar"
-        class="fixed top-0 left-0 z-40 h-full w-64 bg-white dark:bg-slate-900 shadow-xl transform -translate-x-full transition-transform flex flex-col"
+        class="fixed top-0 left-0 z-40 h-full w-14 bg-white dark:bg-slate-900 shadow-xl transition-[width] duration-300 flex flex-col"
     >
         <div
-            class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-slate-800"
+            class="flex items-center justify-start h-16 border-b border-gray-200 dark:border-slate-800"
         >
-            <span class="text-lg font-semibold text-gray-900 dark:text-white"
-                >Navegación</span
-            >
             <button
-                id="sidebar-close"
+                id="sidebar-toggle"
                 type="button"
-                class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-800 transition-colors"
-                aria-label="Cerrar menú"
+                class="flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-800 transition-colors"
+                aria-label="Alternar menú"
+                aria-expanded="false"
+                aria-controls="sidebar"
             >
-                <X size={18} />
+                <Menu data-icon="open" size={18} />
+                <X data-icon="close" size={18} class="hidden" />
             </button>
         </div>
 
-        <nav class="flex flex-col gap-2 px-4 py-4">
+        <nav class="flex flex-col gap-2 px-2 py-4">
             <HeaderButton href="/">
                 <House slot="before" size={24} />
                 Inicio
@@ -41,34 +36,21 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
         </nav>
 
         <div
-            class="mt-auto px-4 py-4 border-t border-gray-200 dark:border-slate-800"
+            class="mt-auto px-2 py-4 border-t border-gray-200 dark:border-slate-800"
         >
             <button
                 id="theme-toggle"
                 type="button"
-                class="flex items-center gap-3 w-full rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-800 transition-colors"
+                class="sidebar-link flex items-center gap-3 w-full rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-800 transition-colors justify-center"
                 aria-label="Alternar tema"
                 aria-pressed="false"
             >
                 <Sun class="hidden dark:block" size={18} />
                 <Moon class="block dark:hidden" size={18} />
-                <span class="text-sm font-medium">Tema</span>
+                <span data-label class="text-sm font-medium hidden">Tema</span>
             </button>
         </div>
     </aside>
-
-    <button
-        id="sidebar-toggle"
-        type="button"
-        class="fixed top-4 left-4 z-50 inline-flex items-center gap-2 rounded-md border border-gray-200 bg-white/90 px-3 py-2 text-gray-700 shadow-sm backdrop-blur transition-colors hover:bg-gray-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-gray-100 dark:hover:bg-slate-800"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        aria-controls="sidebar"
-    >
-        <Menu data-icon="open" size={18} />
-        <X data-icon="close" size={18} class="hidden" />
-        <span class="text-sm font-medium">Menú</span>
-    </button>
 
     <header class="pt-6 pb-8 px-4 mx-auto max-w-2xl lg:pt-10 text-center">
         <h1
@@ -86,11 +68,11 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
     document.addEventListener("astro:page-load", () => {
         const sidebar = document.getElementById("sidebar");
         const sidebarToggle = document.getElementById("sidebar-toggle");
-        const sidebarClose = document.getElementById("sidebar-close");
-        const overlay = document.getElementById("sidebar-overlay");
         const themeToggle = document.getElementById("theme-toggle");
+        const labels = sidebar?.querySelectorAll("[data-label]");
+        const links = sidebar?.querySelectorAll(".sidebar-link");
 
-        if (!sidebar || !sidebarToggle || !overlay) return;
+        if (!sidebar || !sidebarToggle) return;
 
         const updateMenuIcons = (isOpen: boolean) => {
             const openIcon = sidebarToggle.querySelector('[data-icon="open"]');
@@ -100,26 +82,28 @@ import { House, Menu, Moon, Sun, Users, X } from "@lucide/astro";
         };
 
         const setSidebarState = (isOpen: boolean) => {
-            sidebar.classList.toggle("-translate-x-full", !isOpen);
-            sidebar.classList.toggle("translate-x-0", isOpen);
-            overlay.classList.toggle("opacity-0", !isOpen);
-            overlay.classList.toggle("opacity-100", isOpen);
-            overlay.classList.toggle("pointer-events-none", !isOpen);
+            sidebar.classList.toggle("w-14", !isOpen);
+            sidebar.classList.toggle("w-64", isOpen);
+            labels?.forEach((label) => {
+                label.classList.toggle("hidden", !isOpen);
+            });
+            links?.forEach((link) => {
+                link.classList.toggle("justify-center", !isOpen);
+                link.classList.toggle("justify-start", isOpen);
+            });
             sidebarToggle.setAttribute("aria-expanded", String(isOpen));
             updateMenuIcons(isOpen);
         };
 
         const closeSidebar = () => setSidebarState(false);
         const toggleSidebar = () => {
-            const isOpen = sidebar.classList.contains("translate-x-0");
+            const isOpen = sidebar.classList.contains("w-64");
             setSidebarState(!isOpen);
         };
 
         setSidebarState(false);
 
         sidebarToggle.addEventListener("click", toggleSidebar);
-        sidebarClose?.addEventListener("click", closeSidebar);
-        overlay.addEventListener("click", closeSidebar);
         document.addEventListener("keydown", (event) => {
             if (event.key === "Escape") closeSidebar();
         });

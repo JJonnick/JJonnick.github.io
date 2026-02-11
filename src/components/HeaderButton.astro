@@ -8,16 +8,15 @@ const { href } = Astro.props;
 
 <a
     href={href}
-    class="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium text-white group min-w-[155px] text-center border-blue-600"
+    class="sidebar-link flex items-center gap-2 rounded-lg px-2 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-800 transition-colors justify-center"
 >
-    <span
-        class="absolute w-[155px] h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-blue-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"
-    ></span>
-    <span
-        class="relative text-blue-600 transition duration-300 group-hover:text-white ease flex flex-row gap-4 justify-center items-center"
-    >
+    <span class="flex-shrink-0">
         <slot name="before" />
+    </span>
+    <span data-label class="text-sm font-medium sr-only">
         <slot />
+    </span>
+    <span class="flex-shrink-0 empty:hidden">
         <slot name="after" />
     </span>
 </a>
