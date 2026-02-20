@@ -109,6 +109,34 @@ All commits should follow the [Conventional Commits](https://www.conventionalcom
 - Use strict type checking
 - Avoid `any` types
 
+### Import Aliases
+
+Two path aliases are configured in `tsconfig.json`:
+
+- `@/` → `src/` (e.g., `import Header from "@/components/Header.astro"`)
+- `@assets/` → `src/assets/` (e.g., `import logo from "@assets/logo.png"`)
+
+Always use these aliases instead of relative paths like `../../components/`.
+
+### Astro View Transitions
+
+The project uses Astro's `ClientRouter` for client-side view transitions:
+
+- `ClientRouter` from `astro:transitions` is included in `Layout.astro`
+- Inline scripts that must run on every client-side navigation must include `data-astro-rerun="true"`:
+  ```astro
+  <script is:inline data-astro-rerun="true">
+    // This runs on every page load/navigation
+  </script>
+  ```
+- Module scripts that add `astro:page-load` event listeners should use a guard flag to prevent duplicate registrations
+
+### Accessibility
+
+- Use `sr-only` / `not-sr-only` Tailwind classes instead of `hidden` for toggleable labels so they remain in the accessibility tree
+- Add `aria-controls` to toggle buttons to associate them with the regions they control
+- Always include `alt` text on images and appropriate `aria-label` / `aria-expanded` on interactive elements
+
 ### Component Patterns
 
 Example Astro component with Tailwind:
