@@ -1,6 +1,7 @@
 ---
 import { icons } from "@lucide/astro";
 import LucideIcon from "./LucideIcon.astro";
+import CounterNumber from "./CounterNumber.astro";
 
 interface Props {
     icon: keyof typeof icons;
@@ -9,9 +10,16 @@ interface Props {
 }
 
 const { icon, value, label } = Astro.props;
+const isNumber = typeof value === 'number';
 ---
 
 <div class="flex gap-2">
     <LucideIcon name={icon} size={20} />
-    <span>{label ? `${label} ➜ ${value}` : value}</span>
+    {label ? (
+        <span>{label} ➜ {isNumber ? <CounterNumber value={value} /> : value}</span>
+    ) : isNumber ? (
+        <CounterNumber value={value} />
+    ) : (
+        <span>{value}</span>
+    )}
 </div>

@@ -1,0 +1,14 @@
+---
+interface Props {
+    value: number;
+    class?: string;
+}
+
+const { value, class: className = '' } = Astro.props;
+---
+
+<span
+    class:list={['counter-num', className]}
+    style={`--target: ${value}`}
+    aria-label={String(value)}
+></span>
