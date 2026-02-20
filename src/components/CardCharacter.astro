@@ -23,7 +23,10 @@ const { href, char } = Astro.props;
       width={120}
       height={120}
     />
-    <h3 class="font-semibold text-lg text-center text-gray-950 dark:text-white">
+    <h3
+      class="font-semibold text-lg text-center text-gray-950 dark:text-white"
+      transition:name={`char-name-${char.id}`}
+    >
       {char.name}
     </h3>
   </div>
