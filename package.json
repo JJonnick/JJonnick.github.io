@@ -18,14 +18,14 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
-    "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/comfortaa": "^5.2.8",
     "@lucide/astro": "^0.575.0",
     "astro": "^5.17.3",
-    "tailwindcss": "^3.4.19",
+    "tailwindcss": "^4.2.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.2.0",
     "@types/node": "^25.3.0",
     "sharp": "^0.34.5"
   }
