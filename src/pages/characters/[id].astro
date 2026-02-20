@@ -42,14 +42,14 @@ const weaponName = weaponTypeMap[weapon_type] ?? "Desconocido";
         >
             <Image
                 transition:name={`char-icon-${id}`}
-                class="absolute left-1/2 -translate-x-1/2 -top-[40px] p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 bg-neutral-800 min-h-[120px]"
+                class="absolute left-1/2 -translate-x-1/2 -top-[40px] p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 bg-gray-100 dark:bg-neutral-800 min-h-[120px]"
                 src={icon}
                 alt={`${name} avatar`}
                 width={120}
                 height={120}
             />
             <Image
-                class="bg-neutral-700 p-1 rounded-full absolute left-[calc(50%+50px)] top-[35px] -translate-x-1/2"
+                class="bg-gray-100 dark:bg-neutral-700 p-1 rounded-full absolute left-[calc(50%+50px)] top-[35px] -translate-x-1/2"
                 src={`/elements/${element.toLowerCase()}.svg`}
                 alt={element}
                 width="48"
