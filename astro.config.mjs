@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 
 const SERVER_PORT = 4321;
 const LIVE_URL = 'https://JJonnick.github.io';
@@ -18,7 +18,7 @@ export default defineConfig({
     port: SERVER_PORT
   },
   site: BASE_URL,
-  integrations: [
-    tailwind()
-  ]
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
