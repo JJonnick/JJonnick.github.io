@@ -20,7 +20,7 @@
     "@astrojs/check": "^0.9.6",
     "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/comfortaa": "^5.2.8",
-    "@lucide/astro": "^0.574.0",
+    "@lucide/astro": "^0.575.0",
     "astro": "^5.17.2",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.3"
