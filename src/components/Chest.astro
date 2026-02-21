@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import { type ImageMetadata } from 'astro'
+import CounterNumber from './CounterNumber.astro'
 
 interface Props {
     quantity: number
@@ -14,7 +15,7 @@ const { quantity, image } = Astro.props
     <div class="flex items-center justify-between">
         <div>
             <span class="block text-sm text-gray-500 dark:text-gray-400">Cantidad</span>
-            <span class="text-2xl font-medium text-gray-900 dark:text-white tabular-nums">{ quantity }</span>
+            <CounterNumber value={quantity} class="text-2xl font-medium text-gray-900 dark:text-white tabular-nums" />
         </div>
     
         <Image src={ image } height={ 80 } width={ 80 } alt="chest image" />
