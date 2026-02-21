@@ -10,14 +10,13 @@ interface Props {
 }
 
 const { icon, value, label } = Astro.props;
-const isNumber = typeof value === 'number';
 ---
 
 <div class="flex gap-2">
     <LucideIcon name={icon} size={20} />
     {label ? (
-        <span>{label} ➜ {isNumber ? <CounterNumber value={value} /> : value}</span>
-    ) : isNumber ? (
+        <span>{label} ➜ {typeof value === 'number' ? <CounterNumber value={value} /> : value}</span>
+    ) : typeof value === 'number' ? (
         <CounterNumber value={value} />
     ) : (
         <span>{value}</span>

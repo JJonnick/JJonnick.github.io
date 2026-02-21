@@ -5,10 +5,11 @@ interface Props {
 }
 
 const { value, class: className = '' } = Astro.props;
+const normalizedValue = Math.round(value);
 ---
 
 <span
     class:list={['counter-num', className]}
-    style={`--target: ${value}`}
-    aria-label={String(value)}
+    style={`--target: ${normalizedValue}`}
+    aria-label={String(normalizedValue)}
 ></span>
