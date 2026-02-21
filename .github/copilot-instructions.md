@@ -12,6 +12,15 @@ This is a Genshin Impact web application built with Astro and Tailwind CSS. It d
 - **Node Version**: >=22
 - **TypeScript**: For type safety
 
+## Skills Usage
+
+When a task touches Astro or Tailwind code, use these installed skills first:
+
+- `astro-framework` for Astro architecture, routing, content collections, hydration and SSR patterns
+- `tailwindcss-fundamentals-v4` for Tailwind v4 base usage and theming
+- `tailwindcss-advanced-layouts` for complex responsive layouts
+- `tailwindcss-animations` for animation and transition patterns
+
 ## Project Structure
 
 ```
