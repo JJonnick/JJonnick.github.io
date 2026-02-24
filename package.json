@@ -21,7 +21,7 @@
     "@fontsource-variable/comfortaa": "^5.2.8",
     "@lucide/astro": "^0.575.0",
     "astro": "^5.17.3",
-    "tailwindcss": "^4.2.0",
+    "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
