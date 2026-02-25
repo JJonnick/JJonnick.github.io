@@ -14,7 +14,7 @@ const uniqueId = `lazy-img-${Math.random().toString(36).substring(2, 11)}`;
 
 <img
   id={uniqueId}
-  data-src={src}
+  src={src}
   alt={alt}
   width={width}
   height={height}
@@ -23,49 +23,3 @@ const uniqueId = `lazy-img-${Math.random().toString(36).substring(2, 11)}`;
   style="content-visibility: auto;"
   loading="lazy"
 />
-
-<script>
-  // Global observer instance to prevent memory leaks
-  let globalObserver: IntersectionObserver | null = null;
-
-  // Function to initialize lazy loading for all images
-  function initLazyImages() {
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    
-    if ('IntersectionObserver' in window) {
-      // Reuse existing observer or create a new one
-      if (!globalObserver) {
-        globalObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const lazyImage = entry.target as HTMLImageElement;
-              const imgSrc = lazyImage.getAttribute('data-src');
-              if (imgSrc) {
-                lazyImage.src = imgSrc;
-                lazyImage.removeAttribute('data-src');
-                globalObserver!.unobserve(lazyImage);
-              }
-            }
-          });
-        }, {
-          rootMargin: '50px' // Start loading 50px before the image enters the viewport
-        });
-      }
-      
-      lazyImages.forEach(img => globalObserver!.observe(img));
-    } else {
-      // Fallback for browsers without IntersectionObserver
-      lazyImages.forEach(img => {
-        const imgSrc = img.getAttribute('data-src');
-        if (imgSrc) {
-          (img as HTMLImageElement).src = imgSrc;
-          img.removeAttribute('data-src');
-        }
-      });
-    }
-  }
-
-  // Initialize on page load and after view transitions
-  initLazyImages();
-  document.addEventListener('astro:page-load', initLazyImages);
-</script>
