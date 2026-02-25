@@ -29,7 +29,17 @@ const weaponTypeMap: Record<number, string> = {
 };
 
 const { char } = Astro.props;
-const { id, icon, name, rarity, element, level, constellation, friendship, weapon_type } = char;
+const {
+    id,
+    icon,
+    name,
+    rarity,
+    element,
+    level,
+    constellation,
+    friendship,
+    weapon_type,
+} = char;
 const weaponName = weaponTypeMap[weapon_type] ?? "Desconocido";
 ---
 
@@ -38,18 +48,18 @@ const weaponName = weaponTypeMap[weapon_type] ?? "Desconocido";
     <Content>
         <!-- pt-20 accounts for the avatar icon positioned above the card -->
         <article
-            class="relative text-center border rounded-lg border-gray-200 w-full p-4 pt-20 bg-white dark:border-gray-600 dark:bg-neutral-900 dark:text-white"
+            class="relative text-center border rounded-lg border-gray-100 w-full p-4 pt-20 bg-white dark:border-gray-800 dark:bg-gray-900 dark:text-white"
         >
             <Image
                 transition:name={`char-icon-${id}`}
-                class="absolute left-1/2 -translate-x-1/2 -top-[40px] p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 bg-gray-100 dark:bg-neutral-800 min-h-[120px]"
+                class="absolute left-1/2 -translate-x-1/2 -top-[40px] p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-700 bg-gray-100 dark:bg-gray-800 min-h-[120px]"
                 src={icon}
                 alt={`${name} avatar`}
                 width={120}
                 height={120}
             />
             <Image
-                class="bg-gray-100 dark:bg-neutral-700 p-1 rounded-full absolute left-[calc(50%+50px)] top-[35px] -translate-x-1/2"
+                class="bg-gray-100 dark:bg-gray-800 p-1 rounded-full absolute left-[calc(50%+50px)] top-[35px] -translate-x-1/2"
                 src={`/elements/${element.toLowerCase()}.svg`}
                 alt={element}
                 width="48"
@@ -63,25 +73,53 @@ const weaponName = weaponTypeMap[weapon_type] ?? "Desconocido";
             </h2>
             <Stars quantity={rarity} />
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
-                <div class="flex flex-col items-center gap-1 rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-neutral-800">
+                <div
+                    class="flex flex-col items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800"
+                >
                     <Gauge size={20} class="text-blue-500" />
-                    <span class="text-xs text-gray-500 dark:text-gray-400">Nivel</span>
-                    <span class="text-lg font-semibold text-gray-900 dark:text-white">{level}</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400"
+                        >Nivel</span
+                    >
+                    <span
+                        class="text-lg font-semibold text-gray-900 dark:text-white"
+                        >{level}</span
+                    >
                 </div>
-                <div class="flex flex-col items-center gap-1 rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-neutral-800">
+                <div
+                    class="flex flex-col items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800"
+                >
                     <Sparkles size={20} class="text-purple-500" />
-                    <span class="text-xs text-gray-500 dark:text-gray-400">Constelación</span>
-                    <span class="text-lg font-semibold text-gray-900 dark:text-white">C{constellation}</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400"
+                        >Constelación</span
+                    >
+                    <span
+                        class="text-lg font-semibold text-gray-900 dark:text-white"
+                        >C{constellation}</span
+                    >
                 </div>
-                <div class="flex flex-col items-center gap-1 rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-neutral-800">
+                <div
+                    class="flex flex-col items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800"
+                >
                     <Heart size={20} class="text-red-500" />
-                    <span class="text-xs text-gray-500 dark:text-gray-400">Amistad</span>
-                    <span class="text-lg font-semibold text-gray-900 dark:text-white">{friendship}</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400"
+                        >Amistad</span
+                    >
+                    <span
+                        class="text-lg font-semibold text-gray-900 dark:text-white"
+                        >{friendship}</span
+                    >
                 </div>
-                <div class="flex flex-col items-center gap-1 rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-neutral-800">
+                <div
+                    class="flex flex-col items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800"
+                >
                     <Swords size={20} class="text-amber-500" />
-                    <span class="text-xs text-gray-500 dark:text-gray-400">Arma</span>
-                    <span class="text-lg font-semibold text-gray-900 dark:text-white">{weaponName}</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400"
+                        >Arma</span
+                    >
+                    <span
+                        class="text-lg font-semibold text-gray-900 dark:text-white"
+                        >{weaponName}</span
+                    >
                 </div>
             </div>
         </article>
