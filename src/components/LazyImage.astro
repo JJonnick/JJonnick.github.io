@@ -9,11 +9,9 @@ interface Props {
 }
 
 const { src, alt, width, height, class: className, transitionName } = Astro.props;
-const uniqueId = `lazy-img-${Math.random().toString(36).substring(2, 11)}`;
 ---
 
 <img
-  id={uniqueId}
   src={src}
   alt={alt}
   width={width}
