@@ -37,3 +37,10 @@ docs: update README with commit guidelines
 ### Información adicional
 - Datos obtenidos desde un repositorio privado usando **genshin.py**
 - Assets obtenidos desde https://genshin-impact.fandom.com/ y https://github.com/genshindev/api
+
+## Preview de cambios
+
+Se agregó un workflow de **Preview deploy** para Pull Requests hacia `main`.
+
+- En cada PR (desde una rama del mismo repositorio), GitHub Actions genera un despliegue de preview.
+- Puedes abrir la URL del preview desde la ejecución del workflow en la pestaña **Actions**.
