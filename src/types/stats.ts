@@ -23,6 +23,7 @@ interface Stats {
   exquisite_chests: number
   precious_chests: number
   luxurious_chests: number
+  remarkable_chests: number
   unlocked_waypoints: number
   unlocked_domains: number
 }
