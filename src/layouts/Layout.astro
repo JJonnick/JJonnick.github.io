@@ -14,7 +14,10 @@ const { title } = Astro.props;
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta
+			name="description"
+			content="Consulta el progreso de tu cuenta y revisa estadísticas de personajes de Genshin Impact."
+		/>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -67,21 +70,21 @@ const { title } = Astro.props;
 		</script>
 		<slot name="head" />
 	</head>
-	<body class="relative bg-gray-50 dark:bg-slate-950 min-h-dvh">
+	<body class="relative bg-slate-100 dark:bg-slate-950 min-h-dvh">
 		<Header />
 		<main transition:name="page">
 			<slot />
 		</main>
 		<style is:global>
 			:root {
-				--accent: 136, 58, 234;
-				--accent-light: 224, 204, 250;
-				--accent-dark: 49, 10, 101;
+				--accent: 3, 105, 161;
+				--accent-light: 56, 189, 248;
+				--accent-dark: 8, 30, 51;
 				--accent-gradient: linear-gradient(
 					45deg,
 					rgb(var(--accent)),
 					rgb(var(--accent-light)) 30%,
-					white 60%
+					rgb(224 242 254) 60%
 				);
 			}
 			html {

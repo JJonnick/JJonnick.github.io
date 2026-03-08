@@ -12,70 +12,87 @@ if (!account) {
     return Astro.redirect("/404");
 }
 
-const { stats, nickname, level } = account;
+const toSafeNumber = (value: unknown): number => {
+    const numeric = Number(value);
+    return Number.isFinite(numeric) ? numeric : 0;
+};
+
+const stats = account.stats;
+const nickname = account.nickname?.trim() || "Viajero";
+const level = toSafeNumber(account.level);
+
 const chests = {
-    common: stats.common_chests,
-    exquisite: stats.exquisite_chests,
-    precious: stats.precious_chests,
-    luxurious: stats.luxurious_chests,
+    common: toSafeNumber(stats?.common_chests),
+    exquisite: toSafeNumber(stats?.exquisite_chests),
+    precious: toSafeNumber(stats?.precious_chests),
+    luxurious: toSafeNumber(stats?.luxurious_chests),
 };
 
 const oculis = {
-    anemo: stats.anemoculi,
-    geo: stats.geoculi,
-    electro: stats.electroculi,
-    dendro: stats.dendroculi,
-    hydro: stats.hydroculi,
-    pyro: stats.pyroculi,
-    luno: stats.lunoculi,
+    anemo: toSafeNumber(stats?.anemoculi),
+    geo: toSafeNumber(stats?.geoculi),
+    electro: toSafeNumber(stats?.electroculi),
+    dendro: toSafeNumber(stats?.dendroculi),
+    hydro: toSafeNumber(stats?.hydroculi),
+    pyro: toSafeNumber(stats?.pyroculi),
+    luno: toSafeNumber(stats?.lunoculi),
 };
 ---
 
 <Layout title="Estadísticas de Genshin Impact">
     <Content>
-        <div class="grid lg:grid-cols-5 gap-4">
-            <div
-                class="flex flex-col gap-1 justify-between w-full text-[15px] dark:text-white rounded-lg border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900"
-            >
-                <RowData icon="User" value={nickname} />
+        <h1 class="text-heading-page break-words">
+            {nickname}, este es tu progreso
+        </h1>
+        <p class="text-muted-body mt-2 max-w-2xl">
+            Datos principales, cofres y oculus en una sola vista.
+        </p>
+
+        <div class="mt-5 grid gap-6 lg:grid-cols-[minmax(0,19rem)_1fr]">
+            <section class="surface-panel space-y-2 p-4 text-[15px]">
+                <RowData icon="User" value={nickname} label="Jugador" />
                 <RowData icon="Star" value={level} label="Nivel" />
                 <RowData
                     icon="Calendar"
-                    value={stats.days_active}
+                    value={toSafeNumber(stats?.days_active)}
                     label="Días activos"
                 />
                 <RowData
                     icon="Award"
-                    value={stats.achievements}
+                    value={toSafeNumber(stats?.achievements)}
                     label="Logros"
                 />
                 <RowData
                     icon="Users"
-                    value={stats.characters}
+                    value={toSafeNumber(stats?.characters)}
                     label="Personajes"
                 />
                 <RowData
                     icon="MapPin"
-                    value={stats.unlocked_waypoints}
-                    label="TPs"
+                    value={toSafeNumber(stats?.unlocked_waypoints)}
+                    label="Teletransportes"
                 />
                 <RowData
                     icon="Map"
-                    value={stats.unlocked_domains}
+                    value={toSafeNumber(stats?.unlocked_domains)}
                     label="Dominios"
                 />
                 <RowData
                     icon="Shell"
-                    value={stats.spiral_abyss}
+                    value={String(stats?.spiral_abyss ?? "-")}
                     label="Abismo"
                 />
-            </div>
-            <div class="lg:col-span-4">
+            </section>
+
+            <section class="space-y-3">
+                <h3 class="text-heading-section">Cofres</h3>
                 <Chests {...chests} />
-            </div>
-            <div class="col-span-full">
-                <Oculis {...oculis} />
-            </div>
+            </section>
         </div>
+
+        <section class="mt-8 space-y-3">
+            <h3 class="text-heading-section">Oculus</h3>
+            <Oculis {...oculis} />
+        </section>
     </Content>
 </Layout>

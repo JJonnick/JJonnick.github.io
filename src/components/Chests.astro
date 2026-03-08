@@ -1,23 +1,35 @@
 ---
-import Chest from './Chest.astro'
-import commonChestImg from '@assets/chests/common.webp'
-import exquisiteChestImg from '@assets/chests/exquisite.webp'
-import preciousChestImg from '@assets/chests/precious.webp'
-import luxuriousChestImg from '@assets/chests/luxurious.webp'
+import Chest from "./Chest.astro";
+import commonChestImg from "@assets/chests/common.webp";
+import exquisiteChestImg from "@assets/chests/exquisite.webp";
+import preciousChestImg from "@assets/chests/precious.webp";
+import luxuriousChestImg from "@assets/chests/luxurious.webp";
 
 interface Props {
-    common: number
-    exquisite: number
-    precious: number
-    luxurious: number
+    common: number;
+    exquisite: number;
+    precious: number;
+    luxurious: number;
 }
 
-const { common, exquisite, precious, luxurious } = Astro.props
+const { common, exquisite, precious, luxurious } = Astro.props;
 ---
 
-<div class="grid sm:grid-cols-2 gap-4">
-    <Chest quantity={ common } image={ commonChestImg } label="Cofre común" />
-    <Chest quantity={ exquisite } image={ exquisiteChestImg } label="Cofre exquisito" />
-    <Chest quantity={ precious } image={ preciousChestImg } label="Cofre precioso" />
-    <Chest quantity={ luxurious } image={ luxuriousChestImg } label="Cofre lujoso" />
+<div class="grid gap-4 sm:grid-cols-2">
+    <Chest quantity={common} image={commonChestImg} label="Cofre común" />
+    <Chest
+        quantity={exquisite}
+        image={exquisiteChestImg}
+        label="Cofre exquisito"
+    />
+    <Chest
+        quantity={precious}
+        image={preciousChestImg}
+        label="Cofre precioso"
+    />
+    <Chest
+        quantity={luxurious}
+        image={luxuriousChestImg}
+        label="Cofre lujoso"
+    />
 </div>

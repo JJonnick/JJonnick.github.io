@@ -1,0 +1,58 @@
+---
+interface Props {
+    id?: string;
+}
+
+const { id = "theme-toggle" } = Astro.props;
+---
+
+<div class="flex items-center">
+    <label
+        for={id}
+        class="ui-control ui-control-idle cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-400/80 focus-within:ring-offset-2 focus-within:ring-offset-slate-50 dark:focus-within:ring-offset-slate-950"
+    >
+        <input
+            id={id}
+            type="checkbox"
+            role="switch"
+            class="peer sr-only"
+            data-theme-toggle
+            aria-label="Cambiar entre tema claro y oscuro"
+        />
+        <span class="peer-checked:hidden"><slot name="moon" /></span>
+        <span class="hidden peer-checked:inline-flex"><slot name="sun" /></span>
+        <span>Tema</span>
+    </label>
+</div>
+
+<script>
+    const runtimeWindow = window as Window & {
+        __themeTogglePageLoadBound?: boolean;
+    };
+
+    const syncThemeToggle = () => {
+        const input = document.querySelector("[data-theme-toggle]");
+        if (!(input instanceof HTMLInputElement)) return;
+
+        const syncFromDocument = () => {
+            input.checked = document.documentElement.classList.contains("dark");
+        };
+
+        syncFromDocument();
+
+        input.onchange = () => {
+            const isDark = input.checked;
+            document.documentElement.classList.toggle("dark", isDark);
+            try {
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+            } catch (_) {
+                // Ignore storage errors and keep runtime behavior.
+            }
+        };
+    };
+
+    if (!runtimeWindow.__themeTogglePageLoadBound) {
+        document.addEventListener("astro:page-load", syncThemeToggle);
+        runtimeWindow.__themeTogglePageLoadBound = true;
+    }
+</script>
