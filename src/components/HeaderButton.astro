@@ -8,7 +8,7 @@ const { href } = Astro.props;
 
 <a
     href={href}
-    class="sidebar-link flex items-center gap-2 rounded-lg px-2 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-800 transition-colors justify-start"
+    class="sidebar-link flex items-center gap-2 rounded-lg px-2 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-800 transition-colors duration-200 justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50 dark:focus-visible:ring-offset-slate-900"
 >
     <span class="flex-shrink-0">
         <slot name="before" />
