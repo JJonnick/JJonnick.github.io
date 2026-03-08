@@ -21,7 +21,7 @@ interface Props {
 const { anemo, dendro, electro, geo, hydro, pyro, luno } = Astro.props;
 ---
 
-<div class="grid sm:grid-cols-7 gap-4">
+<div class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
     <Oculi quantity={anemo} image={anemoculiImg} label="Anemoculus" />
     <Oculi quantity={geo} image={geoculiImg} label="Geoculus" />
     <Oculi quantity={electro} image={electroculiImg} label="Electroculus" />

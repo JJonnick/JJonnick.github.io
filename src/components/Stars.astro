@@ -6,12 +6,17 @@ interface Props {
 }
 
 const { quantity } = Astro.props;
+const starsLabel = `${quantity} ${quantity === 1 ? "estrella" : "estrellas"}`;
 ---
 
-<div class="flex flex-row gap-1 items-center justify-center py-2">
+<div
+    class="flex flex-row items-center justify-center gap-1 py-2"
+    role="img"
+    aria-label={`Rareza: ${starsLabel}`}
+>
     {
         Array.from({ length: quantity }, () => (
-            <Star size={18} class="text-yellow-500" />
+            <Star size={18} class="text-yellow-500" aria-hidden="true" />
         ))
     }
 </div>

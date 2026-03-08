@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import Content from "../../layouts/Content.astro";
-import Layout from "../../layouts/Layout.astro";
-import Stars from "../../components/Stars.astro";
-import { getCharacters } from "../../services/database";
-import { type Character } from "../../types/character";
+import Content from "@/layouts/Content.astro";
+import Layout from "@/layouts/Layout.astro";
+import Stars from "@/components/Stars.astro";
+import { getCharacters } from "@/services/database";
+import { type Character } from "@/types/character";
 import { Swords, Heart, Sparkles, Gauge } from "@lucide/astro";
 
 interface Props {
@@ -40,88 +40,114 @@ const {
     friendship,
     weapon_type,
 } = char;
+const toSafeNumber = (value: unknown): number => {
+    const numeric = Number(value);
+    return Number.isFinite(numeric) ? numeric : 0;
+};
+
+const safeName = name?.trim() || "Personaje desconocido";
+const safeElement = element?.trim() || "Elemento desconocido";
+const safeIcon = icon || "/fallbacks/icon.svg";
+const safeRarity = Math.min(5, Math.max(1, toSafeNumber(rarity) || 1));
+const safeLevel = toSafeNumber(level);
+const safeConstellation = toSafeNumber(constellation);
+const safeFriendship = toSafeNumber(friendship);
+const elementKey = safeElement.toLowerCase();
+const safeElementIcon = [
+    "anemo",
+    "geo",
+    "electro",
+    "dendro",
+    "hydro",
+    "pyro",
+    "cryo",
+].includes(elementKey)
+    ? `/elements/${elementKey}.svg`
+    : "/fallbacks/icon.svg";
 const weaponName = weaponTypeMap[weapon_type] ?? "Desconocido";
+const statCardClass = "surface-panel p-3";
+const statLabelClass = "text-muted-body text-xs";
+const statValueClass =
+    "text-lg font-semibold text-slate-900 dark:text-slate-100";
 ---
 
-<Layout title={name}>
-    <link slot="head" rel="preload" as="image" href={icon} />
+<Layout title={safeName}>
+    <link slot="head" rel="preload" as="image" href={safeIcon} />
     <Content>
-        <!-- pt-20 accounts for the avatar icon positioned above the card -->
-        <article
-            class="relative text-center border rounded-lg border-gray-100 w-full p-4 pt-20 bg-white dark:border-gray-800 dark:bg-gray-900 dark:text-white"
-        >
-            <Image
-                transition:name={`char-icon-${id}`}
-                class="absolute left-1/2 -translate-x-1/2 -top-[40px] p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-700 bg-gray-100 dark:bg-gray-800 min-h-[120px]"
-                src={icon}
-                alt={`${name} avatar`}
-                width={120}
-                height={120}
-            />
-            <Image
-                class="bg-gray-100 dark:bg-gray-800 p-1 rounded-full absolute left-[calc(50%+50px)] top-[35px] -translate-x-1/2"
-                src={`/elements/${element.toLowerCase()}.svg`}
-                alt={element}
-                width="48"
-                height="48"
-            />
-            <h2
-                class="text-2xl text-gray-900 dark:text-white font-semibold w-fit mx-auto"
-                transition:name={`char-name-${id}`}
+        <article class="mx-auto w-full max-w-4xl space-y-5">
+            <header
+                class="surface-panel flex flex-col items-center gap-3 p-5 text-center dark:text-slate-100"
             >
-                {name}
-            </h2>
-            <Stars quantity={rarity} />
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+                <Image
+                    transition:name={`char-icon-${id}`}
+                    class="rounded-full bg-slate-100 p-1 ring-1 ring-slate-300 dark:bg-slate-800 dark:ring-slate-700"
+                    src={safeIcon}
+                    alt={`${safeName} avatar`}
+                    width={120}
+                    height={120}
+                />
+
+                <div class="flex items-center gap-2">
+                    <h1
+                        class="text-heading-page"
+                        transition:name={`char-name-${id}`}
+                    >
+                        {safeName}
+                    </h1>
+                    <Image
+                        class="rounded-full bg-slate-100 p-1 dark:bg-slate-800"
+                        src={safeElementIcon}
+                        alt={safeElement}
+                        width={28}
+                        height={28}
+                    />
+                </div>
+
+                <Stars quantity={safeRarity} />
+            </header>
+
+            <section class="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 <div
-                    class="flex flex-col items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800"
+                    class={`flex flex-col items-center gap-1 ${statCardClass}`}
                 >
-                    <Gauge size={20} class="text-blue-500" />
-                    <span class="text-xs text-gray-500 dark:text-gray-400"
-                        >Nivel</span
-                    >
-                    <span
-                        class="text-lg font-semibold text-gray-900 dark:text-white"
-                        >{level}</span
-                    >
+                    <Gauge
+                        size={20}
+                        class="text-slate-600 dark:text-slate-300"
+                    />
+                    <span class={statLabelClass}>Nivel</span>
+                    <span class={statValueClass}>{safeLevel}</span>
                 </div>
                 <div
-                    class="flex flex-col items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800"
+                    class={`flex flex-col items-center gap-1 ${statCardClass}`}
                 >
-                    <Sparkles size={20} class="text-purple-500" />
-                    <span class="text-xs text-gray-500 dark:text-gray-400"
-                        >Constelación</span
-                    >
-                    <span
-                        class="text-lg font-semibold text-gray-900 dark:text-white"
-                        >C{constellation}</span
-                    >
+                    <Sparkles
+                        size={20}
+                        class="text-slate-600 dark:text-slate-300"
+                    />
+                    <span class={statLabelClass}>Constelación</span>
+                    <span class={statValueClass}>C{safeConstellation}</span>
                 </div>
                 <div
-                    class="flex flex-col items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800"
+                    class={`flex flex-col items-center gap-1 ${statCardClass}`}
                 >
-                    <Heart size={20} class="text-red-500" />
-                    <span class="text-xs text-gray-500 dark:text-gray-400"
-                        >Amistad</span
-                    >
-                    <span
-                        class="text-lg font-semibold text-gray-900 dark:text-white"
-                        >{friendship}</span
-                    >
+                    <Heart
+                        size={20}
+                        class="text-slate-600 dark:text-slate-300"
+                    />
+                    <span class={statLabelClass}>Amistad</span>
+                    <span class={statValueClass}>{safeFriendship}</span>
                 </div>
                 <div
-                    class="flex flex-col items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800"
+                    class={`flex flex-col items-center gap-1 ${statCardClass}`}
                 >
-                    <Swords size={20} class="text-amber-500" />
-                    <span class="text-xs text-gray-500 dark:text-gray-400"
-                        >Arma</span
-                    >
-                    <span
-                        class="text-lg font-semibold text-gray-900 dark:text-white"
-                        >{weaponName}</span
-                    >
+                    <Swords
+                        size={20}
+                        class="text-slate-600 dark:text-slate-300"
+                    />
+                    <span class={statLabelClass}>Arma</span>
+                    <span class={statValueClass}>{weaponName}</span>
                 </div>
-            </div>
+            </section>
         </article>
     </Content>
 </Layout>

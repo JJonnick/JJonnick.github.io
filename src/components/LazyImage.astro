@@ -8,7 +8,14 @@ interface Props {
   transitionName?: string;
 }
 
-const { src, alt, width, height, class: className, transitionName } = Astro.props;
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: className,
+  transitionName,
+} = Astro.props;
 ---
 
 <img
@@ -16,8 +23,7 @@ const { src, alt, width, height, class: className, transitionName } = Astro.prop
   alt={alt}
   width={width}
   height={height}
-  class={className}
+  class:list={[className, "[content-visibility:auto]"]}
   transition:name={transitionName}
-  style="content-visibility: auto;"
   loading="lazy"
 />

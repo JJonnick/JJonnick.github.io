@@ -1,58 +1,35 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Content from "../../layouts/Content.astro";
-import CardCharacter from "../../components/CardCharacter.astro";
-import { getCharacters } from "../../services/database";
+import Layout from "@/layouts/Layout.astro";
+import Content from "@/layouts/Content.astro";
+import CardCharacter from "@/components/CardCharacter.astro";
+import { getCharacters } from "@/services/database";
 
 const characters = await getCharacters();
 ---
 
 <Layout title="Lista de personajes">
     <Content>
-        <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-5 w-full"
-        >
-            {
-                characters.map((item) => (
-                    <CardCharacter
-                        href={`/characters/${item.id}`}
-                        char={item}
-                    />
-                ))
-            }
-        </div>
-        <script is:inline data-astro-rerun="true">
-            const cards = document.querySelectorAll("[data-scroll-card]");
+        <h1 class="text-heading-page mb-1 text-xl">Tus personajes</h1>
+        <p class="text-muted-body mb-5 max-w-2xl">
+            Selecciona uno para ver nivel, constelación, amistad y arma.
+        </p>
 
-            const revealCard = (card) => {
-                card.classList.remove("opacity-0", "translate-y-4");
-                card.classList.add("opacity-100", "translate-y-0");
-            };
-
-            if (
-                window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-                !("IntersectionObserver" in window)
-            ) {
-                cards.forEach(revealCard);
-            } else {
-                cards.forEach((card) => {
-                    card.classList.add("opacity-0", "translate-y-4");
-                });
-
-                const observer = new IntersectionObserver(
-                    (entries, obs) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                revealCard(entry.target);
-                                obs.unobserve(entry.target);
-                            }
-                        });
-                    },
-                    { threshold: 0.2 }
-                );
-
-                cards.forEach((card) => observer.observe(card));
-            }
-        </script>
+        {
+            characters.length === 0 ? (
+                <section class="surface-panel p-5 text-sm text-slate-700 dark:text-slate-200">
+                    No encontramos personajes en tus datos todavía. Actualiza el
+                    archivo e inténtalo de nuevo.
+                </section>
+            ) : (
+                <div class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 [content-visibility:auto] [contain-intrinsic-size:1px_1200px]">
+                    {characters.map((item) => (
+                        <CardCharacter
+                            href={`/characters/${item.id}`}
+                            char={item}
+                        />
+                    ))}
+                </div>
+            )
+        }
     </Content>
 </Layout>

@@ -16,10 +16,19 @@ This is a Genshin Impact web application built with Astro and Tailwind CSS. It d
 
 When a task touches Astro or Tailwind code, use these installed skills first:
 
+- `astro-tailwind` as the default umbrella skill for Astro + Tailwind tasks in this repo
 - `astro-framework` for Astro architecture, routing, content collections, hydration and SSR patterns
 - `tailwindcss-fundamentals-v4` for Tailwind v4 base usage and theming
 - `tailwindcss-advanced-layouts` for complex responsive layouts
 - `tailwindcss-animations` for animation and transition patterns
+
+For UI quality/refinement tasks, use the matching specialized skills:
+
+- `normalize` for design system consistency
+- `distill` for simplification
+- `quieter` / `bolder` for intensity tuning
+- `polish` for final detail pass
+- `optimize` for frontend performance passes
 
 ## Project Structure
 
@@ -102,6 +111,22 @@ All commits should follow the [Conventional Commits](https://www.conventionalcom
 - Prefer Astro's frontmatter (---) for component logic
 - Keep components focused and single-purpose
 
+### SOLID Principles
+
+Apply SOLID in frontend architecture and component design:
+
+- **Single Responsibility**: each component should have one clear purpose
+- **Open/Closed**: extend behavior via props/composition, avoid rewriting stable components
+- **Liskov Substitution**: variant components should preserve expected behavior and accessibility
+- **Interface Segregation**: keep component props minimal and task-specific
+- **Dependency Inversion**: depend on abstractions (services/types/shared utilities), not page-level concrete details
+
+Practical rules for this repo:
+
+- Prefer extracting reusable UI logic into `src/components/` and data logic into `src/services/`
+- Prefer composition (`<slot />`, children components, utility classes) over duplicated implementations
+- Avoid monolithic page files that mix data fetching, rendering, and interaction logic in one block
+
 ### Styling with Tailwind CSS
 
 - **Always use Tailwind utility classes** for styling
@@ -110,6 +135,25 @@ All commits should follow the [Conventional Commits](https://www.conventionalcom
 - Dark mode is enabled via `class` strategy (`dark:` prefix)
 - Follow mobile-first design approach
 - Use semantic HTML elements
+
+### Design System Utilities (global.css)
+
+This project now centralizes recurring UI patterns in `src/styles/global.css` under `@layer components`.
+
+- Prefer shared utility classes instead of repeating long class strings.
+- Existing shared classes include:
+  - Controls: `ui-control`, `ui-control-idle`, `ui-control-active`
+  - Surfaces: `surface-panel`, `surface-card-interactive`
+  - Motion: `surface-lift-soft`, `surface-media-pop`
+  - Typography: `text-heading-page`, `text-heading-section`, `text-muted-body`
+- When implementing new UI, extend these utilities first before adding one-off combinations.
+
+### Tailwind v4 Notes
+
+- Do not compose custom component classes with `@apply` (e.g. avoid `@apply surface-panel`). Expand the underlying utility classes directly.
+- For arbitrary values in `@apply`, do not include spaces inside class tokens.
+  - Use: `ease-[cubic-bezier(0.22,1,0.36,1)]`
+  - Avoid: `ease-[cubic-bezier(0.22, 1, 0.36, 1)]`
 
 ### TypeScript
 
@@ -170,6 +214,15 @@ const { title, description } = Astro.props;
     </p>
   )}
 </div>
+```
+
+Prefer this pattern for recurring surfaces in this repo:
+
+```astro
+<section class="surface-panel p-5">
+  <h2 class="text-heading-section">Section title</h2>
+  <p class="text-muted-body">Support text.</p>
+</section>
 ```
 
 ## Configuration Files

@@ -1,24 +1,38 @@
 ---
-import { Image } from 'astro:assets'
-import { type ImageMetadata } from 'astro'
-import CounterNumber from './CounterNumber.astro'
+import { Image } from "astro:assets";
+import { type ImageMetadata } from "astro";
+import CounterNumber from "./CounterNumber.astro";
 
 interface Props {
-    quantity: number
-    image: ImageMetadata
-    label: string
+    quantity: number;
+    image: ImageMetadata;
+    label: string;
 }
 
-const { quantity, image, label } = Astro.props
+const { quantity, image, label } = Astro.props;
 ---
 
-<article class="rounded-lg border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
-    <div class="flex items-center justify-between">
-        <div>
-            <span class="block text-sm text-gray-500 dark:text-gray-400">Cantidad</span>
-            <CounterNumber value={quantity} class="text-2xl font-medium text-gray-900 dark:text-white tabular-nums" />
+<article
+    class="surface-panel surface-lift-soft group p-5 shadow-[0_8px_20px_-20px_rgba(30,41,59,0.4)]"
+>
+    <div class="flex items-center justify-between gap-4">
+        <div class="space-y-1">
+            <span
+                class="block text-xs font-medium uppercase tracking-[0.13em] text-slate-700 dark:text-slate-200"
+                >{label}</span
+            >
+            <CounterNumber
+                value={quantity}
+                class="text-3xl font-extrabold text-slate-900 dark:text-slate-50 tabular-nums"
+            />
         </div>
-    
-        <Image src={ image } height={ 80 } width={ 80 } alt={label} />
+
+        <Image
+            src={image}
+            height={80}
+            width={80}
+            alt={label}
+            class="surface-media-pop"
+        />
     </div>
 </article>
