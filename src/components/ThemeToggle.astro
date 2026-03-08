@@ -7,20 +7,20 @@ const { id = "theme-toggle" } = Astro.props;
 ---
 
 <div class="flex items-center">
-    <input
-        id={id}
-        type="checkbox"
-        role="switch"
-        class="peer sr-only"
-        data-theme-toggle
-        aria-label="Cambiar entre tema claro y oscuro"
-    />
     <label
         for={id}
-        class="ui-control ui-control-idle cursor-pointer peer-focus-visible:ring-offset-slate-50"
+        class="ui-control ui-control-idle cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-400/80 focus-within:ring-offset-2 focus-within:ring-offset-slate-50 dark:focus-within:ring-offset-slate-950"
     >
+        <input
+            id={id}
+            type="checkbox"
+            role="switch"
+            class="peer sr-only"
+            data-theme-toggle
+            aria-label="Cambiar entre tema claro y oscuro"
+        />
         <span class="peer-checked:hidden"><slot name="moon" /></span>
-        <span class="hidden peer-checked:block"><slot name="sun" /></span>
+        <span class="hidden peer-checked:inline-flex"><slot name="sun" /></span>
         <span>Tema</span>
     </label>
 </div>
