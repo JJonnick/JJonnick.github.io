@@ -14,9 +14,9 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.6
         version: 0.9.6(prettier@3.7.0)(typescript@5.9.3)
-      '@fontsource-variable/comfortaa':
-        specifier: ^5.2.8
-        version: 5.2.8
+      '@fontsource-variable/quicksand':
+        specifier: ^5.2.10
+        version: 5.2.10
       '@lucide/astro':
         specifier: ^0.577.0
         version: 0.577.0(astro@5.18.0(@types/node@25.3.5)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.1))
@@ -437,8 +437,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource-variable/comfortaa@5.2.8':
-    resolution: {integrity: sha512-8YqOYbeHxywYtMD/AtNc7SHTIk3UufmYdgwVHBwFUe5wxjT7QM1NJ64M5M+qtNTenPEkQl8JU5Be3+EZl8dhMA==}
+  '@fontsource-variable/quicksand@5.2.10':
+    resolution: {integrity: sha512-1uzkzGDwWgtFnxquAXuD7fZV9wHkALb49UPzRXxGTVeeLsNrGnIU0O/pcz6m1U7RDtpHz2qx77JhCpKaq7FrUg==}
 
   '@img/colour@1.0.0':
     resolution: {integrity: sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==}
@@ -2519,7 +2519,7 @@ snapshots:
   '@esbuild/win32-x64@0.27.3':
     optional: true
 
-  '@fontsource-variable/comfortaa@5.2.8': {}
+  '@fontsource-variable/quicksand@5.2.10': {}
 
   '@img/colour@1.0.0': {}
 
