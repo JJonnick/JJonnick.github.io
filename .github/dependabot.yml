@@ -6,9 +6,17 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "chore(Actions)"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
     commit-message:
       prefix: "chore(deps)"
+    groups:
+      npm-dependencies:
+        patterns:
+          - "*"
