@@ -9,7 +9,7 @@ This is a Genshin Impact web application built with Astro and Tailwind CSS. It d
 - **Framework**: Astro 5.x
 - **Styling**: Tailwind CSS 4.x with dark mode support
 - **Package Manager**: pnpm (>=9)
-- **Node Version**: >=22
+- **Node Version**: >=24
 - **TypeScript**: For type safety
 
 ## Skills Usage
