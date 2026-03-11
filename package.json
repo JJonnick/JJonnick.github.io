@@ -1,12 +1,12 @@
 {
   "name": "public",
   "type": "module",
-  "version": "0.0.2",
-  "packageManager": "pnpm@9.1.4",
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.2.0",
   "engines": {
     "npm": "please use pnpm",
-    "pnpm": ">=9",
-    "node": ">=22"
+    "pnpm": ">=10",
+    "node": ">=24"
   },
   "scripts": {
     "dev": "astro dev",
@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.7",
-    "@fontsource-variable/quicksand": "^5.2.10",
     "@lucide/astro": "^0.577.0",
     "astro": "^6.0.3",
     "tailwindcss": "^4.2.1",

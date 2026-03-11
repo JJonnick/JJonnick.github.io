@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
 
 const SERVER_PORT = 4321;
@@ -18,6 +18,15 @@ export default defineConfig({
     port: SERVER_PORT
   },
   site: BASE_URL,
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: "Quicksand",
+      cssVariable: "--font-quicksand",
+      weights: [300, 700],
+      styles: ["normal"],
+    },
+  ],
   vite: {
     plugins: [tailwindcss()]
   }

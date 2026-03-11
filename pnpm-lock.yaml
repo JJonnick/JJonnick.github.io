@@ -14,9 +14,6 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.7
         version: 0.9.7(prettier@3.8.1)(typescript@5.9.3)
-      '@fontsource-variable/quicksand':
-        specifier: ^5.2.10
-        version: 5.2.10
       '@lucide/astro':
         specifier: ^0.577.0
         version: 0.577.0(astro@6.0.3(@types/node@25.4.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
@@ -289,9 +286,6 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
-
-  '@fontsource-variable/quicksand@5.2.10':
-    resolution: {integrity: sha512-1uzkzGDwWgtFnxquAXuD7fZV9wHkALb49UPzRXxGTVeeLsNrGnIU0O/pcz6m1U7RDtpHz2qx77JhCpKaq7FrUg==}
 
   '@img/colour@1.0.0':
     resolution: {integrity: sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==}
@@ -2154,8 +2148,6 @@ snapshots:
 
   '@esbuild/win32-x64@0.27.3':
     optional: true
-
-  '@fontsource-variable/quicksand@5.2.10': {}
 
   '@img/colour@1.0.0': {}
 
