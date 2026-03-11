@@ -17,7 +17,6 @@ jobs:
           node-version: 24
       - uses: pnpm/action-setup@v4
         with:
-          version: 10
           cache: true
       - name: Check changes
         run: pnpm install && pnpm check
