@@ -20,7 +20,7 @@ export default defineConfig({
   site: BASE_URL,
   fonts: [
     {
-      provider: fontProviders.google(),
+      provider: fontProviders.fontsource(),
       name: "Quicksand",
       cssVariable: "--font-quicksand",
       weights: ["300 700"],
