@@ -2,6 +2,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+    --font-sans: var(--font-quicksand), system-ui;
+}
+
 @layer components {
     .text-heading-page {
         @apply text-2xl font-semibold leading-tight text-slate-900 dark:text-slate-100;
