@@ -23,7 +23,7 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: "Quicksand",
       cssVariable: "--font-quicksand",
-      weights: ["300 700"],
+      weights: [300, 700],
       styles: ["normal"],
     },
   ],
