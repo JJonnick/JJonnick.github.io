@@ -15,7 +15,7 @@ export async function getStaticPaths() {
     const characters = await getCharacters();
 
     return characters.map((char) => ({
-        params: { id: char.id },
+        params: { id: String(char.id) },
         props: { char },
     }));
 }
