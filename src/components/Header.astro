@@ -61,7 +61,7 @@ const gameTriggerId = "game-switcher-trigger";
     >
         <div class="min-w-0">
             <a
-                href="/"
+                href={homeHref}
                 class="text-lg font-semibold text-slate-900 dark:text-slate-100"
             >
                 {brandTitle}
@@ -144,7 +144,6 @@ const gameTriggerId = "game-switcher-trigger";
         position: fixed;
         inset: auto;
         position-anchor: --game-switcher-anchor;
-        position-anchor: auto;
         top: anchor(bottom);
         right: anchor(right);
         margin-top: 0.5rem;

@@ -3,17 +3,13 @@ import Content from "@/layouts/Content.astro";
 import Layout from "@/layouts/Layout.astro";
 import RowData from "@/components/RowData.astro";
 import { getHsrAccount } from "@/services/database";
+import { toSafeNumber } from "@/utils/numbers";
 
 const account = await getHsrAccount();
 
 if (!account) {
     return Astro.redirect("/404");
 }
-
-const toSafeNumber = (value: unknown): number => {
-    const numeric = Number(value);
-    return Number.isFinite(numeric) ? numeric : 0;
-};
 
 const stats = account.stats;
 const nickname = account.nickname?.trim() || "Trailblazer";

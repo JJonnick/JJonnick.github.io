@@ -6,6 +6,7 @@ import Stars from "@/components/Stars.astro";
 import { getCharacters } from "@/services/database";
 import { type Character } from "@/types/character";
 import { Swords, Heart, Sparkles, Gauge } from "@lucide/astro";
+import { toSafeNumber } from "@/utils/numbers";
 
 interface Props {
     char: Character;
@@ -40,10 +41,6 @@ const {
     friendship,
     weapon_type,
 } = char;
-const toSafeNumber = (value: unknown): number => {
-    const numeric = Number(value);
-    return Number.isFinite(numeric) ? numeric : 0;
-};
 
 const safeName = name?.trim() || "Personaje desconocido";
 const safeElement = element?.trim() || "Elemento desconocido";
