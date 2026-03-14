@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Content from "@/layouts/Content.astro";
+import CardCharacter from "@/components/CardCharacter.astro";
+import { getHsrCharacters } from "@/services/database";
+
+const characters = await getHsrCharacters();
+---
+
+<Layout title="Lista de personajes de Honkai: Star Rail">
+    <Content>
+        <h1 class="text-heading-page mb-1 text-xl">
+            Tus personajes de Honkai: Star Rail
+        </h1>
+        <p class="text-muted-body mb-5 max-w-2xl">
+            Selecciona uno para ver nivel, eidolón, vía y cono de luz.
+        </p>
+
+        {
+            characters.length === 0 ? (
+                <section class="surface-panel p-5 text-sm text-slate-700 dark:text-slate-200">
+                    No encontramos personajes en tus datos de Honkai: Star Rail
+                    todavía. Actualiza el archivo e inténtalo de nuevo.
+                </section>
+            ) : (
+                <div class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 [content-visibility:auto] [contain-intrinsic-size:1px_1200px]">
+                    {characters.map((item) => (
+                        <CardCharacter
+                            href={`/hsr/characters/${item.id}`}
+                            char={item}
+                            imageWidth={120}
+                            imageHeight={141}
+                            imageAspectRatioClass="aspect-[40/47]"
+                            imageClass="min-h-[141px] rounded-2xl"
+                        />
+                    ))}
+                </div>
+            )
+        }
+    </Content>
+</Layout>

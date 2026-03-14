@@ -1,0 +1,301 @@
+---
+import Content from "@/layouts/Content.astro";
+import Layout from "@/layouts/Layout.astro";
+import Stars from "@/components/Stars.astro";
+import LazyImage from "@/components/LazyImage.astro";
+import RowData from "@/components/RowData.astro";
+import { getHsrCharacters } from "@/services/database";
+import { type HsrCharacter } from "@/types";
+import { Star } from "@lucide/astro";
+import { toSafeNumber } from "@/utils/numbers";
+
+interface Props {
+    char: HsrCharacter;
+}
+
+export async function getStaticPaths() {
+    const characters = await getHsrCharacters();
+
+    return characters.map((char) => ({
+        params: { id: String(char.id) },
+        props: { char },
+    }));
+}
+
+const { char } = Astro.props;
+
+const preferredLocaleRaw = import.meta.env.PUBLIC_HSR_TERMS_LOCALE;
+const preferredLocale =
+    typeof preferredLocaleRaw === "string" &&
+    preferredLocaleRaw.toLowerCase().startsWith("en")
+        ? "en"
+        : "es";
+const labels = {
+    es: {
+        unknownPath: "Desconocida",
+        unknownElement: "Desconocido",
+        unknownCharacter: "Personaje desconocido",
+        noLightCone: "Sin cono de luz",
+        memospriteFallback: "Memosprite",
+        pathPrefix: "Vía",
+        level: "Nivel",
+        eidolon: "Eidolón",
+        path: "Vía",
+        lightCone: "Cono de luz",
+        equippedLightCone: "Cono equipado",
+        memosprite: "Memosprite",
+        notAvailableShort: "-",
+        avatarSuffix: "avatar",
+        iconSuffix: "icono",
+        lightConeRarity: (n: number) =>
+            `Rareza del cono: ${n} ${n === 1 ? "estrella" : "estrellas"}`,
+    },
+    en: {
+        unknownPath: "Unknown",
+        unknownElement: "Unknown",
+        unknownCharacter: "Unknown character",
+        noLightCone: "No Light Cone",
+        memospriteFallback: "Memosprite",
+        pathPrefix: "Path",
+        level: "Level",
+        eidolon: "Eidolon",
+        path: "Path",
+        lightCone: "Light Cone",
+        equippedLightCone: "Equipped Light Cone",
+        memosprite: "Memosprite",
+        notAvailableShort: "-",
+        avatarSuffix: "avatar",
+        iconSuffix: "icon",
+        lightConeRarity: (n: number) =>
+            `Light Cone rarity: ${n} ${n === 1 ? "star" : "stars"}`,
+    },
+}[preferredLocale];
+const formatter = new Intl.NumberFormat(
+    preferredLocale === "en" ? "en-US" : "es-ES",
+);
+
+const safeName = char.name?.trim() || labels.unknownCharacter;
+const safeIcon = char.icon || "/fallbacks/icon.svg";
+const safeRarity = Math.min(5, Math.max(1, toSafeNumber(char.rarity) || 1));
+const safeLevel = toSafeNumber(char.level);
+const safeRank = toSafeNumber(char.rank);
+
+const unknownPathLabel = labels.unknownPath;
+const unknownElementLabel = labels.unknownElement;
+const pathPrefix = labels.pathPrefix;
+
+const pathMap: Record<"es" | "en", Record<number, string>> = {
+    es: {
+        1: "Destrucción",
+        2: "Cacería",
+        3: "Erudición",
+        4: "Armonía",
+        5: "Nihilidad",
+        6: "Preservación",
+        7: "Abundancia",
+        8: "Reminiscencia",
+    },
+    en: {
+        1: "Destruction",
+        2: "The Hunt",
+        3: "Erudition",
+        4: "Harmony",
+        5: "Nihility",
+        6: "Preservation",
+        7: "Abundance",
+        8: "Remembrance",
+    },
+};
+const rawPath = char.path;
+const safePath =
+    typeof rawPath === "number"
+        ? (pathMap[preferredLocale][rawPath] ?? `${pathPrefix} ${rawPath}`)
+        : rawPath?.trim() || unknownPathLabel;
+const rawElement = char.element?.trim().toLowerCase() || "";
+const elementMap: Record<"es" | "en", Record<string, string>> = {
+    es: {
+        fire: "Fuego",
+        ice: "Hielo",
+        imaginary: "Imaginario",
+        lightning: "Rayo",
+        physical: "Físico",
+        quantum: "Cuántico",
+        wind: "Viento",
+    },
+    en: {
+        fire: "Fire",
+        ice: "Ice",
+        imaginary: "Imaginary",
+        lightning: "Lightning",
+        physical: "Physical",
+        quantum: "Quantum",
+        wind: "Wind",
+    },
+};
+const safeElement =
+    elementMap[preferredLocale][rawElement] ??
+    (rawElement
+        ? rawElement[0].toUpperCase() + rawElement.slice(1)
+        : unknownElementLabel);
+const hasLightCone = Boolean(
+    char.equip?.name ||
+    char.equip?.icon ||
+    char.equip?.level ||
+    char.equip?.rank ||
+    char.equip?.rarity,
+);
+const lightConeName = char.equip?.name?.trim() || labels.noLightCone;
+const lightConeIcon = char.equip?.icon || "/fallbacks/icon.svg";
+const lightConeLevel = toSafeNumber(char.equip?.level);
+const lightConeRank = toSafeNumber(char.equip?.rank);
+const lightConeRarity = Math.min(
+    5,
+    Math.max(0, toSafeNumber(char.equip?.rarity) || 0),
+);
+const memospriteName =
+    char.memosprite?.name?.trim() || labels.memospriteFallback;
+const memospriteIcon = char.memosprite?.icon || "/fallbacks/icon.svg";
+const levelText = formatter.format(safeLevel);
+const rankText = formatter.format(safeRank);
+const lightConeLevelText =
+    lightConeLevel > 0
+        ? formatter.format(lightConeLevel)
+        : labels.notAvailableShort;
+const lightConeRankText =
+    lightConeRank > 0
+        ? `S${formatter.format(lightConeRank)}`
+        : labels.notAvailableShort;
+---
+
+<Layout title={safeName}>
+    <link slot="head" rel="preload" as="image" href={safeIcon} />
+    <Content>
+        <article class="mx-auto w-full max-w-4xl space-y-5">
+            <header
+                class="surface-panel flex flex-col items-center gap-3 p-5 text-center dark:text-slate-100"
+            >
+                <LazyImage
+                    transitionName={`char-icon-${char.id}`}
+                    class="rounded-2xl bg-slate-100 p-1 ring-1 ring-slate-300 dark:bg-slate-800 dark:ring-slate-700"
+                    src={safeIcon}
+                    alt={`${safeName} ${labels.avatarSuffix}`}
+                    width={120}
+                    height={141}
+                    aspectRatioClass="aspect-[40/47]"
+                    loading="eager"
+                />
+
+                <div class="flex flex-col items-center gap-1">
+                    <h1
+                        class="text-heading-page"
+                        transition:name={`char-name-${char.id}`}
+                    >
+                        {safeName}
+                    </h1>
+                    <p class="text-muted-body text-sm">
+                        {safeElement}
+                    </p>
+                </div>
+
+                <Stars quantity={safeRarity} />
+            </header>
+
+            <section class="surface-panel space-y-2 p-4 text-[15px]">
+                <RowData
+                    icon="Gauge"
+                    value={levelText}
+                    label={labels.level}
+                    variant="plain"
+                />
+                <RowData
+                    icon="Sparkles"
+                    value={`E${rankText}`}
+                    label={labels.eidolon}
+                    variant="plain"
+                />
+                <RowData
+                    icon="Map"
+                    value={safePath}
+                    label={labels.path}
+                    variant="plain"
+                />
+                <RowData
+                    icon="Swords"
+                    value={`${labels.level} ${lightConeLevelText}`}
+                    label={labels.lightCone}
+                    variant="plain"
+                />
+            </section>
+
+            <section class="surface-panel p-4">
+                <p class="text-muted-body text-sm">
+                    {labels.equippedLightCone}
+                </p>
+                <div
+                    class="mt-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+                >
+                    <LazyImage
+                        class="h-14 w-14 shrink-0 rounded-lg bg-slate-100 p-1 ring-1 ring-slate-300 dark:bg-slate-800 dark:ring-slate-700"
+                        src={lightConeIcon}
+                        alt={`${lightConeName} ${labels.iconSuffix}`}
+                        width={56}
+                        height={56}
+                    />
+                    <div class="min-w-0">
+                        <p
+                            class="text-sm font-semibold text-slate-900 dark:text-slate-100 wrap-break-word"
+                        >
+                            {lightConeName}
+                        </p>
+                        {
+                            hasLightCone && lightConeRarity > 0 && (
+                                <div
+                                    class="mt-1 flex items-center gap-0.5"
+                                    role="img"
+                                    aria-label={labels.lightConeRarity(lightConeRarity)}
+                                >
+                                    {Array.from(
+                                        { length: lightConeRarity },
+                                        () => (
+                                            <Star
+                                                size={14}
+                                                class="text-yellow-500"
+                                                aria-hidden="true"
+                                            />
+                                        ),
+                                    )}
+                                </div>
+                            )
+                        }
+                        <p class="text-muted-body text-xs">
+                            {labels.level}
+                            {lightConeLevelText} · {lightConeRankText}
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {
+                char.memosprite && (
+                    <section class="surface-panel p-4">
+                        <p class="text-muted-body text-sm">
+                            {labels.memosprite}
+                        </p>
+                        <div class="mt-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                            <LazyImage
+                                class="h-12 w-12 shrink-0 rounded-lg bg-slate-100 p-1 ring-1 ring-slate-300 dark:bg-slate-800 dark:ring-slate-700"
+                                src={memospriteIcon}
+                                alt={`${memospriteName} ${labels.iconSuffix}`}
+                                width={48}
+                                height={48}
+                            />
+                            <p class="min-w-0 text-sm font-semibold text-slate-900 dark:text-slate-100 wrap-break-word">
+                                {memospriteName}
+                            </p>
+                        </div>
+                    </section>
+                )
+            }
+        </article>
+    </Content>
+</Layout>

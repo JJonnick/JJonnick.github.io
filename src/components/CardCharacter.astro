@@ -1,13 +1,27 @@
 ---
 import LazyImage from "./LazyImage.astro";
-import { type Character } from "@/types/character";
 
 interface Props {
   href: string;
-  char: Character;
+  char: {
+    id: number | string;
+    icon: string;
+    name: string;
+  };
+  imageWidth?: number;
+  imageHeight?: number;
+  imageAspectRatioClass?: string;
+  imageClass?: string;
 }
 
-const { href, char } = Astro.props;
+const {
+  href,
+  char,
+  imageWidth = 120,
+  imageHeight = 120,
+  imageAspectRatioClass = "aspect-square",
+  imageClass = "min-h-25 rounded-full",
+} = Astro.props;
 ---
 
 <a
@@ -18,14 +32,15 @@ const { href, char } = Astro.props;
   <div class="flex flex-col items-center gap-4">
     <LazyImage
       transitionName={`char-icon-${char.id}`}
-      class="min-h-[100px] rounded-full"
+      class={imageClass}
       src={char.icon}
       alt={char.name}
-      width={120}
-      height={120}
+      width={imageWidth}
+      height={imageHeight}
+      aspectRatioClass={imageAspectRatioClass}
     />
     <h3
-      class="max-w-full break-words text-center text-lg font-semibold leading-snug text-slate-900 dark:text-slate-100"
+      class="max-w-full wrap-break-word text-center text-lg font-semibold leading-snug text-slate-900 dark:text-slate-100"
       transition:name={`char-name-${char.id}`}
     >
       {char.name}

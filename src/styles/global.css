@@ -25,14 +25,14 @@
     }
 
     .ui-control-idle {
-        @apply border-slate-200 bg-slate-50 text-slate-700;
-        @apply hover:bg-slate-100 active:bg-slate-200;
-        @apply dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800 dark:active:bg-slate-700;
+        @apply border-transparent bg-slate-100/80 text-slate-700;
+        @apply hover:bg-slate-200/75 active:bg-slate-200;
+        @apply dark:border-transparent dark:bg-slate-800/75 dark:text-slate-100 dark:hover:bg-slate-700/80 dark:active:bg-slate-700;
     }
 
     .ui-control-active {
-        @apply border-slate-300 bg-slate-100 text-slate-900;
-        @apply dark:border-slate-600 dark:bg-slate-800 dark:text-slate-50;
+        @apply border-transparent bg-slate-200 text-slate-900;
+        @apply dark:border-transparent dark:bg-slate-700 dark:text-slate-50;
     }
 
     .surface-panel {

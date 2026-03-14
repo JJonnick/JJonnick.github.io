@@ -4,8 +4,10 @@ interface Props {
   alt: string;
   width: number;
   height: number;
+  aspectRatioClass?: string;
   class?: string;
   transitionName?: string;
+  loading?: "lazy" | "eager";
 }
 
 const {
@@ -13,17 +15,37 @@ const {
   alt,
   width,
   height,
+  aspectRatioClass = "aspect-square",
   class: className,
   transitionName,
+  loading = "lazy",
 } = Astro.props;
 ---
 
-<img
-  src={src}
-  alt={alt}
-  width={width}
-  height={height}
-  class:list={[className, "[content-visibility:auto]"]}
-  transition:name={transitionName}
-  loading="lazy"
-/>
+<span
+  class:list={["relative inline-block", aspectRatioClass]}
+  style={`width:${width}px`}
+>
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    class:list={[
+      className,
+      "h-full w-full object-contain [content-visibility:auto]",
+      "opacity-0 transition-opacity duration-200",
+    ]}
+    transition:name={transitionName}
+    loading={loading}
+    decoding="async"
+    onload="this.style.opacity='1'; const skeletonOnLoad=this.nextElementSibling; if (skeletonOnLoad) skeletonOnLoad.classList.add('hidden');"
+    onerror="this.style.display='none'; const skeletonOnError=this.nextElementSibling; if (skeletonOnError) skeletonOnError.classList.remove('hidden');"
+  />
+  <span
+    aria-hidden="true"
+    class:list={[
+      className,
+      "absolute inset-0 animate-pulse pointer-events-none bg-slate-200 dark:bg-slate-700",
+    ]}></span>
+</span>

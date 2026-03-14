@@ -1,0 +1,74 @@
+---
+import Content from "@/layouts/Content.astro";
+import Layout from "@/layouts/Layout.astro";
+import RowData from "@/components/RowData.astro";
+import { getHsrAccount } from "@/services/database";
+import { toSafeNumber } from "@/utils/numbers";
+
+const account = await getHsrAccount();
+
+if (!account) {
+    return Astro.redirect("/404");
+}
+
+const stats = account.stats;
+const nickname = account.nickname?.trim() || "Trailblazer";
+const level = toSafeNumber(account.level);
+---
+
+<Layout title="Estadísticas de Honkai: Star Rail">
+    <Content>
+        <h1 class="text-heading-page wrap-break-word">
+            {nickname}, así va tu cuenta de Honkai: Star Rail
+        </h1>
+        <p class="text-muted-body mt-2 max-w-2xl">
+            Revisa tu progreso general en una sola vista.
+        </p>
+
+        <section class="surface-panel mt-5 space-y-2 p-4 text-[15px]">
+            <RowData
+                icon="User"
+                value={nickname}
+                label="Jugador"
+                variant="plain"
+            />
+            <RowData icon="Star" value={level} label="Nivel" variant="plain" />
+            <RowData
+                icon="Calendar"
+                value={toSafeNumber(stats?.active_days)}
+                label="Días activos"
+                variant="plain"
+            />
+            <RowData
+                icon="Award"
+                value={toSafeNumber(stats?.achievement_num)}
+                label="Logros"
+                variant="plain"
+            />
+            <RowData
+                icon="Users"
+                value={toSafeNumber(stats?.avatar_num)}
+                label="Personajes"
+                variant="plain"
+            />
+            <RowData
+                icon="Package"
+                value={toSafeNumber(stats?.chest_num)}
+                label="Cofres"
+                variant="plain"
+            />
+            <RowData
+                icon="Map"
+                value={toSafeNumber(stats?.dreamscape_pass_sticker)}
+                label="Pegatinas del Pase Onírico"
+                variant="plain"
+            />
+            <RowData
+                icon="Shell"
+                value={String(stats?.abyss_process ?? "-")}
+                label="Progreso de abismo"
+                variant="plain"
+            />
+        </section>
+    </Content>
+</Layout>
