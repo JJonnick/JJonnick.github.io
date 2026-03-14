@@ -5,17 +5,13 @@ import Chests from "@/components/Chests.astro";
 import Oculis from "@/components/Oculis.astro";
 import { getAccount } from "@/services/database";
 import RowData from "@/components/RowData.astro";
+import { toSafeNumber } from "@/utils/numbers";
 
 const account = await getAccount();
 
 if (!account) {
     return Astro.redirect("/404");
 }
-
-const toSafeNumber = (value: unknown): number => {
-    const numeric = Number(value);
-    return Number.isFinite(numeric) ? numeric : 0;
-};
 
 const stats = account.stats;
 const nickname = account.nickname?.trim() || "Viajero";
