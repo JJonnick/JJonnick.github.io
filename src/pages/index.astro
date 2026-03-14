@@ -42,7 +42,7 @@ const oculis = {
 
 <Layout title="Estadísticas de Genshin Impact">
     <Content>
-        <h1 class="text-heading-page break-words">
+        <h1 class="text-heading-page wrap-break-word">
             {nickname}, este es tu progreso
         </h1>
         <p class="text-muted-body mt-2 max-w-2xl">
@@ -51,37 +51,53 @@ const oculis = {
 
         <div class="mt-5 grid gap-6 lg:grid-cols-[minmax(0,19rem)_1fr]">
             <section class="surface-panel space-y-2 p-4 text-[15px]">
-                <RowData icon="User" value={nickname} label="Jugador" />
-                <RowData icon="Star" value={level} label="Nivel" />
+                <RowData
+                    icon="User"
+                    value={nickname}
+                    label="Jugador"
+                    variant="plain"
+                />
+                <RowData
+                    icon="Star"
+                    value={level}
+                    label="Nivel"
+                    variant="plain"
+                />
                 <RowData
                     icon="Calendar"
                     value={toSafeNumber(stats?.days_active)}
                     label="Días activos"
+                    variant="plain"
                 />
                 <RowData
                     icon="Award"
                     value={toSafeNumber(stats?.achievements)}
                     label="Logros"
+                    variant="plain"
                 />
                 <RowData
                     icon="Users"
                     value={toSafeNumber(stats?.characters)}
                     label="Personajes"
+                    variant="plain"
                 />
                 <RowData
                     icon="MapPin"
                     value={toSafeNumber(stats?.unlocked_waypoints)}
                     label="Teletransportes"
+                    variant="plain"
                 />
                 <RowData
                     icon="Map"
                     value={toSafeNumber(stats?.unlocked_domains)}
                     label="Dominios"
+                    variant="plain"
                 />
                 <RowData
                     icon="Shell"
                     value={String(stats?.spiral_abyss ?? "-")}
                     label="Abismo"
+                    variant="plain"
                 />
             </section>
 

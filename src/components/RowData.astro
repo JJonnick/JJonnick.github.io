@@ -7,15 +7,18 @@ interface Props {
     icon: keyof typeof icons;
     label?: string;
     value: string | number;
+    variant?: "card" | "plain";
 }
 
-const { icon, value, label } = Astro.props;
+const { icon, value, label, variant = "card" } = Astro.props;
 const labelText = label ?? "Dato";
+const containerClass =
+    variant === "plain"
+        ? "flex items-center justify-between gap-3 px-1 py-2"
+        : "flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white/90 px-3 py-2 dark:border-slate-800 dark:bg-slate-950/40";
 ---
 
-<div
-    class="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white/90 px-3 py-2 dark:border-slate-800 dark:bg-slate-950/40"
->
+<div class={containerClass}>
     <div class="flex min-w-0 items-center gap-2">
         <span
             class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-200/85 text-slate-700 dark:bg-slate-700/50 dark:text-slate-100"
@@ -33,7 +36,7 @@ const labelText = label ?? "Dato";
                 <CounterNumber value={value} />
             </span>
         ) : (
-            <span class="min-w-0 max-w-[55%] break-words text-right text-sm font-semibold text-slate-900 dark:text-slate-50">
+            <span class="min-w-0 max-w-[65%] wrap-break-word text-right text-sm font-semibold text-slate-900 dark:text-slate-50">
                 {value}
             </span>
         )

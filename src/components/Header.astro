@@ -1,39 +1,129 @@
 ---
 import HeaderButton from "./HeaderButton.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import { House, Moon, Sun, Users } from "@lucide/astro";
+import { ChevronDown, House, Moon, Orbit, Sun, Users } from "@lucide/astro";
 
 const pathname = Astro.url.pathname;
-const isHome = pathname === "/";
-const isCharacters = pathname.startsWith("/characters");
+const isHsrContext = pathname.startsWith("/hsr");
+const isInCharactersSection = isHsrContext
+    ? pathname.startsWith("/hsr/characters")
+    : pathname.startsWith("/characters");
+
+const currentGame = isHsrContext
+    ? {
+          id: "hsr",
+          label: "Honkai: Star Rail",
+          shortLabel: "Honkai",
+          homeHref: "/hsr",
+          charactersHref: "/hsr/characters",
+      }
+    : {
+          id: "genshin",
+          label: "Genshin Impact",
+          shortLabel: "Genshin",
+          homeHref: "/",
+          charactersHref: "/characters",
+      };
+
+const homeHref = currentGame.homeHref;
+const charactersHref = currentGame.charactersHref;
+const isHome = pathname === homeHref;
+const isCharacters = pathname.startsWith(charactersHref);
+const brandTitle = currentGame.label;
+const brandDescription = isHsrContext
+    ? "Consulta tu progreso y personajes en Honkai: Star Rail."
+    : "Consulta tu progreso y personajes en Genshin Impact.";
+
+const gameOptions = [
+    {
+        id: "genshin",
+        label: "Genshin Impact",
+        shortLabel: "Genshin",
+        href: isInCharactersSection ? "/characters" : "/",
+    },
+    {
+        id: "hsr",
+        label: "Honkai: Star Rail",
+        shortLabel: "Honkai",
+        href: isInCharactersSection ? "/hsr/characters" : "/hsr",
+    },
+];
+
+const gamePopoverId = "game-switcher-popover";
+const gameTriggerId = "game-switcher-trigger";
 ---
 
 <header
     class="sticky top-0 z-40 border-b border-slate-200/80 bg-slate-50/92 dark:border-slate-800 dark:bg-slate-950/88"
 >
     <div
-        class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-3"
+        class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3"
     >
         <div class="min-w-0">
             <a
                 href="/"
                 class="text-lg font-semibold text-slate-900 dark:text-slate-100"
             >
-                Genshin Impact
+                {brandTitle}
             </a>
             <p
                 class="hidden text-xs text-slate-600 dark:text-slate-300 sm:block"
             >
-                Consulta progreso de cuenta y personajes.
+                {brandDescription}
             </p>
         </div>
 
-        <nav class="flex items-center gap-2" aria-label="Navegación principal">
-            <HeaderButton href="/" isActive={isHome}>
+        <nav
+            class="flex w-full flex-wrap items-center gap-2 max-[400px]:gap-1.5 sm:w-auto"
+            aria-label="Navegación principal"
+        >
+            <div class="relative">
+                <button
+                    id={gameTriggerId}
+                    type="button"
+                    popovertarget={gamePopoverId}
+                    class="ui-control ui-control-idle game-switcher-trigger flex items-center gap-2 whitespace-nowrap"
+                    aria-label="Seleccionar juego"
+                >
+                    <Orbit size={17} />
+                    <span class="hidden sm:inline">{currentGame.label}</span>
+                    <span class="sm:hidden">{currentGame.shortLabel}</span>
+                    <ChevronDown size={15} class="opacity-75" />
+                </button>
+
+                <div
+                    id={gamePopoverId}
+                    popover="auto"
+                    class="surface-panel game-switcher-popover fixed z-50 m-0 w-56 space-y-1 p-2 shadow-[0_10px_20px_-15px_rgba(15,23,42,0.55)]"
+                >
+                    {
+                        gameOptions.map((option) => (
+                            <a
+                                href={option.href}
+                                class:list={[
+                                    "ui-control w-full justify-start",
+                                    option.id === currentGame.id
+                                        ? "ui-control-active"
+                                        : "ui-control-idle",
+                                ]}
+                                aria-current={
+                                    option.id === currentGame.id
+                                        ? "page"
+                                        : undefined
+                                }
+                            >
+                                {option.label}
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <HeaderButton href={homeHref} isActive={isHome}>
                 <House slot="before" size={17} />
                 Inicio
             </HeaderButton>
-            <HeaderButton href="/characters" isActive={isCharacters}>
+            <HeaderButton href={charactersHref} isActive={isCharacters}>
                 <Users slot="before" size={17} />
                 Personajes
             </HeaderButton>
@@ -44,3 +134,55 @@ const isCharacters = pathname.startsWith("/characters");
         </nav>
     </div>
 </header>
+
+<style is:global>
+    #game-switcher-trigger {
+        anchor-name: --game-switcher-anchor;
+    }
+
+    #game-switcher-popover {
+        position: fixed;
+        inset: auto;
+        position-anchor: --game-switcher-anchor;
+        position-anchor: auto;
+        top: anchor(bottom);
+        right: anchor(right);
+        margin-top: 0.5rem;
+        max-width: min(14rem, calc(100vw - 1rem));
+        position-try-fallbacks:
+            --game-switcher-below-left, --game-switcher-above-right,
+            --game-switcher-above-left;
+    }
+
+    @position-try --game-switcher-below-left {
+        top: anchor(bottom);
+        left: anchor(left);
+        right: auto;
+        margin-top: 0.5rem;
+    }
+
+    @position-try --game-switcher-above-right {
+        top: auto;
+        bottom: anchor(top);
+        right: anchor(right);
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    @position-try --game-switcher-above-left {
+        top: auto;
+        bottom: anchor(top);
+        left: anchor(left);
+        right: auto;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    @supports not (top: anchor(bottom)) {
+        #game-switcher-popover {
+            top: 4rem;
+            right: 1rem;
+            left: auto;
+        }
+    }
+</style>
