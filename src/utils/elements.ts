@@ -10,7 +10,7 @@ export const GENSHIN_ELEMENTS = [
 
 export type GenshinElement = (typeof GENSHIN_ELEMENTS)[number];
 
-/** Base RGBA values [r, g, b] for each Genshin element. */
+/** Base RGB values [r, g, b] for each Genshin element. */
 const ELEMENT_RGB: Record<GenshinElement, [number, number, number]> = {
     anemo: [116, 194, 168],
     geo: [203, 164, 78],

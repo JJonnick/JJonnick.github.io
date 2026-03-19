@@ -58,6 +58,7 @@ const rarities = [
                                     data-filter-element="all"
                                     class="ui-control ui-control-active"
                                     aria-pressed="true"
+                                    aria-controls="character-grid"
                                 >
                                     Todos
                                 </button>
@@ -67,6 +68,7 @@ const rarities = [
                                         data-filter-element={el}
                                         class="ui-control ui-control-idle"
                                         aria-pressed="false"
+                                        aria-controls="character-grid"
                                     >
                                         {hsrElementLabels[el] ?? el}
                                     </button>
@@ -84,6 +86,7 @@ const rarities = [
                                     data-filter-rarity="all"
                                     class="ui-control ui-control-active"
                                     aria-pressed="true"
+                                    aria-controls="character-grid"
                                 >
                                     Todas
                                 </button>
@@ -93,6 +96,7 @@ const rarities = [
                                         data-filter-rarity={String(r)}
                                         class="ui-control ui-control-idle"
                                         aria-pressed="false"
+                                        aria-controls="character-grid"
                                     >
                                         {r}★
                                     </button>
@@ -140,62 +144,6 @@ const rarities = [
     </Content>
 </Layout>
 
-<script is:inline data-astro-rerun="true">
-    (() => {
-        const grid = document.getElementById("character-grid");
-        const noResults = document.getElementById("no-results");
-        if (!grid) return;
-
-        let activeElement = "all";
-        let activeRarity = "all";
-
-        function applyFilters() {
-            const cards = grid.querySelectorAll("[data-filter-card]");
-            let visible = 0;
-            cards.forEach((card) => {
-                const el = card.dataset.element ?? "";
-                const rarity = card.dataset.rarity ?? "";
-                const matchEl =
-                    activeElement === "all" || el === activeElement;
-                const matchRarity =
-                    activeRarity === "all" || rarity === activeRarity;
-                const show = matchEl && matchRarity;
-                card.hidden = !show;
-                if (show) visible++;
-            });
-            if (noResults) noResults.hidden = visible > 0;
-        }
-
-        function activateFilterButtons(selector, clickedBtn) {
-            document.querySelectorAll(selector).forEach((btn) => {
-                const isActive = btn === clickedBtn;
-                btn.classList.toggle("ui-control-active", isActive);
-                btn.classList.toggle("ui-control-idle", !isActive);
-                btn.setAttribute(
-                    "aria-pressed",
-                    isActive ? "true" : "false",
-                );
-            });
-        }
-
-        document
-            .querySelectorAll("[data-filter-element]")
-            .forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    activeElement = btn.dataset.filterElement ?? "all";
-                    activateFilterButtons("[data-filter-element]", btn);
-                    applyFilters();
-                });
-            });
-
-        document
-            .querySelectorAll("[data-filter-rarity]")
-            .forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    activeRarity = btn.dataset.filterRarity ?? "all";
-                    activateFilterButtons("[data-filter-rarity]", btn);
-                    applyFilters();
-                });
-            });
-    })();
+<script>
+    import "@/scripts/character-filters";
 </script>
