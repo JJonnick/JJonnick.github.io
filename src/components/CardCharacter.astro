@@ -1,5 +1,10 @@
 ---
 import LazyImage from "./LazyImage.astro";
+import {
+  GENSHIN_ELEMENTS,
+  type GenshinElement,
+  elementBadgeBg,
+} from "@/utils/elements";
 
 interface Props {
   href: string;
@@ -7,6 +12,8 @@ interface Props {
     id: number | string;
     icon: string;
     name: string;
+    element?: string;
+    rarity?: number;
   };
   imageWidth?: number;
   imageHeight?: number;
@@ -22,6 +29,14 @@ const {
   imageAspectRatioClass = "aspect-square",
   imageClass = "min-h-25 rounded-full",
 } = Astro.props;
+
+const elementKey =
+  typeof char.element === "string" ? char.element.trim().toLowerCase() : "";
+const hasElement = (GENSHIN_ELEMENTS as readonly string[]).includes(elementKey);
+const el = hasElement ? (elementKey as GenshinElement) : null;
+const elementIconPath = el ? `/elements/${el}.svg` : null;
+
+const badgeBg = el ? elementBadgeBg(el) : "";
 ---
 
 <a
@@ -30,15 +45,30 @@ const {
   class="surface-card-interactive group flex flex-col items-center justify-center p-5"
 >
   <div class="flex flex-col items-center gap-4">
-    <LazyImage
-      transitionName={`char-icon-${char.id}`}
-      class={imageClass}
-      src={char.icon}
-      alt={char.name}
-      width={imageWidth}
-      height={imageHeight}
-      aspectRatioClass={imageAspectRatioClass}
-    />
+    <div class="relative inline-block">
+      <LazyImage
+        transitionName={`char-icon-${char.id}`}
+        class={imageClass}
+        src={char.icon}
+        alt={char.name}
+        width={imageWidth}
+        height={imageHeight}
+        aspectRatioClass={imageAspectRatioClass}
+      />
+      {
+        elementIconPath && (
+          <img
+            src={elementIconPath}
+            alt=""
+            aria-hidden="true"
+            width={22}
+            height={22}
+            class="absolute -right-1.5 -bottom-1.5 rounded-full border border-white/60 dark:border-slate-900/60"
+            style={`background: ${badgeBg}; padding: 2px`}
+          />
+        )
+      }
+    </div>
     <h3
       class="max-w-full wrap-break-word text-center text-lg font-semibold leading-snug text-slate-900 dark:text-slate-100"
       transition:name={`char-name-${char.id}`}
