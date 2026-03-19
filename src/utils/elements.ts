@@ -26,17 +26,7 @@ function rgba(element: GenshinElement, alpha: number): string {
     return `rgba(${r},${g},${b},${alpha})`;
 }
 
-/** Solid accent color (top bar, badge background). */
-export function elementAccentColor(element: GenshinElement): string {
-    return rgba(element, 0.75);
-}
-
-/** Very translucent tint for badge background. */
+/** Very translucent tint for element icon badge background. */
 export function elementBadgeBg(element: GenshinElement): string {
     return rgba(element, 0.2);
-}
-
-/** Box-shadow glow for element icon badge. */
-export function elementGlow(element: GenshinElement): string {
-    return `0 0 8px 2px ${rgba(element, 0.8)}`;
 }

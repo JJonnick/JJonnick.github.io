@@ -3,9 +3,7 @@ import LazyImage from "./LazyImage.astro";
 import {
   GENSHIN_ELEMENTS,
   type GenshinElement,
-  elementAccentColor,
   elementBadgeBg,
-  elementGlow,
 } from "@/utils/elements";
 
 interface Props {
@@ -38,35 +36,15 @@ const hasElement = (GENSHIN_ELEMENTS as readonly string[]).includes(elementKey);
 const el = hasElement ? (elementKey as GenshinElement) : null;
 const elementIconPath = el ? `/elements/${el}.svg` : null;
 
-const accentColor = el ? elementAccentColor(el) : "";
 const badgeBg = el ? elementBadgeBg(el) : "";
-const badgeGlow = el ? elementGlow(el) : "";
-
-const rarity = char.rarity ?? 0;
-const rarityBorderStyle =
-  rarity === 5
-    ? "border-color: rgba(251,191,36,0.45)"
-    : rarity === 4
-      ? "border-color: rgba(167,139,250,0.45)"
-      : "";
 ---
 
 <a
   href={href}
   data-scroll-card
-  class="surface-card-interactive group relative flex flex-col overflow-hidden p-0"
-  style={rarityBorderStyle}
+  class="surface-card-interactive group flex flex-col items-center justify-center p-5"
 >
-  {
-    el && (
-      <div
-        class="h-0.5 w-full shrink-0"
-        style={`background-color: ${accentColor}`}
-        aria-hidden="true"
-      />
-    )
-  }
-  <div class="flex flex-col items-center gap-3 p-5">
+  <div class="flex flex-col items-center gap-4">
     <div class="relative inline-block">
       <LazyImage
         transitionName={`char-icon-${char.id}`}
@@ -86,7 +64,7 @@ const rarityBorderStyle =
             width={22}
             height={22}
             class="absolute -right-1.5 -bottom-1.5 rounded-full border border-white/60 dark:border-slate-900/60"
-            style={`background: ${badgeBg}; box-shadow: ${badgeGlow}; padding: 2px`}
+            style={`background: ${badgeBg}; padding: 2px`}
           />
         )
       }

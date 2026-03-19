@@ -5,6 +5,28 @@ import CardCharacter from "@/components/CardCharacter.astro";
 import { getHsrCharacters } from "@/services/database";
 
 const characters = await getHsrCharacters();
+
+const hsrElementLabels: Record<string, string> = {
+    fire: "Fuego",
+    ice: "Hielo",
+    wind: "Viento",
+    lightning: "Rayo",
+    physical: "Físico",
+    quantum: "Cuántico",
+    imaginary: "Imaginario",
+};
+
+const presentElements = [
+    ...new Set(
+        characters
+            .map((c) => c.element?.trim().toLowerCase() ?? "")
+            .filter(Boolean),
+    ),
+].sort((a, b) => (hsrElementLabels[a] ?? a).localeCompare(hsrElementLabels[b] ?? b));
+
+const rarities = [
+    ...new Set(characters.map((c) => c.rarity ?? 0).filter(Boolean)),
+].sort((a, b) => b - a);
 ---
 
 <Layout title="Lista de personajes de Honkai: Star Rail">
@@ -23,19 +45,157 @@ const characters = await getHsrCharacters();
                     todavía. Actualiza el archivo e inténtalo de nuevo.
                 </section>
             ) : (
-                <div class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 [content-visibility:auto] [contain-intrinsic-size:1px_1200px]">
-                    {characters.map((item) => (
-                        <CardCharacter
-                            href={`/hsr/characters/${item.id}`}
-                            char={item}
-                            imageWidth={120}
-                            imageHeight={141}
-                            imageAspectRatioClass="aspect-[40/47]"
-                            imageClass="min-h-[141px] rounded-2xl"
-                        />
-                    ))}
-                </div>
+                <>
+                    <div class="mb-5 flex flex-wrap gap-4">
+                        {presentElements.length > 1 && (
+                            <div
+                                class="flex flex-wrap items-center gap-1.5"
+                                role="group"
+                                aria-label="Filtrar por elemento"
+                            >
+                                <button
+                                    type="button"
+                                    data-filter-element="all"
+                                    class="ui-control ui-control-active"
+                                    aria-pressed="true"
+                                >
+                                    Todos
+                                </button>
+                                {presentElements.map((el) => (
+                                    <button
+                                        type="button"
+                                        data-filter-element={el}
+                                        class="ui-control ui-control-idle"
+                                        aria-pressed="false"
+                                    >
+                                        {hsrElementLabels[el] ?? el}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                        {rarities.length > 1 && (
+                            <div
+                                class="flex flex-wrap items-center gap-1.5"
+                                role="group"
+                                aria-label="Filtrar por rareza"
+                            >
+                                <button
+                                    type="button"
+                                    data-filter-rarity="all"
+                                    class="ui-control ui-control-active"
+                                    aria-pressed="true"
+                                >
+                                    Todas
+                                </button>
+                                {rarities.map((r) => (
+                                    <button
+                                        type="button"
+                                        data-filter-rarity={String(r)}
+                                        class="ui-control ui-control-idle"
+                                        aria-pressed="false"
+                                    >
+                                        {r}★
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <div
+                        id="character-grid"
+                        class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 [content-visibility:auto] [contain-intrinsic-size:1px_1200px]"
+                    >
+                        {characters.map((item) => (
+                            <div
+                                data-filter-card
+                                data-element={
+                                    item.element?.trim().toLowerCase() ?? ""
+                                }
+                                data-rarity={item.rarity ?? ""}
+                            >
+                                <CardCharacter
+                                    href={`/hsr/characters/${item.id}`}
+                                    char={item}
+                                    imageWidth={120}
+                                    imageHeight={141}
+                                    imageAspectRatioClass="aspect-[40/47]"
+                                    imageClass="min-h-[141px] rounded-2xl"
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <p
+                        id="no-results"
+                        hidden
+                        class="surface-panel p-5 text-center text-sm text-slate-600 dark:text-slate-300"
+                        aria-live="polite"
+                    >
+                        No hay personajes que coincidan con los filtros
+                        seleccionados.
+                    </p>
+                </>
             )
         }
     </Content>
 </Layout>
+
+<script is:inline data-astro-rerun="true">
+    (() => {
+        const grid = document.getElementById("character-grid");
+        const noResults = document.getElementById("no-results");
+        if (!grid) return;
+
+        let activeElement = "all";
+        let activeRarity = "all";
+
+        function applyFilters() {
+            const cards = grid.querySelectorAll("[data-filter-card]");
+            let visible = 0;
+            cards.forEach((card) => {
+                const el = card.dataset.element ?? "";
+                const rarity = card.dataset.rarity ?? "";
+                const matchEl =
+                    activeElement === "all" || el === activeElement;
+                const matchRarity =
+                    activeRarity === "all" || rarity === activeRarity;
+                const show = matchEl && matchRarity;
+                card.hidden = !show;
+                if (show) visible++;
+            });
+            if (noResults) noResults.hidden = visible > 0;
+        }
+
+        function activateFilterButtons(selector, clickedBtn) {
+            document.querySelectorAll(selector).forEach((btn) => {
+                const isActive = btn === clickedBtn;
+                btn.classList.toggle("ui-control-active", isActive);
+                btn.classList.toggle("ui-control-idle", !isActive);
+                btn.setAttribute(
+                    "aria-pressed",
+                    isActive ? "true" : "false",
+                );
+            });
+        }
+
+        document
+            .querySelectorAll("[data-filter-element]")
+            .forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    activeElement = btn.dataset.filterElement ?? "all";
+                    activateFilterButtons("[data-filter-element]", btn);
+                    applyFilters();
+                });
+            });
+
+        document
+            .querySelectorAll("[data-filter-rarity]")
+            .forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    activeRarity = btn.dataset.filterRarity ?? "all";
+                    activateFilterButtons("[data-filter-rarity]", btn);
+                    applyFilters();
+                });
+            });
+    })();
+</script>
