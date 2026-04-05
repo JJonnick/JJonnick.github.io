@@ -101,12 +101,48 @@ const { title } = Astro.props;
 			}
 			::view-transition-old(page),
 			::view-transition-new(page) {
-				animation-duration: 220ms;
-				animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+				animation-duration: 320ms;
+				animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+			}
+			::view-transition-old(page) {
+				animation-name: page-out;
+			}
+			::view-transition-new(page) {
+				animation-name: page-in;
+			}
+			::view-transition-group(*) {
+				animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+			}
+			@keyframes page-out {
+				from {
+					opacity: 1;
+					transform: translateY(0) scale(1);
+					filter: blur(0);
+				}
+				to {
+					opacity: 0;
+					transform: translateY(-10px) scale(0.99);
+					filter: blur(6px);
+				}
+			}
+			@keyframes page-in {
+				from {
+					opacity: 0;
+					transform: translateY(14px) scale(0.99);
+					filter: blur(6px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0) scale(1);
+					filter: blur(0);
+				}
 			}
 			@media (prefers-reduced-motion: reduce) {
 				::view-transition-old(page),
 				::view-transition-new(page) {
+					animation-duration: 1ms;
+				}
+				::view-transition-group(*) {
 					animation-duration: 1ms;
 				}
 			}
