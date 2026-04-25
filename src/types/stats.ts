@@ -7,8 +7,22 @@ interface BaseAccount {
   game_biz: string
 }
 
+interface StygianStats {
+  difficulty: number
+  has_data: boolean
+  name: string
+  unlocked: boolean
+}
+
+interface TheaterStats {
+  has_data: boolean
+  has_detail_data: boolean
+  max_act: number
+  unlocked: boolean
+}
+
 interface Stats {
-  account_uid?: string
+  account_uid: number
   achievements: number
   days_active: number
   characters: number
@@ -28,8 +42,8 @@ interface Stats {
   unlocked_waypoints: number
   unlocked_domains: number
   max_friendship_characters?: number
-  stygian?: number
-  theater?: number
+  stygian?: StygianStats
+  theater?: TheaterStats
 }
 
 export interface Account extends BaseAccount {
