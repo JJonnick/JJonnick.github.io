@@ -1,8 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import Content from "@/layouts/Content.astro";
 import Layout from "@/layouts/Layout.astro";
 import Stars from "@/components/Stars.astro";
+import LazyImage from "@/components/LazyImage.astro";
 import { getCharacters } from "@/services/database";
 import { type Character } from "@/types/character";
 import { Swords, Heart, Sparkles, Gauge } from "@lucide/astro";
@@ -75,13 +75,14 @@ const statValueClass =
             <header
                 class="surface-panel flex flex-col items-center gap-3 p-5 text-center dark:text-slate-100"
             >
-                <Image
-                    transition:name={`char-icon-${id}`}
+                <LazyImage
+                    transitionName={`char-icon-${id}`}
                     class="rounded-full bg-slate-100 p-1 ring-1 ring-slate-300 dark:bg-slate-800 dark:ring-slate-700"
                     src={safeIcon}
                     alt={`${safeName} avatar`}
                     width={120}
                     height={120}
+                    loading="eager"
                 />
 
                 <div class="flex items-center gap-2">
@@ -91,7 +92,7 @@ const statValueClass =
                     >
                         {safeName}
                     </h1>
-                    <Image
+                    <img
                         class="rounded-full bg-slate-100 p-1 dark:bg-slate-800"
                         src={safeElementIcon}
                         alt={safeElement}

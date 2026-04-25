@@ -20,63 +20,29 @@ function readPublicJSON<T>(filename: string, folder = ''): T | null {
 }
 
 export const getCharacters = async (): Promise<Character[]> => {
-    try {
-        const data = readPublicJSON<Character[]>('characters.json');
-        return data || [];
-    } catch (error) {
-        console.error('Error fetching characters:', error);
-        return [];
-    }
+    const data = readPublicJSON<Character[]>('characters.json');
+    return data || [];
 }
 
 export const getCharacterById = async (id: number): Promise<Character | null> => {
-    try {
-        const characters = await getCharacters();
-        const character = characters.find(char => char.id === id);
-        return character || null;
-    } catch (error) {
-        console.error('Error fetching character:', error);
-        return null;
-    }
+    const characters = await getCharacters();
+    return characters.find(char => char.id === id) ?? null;
 }
 
 export const getAccount = async (): Promise<Account | null> => {
-    try {
-        const data = readPublicJSON<Account>('account.json');
-        return data;
-    } catch (error) {
-        console.error('Error fetching account:', error);
-        return null;
-    }
+    return readPublicJSON<Account>('account.json');
 }
 
 export const getHsrCharacters = async (): Promise<HsrCharacter[]> => {
-    try {
-        const data = readPublicJSON<HsrCharacter[]>('characters.json', 'hsr');
-        return data || [];
-    } catch (error) {
-        console.error('Error fetching HSR characters:', error);
-        return [];
-    }
+    const data = readPublicJSON<HsrCharacter[]>('characters.json', 'hsr');
+    return data || [];
 }
 
 export const getHsrCharacterById = async (id: number): Promise<HsrCharacter | null> => {
-    try {
-        const characters = await getHsrCharacters();
-        const character = characters.find(char => char.id === id);
-        return character || null;
-    } catch (error) {
-        console.error('Error fetching HSR character:', error);
-        return null;
-    }
+    const characters = await getHsrCharacters();
+    return characters.find(char => char.id === id) ?? null;
 }
 
 export const getHsrAccount = async (): Promise<HsrAccount | null> => {
-    try {
-        const data = readPublicJSON<HsrAccount>('account.json', 'hsr');
-        return data;
-    } catch (error) {
-        console.error('Error fetching HSR account:', error);
-        return null;
-    }
+    return readPublicJSON<HsrAccount>('account.json', 'hsr');
 }

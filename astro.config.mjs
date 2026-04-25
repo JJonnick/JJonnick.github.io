@@ -9,7 +9,7 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: "Quicksand",
       cssVariable: "--font-quicksand",
-      weights: [300, 700],
+      weights: [300, 400, 500, 600, 700],
       styles: ["normal"],
     },
   ],

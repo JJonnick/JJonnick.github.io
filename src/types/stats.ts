@@ -8,6 +8,7 @@ interface BaseAccount {
 }
 
 interface Stats {
+  account_uid?: string
   achievements: number
   days_active: number
   characters: number
@@ -26,6 +27,9 @@ interface Stats {
   remarkable_chests: number
   unlocked_waypoints: number
   unlocked_domains: number
+  max_friendship_characters?: number
+  stygian?: number
+  theater?: number
 }
 
 export interface Account extends BaseAccount {
