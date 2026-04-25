@@ -6,15 +6,12 @@ interface Props {
 }
 
 const { href, isActive = false, className = "" } = Astro.props;
-const buttonClass = `ui-control ${
-    isActive ? "ui-control-active" : "ui-control-idle"
-} ${className}`;
 ---
 
 <a
-    href={href}
-    class:list={[buttonClass, "whitespace-nowrap"]}
-    aria-current={isActive ? "page" : undefined}
+  href={href}
+  class:list={["ui-control", isActive ? "ui-control-active" : "ui-control-idle", className, "whitespace-nowrap"]}
+  aria-current={isActive ? "page" : undefined}
 >
     <span class="shrink-0">
         <slot name="before" />

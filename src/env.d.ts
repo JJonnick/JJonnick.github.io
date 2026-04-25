@@ -2,7 +2,7 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-    // Environment variables can be added here as needed
+    readonly PUBLIC_HSR_TERMS_LOCALE?: string;
 }
 
 interface ImportMeta {
