@@ -4,15 +4,16 @@
 
 @theme {
     --font-sans: var(--font-quicksand), system-ui;
+    --font-display: Georgia, "Palatino Linotype", serif;
 }
 
 @layer components {
     .text-heading-page {
-        @apply text-2xl font-semibold leading-tight text-slate-900 dark:text-slate-100;
+        @apply font-display text-2xl font-semibold leading-tight text-slate-900 dark:text-slate-100;
     }
 
     .text-heading-section {
-        @apply text-lg font-semibold text-slate-900 dark:text-slate-100;
+        @apply font-display text-lg font-semibold text-slate-900 dark:text-slate-100;
     }
 
     .text-muted-body {
