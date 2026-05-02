@@ -17,9 +17,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.8",
-    "@lucide/astro": "^1.11.0",
-    "astro": "^6.1.9",
+    "@astrojs/check": "^0.9.9",
+    "@lucide/astro": "^1.14.0",
+    "astro": "^6.2.1",
     "tailwindcss": "^4.2.4",
     "typescript": "^6.0.3"
   },
