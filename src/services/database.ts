@@ -7,8 +7,15 @@ import {
 import fs from 'fs';
 import path from 'path';
 
+function isSafePathSegment(segment: string): boolean {
+    return /^[a-zA-Z0-9._-]*$/.test(segment) && !segment.includes("..");
+}
+
 function readPublicJSON<T>(filename: string, folder = ''): T | null {
     try {
+        if (!isSafePathSegment(filename) || !isSafePathSegment(folder)) {
+            throw new Error('Invalid path segment');
+        }
         const filePath = path.join(process.cwd(), 'public', 'data', folder, filename);
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         return JSON.parse(fileContent) as T;
