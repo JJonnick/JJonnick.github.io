@@ -45,6 +45,11 @@ Se agregó un workflow de **Preview deploy** para Pull Requests hacia `main`.
 - En cada PR (desde una rama del mismo repositorio), GitHub Actions genera un despliegue de preview.
 - Puedes abrir la URL del preview desde la ejecución del workflow en la pestaña **Actions**.
 
+## Variables de entorno
+
+- No envíes archivos `.env` con valores reales.
+- Copia `.env.example` a `.env` para configuración local.
+
 ## Uso de agentes de Copilot
 
 Este repo incluye agentes y prompt personalizados para acelerar revisiones y correcciones.
