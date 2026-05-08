@@ -4,9 +4,9 @@ import Layout from "@/layouts/Layout.astro";
 import Stars from "@/components/Stars.astro";
 import LazyImage from "@/components/LazyImage.astro";
 import { getCharacters } from "@/services/database";
+import { buildGenshinCharacterDetailViewModel } from "@/services/genshin-character-detail";
 import { type Character } from "@/types/character";
 import { Swords, Heart, Sparkles, Gauge } from "@lucide/astro";
-import { toSafeNumber } from "@/utils/numbers";
 
 interface Props {
     char: Character;
@@ -21,47 +21,19 @@ export async function getStaticPaths() {
     }));
 }
 
-const weaponTypeMap: Record<number, string> = {
-    1: "Espada",
-    10: "Catalizador",
-    11: "Mandoble",
-    12: "Arco",
-    13: "Lanza",
-};
-
 const { char } = Astro.props;
+const { id } = char;
 const {
-    id,
-    icon,
-    name,
-    rarity,
-    element,
-    level,
-    constellation,
-    friendship,
-    weapon_type,
-} = char;
-
-const safeName = name?.trim() || "Personaje desconocido";
-const safeElement = element?.trim() || "Elemento desconocido";
-const safeIcon = icon || "/fallbacks/icon.svg";
-const safeRarity = Math.min(5, Math.max(1, toSafeNumber(rarity) || 1));
-const safeLevel = toSafeNumber(level);
-const safeConstellation = toSafeNumber(constellation);
-const safeFriendship = toSafeNumber(friendship);
-const elementKey = safeElement.toLowerCase();
-const safeElementIcon = [
-    "anemo",
-    "geo",
-    "electro",
-    "dendro",
-    "hydro",
-    "pyro",
-    "cryo",
-].includes(elementKey)
-    ? `/elements/${elementKey}.svg`
-    : "/fallbacks/icon.svg";
-const weaponName = weaponTypeMap[weapon_type] ?? "Desconocido";
+    safeName,
+    safeElement,
+    safeIcon,
+    safeRarity,
+    safeLevel,
+    safeConstellation,
+    safeFriendship,
+    safeElementIcon,
+    weaponName,
+} = buildGenshinCharacterDetailViewModel(char);
 const statCardClass = "surface-panel p-3";
 const statLabelClass = "text-muted-body text-xs";
 const statValueClass =
