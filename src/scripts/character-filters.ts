@@ -56,3 +56,5 @@ if (!runtimeWindow.__characterFiltersPageLoadBound) {
     document.addEventListener("astro:page-load", initCharacterFilters);
     runtimeWindow.__characterFiltersPageLoadBound = true;
 }
+
+export {};

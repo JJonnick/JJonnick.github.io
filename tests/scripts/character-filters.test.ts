@@ -49,15 +49,19 @@ describe("character filters script", () => {
         const rarityFiveButton = document.querySelector<HTMLElement>(
             "[data-filter-rarity='5']",
         );
+        const noResults = document.getElementById("no-results");
+        const hydroButton = document.querySelector<HTMLElement>(
+            "[data-filter-element='hydro']",
+        );
         const rarityFourButton = document.querySelector<HTMLElement>(
             "[data-filter-rarity='4']",
         );
-        const noResults = document.getElementById("no-results");
 
         expect(pyroButton).not.toBeNull();
         expect(rarityFiveButton).not.toBeNull();
-        expect(rarityFourButton).not.toBeNull();
         expect(noResults).not.toBeNull();
+        expect(hydroButton).not.toBeNull();
+        expect(rarityFourButton).not.toBeNull();
 
         pyroButton!.click();
         expect(getVisibleCardsCount()).toBe(2);
@@ -72,15 +76,12 @@ describe("character filters script", () => {
             true,
         );
 
-        rarityFourButton!.click();
-        expect(getVisibleCardsCount()).toBe(1);
-        expect(noResults!.hidden).toBe(true);
-
-        const hydroButton = document.querySelector<HTMLElement>(
-            "[data-filter-element='hydro']",
-        );
         hydroButton!.click();
         expect(getVisibleCardsCount()).toBe(0);
         expect(noResults!.hidden).toBe(false);
+
+        rarityFourButton!.click();
+        expect(getVisibleCardsCount()).toBe(1);
+        expect(noResults!.hidden).toBe(true);
     });
 });

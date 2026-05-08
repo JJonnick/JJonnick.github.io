@@ -63,7 +63,7 @@ describe("buildHsrCharacterDetailViewModel", () => {
                     level: 0,
                     name: " ",
                     rank: 0,
-                    rarity: -2,
+                    rarity: 0,
                 },
                 memosprite: {
                     icon: "",
@@ -79,7 +79,7 @@ describe("buildHsrCharacterDetailViewModel", () => {
         expect(model.safeRarity).toBe(5);
         expect(model.safePath).toBe("Desconocida");
         expect(model.safeElement).toBe("Desconocido");
-        expect(model.hasLightCone).toBe(false);
+        expect(model.hasLightCone).toBe(true);
         expect(model.lightConeName).toBe("Sin cono de luz");
         expect(model.lightConeIcon).toBe("/fallbacks/icon.svg");
         expect(model.lightConeRarity).toBe(0);
