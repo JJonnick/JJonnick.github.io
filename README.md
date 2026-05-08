@@ -47,7 +47,7 @@ Se agregó un workflow de **Preview deploy** para Pull Requests hacia `main`.
 
 ## Variables de entorno
 
-- No subas archivos `.env` con valores reales.
+- No envíes archivos `.env` con valores reales.
 - Copia `.env.example` a `.env` para configuración local.
 
 ## Uso de agentes de Copilot

@@ -7,16 +7,32 @@ import {
 import fs from 'fs';
 import path from 'path';
 
-function isSafePathSegment(segment: string): boolean {
-    return /^[a-zA-Z0-9._-]*$/.test(segment) && !segment.includes("..");
+function isSafeFilename(segment: string): boolean {
+    return /^[a-zA-Z0-9_-]+\.json$/.test(segment);
+}
+
+function isSafeFolder(segment: string): boolean {
+    if (!segment) return true;
+    return /^[a-zA-Z0-9_-]+$/.test(segment);
 }
 
 function readPublicJSON<T>(filename: string, folder = ''): T | null {
     try {
-        if (!isSafePathSegment(filename) || !isSafePathSegment(folder)) {
-            throw new Error('Invalid path segment');
+        if (!isSafeFilename(filename)) {
+            throw new Error('Invalid filename: contains forbidden characters or traversal patterns');
         }
-        const filePath = path.join(process.cwd(), 'public', 'data', folder, filename);
+
+        if (!isSafeFolder(folder)) {
+            throw new Error('Invalid folder path: contains forbidden characters or traversal patterns');
+        }
+
+        const dataRoot = path.resolve(process.cwd(), 'public', 'data');
+        const filePath = path.resolve(dataRoot, folder, filename);
+        const relativePath = path.relative(dataRoot, filePath);
+        if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+            throw new Error('Resolved path escapes data root');
+        }
+
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         return JSON.parse(fileContent) as T;
     } catch (error) {
