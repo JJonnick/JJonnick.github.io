@@ -3998,9 +3998,9 @@
     "path": 9,
     "properties": [
       {
-        "add": "1113",
+        "add": "877",
         "base": "2106",
-        "final": "3219",
+        "final": "2983",
         "info": {
           "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/237d6d84d1c6411734635c892e050487.png",
           "name": "HP",
@@ -4013,9 +4013,9 @@
         "recommended": false
       },
       {
-        "add": "1690",
+        "add": "1838",
         "base": "1222",
-        "final": "2912",
+        "final": "3060",
         "info": {
           "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/9d817d90b85f5b02dcce9f4232e22e5b.png",
           "name": "ATK",
@@ -4028,9 +4028,9 @@
         "recommended": false
       },
       {
-        "add": "224",
+        "add": "205",
         "base": "923",
-        "final": "1148",
+        "final": "1129",
         "info": {
           "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/3d38c23b7cbc4fb411d556d26753bfab.png",
           "name": "DEF",
@@ -4043,9 +4043,9 @@
         "recommended": false
       },
       {
-        "add": "12",
+        "add": "6",
         "base": "107",
-        "final": "119",
+        "final": "113",
         "info": {
           "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/8a0af2db52362d0b23c61a78430e203b.png",
           "name": "SPD",
@@ -4059,8 +4059,8 @@
       },
       {
         "add": "0.0%",
-        "base": "77.9%",
-        "final": "77.9%",
+        "base": "76.2%",
+        "final": "76.2%",
         "info": {
           "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/a23488fd3fd2a89e893b3c65cc15742f.png",
           "name": "CRIT Rate",
@@ -4074,8 +4074,8 @@
       },
       {
         "add": "0.0%",
-        "base": "218.2%",
-        "final": "218.2%",
+        "base": "223.4%",
+        "final": "223.4%",
         "info": {
           "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/8ed3bf4370943f2a9c27ab66013424e7.png",
           "name": "CRIT DMG",
@@ -4352,31 +4352,17 @@
         "properties": [
           {
             "info": {
-              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/3d38c23b7cbc4fb411d556d26753bfab.png",
-              "name": "DEF",
-              "property_name_filter": "DEF",
-              "property_name_relic": "DEF",
-              "property_type": 31
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/9d817d90b85f5b02dcce9f4232e22e5b.png",
+              "name": "ATK",
+              "property_name_filter": "ATK Percentage",
+              "property_name_relic": "ATK",
+              "property_type": 33
             },
             "preferred": false,
-            "property_type": 31,
-            "recommended": false,
-            "times": 1,
-            "value": "16"
-          },
-          {
-            "info": {
-              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/237d6d84d1c6411734635c892e050487.png",
-              "name": "HP",
-              "property_name_filter": "HP Percentage",
-              "property_name_relic": "HP",
-              "property_type": 32
-            },
-            "preferred": false,
-            "property_type": 32,
-            "recommended": false,
+            "property_type": 33,
+            "recommended": true,
             "times": 2,
-            "value": "8.6%"
+            "value": "7.7%"
           },
           {
             "info": {
@@ -4389,8 +4375,8 @@
             "preferred": false,
             "property_type": 52,
             "recommended": true,
-            "times": 2,
-            "value": "6.4%"
+            "times": 3,
+            "value": "8.4%"
           },
           {
             "info": {
@@ -4403,8 +4389,22 @@
             "preferred": false,
             "property_type": 53,
             "recommended": true,
-            "times": 4,
-            "value": "23.9%"
+            "times": 2,
+            "value": "12.3%"
+          },
+          {
+            "info": {
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/237d6d84d1c6411734635c892e050487.png",
+              "name": "HP",
+              "property_name_filter": "HP Percentage",
+              "property_name_relic": "HP",
+              "property_type": 32
+            },
+            "preferred": false,
+            "property_type": 32,
+            "recommended": false,
+            "times": 1,
+            "value": "4.3%"
           }
         ],
         "rarity": 5,
@@ -4516,6 +4516,20 @@
         "properties": [
           {
             "info": {
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/9d817d90b85f5b02dcce9f4232e22e5b.png",
+              "name": "ATK",
+              "property_name_filter": "ATK",
+              "property_name_relic": "ATK",
+              "property_type": 29
+            },
+            "preferred": false,
+            "property_type": 29,
+            "recommended": false,
+            "times": 3,
+            "value": "52"
+          },
+          {
+            "info": {
               "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/3d38c23b7cbc4fb411d556d26753bfab.png",
               "name": "DEF",
               "property_name_filter": "DEF",
@@ -4526,21 +4540,21 @@
             "property_type": 31,
             "recommended": false,
             "times": 1,
-            "value": "21"
+            "value": "19"
           },
           {
             "info": {
-              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/8a0af2db52362d0b23c61a78430e203b.png",
-              "name": "SPD",
-              "property_name_filter": "SPD",
-              "property_name_relic": "SPD",
-              "property_type": 51
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/8ed3bf4370943f2a9c27ab66013424e7.png",
+              "name": "CRIT DMG",
+              "property_name_filter": "CRIT DMG",
+              "property_name_relic": "CRIT DMG",
+              "property_type": 53
             },
             "preferred": false,
-            "property_type": 51,
-            "recommended": false,
+            "property_type": 53,
+            "recommended": true,
             "times": 3,
-            "value": "6"
+            "value": "16.8%"
           },
           {
             "info": {
@@ -4553,22 +4567,8 @@
             "preferred": false,
             "property_type": 52,
             "recommended": true,
-            "times": 2,
-            "value": "6.4%"
-          },
-          {
-            "info": {
-              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua8b8d/237d6d84d1c6411734635c892e050487.png",
-              "name": "HP",
-              "property_name_filter": "HP Percentage",
-              "property_name_relic": "HP",
-              "property_type": 32
-            },
-            "preferred": false,
-            "property_type": 32,
-            "recommended": false,
-            "times": 2,
-            "value": "6.9%"
+            "times": 1,
+            "value": "2.9%"
           }
         ],
         "rarity": 5,
