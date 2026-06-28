@@ -17781,7 +17781,7 @@
         "recommended": false
       }
     ],
-    "rank": 3,
+    "rank": 5,
     "ranks": [
       {
         "desc": "While the Ultimate's Zone is deployed, the DMG dealt by all allies ignores 20% of the target's DEF.",
@@ -17811,7 +17811,7 @@
         "desc": "When an enemy target's Weakness is Broken, Ruan Mei's Break Effect increases by 100% for 3 turn(s).",
         "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/a0f40116c17c0cb5d5429a8ee6b58bf4.png",
         "id": 130304,
-        "is_unlocked": false,
+        "is_unlocked": true,
         "name": "Chatoyant Éclat",
         "pos": 4
       },
@@ -17819,7 +17819,7 @@
         "desc": "Skill Lv. +2, up to a maximum of Lv. 15.\nBasic ATK Lv. +1, up to a maximum of Lv. 10.",
         "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/e93e8133ad487af7efdc1dd12896da04.png",
         "id": 130305,
-        "is_unlocked": false,
+        "is_unlocked": true,
         "name": "Languid Barrette",
         "pos": 5
       },
@@ -18167,20 +18167,20 @@
       {
         "anchor": "Point01",
         "is_activated": true,
-        "is_rank_work": false,
+        "is_rank_work": true,
         "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/0df3b1210926007330d859a23bc95c20.png",
-        "level": 6,
+        "level": 7,
         "point_id": "1303001",
         "point_type": 2,
         "pre_point": "0",
         "remake": "Basic ATK",
         "skill_stages": [
           {
-            "desc": "Deals Ice DMG equal to 100% of Ruan Mei's ATK to one designated enemy target.",
+            "desc": "Deals Ice DMG equal to 110% of Ruan Mei's ATK to one designated enemy target.",
             "is_activated": true,
-            "is_rank_work": false,
+            "is_rank_work": true,
             "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/36a8411a273e56e08526ef0b09cdbda6.png",
-            "level": 6,
+            "level": 7,
             "name": "Threading Fragrance",
             "remake": "Basic ATK"
           }
@@ -18189,20 +18189,20 @@
       {
         "anchor": "Point02",
         "is_activated": true,
-        "is_rank_work": false,
+        "is_rank_work": true,
         "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/559c73e7549956dda05e7fda7750770f.png",
-        "level": 10,
+        "level": 12,
         "point_id": "1303002",
         "point_type": 2,
         "pre_point": "0",
         "remake": "Skill",
         "skill_stages": [
           {
-            "desc": "After using her Skill, Ruan Mei gains Overtone, lasting for 3 turn(s). This duration decreases by 1 at the start of Ruan Mei's every turn. When Ruan Mei has Overtone, all allies' DMG increases by 32.0% and Weakness Break Efficiency increases by 50%.",
+            "desc": "After using her Skill, Ruan Mei gains Overtone, lasting for 3 turn(s). This duration decreases by 1 at the start of Ruan Mei's every turn. When Ruan Mei has Overtone, all allies' DMG increases by 35.2% and Weakness Break Efficiency increases by 50%.",
             "is_activated": true,
-            "is_rank_work": false,
+            "is_rank_work": true,
             "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/560641687c7bb2daf42d5e01f95cb52f.png",
-            "level": 10,
+            "level": 12,
             "name": "String Sings Slow Swirls",
             "remake": "Skill"
           }
@@ -38474,6 +38474,685 @@
             "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/214decb26b23cd8fee5889630e170707.png",
             "level": 1,
             "name": "DEF Boost",
+            "remake": "Stat Bonus"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "element": "fire",
+    "equip": null,
+    "figure_path": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/b10c4b725c466ce0ff5b03cc00fe3f31.png",
+    "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/ee669ca108fc20c7d05e03b45910ff72.png",
+    "id": 1507,
+    "image": "https://act-webstatic.hoyoverse.com/game_record/hkrpg/custom/avatar_image/1507@2x.png",
+    "level": 1,
+    "memosprite": null,
+    "name": "Mortenax Blade",
+    "ornaments": [],
+    "path": 5,
+    "properties": [
+      {
+        "add": "0",
+        "base": "184",
+        "final": "184",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/9aedaea4ab1fb2e020e72c03fd3cbf1f.png",
+          "name": "HP",
+          "property_name_filter": "HP",
+          "property_name_relic": "HP",
+          "property_type": 1
+        },
+        "preferred": false,
+        "property_type": 1,
+        "recommended": false
+      },
+      {
+        "add": "0",
+        "base": "73",
+        "final": "73",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/433e4adc3590b8506d0a20138e7b6779.png",
+          "name": "ATK",
+          "property_name_filter": "ATK",
+          "property_name_relic": "ATK",
+          "property_type": 2
+        },
+        "preferred": false,
+        "property_type": 2,
+        "recommended": false
+      },
+      {
+        "add": "0",
+        "base": "66",
+        "final": "66",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/b63182654f640c2ac9087a8773f9b1e0.png",
+          "name": "DEF",
+          "property_name_filter": "DEF",
+          "property_name_relic": "DEF",
+          "property_type": 3
+        },
+        "preferred": false,
+        "property_type": 3,
+        "recommended": false
+      },
+      {
+        "add": "0",
+        "base": "107",
+        "final": "107",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/7984f2a5eeaacc3966e51b60301f51bb.png",
+          "name": "SPD",
+          "property_name_filter": "SPD",
+          "property_name_relic": "SPD",
+          "property_type": 4
+        },
+        "preferred": false,
+        "property_type": 4,
+        "recommended": false
+      },
+      {
+        "add": "0.0%",
+        "base": "5.0%",
+        "final": "5.0%",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/d881deb44a5838c2e2d23d4d8730b0fd.png",
+          "name": "CRIT Rate",
+          "property_name_filter": "CRIT Rate",
+          "property_name_relic": "CRIT Rate",
+          "property_type": 5
+        },
+        "preferred": false,
+        "property_type": 5,
+        "recommended": false
+      },
+      {
+        "add": "0.0%",
+        "base": "50.0%",
+        "final": "50.0%",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/8da1aadac2b1c22981586899b53655be.png",
+          "name": "CRIT DMG",
+          "property_name_filter": "CRIT DMG",
+          "property_name_relic": "CRIT DMG",
+          "property_type": 6
+        },
+        "preferred": false,
+        "property_type": 6,
+        "recommended": false
+      },
+      {
+        "add": "0.0%",
+        "base": "0.0%",
+        "final": "0.0%",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/fa867b0a212e36438531e277f4b9fa93.png",
+          "name": "Fire DMG Boost",
+          "property_name_filter": "Fire DMG Boost",
+          "property_name_relic": "Fire DMG Boost",
+          "property_type": 14
+        },
+        "preferred": false,
+        "property_type": 14,
+        "recommended": false
+      },
+      {
+        "add": "0.0%",
+        "base": "0.0%",
+        "final": "0.0%",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/52ac6dae913b472cc300a2170eee6049.png",
+          "name": "Break Effect",
+          "property_name_filter": "Break Effect",
+          "property_name_relic": "Break Effect",
+          "property_type": 58
+        },
+        "preferred": false,
+        "property_type": 58,
+        "recommended": false
+      },
+      {
+        "add": "0.0%",
+        "base": "0.0%",
+        "final": "0.0%",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/d3a5fb768f24ef5ad3f7f06274303e36.png",
+          "name": "Elation",
+          "property_name_filter": "Elation",
+          "property_name_relic": "Elation",
+          "property_type": 71
+        },
+        "preferred": false,
+        "property_type": 71,
+        "recommended": false
+      },
+      {
+        "add": "0.0%",
+        "base": "0.0%",
+        "final": "0.0%",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/b8181b14a041019ac34a5fb595960111.png",
+          "name": "Outgoing Healing Boost",
+          "property_name_filter": "Outgoing Healing Boost",
+          "property_name_relic": "Outgoing Healing Boost",
+          "property_type": 7
+        },
+        "preferred": false,
+        "property_type": 7,
+        "recommended": false
+      },
+      {
+        "add": "0.0%",
+        "base": "100.0%",
+        "final": "100.0%",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/79490d202d35a56d6d34a31a86b5f00c.png",
+          "name": "Energy Regeneration Rate",
+          "property_name_filter": "Energy Regeneration Rate",
+          "property_name_relic": "Energy Regeneration Rate",
+          "property_type": 9
+        },
+        "preferred": false,
+        "property_type": 9,
+        "recommended": false
+      },
+      {
+        "add": "0.0%",
+        "base": "0.0%",
+        "final": "0.0%",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/ed1d5180252e408048eeda23bd94010e.png",
+          "name": "Effect Hit Rate",
+          "property_name_filter": "Effect Hit Rate",
+          "property_name_relic": "Effect Hit Rate",
+          "property_type": 10
+        },
+        "preferred": false,
+        "property_type": 10,
+        "recommended": false
+      },
+      {
+        "add": "0.0%",
+        "base": "0.0%",
+        "final": "0.0%",
+        "info": {
+          "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/44da1bf1f5f6ab79d96169a1ce9cf8d1.png",
+          "name": "Effect RES",
+          "property_name_filter": "Effect RES",
+          "property_name_relic": "Effect RES",
+          "property_type": 11
+        },
+        "preferred": false,
+        "property_type": 11,
+        "recommended": false
+      }
+    ],
+    "rank": 0,
+    "ranks": [
+      {
+        "desc": "While the Zone is active, decreases all enemies' All-Type RES by 20%. After using the extra Skill from Talent, the \"Infinite Fury\" countdown has its action delayed by 15%.",
+        "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/8d22cacc48975b1ae7cacaa4f5e76169.png",
+        "id": 150701,
+        "is_unlocked": false,
+        "name": "Ere My Death, I Stood Unmade",
+        "pos": 1
+      },
+      {
+        "desc": "When an ally character uses Ultimate to deal DMG, it is considered as having launched Follow-Up ATK. And the Follow-Up ATK DMG dealt by ally targets increases by 75%. The upper limit of Mortenax Blade's Charge decreases to 7.",
+        "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/9a2642c26027d32f4c0d7de3090bfec8.png",
+        "id": 150702,
+        "is_unlocked": false,
+        "name": "Ash Was My Heart, Yet the Flame Stayed",
+        "pos": 2
+      },
+      {
+        "desc": "Ultimate Lv. +2, up to a maximum of Lv. 15.\nTalent Lv. +2, up to a maximum of Lv. 15.",
+        "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/5565b2008be41e9624e557483f23ea9f.png",
+        "id": 150703,
+        "is_unlocked": false,
+        "name": "Across the Shore, Wrath Laid Bare",
+        "pos": 3
+      },
+      {
+        "desc": "\"Heart, Refined ad Infinitum\" additionally increases ally targets' DMG dealt by 50%.",
+        "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/3cc53fcf7388c8e5031d2044f59e5f54.png",
+        "id": 150704,
+        "is_unlocked": false,
+        "name": "Odium I've Smitten, Thence Came the Blade",
+        "pos": 4
+      },
+      {
+        "desc": "Skill Lv. +2, up to a maximum of Lv. 15.\nBasic ATK Lv. +1, up to a maximum of Lv. 10.",
+        "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/799219881bf0452ace107792746de9ec.png",
+        "id": 150705,
+        "is_unlocked": false,
+        "name": "I Severed My Woes, Knowing Death Begets Life",
+        "pos": 5
+      },
+      {
+        "desc": "As the Zone persists, when Mortenax Blade takes DMG or consumes HP, he gains 1 Charge. This effect can trigger again after any target's turn ends. The DMG multiplier of \"Tenax Per Ignem\" increases to 150% of its original value.",
+        "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/38ac444cafd8c48862cff56936758a38.png",
+        "id": 150706,
+        "is_unlocked": false,
+        "name": "If Immortality Could Die, I Swore THEM Slain",
+        "pos": 6
+      }
+    ],
+    "rarity": 5,
+    "relics": [],
+    "skills": [
+      {
+        "anchor": "Point01",
+        "is_activated": true,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/3b32224ca71bd09d2f46daa16729b8f6.png",
+        "level": 1,
+        "point_id": "1507001",
+        "point_type": 2,
+        "pre_point": "0",
+        "remake": "Basic ATK",
+        "skill_stages": [
+          {
+            "desc": "Deals Fire DMG equal to 25% of Mortenax Blade's Max HP to one designated enemy, and causes the target to enter the Taunt state for 1 turn.",
+            "is_activated": true,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/64e61dd391c7a566ac8b9ce2104ad230.png",
+            "level": 1,
+            "name": "A Broken Blade Still Slays",
+            "remake": "Basic ATK"
+          },
+          {
+            "desc": "Deals Fire DMG equal to 50% of Mortenax Blade's Max HP to one designated enemy, and causes the target to enter the Taunt state for 1 turn.",
+            "is_activated": true,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/eed352ceb8a35d143487ba57353916d7.png",
+            "level": 1,
+            "name": "A Tempered Blade Severs Souls",
+            "remake": "Basic ATK"
+          }
+        ]
+      },
+      {
+        "anchor": "Point02",
+        "is_activated": true,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/eb54c8fc7d2a82fddea801cbbd60e890.png",
+        "level": 1,
+        "point_id": "1507002",
+        "point_type": 2,
+        "pre_point": "0",
+        "remake": "Skill",
+        "skill_stages": [
+          {
+            "desc": "Consumes HP equal to 10% of Mortenax Blade's Max HP and deals Fire DMG equal to 36.0% of Mortenax Blade's Max HP to all enemies, and additionally deals 4 instance(s) of DMG, with each instance dealing Fire DMG equal to 12.0% of Mortenax Blade's Max HP to one random enemy.\nIf the current HP is insufficient, Mortenax Blade's current HP will be reduced to 1 when he uses Skill.\nWhile not in the \"Infinite Fury\" state or when the current HP is 1 or lower, Mortenax Blade cannot use his Skill.\nUsing Skill does not consume Skill Points.",
+            "is_activated": true,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/3da3845438d85ca81f93cc16223ca299.png",
+            "level": 1,
+            "name": "A Rain of Blades Seals Fate",
+            "remake": "Skill"
+          }
+        ]
+      },
+      {
+        "anchor": "Point03",
+        "is_activated": true,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/b0fee8e1451b6eefd1ed4311a258d3ce.png",
+        "level": 1,
+        "point_id": "1507003",
+        "point_type": 2,
+        "pre_point": "0",
+        "remake": "Ultimate",
+        "skill_stages": [
+          {
+            "desc": "Inflicts \"Balefire Bind\" on all enemies. Enemy targets in the \"Balefire Bind\" state have their DEF reduced by 20.0% and the DMG they receive increases by 30.0%, lasting for 2 turn(s). Then, consumes HP equal to 20% of Mortenax Blade's Max HP to deploy a Zone. While the Zone is active, Mortenax Blade enters the \"Infinite Fury\" state.\nDuring the \"Infinite Fury\" state, increases CRIT Rate by 20%, increases CRIT DMG by 30.0%, enhances Basic ATK, unlocks Skill, and gains a new Ultimate \"Tenax Per Ignem.\" When receiving a killing blow, this unit will not be knocked down, but will dispel the Zone, exit the \"Infinite Fury\" state, and restore HP equal to 50% of this unit's Max HP.\nWhen gaining the \"Infinite Fury\" state, a corresponding countdown appears on the Action Order. The countdown has a fixed SPD of 70. At the start of the countdown's turn, dispels the Zone and exits the \"Infinite Fury\" state.\nIf the current HP is insufficient, Mortenax Blade's current HP will be reduced to 1 when he uses this ability.",
+            "is_activated": true,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/3e48b44e1ef47dd741a8233989891a77.png",
+            "level": 1,
+            "name": "Fornax Ex Corpore",
+            "remake": "Ultimate"
+          },
+          {
+            "desc": "Deals Fire DMG equal to 210.0% of Mortenax Blade's Max HP to all enemies.",
+            "is_activated": true,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/7564589079688eeb392195a1b482a6e8.png",
+            "level": 1,
+            "name": "Tenax Per Ignem",
+            "remake": "Ultimate"
+          }
+        ]
+      },
+      {
+        "anchor": "Point04",
+        "is_activated": true,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/0f94977e5713e85699db45522c97b96a.png",
+        "level": 1,
+        "point_id": "1507004",
+        "point_type": 2,
+        "pre_point": "0",
+        "remake": "Talent",
+        "skill_stages": [
+          {
+            "desc": "While the Zone is active, after each attack an ally target uses on an enemy, inflicts the \"Balefire Bind\" state on the corresponding enemy target and grants 1 Charge to Mortenax Blade. When Charge reaches 9 points and the current HP is more than 1, consumes 9 Charge, regenerates 15.0 Energy, and enables Mortenax Blade to use Skill 1 extra time. This extra Skill use is considered as Follow-Up ATK.",
+            "is_activated": true,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/3d1da80edd4866dfb830a66d82a241ea.png",
+            "level": 1,
+            "name": "All Karma Comes Due",
+            "remake": "Talent"
+          }
+        ]
+      },
+      {
+        "anchor": "Point05",
+        "is_activated": true,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/13e307cb9ab740f4e91a5988b873db3d.png",
+        "level": 1,
+        "point_id": "1507007",
+        "point_type": 2,
+        "pre_point": "0",
+        "remake": "Technique",
+        "skill_stages": [
+          {
+            "desc": "Immediately attacks all enemies within a certain range. After entering combat, inflicts the Taunt state on all enemies for 1 turn and decreases DMG taken by this unit by 90% for 2 turn(s).",
+            "is_activated": true,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c5ebb44b4f218bc5bb1fff6da28dd4b5.png",
+            "level": 1,
+            "name": "Blade's Reach Spares None",
+            "remake": "Technique"
+          }
+        ]
+      },
+      {
+        "anchor": "Point06",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/d6cef439df9968114390f1f661c230d4.png",
+        "level": 1,
+        "point_id": "1507101",
+        "point_type": 3,
+        "pre_point": "0",
+        "remake": "Bonus Ability",
+        "skill_stages": [
+          {
+            "desc": "Mortenax Blade can accumulate up to 80 overflow Energy. After using Ultimate, clears it and regenerates a corresponding amount of Energy. When the battle starts or when the Zone is dispelled, if Energy is below 75%, it is immediately regenerated to 75%. When Energy is regenerated to its maximum, dispels all debuffs from this unit.",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/d6cef439df9968114390f1f661c230d4.png",
+            "level": 1,
+            "name": "Bone, Hardened ad Nauseam",
+            "remake": "Bonus Ability"
+          }
+        ]
+      },
+      {
+        "anchor": "Point07",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/eb49d3e4a7e1aa6aaba4c2a310cda763.png",
+        "level": 1,
+        "point_id": "1507102",
+        "point_type": 3,
+        "pre_point": "0",
+        "remake": "Bonus Ability",
+        "skill_stages": [
+          {
+            "desc": "While the Zone is active, increases the chance of being attacked by enemies, decreases DMG taken by this unit by 50%, and increases Incoming Healing by 50%. After being attacked, inflicts the \"Balefire Bind\" state on the corresponding target, and enables Mortenax Blade to gain 1 Charge.",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/eb49d3e4a7e1aa6aaba4c2a310cda763.png",
+            "level": 1,
+            "name": "Soul, Tempered ad Mortem",
+            "remake": "Bonus Ability"
+          }
+        ]
+      },
+      {
+        "anchor": "Point08",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/630740d729dcdd06e0ac86ff2a8c9df4.png",
+        "level": 1,
+        "point_id": "1507103",
+        "point_type": 3,
+        "pre_point": "0",
+        "remake": "Bonus Ability",
+        "skill_stages": [
+          {
+            "desc": "While the Zone is active, ally targets deal 50% increased DMG. If there are other Nihility characters aside from Mortenax Blade in the team, Ultimate DMG dealt by ally targets increases by 75%. Otherwise, DMG dealt by Mortenax Blade additionally increases by 75%.",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/630740d729dcdd06e0ac86ff2a8c9df4.png",
+            "level": 1,
+            "name": "Heart, Refined ad Infinitum",
+            "remake": "Bonus Ability"
+          }
+        ]
+      },
+      {
+        "anchor": "Point09",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+        "level": 1,
+        "point_id": "1507201",
+        "point_type": 1,
+        "pre_point": "0",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+            "level": 1,
+            "name": "DMG Boost: Fire",
+            "remake": "Stat Bonus"
+          }
+        ]
+      },
+      {
+        "anchor": "Point11",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+        "level": 1,
+        "point_id": "1507203",
+        "point_type": 1,
+        "pre_point": "1507202",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+            "level": 1,
+            "name": "DMG Boost: Fire",
+            "remake": "Stat Bonus"
+          }
+        ]
+      },
+      {
+        "anchor": "Point13",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+        "level": 1,
+        "point_id": "1507205",
+        "point_type": 1,
+        "pre_point": "1507102",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+            "level": 1,
+            "name": "DMG Boost: Fire",
+            "remake": "Stat Bonus"
+          }
+        ]
+      },
+      {
+        "anchor": "Point15",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+        "level": 1,
+        "point_id": "1507207",
+        "point_type": 1,
+        "pre_point": "1507206",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+            "level": 1,
+            "name": "DMG Boost: Fire",
+            "remake": "Stat Bonus"
+          }
+        ]
+      },
+      {
+        "anchor": "Point18",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+        "level": 1,
+        "point_id": "1507210",
+        "point_type": 1,
+        "pre_point": "1507201",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/c7e1cc5d58aaa1c8d98c5f7024bf56b2.png",
+            "level": 1,
+            "name": "DMG Boost: Fire",
+            "remake": "Stat Bonus"
+          }
+        ]
+      },
+      {
+        "anchor": "Point10",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/e4aaafb564cdd5a78df5d65f61cecb90.png",
+        "level": 1,
+        "point_id": "1507202",
+        "point_type": 1,
+        "pre_point": "1507101",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/e4aaafb564cdd5a78df5d65f61cecb90.png",
+            "level": 1,
+            "name": "CRIT Rate Boost",
+            "remake": "Stat Bonus"
+          }
+        ]
+      },
+      {
+        "anchor": "Point14",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/e4aaafb564cdd5a78df5d65f61cecb90.png",
+        "level": 1,
+        "point_id": "1507206",
+        "point_type": 1,
+        "pre_point": "1507205",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/e4aaafb564cdd5a78df5d65f61cecb90.png",
+            "level": 1,
+            "name": "CRIT Rate Boost",
+            "remake": "Stat Bonus"
+          }
+        ]
+      },
+      {
+        "anchor": "Point17",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/e4aaafb564cdd5a78df5d65f61cecb90.png",
+        "level": 1,
+        "point_id": "1507209",
+        "point_type": 1,
+        "pre_point": "1507103",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/e4aaafb564cdd5a78df5d65f61cecb90.png",
+            "level": 1,
+            "name": "CRIT Rate Boost",
+            "remake": "Stat Bonus"
+          }
+        ]
+      },
+      {
+        "anchor": "Point12",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/05a17d01a64757686a867cad4c7b0257.png",
+        "level": 1,
+        "point_id": "1507204",
+        "point_type": 1,
+        "pre_point": "1507203",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/05a17d01a64757686a867cad4c7b0257.png",
+            "level": 1,
+            "name": "HP Boost",
+            "remake": "Stat Bonus"
+          }
+        ]
+      },
+      {
+        "anchor": "Point16",
+        "is_activated": false,
+        "is_rank_work": false,
+        "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/05a17d01a64757686a867cad4c7b0257.png",
+        "level": 1,
+        "point_id": "1507208",
+        "point_type": 1,
+        "pre_point": "1507103",
+        "remake": "Stat Bonus",
+        "skill_stages": [
+          {
+            "desc": "",
+            "is_activated": false,
+            "is_rank_work": false,
+            "item_url": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/05a17d01a64757686a867cad4c7b0257.png",
+            "level": 1,
+            "name": "HP Boost",
             "remake": "Stat Bonus"
           }
         ]
