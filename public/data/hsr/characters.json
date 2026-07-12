@@ -17781,7 +17781,7 @@
         "recommended": false
       }
     ],
-    "rank": 5,
+    "rank": 6,
     "ranks": [
       {
         "desc": "While the Ultimate's Zone is deployed, the DMG dealt by all allies ignores 20% of the target's DEF.",
@@ -17827,7 +17827,7 @@
         "desc": "Extends the duration of the Ultimate's Zone by 1 turn(s). The Talent's Break DMG multiplier additionally increases by 200%.",
         "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/72c3cd884dc9d305cd946a6c3a368ac6.png",
         "id": 130306,
-        "is_unlocked": false,
+        "is_unlocked": true,
         "name": "Sash Cascade",
         "pos": 6
       }
@@ -40496,7 +40496,7 @@
       "desc": "The boy is still tightly grasping the sword even when fast asleep against the general's shoulder.\nThe general gently taps the boy's cheek, and the boy mutters in his sleep.\n<i>\"General... I finally... won.\"</i>\n\nThe general pauses. He suddenly realizes that, compared to the boy trying to improve every day,\nhe himself has endured too many years and is used to stagnation.\n\n<i>\"You will soon be better than everyone, and that will only be the beginning...\"</i>",
       "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/9aacab32b897b118ebe688fc94323674.png",
       "id": 23012,
-      "level": 1,
+      "level": 20,
       "name": "Sleep Like the Dead",
       "rank": 4,
       "rarity": 5,
@@ -40514,8 +40514,8 @@
     "properties": [
       {
         "add": "0",
-        "base": "169",
-        "final": "169",
+        "base": "306",
+        "final": "306",
         "info": {
           "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/9aedaea4ab1fb2e020e72c03fd3cbf1f.png",
           "name": "HP",
@@ -40529,8 +40529,8 @@
       },
       {
         "add": "0",
-        "base": "118",
-        "final": "118",
+        "base": "194",
+        "final": "194",
         "info": {
           "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/433e4adc3590b8506d0a20138e7b6779.png",
           "name": "ATK",
@@ -40544,8 +40544,8 @@
       },
       {
         "add": "0",
-        "base": "77",
-        "final": "77",
+        "base": "136",
+        "final": "136",
         "info": {
           "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_u0a0ae/b63182654f640c2ac9087a8773f9b1e0.png",
           "name": "DEF",
