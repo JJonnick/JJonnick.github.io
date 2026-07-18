@@ -30,17 +30,7 @@ const weaponTypeMap: Record<number, string> = {
 };
 
 const { char } = Astro.props;
-const {
-    id,
-    icon,
-    name,
-    rarity,
-    element,
-    level,
-    constellation,
-    friendship,
-    weapon_type,
-} = char;
+const { id, icon, name, rarity, element, level, constellation, friendship, weapon_type } = char;
 
 const safeName = name?.trim() || "Personaje desconocido";
 const safeElement = element?.trim() || "Elemento desconocido";
@@ -50,22 +40,15 @@ const safeLevel = toSafeNumber(level);
 const safeConstellation = toSafeNumber(constellation);
 const safeFriendship = toSafeNumber(friendship);
 const elementKey = safeElement.toLowerCase();
-const safeElementIcon = [
-    "anemo",
-    "geo",
-    "electro",
-    "dendro",
-    "hydro",
-    "pyro",
-    "cryo",
-].includes(elementKey)
+const safeElementIcon = ["anemo", "geo", "electro", "dendro", "hydro", "pyro", "cryo"].includes(
+    elementKey,
+)
     ? `/elements/${elementKey}.svg`
     : "/fallbacks/icon.svg";
 const weaponName = weaponTypeMap[weapon_type] ?? "Desconocido";
 const statCardClass = "surface-panel p-3";
 const statLabelClass = "text-muted-body text-xs";
-const statValueClass =
-    "text-lg font-semibold text-slate-900 dark:text-slate-100";
+const statValueClass = "text-lg font-semibold text-slate-900 dark:text-slate-100";
 ---
 
 <Layout title={safeName}>

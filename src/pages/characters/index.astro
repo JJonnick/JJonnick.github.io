@@ -19,9 +19,9 @@ const presentElements = GENSHIN_ELEMENTS.filter((el) =>
     characters.some((c) => c.element?.trim().toLowerCase() === el),
 );
 
-const rarities = [
-    ...new Set(characters.map((c) => c.rarity ?? 0).filter(Boolean)),
-].sort((a, b) => b - a);
+const rarities = [...new Set(characters.map((c) => c.rarity ?? 0).filter(Boolean))].sort(
+    (a, b) => b - a,
+);
 ---
 
 <CharacterListPage
