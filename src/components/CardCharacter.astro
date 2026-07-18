@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import LazyImage from "./LazyImage.astro";
 import {
   GENSHIN_ELEMENT_VISUALS,
@@ -53,15 +54,27 @@ const elementVisual = elementKey ? elementVisuals[elementKey] : undefined;
       />
       {
         elementVisual && (
-          <img
-            src={elementVisual.iconPath}
-            alt=""
-            aria-hidden="true"
-            width={22}
-            height={22}
-            class="absolute -right-1.5 -bottom-1.5 rounded-full border border-white/60 dark:border-slate-900/60"
-            style={`background: ${elementVisual.badgeBg}; padding: 2px`}
-          />
+          typeof elementVisual.iconPath === "string" ? (
+            <img
+              src={elementVisual.iconPath}
+              alt=""
+              aria-hidden="true"
+              width={22}
+              height={22}
+              class="absolute -right-1.5 -bottom-1.5 rounded-full border border-white/60 dark:border-slate-900/60"
+              style={`background: ${elementVisual.badgeBg}; padding: 2px`}
+            />
+          ) : (
+            <Image
+              src={elementVisual.iconPath}
+              alt=""
+              aria-hidden="true"
+              width={22}
+              height={22}
+              class="absolute -right-1.5 -bottom-1.5 rounded-full border border-white/60 dark:border-slate-900/60"
+              style={`background: ${elementVisual.badgeBg}; padding: 2px`}
+            />
+          )
         )
       }
     </div>
