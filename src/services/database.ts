@@ -16,14 +16,13 @@ function isSafeFolder(segment: string): boolean {
     return /^[a-zA-Z0-9_-]+$/.test(segment);
 }
 
+// Module-level cache populated once per Astro static build. The build
+// process lifetime naturally clears memory, so no manual invalidation
+// is needed. Only validated, successfully-parsed files are stored.
 const jsonCache = new Map<string, unknown>();
 
 function readPublicJSON<T>(filename: string, folder = ''): T | null {
     const cacheKey = folder ? `${folder}/${filename}` : filename;
-
-    if (jsonCache.has(cacheKey)) {
-        return jsonCache.get(cacheKey) as T;
-    }
 
     try {
         if (!isSafeFilename(filename)) {
@@ -32,6 +31,10 @@ function readPublicJSON<T>(filename: string, folder = ''): T | null {
 
         if (!isSafeFolder(folder)) {
             throw new Error('Invalid folder path: contains forbidden characters or traversal patterns');
+        }
+
+        if (jsonCache.has(cacheKey)) {
+            return jsonCache.get(cacheKey) as T;
         }
 
         const dataRoot = path.resolve(process.cwd(), 'public', 'data');
