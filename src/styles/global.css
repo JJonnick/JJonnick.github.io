@@ -62,7 +62,7 @@
 }
 
 @property --num {
-    syntax: '<integer>';
+    syntax: "<integer>";
     initial-value: 0;
     inherits: false;
 }

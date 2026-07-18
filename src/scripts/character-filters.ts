@@ -47,8 +47,7 @@ function initCharacterFilters() {
             const el = card.dataset.element ?? "";
             const rarity = card.dataset.rarity ?? "";
             const matchEl = activeElement === "all" || el === activeElement;
-            const matchRarity =
-                activeRarity === "all" || rarity === activeRarity;
+            const matchRarity = activeRarity === "all" || rarity === activeRarity;
             const show = matchEl && matchRarity;
             card.hidden = !show;
             if (show) visible++;

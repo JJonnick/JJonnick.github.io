@@ -1,24 +1,24 @@
 ---
 interface Props {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  aspectRatioClass?: string;
-  class?: string;
-  transitionName?: string;
-  loading?: "lazy" | "eager";
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    aspectRatioClass?: string;
+    class?: string;
+    transitionName?: string;
+    loading?: "lazy" | "eager";
 }
 
 const {
-  src,
-  alt,
-  width,
-  height,
-  aspectRatioClass = "aspect-square",
-  class: className,
-  transitionName,
-  loading = "lazy",
+    src,
+    alt,
+    width,
+    height,
+    aspectRatioClass = "aspect-square",
+    class: className,
+    transitionName,
+    loading = "lazy",
 } = Astro.props;
 ---
 
