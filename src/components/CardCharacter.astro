@@ -18,7 +18,7 @@ interface Props {
   imageHeight?: number;
   imageAspectRatioClass?: string;
   imageClass?: string;
-  elementVisuals?: Readonly<Record<string, ElementVisual>>;
+  elementVisuals?: Partial<Record<string, ElementVisual>>;
 }
 
 const {
@@ -28,7 +28,7 @@ const {
   imageHeight = 120,
   imageAspectRatioClass = "aspect-square",
   imageClass = "min-h-25 rounded-full",
-  elementVisuals = GENSHIN_ELEMENT_VISUALS as Readonly<Record<string, ElementVisual>>,
+  elementVisuals = GENSHIN_ELEMENT_VISUALS as Partial<Record<string, ElementVisual>>,
 } = Astro.props;
 
 const elementKey =
