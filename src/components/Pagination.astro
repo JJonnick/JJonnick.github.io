@@ -1,0 +1,73 @@
+---
+interface Props {
+    currentPage: number;
+    lastPage: number;
+    prevUrl?: string | undefined;
+    nextUrl?: string | undefined;
+    basePath: string;
+}
+
+const { currentPage, lastPage, prevUrl, nextUrl, basePath } = Astro.props;
+
+function pageUrl(page: number): string {
+    return page === 1 ? basePath : `${basePath}/${page}`;
+}
+---
+
+{
+    lastPage > 1 && (
+        <nav
+            aria-label="Paginación"
+            class="mt-6 flex flex-wrap items-center justify-center gap-2"
+        >
+            {prevUrl ? (
+                <a
+                    href={prevUrl}
+                    class="ui-control ui-control-idle"
+                    aria-label="Página anterior"
+                >
+                    ← Anterior
+                </a>
+            ) : (
+                <span
+                    class="ui-control ui-control-idle cursor-not-allowed opacity-40"
+                    aria-disabled="true"
+                >
+                    ← Anterior
+                </span>
+            )}
+
+            <div class="flex items-center gap-1">
+                {Array.from({ length: lastPage }, (_, i) => i + 1).map(
+                    (p) => (
+                        <a
+                            href={pageUrl(p)}
+                            class={`ui-control ${p === currentPage ? "ui-control-active" : "ui-control-idle"}`}
+                            aria-current={p === currentPage ? "page" : undefined}
+                            aria-label={`Página ${p}`}
+                        >
+                            {p}
+                        </a>
+                    ),
+                )}
+            </div>
+
+            {nextUrl ? (
+                <a
+                    href={nextUrl}
+                    class="ui-control ui-control-idle"
+                    aria-label="Página siguiente"
+                >
+                    Siguiente →
+                </a>
+            ) : (
+                <span
+                    class="ui-control ui-control-idle cursor-not-allowed opacity-40"
+                    aria-disabled="true"
+                >
+                    Siguiente →
+                </span>
+            )}
+        </nav>
+    )
+}

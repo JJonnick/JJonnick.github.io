@@ -1,0 +1,62 @@
+---
+import CharacterListPage from "@/components/CharacterListPage.astro";
+import { getCharacters } from "@/services/database";
+import { GENSHIN_ELEMENTS, type GenshinElement } from "@/utils/elements";
+import type { Character } from "@/types";
+import type { GetStaticPaths, Page } from "astro";
+
+interface Props {
+    page: Page<Character>;
+    presentElements: GenshinElement[];
+    rarities: number[];
+    elementLabels: Record<GenshinElement, string>;
+}
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+    const allCharacters = await getCharacters();
+
+    const elementLabels: Record<GenshinElement, string> = {
+        anemo: "Anemo",
+        geo: "Geo",
+        electro: "Electro",
+        dendro: "Dendro",
+        hydro: "Hydro",
+        pyro: "Pyro",
+        cryo: "Cryo",
+    };
+
+    const presentElements = GENSHIN_ELEMENTS.filter((el) =>
+        allCharacters.some((c) => c.element?.trim().toLowerCase() === el),
+    );
+
+    const rarities = [
+        ...new Set(allCharacters.map((c) => c.rarity ?? 0).filter(Boolean)),
+    ].sort((a, b) => b - a);
+
+    return paginate(allCharacters, {
+        pageSize: 24,
+        props: { presentElements, rarities, elementLabels },
+    });
+};
+
+const { page, presentElements, rarities, elementLabels } = Astro.props;
+---
+
+<CharacterListPage
+    title="Lista de personajes"
+    heading="Tus personajes"
+    description="Selecciona uno para ver nivel, constelación, amistad y arma."
+    emptyMessage="No encontramos personajes en tus datos todavía. Actualiza el archivo e inténtalo de nuevo."
+    characters={page.data}
+    basePath="/characters"
+    presentElements={presentElements}
+    rarities={rarities}
+    elementLabels={elementLabels}
+    showElementIcons={true}
+    pagination={{
+        currentPage: page.currentPage,
+        lastPage: page.lastPage,
+        prevUrl: page.url.prev,
+        nextUrl: page.url.next,
+    }}
+/>

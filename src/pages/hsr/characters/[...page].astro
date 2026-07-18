@@ -1,0 +1,68 @@
+---
+import CharacterListPage from "@/components/CharacterListPage.astro";
+import { getHsrCharacters } from "@/services/database";
+import {
+    HSR_ELEMENTS,
+    HSR_ELEMENT_VISUALS,
+    type HsrElement,
+} from "@/utils/elements";
+import { getHsrLocale, HSR_ELEMENT_LABELS } from "@/i18n/hsr";
+import type { HsrCharacter } from "@/types";
+import type { GetStaticPaths, Page } from "astro";
+
+interface Props {
+    page: Page<HsrCharacter>;
+    presentElements: HsrElement[];
+    rarities: number[];
+    elementLabels: Record<HsrElement, string>;
+}
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+    const allCharacters = await getHsrCharacters();
+
+    const hsrElementLabels: Record<HsrElement, string> =
+        HSR_ELEMENT_LABELS[getHsrLocale()];
+
+    const presentElements = HSR_ELEMENTS.filter((el) =>
+        allCharacters.some((c) => c.element?.trim().toLowerCase() === el),
+    );
+
+    const rarities = [
+        ...new Set(allCharacters.map((c) => c.rarity ?? 0).filter(Boolean)),
+    ].sort((a, b) => b - a);
+
+    return paginate(allCharacters, {
+        pageSize: 24,
+        props: {
+            presentElements,
+            rarities,
+            elementLabels: hsrElementLabels,
+        },
+    });
+};
+
+const { page, presentElements, rarities, elementLabels } = Astro.props;
+---
+
+<CharacterListPage
+    title="Lista de personajes de Honkai: Star Rail"
+    heading="Tus personajes de Honkai: Star Rail"
+    description="Selecciona uno para ver nivel, eidolón, vía y cono de luz."
+    emptyMessage="No encontramos personajes en tus datos de Honkai: Star Rail todavía. Actualiza el archivo e inténtalo de nuevo."
+    characters={page.data}
+    basePath="/hsr/characters"
+    presentElements={presentElements}
+    rarities={rarities}
+    elementLabels={elementLabels}
+    elementVisuals={HSR_ELEMENT_VISUALS}
+    imageWidth={120}
+    imageHeight={141}
+    imageAspectRatioClass="aspect-[40/47]"
+    imageClass="min-h-[141px] rounded-2xl"
+    pagination={{
+        currentPage: page.currentPage,
+        lastPage: page.lastPage,
+        prevUrl: page.url.prev,
+        nextUrl: page.url.next,
+    }}
+/>
