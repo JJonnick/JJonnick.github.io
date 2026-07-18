@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import Content from "@/layouts/Content.astro";
 import CardCharacter from "@/components/CardCharacter.astro";
+import type { ElementVisual } from "@/utils/elements";
 
 interface CharacterItem {
     id: number | string;
@@ -21,6 +22,7 @@ interface Props {
     presentElements: string[];
     rarities: number[];
     elementLabels: Record<string, string>;
+    elementVisuals?: Partial<Record<string, ElementVisual>>;
     showElementIcons?: boolean;
     imageWidth?: number;
     imageHeight?: number;
@@ -38,6 +40,7 @@ const {
     presentElements,
     rarities,
     elementLabels,
+    elementVisuals,
     showElementIcons = false,
     imageWidth,
     imageHeight,
@@ -142,6 +145,7 @@ const {
                                 <CardCharacter
                                     href={`${basePath}/${item.id}`}
                                     char={item}
+                                    elementVisuals={elementVisuals}
                                     imageWidth={imageWidth}
                                     imageHeight={imageHeight}
                                     imageAspectRatioClass={imageAspectRatioClass}

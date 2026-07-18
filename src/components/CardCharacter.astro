@@ -1,9 +1,8 @@
 ---
 import LazyImage from "./LazyImage.astro";
 import {
-  GENSHIN_ELEMENTS,
-  type GenshinElement,
-  elementBadgeBg,
+  GENSHIN_ELEMENT_VISUALS,
+  type ElementVisual,
 } from "@/utils/elements";
 
 interface Props {
@@ -19,6 +18,7 @@ interface Props {
   imageHeight?: number;
   imageAspectRatioClass?: string;
   imageClass?: string;
+  elementVisuals?: Partial<Record<string, ElementVisual>>;
 }
 
 const {
@@ -28,15 +28,12 @@ const {
   imageHeight = 120,
   imageAspectRatioClass = "aspect-square",
   imageClass = "min-h-25 rounded-full",
+  elementVisuals = GENSHIN_ELEMENT_VISUALS as Partial<Record<string, ElementVisual>>,
 } = Astro.props;
 
 const elementKey =
   typeof char.element === "string" ? char.element.trim().toLowerCase() : "";
-const hasElement = (GENSHIN_ELEMENTS as readonly string[]).includes(elementKey);
-const el = hasElement ? (elementKey as GenshinElement) : null;
-const elementIconPath = el ? `/elements/${el}.svg` : null;
-
-const badgeBg = el ? elementBadgeBg(el) : "";
+const elementVisual = elementKey ? elementVisuals[elementKey] : undefined;
 ---
 
 <a
@@ -55,15 +52,15 @@ const badgeBg = el ? elementBadgeBg(el) : "";
         aspectRatioClass={imageAspectRatioClass}
       />
       {
-        elementIconPath && (
+        elementVisual && (
           <img
-            src={elementIconPath}
+            src={elementVisual.iconPath}
             alt=""
             aria-hidden="true"
             width={22}
             height={22}
             class="absolute -right-1.5 -bottom-1.5 rounded-full border border-white/60 dark:border-slate-900/60"
-            style={`background: ${badgeBg}; padding: 2px`}
+            style={`background: ${elementVisual.badgeBg}; padding: 2px`}
           />
         )
       }
