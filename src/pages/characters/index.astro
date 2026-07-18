@@ -1,12 +1,7 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Content from "@/layouts/Content.astro";
-import CardCharacter from "@/components/CardCharacter.astro";
+import CharacterListPage from "@/components/CharacterListPage.astro";
 import { getCharacters } from "@/services/database";
-import {
-    GENSHIN_ELEMENTS,
-    type GenshinElement,
-} from "@/utils/elements";
+import { GENSHIN_ELEMENTS, type GenshinElement } from "@/utils/elements";
 
 const characters = await getCharacters();
 
@@ -24,128 +19,20 @@ const presentElements = GENSHIN_ELEMENTS.filter((el) =>
     characters.some((c) => c.element?.trim().toLowerCase() === el),
 );
 
-const rarities = [...new Set(characters.map((c) => c.rarity ?? 0).filter(Boolean))].sort(
-    (a, b) => b - a,
-);
+const rarities = [
+    ...new Set(characters.map((c) => c.rarity ?? 0).filter(Boolean)),
+].sort((a, b) => b - a);
 ---
 
-<Layout title="Lista de personajes">
-    <Content>
-        <h1 class="text-heading-page mb-1 text-xl">Tus personajes</h1>
-        <p class="text-muted-body mb-5 max-w-2xl">
-            Selecciona uno para ver nivel, constelación, amistad y arma.
-        </p>
-
-        {
-            characters.length === 0 ? (
-                <section class="surface-panel p-5 text-sm text-slate-700 dark:text-slate-200">
-                    No encontramos personajes en tus datos todavía. Actualiza el
-                    archivo e inténtalo de nuevo.
-                </section>
-            ) : (
-                <>
-                    <div class="mb-5 flex flex-wrap gap-4">
-                        {presentElements.length > 1 && (
-                            <div
-                                class="flex flex-wrap items-center gap-1.5"
-                                role="group"
-                                aria-label="Filtrar por elemento"
-                            >
-                                <button
-                                    type="button"
-                                    data-filter-element="all"
-                                    class="ui-control ui-control-active"
-                                    aria-pressed="true"
-                                    aria-controls="character-grid"
-                                >
-                                    Todos
-                                </button>
-                                {presentElements.map((el) => (
-                                    <button
-                                        type="button"
-                                        data-filter-element={el}
-                                        class="ui-control ui-control-idle"
-                                        aria-pressed="false"
-                                        aria-controls="character-grid"
-                                    >
-                                        <img
-                                            src={`/elements/${el}.svg`}
-                                            alt=""
-                                            aria-hidden="true"
-                                            width={16}
-                                            height={16}
-                                            class="shrink-0"
-                                        />
-                                        <span>{elementLabels[el]}</span>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                        {rarities.length > 1 && (
-                            <div
-                                class="flex flex-wrap items-center gap-1.5"
-                                role="group"
-                                aria-label="Filtrar por rareza"
-                            >
-                                <button
-                                    type="button"
-                                    data-filter-rarity="all"
-                                    class="ui-control ui-control-active"
-                                    aria-pressed="true"
-                                    aria-controls="character-grid"
-                                >
-                                    Todas
-                                </button>
-                                {rarities.map((r) => (
-                                    <button
-                                        type="button"
-                                        data-filter-rarity={String(r)}
-                                        class="ui-control ui-control-idle"
-                                        aria-pressed="false"
-                                        aria-controls="character-grid"
-                                    >
-                                        {r}★
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-                    <div
-                        id="character-grid"
-                        class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 [content-visibility:auto] [contain-intrinsic-size:1px_1200px]"
-                    >
-                        {characters.map((item) => (
-                            <div
-                                data-filter-card
-                                data-element={
-                                    item.element?.trim().toLowerCase() ?? ""
-                                }
-                                data-rarity={item.rarity ?? ""}
-                            >
-                                <CardCharacter
-                                    href={`/characters/${item.id}`}
-                                    char={item}
-                                />
-                            </div>
-                        ))}
-                    </div>
-
-                    <p
-                        id="no-results"
-                        hidden
-                        class="surface-panel p-5 text-center text-sm text-slate-600 dark:text-slate-300"
-                        aria-live="polite"
-                    >
-                        No hay personajes que coincidan con los filtros
-                        seleccionados.
-                    </p>
-                </>
-            )
-        }
-    </Content>
-</Layout>
-
-<script>
-    import "@/scripts/character-filters";
-</script>
+<CharacterListPage
+    title="Lista de personajes"
+    heading="Tus personajes"
+    description="Selecciona uno para ver nivel, constelación, amistad y arma."
+    emptyMessage="No encontramos personajes en tus datos todavía. Actualiza el archivo e inténtalo de nuevo."
+    characters={characters}
+    basePath="/characters"
+    presentElements={presentElements}
+    rarities={rarities}
+    elementLabels={elementLabels}
+    showElementIcons={true}
+/>
