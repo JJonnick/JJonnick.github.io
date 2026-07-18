@@ -28,7 +28,7 @@ const {
   imageHeight = 120,
   imageAspectRatioClass = "aspect-square",
   imageClass = "min-h-25 rounded-full",
-  elementVisuals = GENSHIN_ELEMENT_VISUALS,
+  elementVisuals = GENSHIN_ELEMENT_VISUALS as Readonly<Record<string, ElementVisual>>,
 } = Astro.props;
 
 const elementKey =
