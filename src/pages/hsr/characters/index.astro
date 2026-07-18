@@ -3,10 +3,15 @@ import Layout from "@/layouts/Layout.astro";
 import Content from "@/layouts/Content.astro";
 import CardCharacter from "@/components/CardCharacter.astro";
 import { getHsrCharacters } from "@/services/database";
+import {
+    HSR_ELEMENTS,
+    HSR_ELEMENT_VISUALS,
+    type HsrElement,
+} from "@/utils/elements";
 
 const characters = await getHsrCharacters();
 
-const hsrElementLabels: Record<string, string> = {
+const hsrElementLabels: Record<HsrElement, string> = {
     fire: "Fuego",
     ice: "Hielo",
     wind: "Viento",
@@ -16,13 +21,9 @@ const hsrElementLabels: Record<string, string> = {
     imaginary: "Imaginario",
 };
 
-const presentElements = [
-    ...new Set(
-        characters
-            .map((c) => c.element?.trim().toLowerCase() ?? "")
-            .filter(Boolean),
-    ),
-].sort((a, b) => (hsrElementLabels[a] ?? a).localeCompare(hsrElementLabels[b] ?? b));
+const presentElements = HSR_ELEMENTS.filter((el) =>
+    characters.some((c) => c.element?.trim().toLowerCase() === el),
+);
 
 const rarities = [
     ...new Set(characters.map((c) => c.rarity ?? 0).filter(Boolean)),
@@ -120,6 +121,7 @@ const rarities = [
                                 <CardCharacter
                                     href={`/hsr/characters/${item.id}`}
                                     char={item}
+                                    elementVisuals={HSR_ELEMENT_VISUALS}
                                     imageWidth={120}
                                     imageHeight={141}
                                     imageAspectRatioClass="aspect-[40/47]"
