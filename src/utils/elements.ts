@@ -1,3 +1,12 @@
+import type { ImageMetadata } from "astro";
+import hsrFire from "@assets/elements/hsr/fire.png";
+import hsrIce from "@assets/elements/hsr/ice.png";
+import hsrWind from "@assets/elements/hsr/wind.png";
+import hsrLightning from "@assets/elements/hsr/lightning.png";
+import hsrPhysical from "@assets/elements/hsr/physical.png";
+import hsrQuantum from "@assets/elements/hsr/quantum.png";
+import hsrImaginary from "@assets/elements/hsr/imaginary.png";
+
 export const GENSHIN_ELEMENTS = [
     "anemo",
     "geo",
@@ -10,7 +19,7 @@ export const GENSHIN_ELEMENTS = [
 
 export type GenshinElement = (typeof GENSHIN_ELEMENTS)[number];
 export type ElementVisual = {
-    iconPath: string;
+    iconPath: string | ImageMetadata;
     badgeBg: string;
 };
 
@@ -95,31 +104,31 @@ function hsrBadgeBg(element: HsrElement): string {
 
 export const HSR_ELEMENT_VISUALS: Record<HsrElement, ElementVisual> = {
     fire: {
-        iconPath: "/elements/pyro.svg",
+        iconPath: hsrFire,
         badgeBg: hsrBadgeBg("fire"),
     },
     ice: {
-        iconPath: "/elements/cryo.svg",
+        iconPath: hsrIce,
         badgeBg: hsrBadgeBg("ice"),
     },
     wind: {
-        iconPath: "/elements/anemo.svg",
+        iconPath: hsrWind,
         badgeBg: hsrBadgeBg("wind"),
     },
     lightning: {
-        iconPath: "/elements/electro.svg",
+        iconPath: hsrLightning,
         badgeBg: hsrBadgeBg("lightning"),
     },
     physical: {
-        iconPath: "/elements/geo.svg",
+        iconPath: hsrPhysical,
         badgeBg: hsrBadgeBg("physical"),
     },
     quantum: {
-        iconPath: "/elements/dendro.svg",
+        iconPath: hsrQuantum,
         badgeBg: hsrBadgeBg("quantum"),
     },
     imaginary: {
-        iconPath: "/elements/hydro.svg",
+        iconPath: hsrImaginary,
         badgeBg: hsrBadgeBg("imaginary"),
     },
 };
