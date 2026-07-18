@@ -8,7 +8,9 @@ import { toSafeNumber } from "@/utils/numbers";
 const account = await getHsrAccount();
 
 if (!account) {
-    return Astro.redirect("/404");
+    throw new Error(
+        "Falta public/data/hsr/account.json. Los datos de cuenta de HSR son obligatorios para construir esta página.",
+    );
 }
 
 const stats = account.stats;
