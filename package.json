@@ -1,36 +1,40 @@
 {
-  "name": "public",
-  "type": "module",
-  "version": "0.1.0",
-  "packageManager": "pnpm@10.2.0",
-  "engines": {
-    "npm": "please use pnpm",
-    "pnpm": ">=10",
-    "node": ">=24"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "check": "astro check",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/check": "^0.9.9",
-    "@lucide/astro": "^1.25.0",
-    "astro": "^7.1.1",
-    "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "@types/node": "^26.1.1",
-    "sharp": "^0.35.3"
-  },
-  "pnpm": {
-    "overrides": {
-      "@emmetio/css-parser": "0.4.1"
+    "name": "public",
+    "type": "module",
+    "version": "0.1.0",
+    "packageManager": "pnpm@10.2.0",
+    "engines": {
+        "npm": "please use pnpm",
+        "pnpm": ">=10",
+        "node": ">=24"
+    },
+    "scripts": {
+        "dev": "astro dev",
+        "start": "astro dev",
+        "check": "astro check",
+        "build": "astro check && astro build",
+        "preview": "astro preview",
+        "astro": "astro",
+        "lint": "biome lint .",
+        "format": "biome format --write .",
+        "format:check": "biome format ."
+    },
+    "dependencies": {
+        "@astrojs/check": "^0.9.9",
+        "@lucide/astro": "^1.25.0",
+        "astro": "^7.1.1",
+        "tailwindcss": "^4.3.3",
+        "typescript": "^6.0.3"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "2.5.4",
+        "@tailwindcss/vite": "^4.3.3",
+        "@types/node": "^26.1.1",
+        "sharp": "^0.35.3"
+    },
+    "pnpm": {
+        "overrides": {
+            "@emmetio/css-parser": "0.4.1"
+        }
     }
-  }
 }

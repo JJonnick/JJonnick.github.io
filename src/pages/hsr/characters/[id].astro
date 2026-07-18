@@ -8,12 +8,7 @@ import { getHsrCharacters } from "@/services/database";
 import { type HsrCharacter } from "@/types";
 import { Star } from "@lucide/astro";
 import { toSafeNumber } from "@/utils/numbers";
-import {
-    getHsrLocale,
-    HSR_LABELS,
-    HSR_PATH_LABELS,
-    HSR_ELEMENT_LABELS,
-} from "@/i18n/hsr";
+import { getHsrLocale, HSR_LABELS, HSR_PATH_LABELS, HSR_ELEMENT_LABELS } from "@/i18n/hsr";
 
 interface Props {
     char: HsrCharacter;
@@ -32,9 +27,7 @@ const { char } = Astro.props;
 
 const preferredLocale = getHsrLocale();
 const labels = HSR_LABELS[preferredLocale];
-const formatter = new Intl.NumberFormat(
-    preferredLocale === "en" ? "en-US" : "es-ES",
-);
+const formatter = new Intl.NumberFormat(preferredLocale === "en" ? "en-US" : "es-ES");
 
 const safeName = char.name?.trim() || labels.unknownCharacter;
 const safeIcon = char.icon || "/fallbacks/icon.svg";
@@ -54,40 +47,28 @@ const safePath =
         : rawPath?.trim() || unknownPathLabel;
 const rawElement = char.element?.trim().toLowerCase() || "";
 const safeElement =
-    (HSR_ELEMENT_LABELS[preferredLocale] as Record<string, string>)[
-        rawElement
-    ] ??
-    (rawElement
-        ? rawElement[0].toUpperCase() + rawElement.slice(1)
-        : unknownElementLabel);
+    (HSR_ELEMENT_LABELS[preferredLocale] as Record<string, string>)[rawElement] ??
+    (rawElement ? rawElement[0].toUpperCase() + rawElement.slice(1) : unknownElementLabel);
 const hasLightCone = Boolean(
     char.equip?.name ||
-    char.equip?.icon ||
-    char.equip?.level ||
-    char.equip?.rank ||
-    char.equip?.rarity,
+        char.equip?.icon ||
+        char.equip?.level ||
+        char.equip?.rank ||
+        char.equip?.rarity,
 );
 const lightConeName = char.equip?.name?.trim() || labels.noLightCone;
 const lightConeIcon = char.equip?.icon || "/fallbacks/icon.svg";
 const lightConeLevel = toSafeNumber(char.equip?.level);
 const lightConeRank = toSafeNumber(char.equip?.rank);
-const lightConeRarity = Math.min(
-    5,
-    Math.max(0, toSafeNumber(char.equip?.rarity) || 0),
-);
-const memospriteName =
-    char.memosprite?.name?.trim() || labels.memospriteFallback;
+const lightConeRarity = Math.min(5, Math.max(0, toSafeNumber(char.equip?.rarity) || 0));
+const memospriteName = char.memosprite?.name?.trim() || labels.memospriteFallback;
 const memospriteIcon = char.memosprite?.icon || "/fallbacks/icon.svg";
 const levelText = formatter.format(safeLevel);
 const rankText = formatter.format(safeRank);
 const lightConeLevelText =
-    lightConeLevel > 0
-        ? formatter.format(lightConeLevel)
-        : labels.notAvailableShort;
+    lightConeLevel > 0 ? formatter.format(lightConeLevel) : labels.notAvailableShort;
 const lightConeRankText =
-    lightConeRank > 0
-        ? `S${formatter.format(lightConeRank)}`
-        : labels.notAvailableShort;
+    lightConeRank > 0 ? `S${formatter.format(lightConeRank)}` : labels.notAvailableShort;
 ---
 
 <Layout title={safeName}>

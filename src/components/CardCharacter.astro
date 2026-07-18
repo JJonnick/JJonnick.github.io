@@ -1,39 +1,35 @@
 ---
 import { Image } from "astro:assets";
 import LazyImage from "./LazyImage.astro";
-import {
-  GENSHIN_ELEMENT_VISUALS,
-  type ElementVisual,
-} from "@/utils/elements";
+import { GENSHIN_ELEMENT_VISUALS, type ElementVisual } from "@/utils/elements";
 
 interface Props {
-  href: string;
-  char: {
-    id: number | string;
-    icon: string;
-    name: string;
-    element?: string;
-    rarity?: number;
-  };
-  imageWidth?: number;
-  imageHeight?: number;
-  imageAspectRatioClass?: string;
-  imageClass?: string;
-  elementVisuals?: Partial<Record<string, ElementVisual>>;
+    href: string;
+    char: {
+        id: number | string;
+        icon: string;
+        name: string;
+        element?: string;
+        rarity?: number;
+    };
+    imageWidth?: number;
+    imageHeight?: number;
+    imageAspectRatioClass?: string;
+    imageClass?: string;
+    elementVisuals?: Partial<Record<string, ElementVisual>>;
 }
 
 const {
-  href,
-  char,
-  imageWidth = 120,
-  imageHeight = 120,
-  imageAspectRatioClass = "aspect-square",
-  imageClass = "min-h-25 rounded-full",
-  elementVisuals = GENSHIN_ELEMENT_VISUALS as Partial<Record<string, ElementVisual>>,
+    href,
+    char,
+    imageWidth = 120,
+    imageHeight = 120,
+    imageAspectRatioClass = "aspect-square",
+    imageClass = "min-h-25 rounded-full",
+    elementVisuals = GENSHIN_ELEMENT_VISUALS as Partial<Record<string, ElementVisual>>,
 } = Astro.props;
 
-const elementKey =
-  typeof char.element === "string" ? char.element.trim().toLowerCase() : "";
+const elementKey = typeof char.element === "string" ? char.element.trim().toLowerCase() : "";
 const elementVisual = elementKey ? elementVisuals[elementKey] : undefined;
 ---
 

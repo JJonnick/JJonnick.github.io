@@ -50,6 +50,18 @@ Se agregó un workflow de **Preview deploy** para Pull Requests hacia `main`.
 - No envíes archivos `.env` con valores reales.
 - Copia `.env.example` a `.env` para configuración local.
 
+## Linter y formateador
+
+Este proyecto usa [Biome](https://biomejs.dev/) como linter y formateador.
+
+```bash
+pnpm lint          # Ejecuta el linter
+pnpm format        # Formatea todos los archivos
+pnpm format:check  # Comprueba el formato sin aplicar cambios
+```
+
+Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) para obtener diagnósticos en tiempo real y formateo automático al guardar.
+
 ## Uso de agentes de Copilot
 
 Este repo incluye agentes y prompt personalizados para acelerar revisiones y correcciones.

@@ -4,9 +4,7 @@ export type HsrLocale = "es" | "en";
 
 export function getHsrLocale(): HsrLocale {
     const raw = import.meta.env.PUBLIC_HSR_TERMS_LOCALE;
-    return typeof raw === "string" && raw.toLowerCase().startsWith("en")
-        ? "en"
-        : "es";
+    return typeof raw === "string" && raw.toLowerCase().startsWith("en") ? "en" : "es";
 }
 
 type HsrLabels = {
@@ -64,8 +62,7 @@ export const HSR_LABELS: Record<HsrLocale, HsrLabels> = {
         notAvailableShort: "-",
         avatarSuffix: "avatar",
         iconSuffix: "icon",
-        lightConeRarity: (n: number) =>
-            `Light Cone rarity: ${n} ${n === 1 ? "star" : "stars"}`,
+        lightConeRarity: (n: number) => `Light Cone rarity: ${n} ${n === 1 ? "star" : "stars"}`,
     },
 };
 
@@ -92,24 +89,23 @@ export const HSR_PATH_LABELS: Record<HsrLocale, Record<number, string>> = {
     },
 };
 
-export const HSR_ELEMENT_LABELS: Record<HsrLocale, Record<HsrElement, string>> =
-    {
-        es: {
-            fire: "Fuego",
-            ice: "Hielo",
-            imaginary: "Imaginario",
-            lightning: "Rayo",
-            physical: "Físico",
-            quantum: "Cuántico",
-            wind: "Viento",
-        },
-        en: {
-            fire: "Fire",
-            ice: "Ice",
-            imaginary: "Imaginary",
-            lightning: "Lightning",
-            physical: "Physical",
-            quantum: "Quantum",
-            wind: "Wind",
-        },
-    };
+export const HSR_ELEMENT_LABELS: Record<HsrLocale, Record<HsrElement, string>> = {
+    es: {
+        fire: "Fuego",
+        ice: "Hielo",
+        imaginary: "Imaginario",
+        lightning: "Rayo",
+        physical: "Físico",
+        quantum: "Cuántico",
+        wind: "Viento",
+    },
+    en: {
+        fire: "Fire",
+        ice: "Ice",
+        imaginary: "Imaginary",
+        lightning: "Lightning",
+        physical: "Physical",
+        quantum: "Quantum",
+        wind: "Wind",
+    },
+};
