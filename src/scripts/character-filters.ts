@@ -68,7 +68,7 @@ function initCharacterFilters() {
     // Restore saved filter button visual state
     if (activeElement !== "all") {
         const savedBtn = document.querySelector<HTMLElement>(
-            `[data-filter-element="${activeElement}"]`,
+            `[data-filter-element="${CSS.escape(activeElement)}"]`,
         );
         if (savedBtn) {
             activateFilterButtons("[data-filter-element]", savedBtn);
@@ -78,7 +78,7 @@ function initCharacterFilters() {
     }
     if (activeRarity !== "all") {
         const savedBtn = document.querySelector<HTMLElement>(
-            `[data-filter-rarity="${activeRarity}"]`,
+            `[data-filter-rarity="${CSS.escape(activeRarity)}"]`,
         );
         if (savedBtn) {
             activateFilterButtons("[data-filter-rarity]", savedBtn);
