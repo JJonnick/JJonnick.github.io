@@ -16,7 +16,15 @@ function isSafeFolder(segment: string): boolean {
     return /^[a-zA-Z0-9_-]+$/.test(segment);
 }
 
+const jsonCache = new Map<string, unknown>();
+
 function readPublicJSON<T>(filename: string, folder = ''): T | null {
+    const cacheKey = folder ? `${folder}/${filename}` : filename;
+
+    if (jsonCache.has(cacheKey)) {
+        return jsonCache.get(cacheKey) as T;
+    }
+
     try {
         if (!isSafeFilename(filename)) {
             throw new Error('Invalid filename: contains forbidden characters or traversal patterns');
@@ -34,10 +42,11 @@ function readPublicJSON<T>(filename: string, folder = ''): T | null {
         }
 
         const fileContent = fs.readFileSync(filePath, 'utf-8');
-        return JSON.parse(fileContent) as T;
+        const parsed = JSON.parse(fileContent) as T;
+        jsonCache.set(cacheKey, parsed);
+        return parsed;
     } catch (error) {
-        const label = folder ? `${folder}/${filename}` : filename;
-        console.error(`Error reading ${label}:`, error);
+        console.error(`Error reading ${cacheKey}:`, error);
         return null;
     }
 }
