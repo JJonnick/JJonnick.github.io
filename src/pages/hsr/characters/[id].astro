@@ -8,6 +8,12 @@ import { getHsrCharacters } from "@/services/database";
 import { type HsrCharacter } from "@/types";
 import { Star } from "@lucide/astro";
 import { toSafeNumber } from "@/utils/numbers";
+import {
+    getHsrLocale,
+    HSR_LABELS,
+    HSR_PATH_LABELS,
+    HSR_ELEMENT_LABELS,
+} from "@/i18n/hsr";
 
 interface Props {
     char: HsrCharacter;
@@ -24,52 +30,8 @@ export async function getStaticPaths() {
 
 const { char } = Astro.props;
 
-const preferredLocaleRaw = import.meta.env.PUBLIC_HSR_TERMS_LOCALE;
-const preferredLocale =
-    typeof preferredLocaleRaw === "string" &&
-    preferredLocaleRaw.toLowerCase().startsWith("en")
-        ? "en"
-        : "es";
-const labels = {
-    es: {
-        unknownPath: "Desconocida",
-        unknownElement: "Desconocido",
-        unknownCharacter: "Personaje desconocido",
-        noLightCone: "Sin cono de luz",
-        memospriteFallback: "Memosprite",
-        pathPrefix: "Vía",
-        level: "Nivel",
-        eidolon: "Eidolón",
-        path: "Vía",
-        lightCone: "Cono de luz",
-        equippedLightCone: "Cono equipado",
-        memosprite: "Memosprite",
-        notAvailableShort: "-",
-        avatarSuffix: "avatar",
-        iconSuffix: "icono",
-        lightConeRarity: (n: number) =>
-            `Rareza del cono: ${n} ${n === 1 ? "estrella" : "estrellas"}`,
-    },
-    en: {
-        unknownPath: "Unknown",
-        unknownElement: "Unknown",
-        unknownCharacter: "Unknown character",
-        noLightCone: "No Light Cone",
-        memospriteFallback: "Memosprite",
-        pathPrefix: "Path",
-        level: "Level",
-        eidolon: "Eidolon",
-        path: "Path",
-        lightCone: "Light Cone",
-        equippedLightCone: "Equipped Light Cone",
-        memosprite: "Memosprite",
-        notAvailableShort: "-",
-        avatarSuffix: "avatar",
-        iconSuffix: "icon",
-        lightConeRarity: (n: number) =>
-            `Light Cone rarity: ${n} ${n === 1 ? "star" : "stars"}`,
-    },
-}[preferredLocale];
+const preferredLocale = getHsrLocale();
+const labels = HSR_LABELS[preferredLocale];
 const formatter = new Intl.NumberFormat(
     preferredLocale === "en" ? "en-US" : "es-ES",
 );
@@ -84,56 +46,17 @@ const unknownPathLabel = labels.unknownPath;
 const unknownElementLabel = labels.unknownElement;
 const pathPrefix = labels.pathPrefix;
 
-const pathMap: Record<"es" | "en", Record<number, string>> = {
-    es: {
-        1: "Destrucción",
-        2: "Cacería",
-        3: "Erudición",
-        4: "Armonía",
-        5: "Nihilidad",
-        6: "Preservación",
-        7: "Abundancia",
-        8: "Reminiscencia",
-    },
-    en: {
-        1: "Destruction",
-        2: "The Hunt",
-        3: "Erudition",
-        4: "Harmony",
-        5: "Nihility",
-        6: "Preservation",
-        7: "Abundance",
-        8: "Remembrance",
-    },
-};
+const pathMap = HSR_PATH_LABELS;
 const rawPath = char.path;
 const safePath =
     typeof rawPath === "number"
         ? (pathMap[preferredLocale][rawPath] ?? `${pathPrefix} ${rawPath}`)
         : rawPath?.trim() || unknownPathLabel;
 const rawElement = char.element?.trim().toLowerCase() || "";
-const elementMap: Record<"es" | "en", Record<string, string>> = {
-    es: {
-        fire: "Fuego",
-        ice: "Hielo",
-        imaginary: "Imaginario",
-        lightning: "Rayo",
-        physical: "Físico",
-        quantum: "Cuántico",
-        wind: "Viento",
-    },
-    en: {
-        fire: "Fire",
-        ice: "Ice",
-        imaginary: "Imaginary",
-        lightning: "Lightning",
-        physical: "Physical",
-        quantum: "Quantum",
-        wind: "Wind",
-    },
-};
 const safeElement =
-    elementMap[preferredLocale][rawElement] ??
+    (HSR_ELEMENT_LABELS[preferredLocale] as Record<string, string>)[
+        rawElement
+    ] ??
     (rawElement
         ? rawElement[0].toUpperCase() + rawElement.slice(1)
         : unknownElementLabel);

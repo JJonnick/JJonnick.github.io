@@ -6,18 +6,12 @@ import {
     HSR_ELEMENT_VISUALS,
     type HsrElement,
 } from "@/utils/elements";
+import { getHsrLocale, HSR_ELEMENT_LABELS } from "@/i18n/hsr";
 
 const characters = await getHsrCharacters();
 
-const hsrElementLabels: Record<HsrElement, string> = {
-    fire: "Fuego",
-    ice: "Hielo",
-    wind: "Viento",
-    lightning: "Rayo",
-    physical: "Físico",
-    quantum: "Cuántico",
-    imaginary: "Imaginario",
-};
+const hsrElementLabels: Record<HsrElement, string> =
+    HSR_ELEMENT_LABELS[getHsrLocale()];
 
 const presentElements = HSR_ELEMENTS.filter((el) =>
     characters.some((c) => c.element?.trim().toLowerCase() === el),
