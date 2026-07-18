@@ -5,10 +5,40 @@ const runtimeWindow = window as Window & {
 function initCharacterFilters() {
     const grid = document.getElementById("character-grid");
     const noResults = document.getElementById("no-results");
+    const filtersBar = document.getElementById("character-filters");
     if (!grid) return;
 
-    let activeElement = "all";
-    let activeRarity = "all";
+    const filterNs = filtersBar?.dataset.filterNs ?? "";
+    const storageKey = filterNs ? `char-filters:${filterNs}` : null;
+
+    let savedState: { element?: string; rarity?: string } = {};
+    if (storageKey) {
+        try {
+            savedState = JSON.parse(
+                sessionStorage.getItem(storageKey) ?? "{}",
+            );
+        } catch {
+            // ignore parse errors
+        }
+    }
+
+    let activeElement = savedState.element ?? "all";
+    let activeRarity = savedState.rarity ?? "all";
+
+    function saveState() {
+        if (!storageKey) return;
+        try {
+            sessionStorage.setItem(
+                storageKey,
+                JSON.stringify({
+                    element: activeElement,
+                    rarity: activeRarity,
+                }),
+            );
+        } catch {
+            // ignore storage errors
+        }
+    }
 
     function applyFilters() {
         const cards = grid!.querySelectorAll<HTMLElement>("[data-filter-card]");
@@ -34,21 +64,51 @@ function initCharacterFilters() {
         });
     }
 
-    document.querySelectorAll<HTMLElement>("[data-filter-element]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            activeElement = btn.dataset.filterElement ?? "all";
-            activateFilterButtons("[data-filter-element]", btn);
-            applyFilters();
-        });
-    });
+    // Restore saved filter button visual state
+    if (activeElement !== "all") {
+        const savedBtn = document.querySelector<HTMLElement>(
+            `[data-filter-element="${CSS.escape(activeElement)}"]`,
+        );
+        if (savedBtn) {
+            activateFilterButtons("[data-filter-element]", savedBtn);
+        } else {
+            activeElement = "all";
+        }
+    }
+    if (activeRarity !== "all") {
+        const savedBtn = document.querySelector<HTMLElement>(
+            `[data-filter-rarity="${CSS.escape(activeRarity)}"]`,
+        );
+        if (savedBtn) {
+            activateFilterButtons("[data-filter-rarity]", savedBtn);
+        } else {
+            activeRarity = "all";
+        }
+    }
 
-    document.querySelectorAll<HTMLElement>("[data-filter-rarity]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            activeRarity = btn.dataset.filterRarity ?? "all";
-            activateFilterButtons("[data-filter-rarity]", btn);
-            applyFilters();
+    applyFilters();
+
+    document
+        .querySelectorAll<HTMLElement>("[data-filter-element]")
+        .forEach((btn) => {
+            btn.addEventListener("click", () => {
+                activeElement = btn.dataset.filterElement ?? "all";
+                activateFilterButtons("[data-filter-element]", btn);
+                applyFilters();
+                saveState();
+            });
         });
-    });
+
+    document
+        .querySelectorAll<HTMLElement>("[data-filter-rarity]")
+        .forEach((btn) => {
+            btn.addEventListener("click", () => {
+                activeRarity = btn.dataset.filterRarity ?? "all";
+                activateFilterButtons("[data-filter-rarity]", btn);
+                applyFilters();
+                saveState();
+            });
+        });
 }
 
 if (!runtimeWindow.__characterFiltersPageLoadBound) {
