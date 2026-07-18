@@ -10,7 +10,9 @@ import { toSafeNumber } from "@/utils/numbers";
 const account = await getAccount();
 
 if (!account) {
-    return Astro.redirect("/404");
+    throw new Error(
+        "Falta public/data/account.json. Los datos de cuenta son obligatorios para construir la página principal.",
+    );
 }
 
 const stats = account.stats;
