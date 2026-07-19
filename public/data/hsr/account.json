@@ -1,14 +1,14 @@
 {
-    "avatar": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua5ece/7cbcd9fda83f50741ced2d175e6b0413.png",
-    "level": 70,
-    "nickname": "Nep-Nep",
-    "server": "prod_official_eur",
-    "stats": {
-        "abyss_process": "Academy Ghost Story (XII)",
-        "achievement_num": 1204,
-        "active_days": 1153,
-        "avatar_num": 60,
-        "chest_num": 1887,
-        "dreamscape_pass_sticker": 243
-    }
+  "avatar": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ua5ece/7cbcd9fda83f50741ced2d175e6b0413.png",
+  "level": 70,
+  "nickname": "Nep-Nep",
+  "server": "prod_official_eur",
+  "stats": {
+    "abyss_process": "Academy Ghost Story (XII)",
+    "achievement_num": 1204,
+    "active_days": 1153,
+    "avatar_num": 60,
+    "chest_num": 1887,
+    "dreamscape_pass_sticker": 243
+  }
 }
