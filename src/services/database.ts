@@ -1,61 +1,54 @@
-import { type Character, type Account, type HsrAccount, type HsrCharacter } from "@/types";
-import fs from "fs";
-import path from "path";
+import { type Account, type Character, type HsrAccount, type HsrCharacter } from "@/types";
+import fs from "node:fs";
+import path from "node:path";
 
-function isSafeFilename(segment: string): boolean {
-    return /^[a-zA-Z0-9_-]+\.json$/.test(segment);
-}
+type DatasetName = "characters" | "account" | "hsrCharacters" | "hsrAccount";
 
-function isSafeFolder(segment: string): boolean {
-    if (!segment) return true;
-    return /^[a-zA-Z0-9_-]+$/.test(segment);
-}
+type DatasetValueMap = {
+    characters: Character[];
+    account: Account;
+    hsrCharacters: HsrCharacter[];
+    hsrAccount: HsrAccount;
+};
 
-// Module-level cache populated once per Astro static build. The build
-// process lifetime naturally clears memory, so no manual invalidation
-// is needed. Only validated, successfully-parsed files are stored.
-const jsonCache = new Map<string, unknown>();
+const DATASET_FILE_MAP: Record<DatasetName, { folder: string; filename: string }> = {
+    characters: { folder: "", filename: "characters.json" },
+    account: { folder: "", filename: "account.json" },
+    hsrCharacters: { folder: "hsr", filename: "characters.json" },
+    hsrAccount: { folder: "hsr", filename: "account.json" },
+};
 
-function readPublicJSON<T>(filename: string, folder = ""): T | null {
-    const cacheKey = folder ? `${folder}/${filename}` : filename;
+const jsonCache = new Map<DatasetName, DatasetValueMap[DatasetName]>();
+
+function readDataset<K extends DatasetName>(datasetName: K): DatasetValueMap[K] | null {
+    if (jsonCache.has(datasetName)) {
+        return jsonCache.get(datasetName) as DatasetValueMap[K];
+    }
+
+    const { folder, filename } = DATASET_FILE_MAP[datasetName];
+    const dataRoot = path.resolve(process.cwd(), "public", "data");
+    const filePath = path.resolve(dataRoot, folder, filename);
+    const relativePath = path.relative(dataRoot, filePath);
+
+    if (relativePath.startsWith("..") || path.isAbsolute(relativePath)) {
+        console.error(`Error reading dataset ${datasetName}: resolved path escapes data root`);
+        return null;
+    }
 
     try {
-        if (!isSafeFilename(filename)) {
-            throw new Error(
-                "Invalid filename: contains forbidden characters or traversal patterns",
-            );
-        }
-
-        if (!isSafeFolder(folder)) {
-            throw new Error(
-                "Invalid folder path: contains forbidden characters or traversal patterns",
-            );
-        }
-
-        if (jsonCache.has(cacheKey)) {
-            return jsonCache.get(cacheKey) as T;
-        }
-
-        const dataRoot = path.resolve(process.cwd(), "public", "data");
-        const filePath = path.resolve(dataRoot, folder, filename);
-        const relativePath = path.relative(dataRoot, filePath);
-        if (relativePath.startsWith("..") || path.isAbsolute(relativePath)) {
-            throw new Error("Resolved path escapes data root");
-        }
-
         const fileContent = fs.readFileSync(filePath, "utf-8");
-        const parsed = JSON.parse(fileContent) as T;
-        jsonCache.set(cacheKey, parsed);
+        const parsed = JSON.parse(fileContent) as DatasetValueMap[K];
+        jsonCache.set(datasetName, parsed);
         return parsed;
     } catch (error) {
-        console.error(`Error reading ${cacheKey}:`, error);
+        console.error(`Error reading dataset ${datasetName}:`, error);
         return null;
     }
 }
 
 export const getCharacters = async (): Promise<Character[]> => {
-    const data = readPublicJSON<Character[]>("characters.json");
-    return data || [];
+    const characters = readDataset("characters");
+    return characters ?? [];
 };
 
 export const getCharacterById = async (id: number): Promise<Character | null> => {
@@ -64,12 +57,12 @@ export const getCharacterById = async (id: number): Promise<Character | null> =>
 };
 
 export const getAccount = async (): Promise<Account | null> => {
-    return readPublicJSON<Account>("account.json");
+    return readDataset("account");
 };
 
 export const getHsrCharacters = async (): Promise<HsrCharacter[]> => {
-    const data = readPublicJSON<HsrCharacter[]>("characters.json", "hsr");
-    return data || [];
+    const characters = readDataset("hsrCharacters");
+    return characters ?? [];
 };
 
 export const getHsrCharacterById = async (id: number): Promise<HsrCharacter | null> => {
@@ -78,5 +71,5 @@ export const getHsrCharacterById = async (id: number): Promise<HsrCharacter | nu
 };
 
 export const getHsrAccount = async (): Promise<HsrAccount | null> => {
-    return readPublicJSON<HsrAccount>("account.json", "hsr");
+    return readDataset("hsrAccount");
 };

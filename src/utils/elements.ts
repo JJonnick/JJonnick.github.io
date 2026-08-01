@@ -75,6 +75,27 @@ export const GENSHIN_ELEMENT_VISUALS: Record<GenshinElement, ElementVisual> = {
     },
 };
 
+export const GENSHIN_ELEMENT_LABELS: Record<GenshinElement, string> = {
+    anemo: "Anemo",
+    geo: "Geo",
+    electro: "Electro",
+    dendro: "Dendro",
+    hydro: "Hydro",
+    pyro: "Pyro",
+    cryo: "Cryo",
+};
+
+export const GENSHIN_ELEMENT_SET = new Set<GenshinElement>(GENSHIN_ELEMENTS);
+
+export function getGenshinElementIconPath(element: string | null | undefined): string {
+    const normalized = element?.trim().toLowerCase();
+    if (!normalized || !GENSHIN_ELEMENT_SET.has(normalized as GenshinElement)) {
+        return "/fallbacks/icon.svg";
+    }
+
+    return `/elements/${normalized}.svg`;
+}
+
 export const HSR_ELEMENTS = [
     "fire",
     "ice",

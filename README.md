@@ -62,6 +62,13 @@ pnpm format:check  # Comprueba el formato sin aplicar cambios
 
 Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) para obtener diagnósticos en tiempo real y formateo automático al guardar.
 
+## Decisiones de arquitectura para mantenibilidad
+
+- Los listados paginados de personajes (Genshin y HSR) comparten lógica de filtros en `src/services/character-list.ts` para evitar duplicación en `getStaticPaths`.
+- Los mapeos de dominio de Genshin (por ejemplo tipo de arma) se mantienen fuera de páginas en `src/constants/genshin.ts`.
+- Los labels e íconos de elementos de Genshin se centralizan en `src/utils/elements.ts` para reutilización consistente entre páginas y componentes.
+- El acceso a JSON público se resuelve desde un mapa tipado en `src/services/database.ts` y una caché por dataset, reduciendo lógica repetida de lectura/parsing.
+
 ## Uso de agentes de Copilot
 
 Este repo incluye agentes y prompt personalizados para acelerar revisiones y correcciones.

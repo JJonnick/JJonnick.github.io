@@ -1,7 +1,12 @@
 ---
 import CharacterListPage from "@/components/CharacterListPage.astro";
 import { getCharacters } from "@/services/database";
-import { GENSHIN_ELEMENTS, type GenshinElement } from "@/utils/elements";
+import { collectPresentElements, collectRarities } from "@/services/character-list";
+import {
+    GENSHIN_ELEMENT_LABELS,
+    GENSHIN_ELEMENTS,
+    type GenshinElement,
+} from "@/utils/elements";
 import type { Character } from "@/types";
 import type { GetStaticPaths, Page } from "astro";
 
@@ -15,27 +20,12 @@ interface Props {
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
     const allCharacters = await getCharacters();
 
-    const elementLabels: Record<GenshinElement, string> = {
-        anemo: "Anemo",
-        geo: "Geo",
-        electro: "Electro",
-        dendro: "Dendro",
-        hydro: "Hydro",
-        pyro: "Pyro",
-        cryo: "Cryo",
-    };
-
-    const presentElements = GENSHIN_ELEMENTS.filter((el) =>
-        allCharacters.some((c) => c.element?.trim().toLowerCase() === el),
-    );
-
-    const rarities = [
-        ...new Set(allCharacters.map((c) => c.rarity ?? 0).filter(Boolean)),
-    ].sort((a, b) => b - a);
+    const presentElements = collectPresentElements(allCharacters, GENSHIN_ELEMENTS);
+    const rarities = collectRarities(allCharacters);
 
     return paginate(allCharacters, {
         pageSize: 24,
-        props: { presentElements, rarities, elementLabels },
+        props: { presentElements, rarities, elementLabels: GENSHIN_ELEMENT_LABELS },
     });
 };
 

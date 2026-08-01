@@ -3,10 +3,12 @@ import Content from "@/layouts/Content.astro";
 import Layout from "@/layouts/Layout.astro";
 import Stars from "@/components/Stars.astro";
 import LazyImage from "@/components/LazyImage.astro";
+import LucideIcon from "@/components/LucideIcon.astro";
+import { GENSHIN_WEAPON_TYPE_LABELS } from "@/constants/genshin";
 import { getCharacters } from "@/services/database";
 import { type Character } from "@/types/character";
-import { Swords, Heart, Sparkles, Gauge } from "@lucide/astro";
 import { toSafeNumber } from "@/utils/numbers";
+import { getGenshinElementIconPath } from "@/utils/elements";
 
 interface Props {
     char: Character;
@@ -21,14 +23,6 @@ export async function getStaticPaths() {
     }));
 }
 
-const weaponTypeMap: Record<number, string> = {
-    1: "Espada",
-    10: "Catalizador",
-    11: "Mandoble",
-    12: "Arco",
-    13: "Lanza",
-};
-
 const { char } = Astro.props;
 const { id, icon, name, rarity, element, level, constellation, friendship, weapon_type } = char;
 
@@ -39,16 +33,17 @@ const safeRarity = Math.min(5, Math.max(1, toSafeNumber(rarity) || 1));
 const safeLevel = toSafeNumber(level);
 const safeConstellation = toSafeNumber(constellation);
 const safeFriendship = toSafeNumber(friendship);
-const elementKey = safeElement.toLowerCase();
-const safeElementIcon = ["anemo", "geo", "electro", "dendro", "hydro", "pyro", "cryo"].includes(
-    elementKey,
-)
-    ? `/elements/${elementKey}.svg`
-    : "/fallbacks/icon.svg";
-const weaponName = weaponTypeMap[weapon_type] ?? "Desconocido";
+const safeElementIcon = getGenshinElementIconPath(safeElement);
+const weaponName = GENSHIN_WEAPON_TYPE_LABELS[weapon_type] ?? "Desconocido";
 const statCardClass = "surface-panel p-3";
 const statLabelClass = "text-muted-body text-xs";
 const statValueClass = "text-lg font-semibold text-slate-900 dark:text-slate-100";
+const statItems = [
+    { icon: "Gauge", label: "Nivel", value: safeLevel },
+    { icon: "Sparkles", label: "Constelación", value: `C${safeConstellation}` },
+    { icon: "Heart", label: "Amistad", value: safeFriendship },
+    { icon: "Swords", label: "Arma", value: weaponName },
+] as const;
 ---
 
 <Layout title={safeName}>
@@ -88,46 +83,17 @@ const statValueClass = "text-lg font-semibold text-slate-900 dark:text-slate-100
             </header>
 
             <section class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <div
-                    class={`flex flex-col items-center gap-1 ${statCardClass}`}
-                >
-                    <Gauge
-                        size={20}
-                        class="text-slate-600 dark:text-slate-300"
-                    />
-                    <span class={statLabelClass}>Nivel</span>
-                    <span class={statValueClass}>{safeLevel}</span>
-                </div>
-                <div
-                    class={`flex flex-col items-center gap-1 ${statCardClass}`}
-                >
-                    <Sparkles
-                        size={20}
-                        class="text-slate-600 dark:text-slate-300"
-                    />
-                    <span class={statLabelClass}>Constelación</span>
-                    <span class={statValueClass}>C{safeConstellation}</span>
-                </div>
-                <div
-                    class={`flex flex-col items-center gap-1 ${statCardClass}`}
-                >
-                    <Heart
-                        size={20}
-                        class="text-slate-600 dark:text-slate-300"
-                    />
-                    <span class={statLabelClass}>Amistad</span>
-                    <span class={statValueClass}>{safeFriendship}</span>
-                </div>
-                <div
-                    class={`flex flex-col items-center gap-1 ${statCardClass}`}
-                >
-                    <Swords
-                        size={20}
-                        class="text-slate-600 dark:text-slate-300"
-                    />
-                    <span class={statLabelClass}>Arma</span>
-                    <span class={statValueClass}>{weaponName}</span>
-                </div>
+                {statItems.map((item) => (
+                    <div class={`flex flex-col items-center gap-1 ${statCardClass}`}>
+                        <LucideIcon
+                            name={item.icon}
+                            size={20}
+                            class="text-slate-600 dark:text-slate-300"
+                        />
+                        <span class={statLabelClass}>{item.label}</span>
+                        <span class={statValueClass}>{item.value}</span>
+                    </div>
+                ))}
             </section>
         </article>
     </Content>
