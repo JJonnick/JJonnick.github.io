@@ -3,7 +3,7 @@ import Content from "@/layouts/Content.astro";
 import Layout from "@/layouts/Layout.astro";
 import Stars from "@/components/Stars.astro";
 import LazyImage from "@/components/LazyImage.astro";
-import LucideIcon from "@/components/LucideIcon.astro";
+import { Gauge, Sparkles, Heart, Swords } from "@lucide/astro";
 import { GENSHIN_WEAPON_TYPE_LABELS } from "@/constants/genshin";
 import { getCharacters } from "@/services/database";
 import { type Character } from "@/types/character";
@@ -39,10 +39,10 @@ const statCardClass = "surface-panel p-3";
 const statLabelClass = "text-muted-body text-xs";
 const statValueClass = "text-lg font-semibold text-slate-900 dark:text-slate-100";
 const statItems = [
-    { icon: "Gauge", label: "Nivel", value: safeLevel },
-    { icon: "Sparkles", label: "Constelación", value: `C${safeConstellation}` },
-    { icon: "Heart", label: "Amistad", value: safeFriendship },
-    { icon: "Swords", label: "Arma", value: weaponName },
+    { Icon: Gauge, label: "Nivel", value: safeLevel },
+    { Icon: Sparkles, label: "Constelación", value: `C${safeConstellation}` },
+    { Icon: Heart, label: "Amistad", value: safeFriendship },
+    { Icon: Swords, label: "Arma", value: weaponName },
 ] as const;
 ---
 
@@ -85,11 +85,7 @@ const statItems = [
             <section class="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {statItems.map((item) => (
                     <div class={`flex flex-col items-center gap-1 ${statCardClass}`}>
-                        <LucideIcon
-                            name={item.icon}
-                            size={20}
-                            class="text-slate-600 dark:text-slate-300"
-                        />
+                        <item.Icon size={20} class="text-slate-600 dark:text-slate-300" />
                         <span class={statLabelClass}>{item.label}</span>
                         <span class={statValueClass}>{item.value}</span>
                     </div>

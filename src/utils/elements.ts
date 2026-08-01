@@ -85,7 +85,7 @@ export const GENSHIN_ELEMENT_LABELS: Record<GenshinElement, string> = {
     cryo: "Cryo",
 };
 
-export const GENSHIN_ELEMENT_SET = new Set<GenshinElement>(GENSHIN_ELEMENTS);
+const GENSHIN_ELEMENT_SET = new Set<GenshinElement>(GENSHIN_ELEMENTS);
 
 export function getGenshinElementIconPath(element: string | null | undefined): string {
     const normalized = element?.trim().toLowerCase();
