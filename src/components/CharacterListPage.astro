@@ -98,6 +98,9 @@ const {
                                         class="ui-control ui-control-idle"
                                         aria-pressed="false"
                                         aria-controls="character-grid"
+                                        aria-label={`Filtrar por elemento: ${
+                                            elementLabels[el] ?? el
+                                        }`}
                                     >
                                         {showElementIcons && (
                                             <img
@@ -136,6 +139,7 @@ const {
                                         class="ui-control ui-control-idle"
                                         aria-pressed="false"
                                         aria-controls="character-grid"
+                                        aria-label={`Filtrar por rareza: ${r} estrellas`}
                                     >
                                         {r}★
                                     </button>

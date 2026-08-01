@@ -55,8 +55,11 @@ function initCharacterFilters() {
         if (noResults) noResults.hidden = visible > 0;
     }
 
-    function activateFilterButtons(selector: string, clickedBtn: Element) {
-        document.querySelectorAll(selector).forEach((btn) => {
+    function activateFilterButtons(
+        selector: "[data-filter-element]" | "[data-filter-rarity]",
+        clickedBtn: Element,
+    ) {
+        filtersBar?.querySelectorAll(selector).forEach((btn) => {
             const isActive = btn === clickedBtn;
             btn.classList.toggle("ui-control-active", isActive);
             btn.classList.toggle("ui-control-idle", !isActive);
@@ -66,7 +69,7 @@ function initCharacterFilters() {
 
     // Restore saved filter button visual state
     if (activeElement !== "all") {
-        const savedBtn = document.querySelector<HTMLElement>(
+        const savedBtn = filtersBar?.querySelector<HTMLElement>(
             `[data-filter-element="${CSS.escape(activeElement)}"]`,
         );
         if (savedBtn) {
@@ -76,7 +79,7 @@ function initCharacterFilters() {
         }
     }
     if (activeRarity !== "all") {
-        const savedBtn = document.querySelector<HTMLElement>(
+        const savedBtn = filtersBar?.querySelector<HTMLElement>(
             `[data-filter-rarity="${CSS.escape(activeRarity)}"]`,
         );
         if (savedBtn) {
@@ -88,8 +91,8 @@ function initCharacterFilters() {
 
     applyFilters();
 
-    document
-        .querySelectorAll<HTMLElement>("[data-filter-element]")
+    filtersBar
+        ?.querySelectorAll<HTMLElement>("[data-filter-element]")
         .forEach((btn) => {
             btn.addEventListener("click", () => {
                 activeElement = btn.dataset.filterElement ?? "all";
@@ -99,8 +102,8 @@ function initCharacterFilters() {
             });
         });
 
-    document
-        .querySelectorAll<HTMLElement>("[data-filter-rarity]")
+    filtersBar
+        ?.querySelectorAll<HTMLElement>("[data-filter-rarity]")
         .forEach((btn) => {
             btn.addEventListener("click", () => {
                 activeRarity = btn.dataset.filterRarity ?? "all";

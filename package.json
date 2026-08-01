@@ -24,7 +24,7 @@
         "@lucide/astro": "^1.27.0",
         "astro": "^7.1.5",
         "tailwindcss": "^4.3.3",
-        "typescript": "^7.0.2"
+        "typescript": "^5.9.2"
     },
     "devDependencies": {
         "@biomejs/biome": "2.5.6",
