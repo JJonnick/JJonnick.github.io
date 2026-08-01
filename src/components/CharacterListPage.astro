@@ -57,6 +57,13 @@ const {
     imageClass,
     pagination,
 } = Astro.props;
+
+const getElementIconSrc = (element: string): string => {
+    const iconPath = elementVisuals?.[element]?.iconPath;
+
+    if (!iconPath) return `/elements/${element}.svg`;
+    return typeof iconPath === "string" ? iconPath : iconPath.src;
+};
 ---
 
 <Layout title={title}>
@@ -104,7 +111,7 @@ const {
                                     >
                                         {showElementIcons && (
                                             <img
-                                                src={`/elements/${el}.svg`}
+                                                src={getElementIconSrc(el)}
                                                 alt=""
                                                 aria-hidden="true"
                                                 width={16}
