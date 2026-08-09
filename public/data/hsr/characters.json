@@ -28,7 +28,7 @@
     "rarity": 5,
     "element": "fire",
     "level": 80,
-    "rank": 5,
+    "rank": 6,
     "path": 3,
     "equip": {
       "id": 23060,
@@ -676,7 +676,7 @@
     "rarity": 5,
     "element": "quantum",
     "level": 1,
-    "rank": 1,
+    "rank": 2,
     "path": 3,
     "equip": {
       "id": 23061,
