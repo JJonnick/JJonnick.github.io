@@ -19,4 +19,4 @@ jobs:
         with:
           cache: true
       - name: Check changes
-        run: pnpm install --allow-build=esbuild && pnpm check
+        run: pnpm install && pnpm check
