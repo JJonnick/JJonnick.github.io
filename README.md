@@ -83,6 +83,10 @@ Este repo incluye agentes y prompt personalizados para acelerar revisiones y cor
 2. Toma los hallazgos y ejecuta `Fix From Review` con la lista de problemas a corregir.
 3. Repite la revisión con `Reviewer Code` para validar que no queden riesgos importantes.
 
+### Skill de agentes compartidas
+- Este repo incluye el submódulo `.github/agent-skills`, que apunta a `addyosmani/agent-skills`.
+- Se actualiza automáticamente con el workflow de GitHub Actions `agent-skills-sync` y también se sincroniza desde `copilot-setup-steps.yml` en los entornos de Copilot.
+
 ### Ejemplos rápidos
 - `/Review PR Risk-First revisa los cambios actuales con profundidad alta.`
 - `Usa Reviewer Code para revisar riesgos de regresión en src/pages y src/services.`

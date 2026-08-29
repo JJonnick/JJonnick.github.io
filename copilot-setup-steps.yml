@@ -1,0 +1,9 @@
+steps:
+  - name: Sync repository skills
+    run: |
+      git submodule sync --recursive
+      git submodule update --init --recursive --remote
+
+  - name: Install project dependencies
+    run: |
+      pnpm install
