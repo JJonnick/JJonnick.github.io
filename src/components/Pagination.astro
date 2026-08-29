@@ -18,6 +18,7 @@ function pageUrl(page: number): string {
     lastPage > 1 && (
         <nav
             aria-label="Paginación"
+            data-pagination-nav
             class="mt-6 flex flex-wrap items-center justify-center gap-2"
         >
             {prevUrl ? (
@@ -25,6 +26,7 @@ function pageUrl(page: number): string {
                     href={prevUrl}
                     data-page-link
                     data-page-href={prevUrl}
+                    data-page-prev
                     class="ui-control ui-control-idle"
                     aria-label="Página anterior"
                 >
@@ -32,6 +34,7 @@ function pageUrl(page: number): string {
                 </a>
             ) : (
                 <span
+                    data-page-prev
                     class="ui-control ui-control-idle cursor-not-allowed opacity-40"
                     aria-disabled="true"
                 >
@@ -46,6 +49,7 @@ function pageUrl(page: number): string {
                             href={pageUrl(p)}
                             data-page-link
                             data-page-href={pageUrl(p)}
+                            data-page-number={String(p)}
                             class={`ui-control ${p === currentPage ? "ui-control-active" : "ui-control-idle"}`}
                             aria-current={p === currentPage ? "page" : undefined}
                             aria-label={`Página ${p}`}
@@ -61,6 +65,7 @@ function pageUrl(page: number): string {
                     href={nextUrl}
                     data-page-link
                     data-page-href={nextUrl}
+                    data-page-next
                     class="ui-control ui-control-idle"
                     aria-label="Página siguiente"
                 >
@@ -68,6 +73,7 @@ function pageUrl(page: number): string {
                 </a>
             ) : (
                 <span
+                    data-page-next
                     class="ui-control ui-control-idle cursor-not-allowed opacity-40"
                     aria-disabled="true"
                 >

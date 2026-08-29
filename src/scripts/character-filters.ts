@@ -65,9 +65,38 @@ function initCharacterFilters() {
 
     const gridEl = grid as HTMLElement;
     const filtersBarEl = filtersBar as HTMLElement;
+    const pageSize = Number(filtersBarEl.dataset.pageSize ?? "24") || 24;
 
     let activeElement = getFilterStateFromUrl().element;
     let activeRarity = getFilterStateFromUrl().rarity;
+
+    function syncPaginationState(visible: number) {
+        const nav = document.querySelector<HTMLElement>("[data-pagination-nav]");
+        const pageButtons = document.querySelectorAll<HTMLElement>("[data-page-number]");
+        const prevButton = document.querySelector<HTMLElement>("[data-page-prev]");
+        const nextButton = document.querySelector<HTMLElement>("[data-page-next]");
+        const totalPages = Math.max(1, Math.ceil(visible / pageSize));
+        const currentPathPage = Number(
+            window.location.pathname.match(/\/\d+\/?$/)?.[0].replace(/\D/g, "") ?? "1",
+        );
+
+        if (currentPathPage > totalPages && visible > 0) {
+            const url = new URL(window.location.href);
+            url.pathname = url.pathname.replace(/\/\d+\/?$/, "") || "/";
+            window.history.replaceState({}, "", `${url.pathname}${url.search}`);
+        }
+
+        if (nav) nav.hidden = visible === 0 || totalPages <= 1;
+        if (prevButton) prevButton.hidden = visible === 0 || totalPages <= 1;
+        if (nextButton) nextButton.hidden = visible === 0 || totalPages <= 1;
+
+        pageButtons.forEach((button) => {
+            const pageNumber = Number(button.dataset.pageNumber ?? "0");
+            const shouldShow = pageNumber <= totalPages;
+            button.hidden = !shouldShow;
+            button.setAttribute("aria-hidden", String(!shouldShow));
+        });
+    }
 
     function applyFilters() {
         const cards = gridEl.querySelectorAll<HTMLElement>("[data-filter-card]");
@@ -84,6 +113,7 @@ function initCharacterFilters() {
         });
 
         if (noResults) noResults.hidden = visible > 0;
+        syncPaginationState(visible);
     }
 
     function activateFilterButtons(
