@@ -1,5 +1,6 @@
 import { createLoader, parseAsStringLiteral } from "nuqs";
 import { z } from "zod";
+import { getFilteredCharacterPage } from "@/services/character-list";
 
 const runtimeWindow = window as Window & {
     __characterFiltersPageLoadBound?: boolean;
@@ -66,54 +67,95 @@ function initCharacterFilters() {
     const gridEl = grid as HTMLElement;
     const filtersBarEl = filtersBar as HTMLElement;
     const pageSize = Number(filtersBarEl.dataset.pageSize ?? "24") || 24;
+    const basePath = filtersBarEl.dataset.filterNs ?? "/";
 
     let activeElement = getFilterStateFromUrl().element;
     let activeRarity = getFilterStateFromUrl().rarity;
 
-    function syncPaginationState(visible: number) {
+    function pageUrl(page: number): string {
+        const url = new URL(window.location.href);
+        url.pathname = page === 1 ? basePath : `${basePath}/${page}`;
+        return `${url.pathname}${url.search}`;
+    }
+
+    function getCurrentPathPage(): number {
+        const escapedBasePath = basePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const match = window.location.pathname.match(new RegExp(`^${escapedBasePath}/(\\d+)/?$`));
+        return Number(match?.[1] ?? "1");
+    }
+
+    function syncPaginationState(totalItems: number, currentPage: number, totalPages: number) {
         const nav = document.querySelector<HTMLElement>("[data-pagination-nav]");
         const pageButtons = document.querySelectorAll<HTMLElement>("[data-page-number]");
-        const prevButton = document.querySelector<HTMLElement>("[data-page-prev]");
-        const nextButton = document.querySelector<HTMLElement>("[data-page-next]");
-        const totalPages = Math.max(1, Math.ceil(visible / pageSize));
-        const currentPathPage = Number(
-            window.location.pathname.match(/\/\d+\/?$/)?.[0].replace(/\D/g, "") ?? "1",
-        );
+        const prevLink = document.querySelector<HTMLAnchorElement>("[data-page-prev-link]");
+        const prevDisabled = document.querySelector<HTMLElement>("[data-page-prev-disabled]");
+        const nextLink = document.querySelector<HTMLAnchorElement>("[data-page-next-link]");
+        const nextDisabled = document.querySelector<HTMLElement>("[data-page-next-disabled]");
 
-        if (currentPathPage > totalPages && visible > 0) {
-            const url = new URL(window.location.href);
-            url.pathname = url.pathname.replace(/\/\d+\/?$/, "") || "/";
-            window.history.replaceState({}, "", `${url.pathname}${url.search}`);
+        if (nav) nav.hidden = totalItems === 0 || totalPages <= 1;
+
+        if (prevLink) {
+            prevLink.hidden = currentPage <= 1;
+            prevLink.href = pageUrl(Math.max(1, currentPage - 1));
         }
+        if (prevDisabled) prevDisabled.hidden = currentPage > 1;
 
-        if (nav) nav.hidden = visible === 0 || totalPages <= 1;
-        if (prevButton) prevButton.hidden = visible === 0 || totalPages <= 1;
-        if (nextButton) nextButton.hidden = visible === 0 || totalPages <= 1;
+        if (nextLink) {
+            nextLink.hidden = currentPage >= totalPages;
+            nextLink.href = pageUrl(Math.min(totalPages, currentPage + 1));
+        }
+        if (nextDisabled) nextDisabled.hidden = currentPage < totalPages;
 
         pageButtons.forEach((button) => {
             const pageNumber = Number(button.dataset.pageNumber ?? "0");
             const shouldShow = pageNumber <= totalPages;
             button.hidden = !shouldShow;
             button.setAttribute("aria-hidden", String(!shouldShow));
+            button.classList.toggle("ui-control-active", pageNumber === currentPage);
+            button.classList.toggle("ui-control-idle", pageNumber !== currentPage);
+
+            if (pageNumber === currentPage) {
+                button.setAttribute("aria-current", "page");
+            } else {
+                button.removeAttribute("aria-current");
+            }
+
+            if (button instanceof HTMLAnchorElement) button.href = pageUrl(pageNumber);
         });
     }
 
     function applyFilters() {
-        const cards = gridEl.querySelectorAll<HTMLElement>("[data-filter-card]");
-        let visible = 0;
+        const cards = Array.from(
+            gridEl.querySelectorAll<HTMLElement>("[data-filter-card]"),
+            (card) => ({
+                card,
+                element: card.dataset.element,
+                rarity: card.dataset.rarity,
+            }),
+        );
+        const requestedPage = getCurrentPathPage();
+        const characterPage = getFilteredCharacterPage(
+            cards,
+            { element: activeElement, rarity: activeRarity },
+            requestedPage,
+            pageSize,
+        );
+        const visibleCards = new Set(characterPage.items.map(({ card }) => card));
 
-        cards.forEach((card) => {
-            const el = card.dataset.element ?? "";
-            const rarity = card.dataset.rarity ?? "";
-            const matchEl = activeElement === "all" || el === activeElement;
-            const matchRarity = activeRarity === "all" || rarity === activeRarity;
-            const show = matchEl && matchRarity;
-            card.hidden = !show;
-            if (show) visible++;
+        if (characterPage.currentPage !== requestedPage && characterPage.totalItems > 0) {
+            window.history.replaceState({}, "", pageUrl(characterPage.currentPage));
+        }
+
+        cards.forEach(({ card }) => {
+            card.hidden = !visibleCards.has(card);
         });
 
-        if (noResults) noResults.hidden = visible > 0;
-        syncPaginationState(visible);
+        if (noResults) noResults.hidden = characterPage.totalItems > 0;
+        syncPaginationState(
+            characterPage.totalItems,
+            characterPage.currentPage,
+            characterPage.totalPages,
+        );
     }
 
     function activateFilterButtons(
@@ -135,9 +177,7 @@ function initCharacterFilters() {
         activateFilterButtons("[data-filter-element]", savedElementBtn);
     } else {
         activeElement = "all";
-        const defaultBtn = filtersBarEl.querySelector<HTMLElement>(
-            '[data-filter-element="all"]',
-        );
+        const defaultBtn = filtersBarEl.querySelector<HTMLElement>('[data-filter-element="all"]');
         if (defaultBtn) {
             activateFilterButtons("[data-filter-element]", defaultBtn);
         }
@@ -150,9 +190,7 @@ function initCharacterFilters() {
         activateFilterButtons("[data-filter-rarity]", savedRarityBtn);
     } else {
         activeRarity = "all";
-        const defaultBtn = filtersBarEl.querySelector<HTMLElement>(
-            '[data-filter-rarity="all"]',
-        );
+        const defaultBtn = filtersBarEl.querySelector<HTMLElement>('[data-filter-rarity="all"]');
         if (defaultBtn) {
             activateFilterButtons("[data-filter-rarity]", defaultBtn);
         }
@@ -160,27 +198,23 @@ function initCharacterFilters() {
 
     applyFilters();
 
-    filtersBarEl
-        .querySelectorAll<HTMLElement>("[data-filter-element]")
-        .forEach((btn) => {
-            btn.addEventListener("click", () => {
-                activeElement = btn.dataset.filterElement ?? "all";
-                activateFilterButtons("[data-filter-element]", btn);
-                updateUrlFilters({ element: activeElement, rarity: activeRarity });
-                applyFilters();
-            });
+    filtersBarEl.querySelectorAll<HTMLElement>("[data-filter-element]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            activeElement = btn.dataset.filterElement ?? "all";
+            activateFilterButtons("[data-filter-element]", btn);
+            updateUrlFilters({ element: activeElement, rarity: activeRarity });
+            applyFilters();
         });
+    });
 
-    filtersBarEl
-        .querySelectorAll<HTMLElement>("[data-filter-rarity]")
-        .forEach((btn) => {
-            btn.addEventListener("click", () => {
-                activeRarity = btn.dataset.filterRarity ?? "all";
-                activateFilterButtons("[data-filter-rarity]", btn);
-                updateUrlFilters({ element: activeElement, rarity: activeRarity });
-                applyFilters();
-            });
+    filtersBarEl.querySelectorAll<HTMLElement>("[data-filter-rarity]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            activeRarity = btn.dataset.filterRarity ?? "all";
+            activateFilterButtons("[data-filter-rarity]", btn);
+            updateUrlFilters({ element: activeElement, rarity: activeRarity });
+            applyFilters();
         });
+    });
 }
 
 if (!runtimeWindow.__characterFiltersPageLoadBound) {

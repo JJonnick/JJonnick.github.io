@@ -21,34 +21,29 @@ function pageUrl(page: number): string {
             data-pagination-nav
             class="mt-6 flex flex-wrap items-center justify-center gap-2"
         >
-            {prevUrl ? (
-                <a
-                    href={prevUrl}
-                    data-page-link
-                    data-page-href={prevUrl}
-                    data-page-prev
-                    class="ui-control ui-control-idle"
-                    aria-label="Página anterior"
-                >
-                    ← Anterior
-                </a>
-            ) : (
-                <span
-                    data-page-prev
-                    class="ui-control ui-control-idle cursor-not-allowed opacity-40"
-                    aria-disabled="true"
-                >
-                    ← Anterior
-                </span>
-            )}
+            <a
+                href={prevUrl ?? pageUrl(Math.max(1, currentPage - 1))}
+                data-page-prev-link
+                class="ui-control ui-control-idle"
+                aria-label="Página anterior"
+                hidden={!prevUrl}
+            >
+                ← Anterior
+            </a>
+            <span
+                data-page-prev-disabled
+                class="ui-control ui-control-idle cursor-not-allowed opacity-40"
+                aria-disabled="true"
+                hidden={Boolean(prevUrl)}
+            >
+                ← Anterior
+            </span>
 
             <div class="flex items-center gap-1">
                 {Array.from({ length: lastPage }, (_, i) => i + 1).map(
                     (p) => (
                         <a
                             href={pageUrl(p)}
-                            data-page-link
-                            data-page-href={pageUrl(p)}
                             data-page-number={String(p)}
                             class={`ui-control ${p === currentPage ? "ui-control-active" : "ui-control-idle"}`}
                             aria-current={p === currentPage ? "page" : undefined}
@@ -60,45 +55,23 @@ function pageUrl(page: number): string {
                 )}
             </div>
 
-            {nextUrl ? (
-                <a
-                    href={nextUrl}
-                    data-page-link
-                    data-page-href={nextUrl}
-                    data-page-next
-                    class="ui-control ui-control-idle"
-                    aria-label="Página siguiente"
-                >
-                    Siguiente →
-                </a>
-            ) : (
-                <span
-                    data-page-next
-                    class="ui-control ui-control-idle cursor-not-allowed opacity-40"
-                    aria-disabled="true"
-                >
-                    Siguiente →
-                </span>
-            )}
+            <a
+                href={nextUrl ?? pageUrl(Math.min(lastPage, currentPage + 1))}
+                data-page-next-link
+                class="ui-control ui-control-idle"
+                aria-label="Página siguiente"
+                hidden={!nextUrl}
+            >
+                Siguiente →
+            </a>
+            <span
+                data-page-next-disabled
+                class="ui-control ui-control-idle cursor-not-allowed opacity-40"
+                aria-disabled="true"
+                hidden={Boolean(nextUrl)}
+            >
+                Siguiente →
+            </span>
         </nav>
     )
 }
-
-<script>
-    const syncPaginationLinks = () => {
-        const search = window.location.search;
-        const links = document.querySelectorAll<HTMLElement>('[data-page-link]');
-
-        links.forEach((link) => {
-            const targetHref = link.dataset.pageHref ?? link.getAttribute('href') ?? '';
-            if (!targetHref) return;
-
-            const targetUrl = new URL(targetHref, window.location.origin);
-            targetUrl.search = search ? new URLSearchParams(search).toString() : '';
-            link.setAttribute('href', `${targetUrl.pathname}${targetUrl.search}`);
-        });
-    };
-
-    document.addEventListener('astro:page-load', syncPaginationLinks);
-    syncPaginationLinks();
-</script>
