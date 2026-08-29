@@ -26,7 +26,7 @@
 - Use pnpm only (npm/yarn are not supported in this repo).
 - Runtime/tooling requirements from `package.json`:
   - Node `>=24`
-  - pnpm `>=10`
+  - pnpm `>=12`
 - Common commands:
   - `pnpm install`
   - `pnpm dev`

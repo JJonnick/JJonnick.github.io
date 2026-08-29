@@ -20,3 +20,10 @@ updates:
       npm-dependencies:
         patterns:
           - "*"
+    ignore:
+      # Astro check currently requires TypeScript 6.x. Dependabot continues
+      # updating compatible 6.x releases; remove this rule when Astro adds
+      # TypeScript 7 support so major upgrades can resume automatically.
+      - dependency-name: "typescript"
+        versions:
+          - ">=7.0.0"
