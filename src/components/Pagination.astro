@@ -9,8 +9,28 @@ interface Props {
 
 const { currentPage, lastPage, prevUrl, nextUrl, basePath } = Astro.props;
 
+function withActiveFilters(url: string): string {
+    const params = new URLSearchParams(Astro.url.search);
+    const filterKeys = ["element", "rarity"];
+
+    if (filterKeys.every((key) => !params.has(key))) {
+        return url;
+    }
+
+    const targetUrl = new URL(url, Astro.url.origin);
+    for (const key of filterKeys) {
+        const value = params.get(key);
+        if (value) {
+            targetUrl.searchParams.set(key, value);
+        }
+    }
+
+    return `${targetUrl.pathname}${targetUrl.search}`;
+}
+
 function pageUrl(page: number): string {
-    return page === 1 ? basePath : `${basePath}/${page}`;
+    const pagePath = page === 1 ? basePath : `${basePath}/${page}`;
+    return withActiveFilters(pagePath);
 }
 ---
 
@@ -22,7 +42,7 @@ function pageUrl(page: number): string {
         >
             {prevUrl ? (
                 <a
-                    href={prevUrl}
+                    href={withActiveFilters(prevUrl)}
                     class="ui-control ui-control-idle"
                     aria-label="Página anterior"
                 >
@@ -54,7 +74,7 @@ function pageUrl(page: number): string {
 
             {nextUrl ? (
                 <a
-                    href={nextUrl}
+                    href={withActiveFilters(nextUrl)}
                     class="ui-control ui-control-idle"
                     aria-label="Página siguiente"
                 >
