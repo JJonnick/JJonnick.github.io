@@ -1,0 +1,6 @@
+overrides:
+  '@emmetio/css-parser': 0.4.1
+minimumReleaseAgeExclude:
+  - zod@4.5.2
+allowBuilds:
+  esbuild: true

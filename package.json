@@ -31,10 +31,5 @@
         "@tailwindcss/vite": "^4.3.3",
         "@types/node": "^26.3.0",
         "sharp": "^0.35.4"
-    },
-    "pnpm": {
-        "overrides": {
-            "@emmetio/css-parser": "0.4.1"
-        }
     }
 }
