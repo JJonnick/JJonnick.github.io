@@ -81,6 +81,8 @@ const getElementIconSrc = (element: string): string => {
                     <div
                         id="character-filters"
                         data-filter-ns={basePath}
+                        data-element-options={presentElements.join(",")}
+                        data-rarity-options={rarities.join(",")}
                         class="mb-5 flex flex-wrap gap-4"
                     >
                         {presentElements.length > 1 && (

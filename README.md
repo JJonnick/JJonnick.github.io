@@ -69,21 +69,23 @@ Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace
 - Los labels e íconos de elementos de Genshin se centralizan en `src/utils/elements.ts` para reutilización consistente entre páginas y componentes.
 - El acceso a JSON público se resuelve desde un mapa tipado en `src/services/database.ts` y una caché por dataset, reduciendo lógica repetida de lectura/parsing.
 
-## Uso de agentes de Copilot
+## Uso de agentes y skills
 
-Este repo incluye agentes y prompt personalizados para acelerar revisiones y correcciones.
-
-### Componentes disponibles
-- Prompt de revisión: `/.github/prompts/review-pr.prompt.md`
-- Agente de review: `/.github/agents/reviewer-code.agent.md`
-- Agente de fix: `/.github/agents/fix-from-review.agent.md`
+Este repo usa dos capas de configuración:
+- `AGENTS.md` en la raíz para reglas del proyecto y flujo con agentes.
+- `.github/copilot-instructions.md` para GitHub Copilot.
+- El submódulo `.github/agent-skills` aporta las skills reutilizables de `addyosmani/agent-skills` para revisión, test y quality gates.
 
 ### Flujo recomendado
-1. Ejecuta `/Review PR Risk-First` y pide una revisión con foco en riesgo.
-2. Toma los hallazgos y ejecuta `Fix From Review` con la lista de problemas a corregir.
-3. Repite la revisión con `Reviewer Code` para validar que no queden riesgos importantes.
+1. Usa `AGENTS.md` como referencia para el contexto del proyecto.
+2. Consulta las skills del submódulo y usa `code-review-and-quality` antes de merge.
+3. Mantén cambios pequeños, verificables y con validación del proyecto.
+
+### Skill de agentes compartidas
+- Este repo incluye el submódulo `.github/agent-skills`, que apunta a `addyosmani/agent-skills`.
+- Se actualiza automáticamente con el workflow de GitHub Actions `agent-skills-sync` y también se sincroniza desde `copilot-setup-steps.yml` en los entornos de Copilot.
 
 ### Ejemplos rápidos
-- `/Review PR Risk-First revisa los cambios actuales con profundidad alta.`
-- `Usa Reviewer Code para revisar riesgos de regresión en src/pages y src/services.`
-- `Usa Fix From Review para corregir estos hallazgos: ...`
+- `Usa code-review-and-quality para revisar los cambios actuales con foco en regresión.`
+- `Revisa el flujo de filtros y paginación con riesgo de UI y URL state.`
+- `Haz un fix seguro para restaurar el estado del listado tras cambiar filtros.`

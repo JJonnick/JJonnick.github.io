@@ -1,48 +1,78 @@
+import { createLoader, parseAsStringLiteral } from "nuqs";
+import { z } from "zod";
+
 const runtimeWindow = window as Window & {
     __characterFiltersPageLoadBound?: boolean;
 };
+
+function getFilterStateFromUrl() {
+    const filtersBar = document.getElementById("character-filters");
+    const elements = (filtersBar?.dataset.elementOptions ?? "")
+        .split(",")
+        .map((value) => value.trim().toLowerCase())
+        .filter(Boolean);
+    const rarities = (filtersBar?.dataset.rarityOptions ?? "")
+        .split(",")
+        .map((value) => value.trim())
+        .filter(Boolean);
+
+    const filterParsers = {
+        element: parseAsStringLiteral(["all", ...elements]).withDefault("all"),
+        rarity: parseAsStringLiteral(["all", ...rarities]).withDefault("all"),
+    };
+
+    const loadFilters = createLoader(filterParsers);
+    const schema = z.object({
+        element: z.enum(["all", ...elements] as ["all", ...string[]]).default("all"),
+        rarity: z.enum(["all", ...rarities] as ["all", ...string[]]).default("all"),
+    });
+
+    const parsed = loadFilters(window.location.search);
+    const validated = schema.safeParse(parsed);
+
+    return validated.success ? validated.data : { element: "all", rarity: "all" };
+}
+
+function updateUrlFilters(nextState: { element: string; rarity: string }) {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+
+    if (nextState.element === "all") {
+        params.delete("element");
+    } else {
+        params.set("element", nextState.element);
+    }
+
+    if (nextState.rarity === "all") {
+        params.delete("rarity");
+    } else {
+        params.set("rarity", nextState.rarity);
+    }
+
+    const sanitizedPath = url.pathname.replace(/\/\d+\/?$/, "") || "/";
+    url.pathname = sanitizedPath;
+    url.search = params.toString();
+
+    const nextUrl = `${url.pathname}${url.search}`;
+    window.history.pushState({}, "", nextUrl);
+}
 
 function initCharacterFilters() {
     const grid = document.getElementById("character-grid");
     const noResults = document.getElementById("no-results");
     const filtersBar = document.getElementById("character-filters");
-    if (!grid) return;
+    if (!grid || !filtersBar) return;
 
-    const filterNs = filtersBar?.dataset.filterNs ?? "";
-    const storageKey = filterNs ? `char-filters:${filterNs}` : null;
+    const gridEl = grid as HTMLElement;
+    const filtersBarEl = filtersBar as HTMLElement;
 
-    let savedState: { element?: string; rarity?: string } = {};
-    if (storageKey) {
-        try {
-            savedState = JSON.parse(
-                sessionStorage.getItem(storageKey) ?? "{}",
-            );
-        } catch {
-            // ignore parse errors
-        }
-    }
-
-    let activeElement = savedState.element ?? "all";
-    let activeRarity = savedState.rarity ?? "all";
-
-    function saveState() {
-        if (!storageKey) return;
-        try {
-            sessionStorage.setItem(
-                storageKey,
-                JSON.stringify({
-                    element: activeElement,
-                    rarity: activeRarity,
-                }),
-            );
-        } catch {
-            // ignore storage errors
-        }
-    }
+    let activeElement = getFilterStateFromUrl().element;
+    let activeRarity = getFilterStateFromUrl().rarity;
 
     function applyFilters() {
-        const cards = grid!.querySelectorAll<HTMLElement>("[data-filter-card]");
+        const cards = gridEl.querySelectorAll<HTMLElement>("[data-filter-card]");
         let visible = 0;
+
         cards.forEach((card) => {
             const el = card.dataset.element ?? "";
             const rarity = card.dataset.rarity ?? "";
@@ -52,6 +82,7 @@ function initCharacterFilters() {
             card.hidden = !show;
             if (show) visible++;
         });
+
         if (noResults) noResults.hidden = visible > 0;
     }
 
@@ -59,7 +90,7 @@ function initCharacterFilters() {
         selector: "[data-filter-element]" | "[data-filter-rarity]",
         clickedBtn: Element,
     ) {
-        filtersBar?.querySelectorAll(selector).forEach((btn) => {
+        filtersBarEl.querySelectorAll(selector).forEach((btn) => {
             const isActive = btn === clickedBtn;
             btn.classList.toggle("ui-control-active", isActive);
             btn.classList.toggle("ui-control-idle", !isActive);
@@ -67,49 +98,57 @@ function initCharacterFilters() {
         });
     }
 
-    // Restore saved filter button visual state
-    if (activeElement !== "all") {
-        const savedBtn = filtersBar?.querySelector<HTMLElement>(
-            `[data-filter-element="${CSS.escape(activeElement)}"]`,
+    const savedElementBtn = filtersBarEl.querySelector<HTMLElement>(
+        `[data-filter-element="${CSS.escape(activeElement)}"]`,
+    );
+    if (savedElementBtn) {
+        activateFilterButtons("[data-filter-element]", savedElementBtn);
+    } else {
+        activeElement = "all";
+        const defaultBtn = filtersBarEl.querySelector<HTMLElement>(
+            '[data-filter-element="all"]',
         );
-        if (savedBtn) {
-            activateFilterButtons("[data-filter-element]", savedBtn);
-        } else {
-            activeElement = "all";
+        if (defaultBtn) {
+            activateFilterButtons("[data-filter-element]", defaultBtn);
         }
     }
-    if (activeRarity !== "all") {
-        const savedBtn = filtersBar?.querySelector<HTMLElement>(
-            `[data-filter-rarity="${CSS.escape(activeRarity)}"]`,
+
+    const savedRarityBtn = filtersBarEl.querySelector<HTMLElement>(
+        `[data-filter-rarity="${CSS.escape(activeRarity)}"]`,
+    );
+    if (savedRarityBtn) {
+        activateFilterButtons("[data-filter-rarity]", savedRarityBtn);
+    } else {
+        activeRarity = "all";
+        const defaultBtn = filtersBarEl.querySelector<HTMLElement>(
+            '[data-filter-rarity="all"]',
         );
-        if (savedBtn) {
-            activateFilterButtons("[data-filter-rarity]", savedBtn);
-        } else {
-            activeRarity = "all";
+        if (defaultBtn) {
+            activateFilterButtons("[data-filter-rarity]", defaultBtn);
         }
     }
 
     applyFilters();
 
-    filtersBar
-        ?.querySelectorAll<HTMLElement>("[data-filter-element]")
+    filtersBarEl
+        .querySelectorAll<HTMLElement>("[data-filter-element]")
         .forEach((btn) => {
             btn.addEventListener("click", () => {
                 activeElement = btn.dataset.filterElement ?? "all";
                 activateFilterButtons("[data-filter-element]", btn);
+                updateUrlFilters({ element: activeElement, rarity: activeRarity });
                 applyFilters();
-                saveState();
             });
         });
 
-    filtersBar
-        ?.querySelectorAll<HTMLElement>("[data-filter-rarity]")
+    filtersBarEl
+        .querySelectorAll<HTMLElement>("[data-filter-rarity]")
         .forEach((btn) => {
             btn.addEventListener("click", () => {
                 activeRarity = btn.dataset.filterRarity ?? "all";
                 activateFilterButtons("[data-filter-rarity]", btn);
+                updateUrlFilters({ element: activeElement, rarity: activeRarity });
                 applyFilters();
-                saveState();
             });
         });
 }
