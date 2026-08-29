@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getFilteredCharacterPage } from "./character-list.ts";
+import { getFilteredCharacterPage, getVisiblePageNumbers } from "./character-list.ts";
 
 test("filters the complete character list before paginating", () => {
     const firstPageCharacters = Array.from({ length: 24 }, (_, id) => ({
@@ -40,4 +40,14 @@ test("clamps filtered pages that no longer exist", () => {
     assert.equal(page.currentPage, 2);
     assert.equal(page.totalPages, 2);
     assert.equal(page.items.length, 6);
+});
+
+test("keeps long pagination compact around the current page", () => {
+    assert.deepEqual(getVisiblePageNumbers(10, 20), [1, 9, 10, 11, 20]);
+    assert.deepEqual(getVisiblePageNumbers(1, 20), [1, 2, 3, 4, 5, 20]);
+    assert.deepEqual(getVisiblePageNumbers(20, 20), [1, 16, 17, 18, 19, 20]);
+});
+
+test("shows every page when pagination is short", () => {
+    assert.deepEqual(getVisiblePageNumbers(2, 4), [1, 2, 3, 4]);
 });

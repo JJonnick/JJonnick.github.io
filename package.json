@@ -11,7 +11,7 @@
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
-        "test": "node --test src/services/character-list.test.ts",
+        "test": "node --test src/**/*.test.ts",
         "check": "astro check",
         "build": "astro check && astro build",
         "preview": "astro preview",
@@ -33,6 +33,7 @@
         "@biomejs/biome": "2.5.10",
         "@tailwindcss/vite": "^4.3.3",
         "@types/node": "^26.3.0",
+        "happy-dom": "20.11.10",
         "sharp": "^0.35.4"
     }
 }

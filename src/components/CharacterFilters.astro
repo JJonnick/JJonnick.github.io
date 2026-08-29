@@ -1,0 +1,114 @@
+---
+import { CHARACTER_PAGE_SIZE } from "@/services/character-list";
+import type { ElementVisual } from "@/utils/elements";
+
+interface Props {
+    basePath: string;
+    presentElements: string[];
+    rarities: number[];
+    elementLabels: Record<string, string>;
+    elementVisuals?: Partial<Record<string, ElementVisual>>;
+    showElementIcons?: boolean;
+}
+
+const {
+    basePath,
+    presentElements,
+    rarities,
+    elementLabels,
+    elementVisuals,
+    showElementIcons = false,
+} = Astro.props;
+
+const getElementIconSrc = (element: string): string => {
+    const iconPath = elementVisuals?.[element]?.iconPath;
+    if (!iconPath) return `/elements/${element}.svg`;
+    return typeof iconPath === "string" ? iconPath : iconPath.src;
+};
+---
+
+<div
+    id="character-filters"
+    data-filter-ns={basePath}
+    data-element-options={presentElements.join(",")}
+    data-rarity-options={rarities.join(",")}
+    data-page-size={CHARACTER_PAGE_SIZE}
+    class="mb-5 flex flex-wrap gap-4"
+>
+    {
+        presentElements.length > 1 && (
+            <div
+                class="flex flex-wrap items-center gap-1.5"
+                role="group"
+                aria-label="Filtrar por elemento"
+            >
+                <button
+                    type="button"
+                    data-filter-element="all"
+                    class="ui-control ui-control-active"
+                    aria-pressed="true"
+                    aria-controls="character-grid"
+                >
+                    Todos
+                </button>
+                {presentElements.map((element) => (
+                    <button
+                        type="button"
+                        data-filter-element={element}
+                        class="ui-control ui-control-idle"
+                        aria-pressed="false"
+                        aria-controls="character-grid"
+                        aria-label={`Filtrar por elemento: ${elementLabels[element] ?? element}`}
+                    >
+                        {showElementIcons && (
+                            <img
+                                src={getElementIconSrc(element)}
+                                alt=""
+                                aria-hidden="true"
+                                width={16}
+                                height={16}
+                                class="shrink-0"
+                            />
+                        )}
+                        <span>{elementLabels[element] ?? element}</span>
+                    </button>
+                ))}
+            </div>
+        )
+    }
+    {
+        rarities.length > 1 && (
+            <div
+                class="flex flex-wrap items-center gap-1.5"
+                role="group"
+                aria-label="Filtrar por rareza"
+            >
+                <button
+                    type="button"
+                    data-filter-rarity="all"
+                    class="ui-control ui-control-active"
+                    aria-pressed="true"
+                    aria-controls="character-grid"
+                >
+                    Todas
+                </button>
+                {rarities.map((rarity) => (
+                    <button
+                        type="button"
+                        data-filter-rarity={String(rarity)}
+                        class="ui-control ui-control-idle"
+                        aria-pressed="false"
+                        aria-controls="character-grid"
+                        aria-label={`Filtrar por rareza: ${rarity} estrellas`}
+                    >
+                        {rarity}★
+                    </button>
+                ))}
+            </div>
+        )
+    }
+</div>
+
+<script>
+    import "@/scripts/character-filters";
+</script>

@@ -1,7 +1,8 @@
 ---
 import HeaderButton from "./HeaderButton.astro";
+import GameSwitcher from "./GameSwitcher.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import { ChevronDown, House, Moon, Orbit, Sun, Users } from "@lucide/astro";
+import { House, Moon, Sun, Users } from "@lucide/astro";
 
 const pathname = Astro.url.pathname;
 const isHsrContext = pathname.startsWith("/hsr");
@@ -48,9 +49,6 @@ const gameOptions = [
         href: isInCharactersSection ? "/hsr/characters" : "/hsr",
     },
 ];
-
-const gamePopoverId = "game-switcher-popover";
-const gameTriggerId = "game-switcher-trigger";
 ---
 
 <header
@@ -77,111 +75,20 @@ const gameTriggerId = "game-switcher-trigger";
             class="flex w-full flex-wrap items-center gap-2 max-[400px]:gap-1.5 sm:w-auto"
             aria-label="Navegación principal"
         >
-            <div class="relative">
-                <button
-                    id={gameTriggerId}
-                    type="button"
-                    popovertarget={gamePopoverId}
-                    class="ui-control ui-control-idle game-switcher-trigger flex items-center gap-2 whitespace-nowrap"
-                    aria-label="Seleccionar juego"
-                >
-                    <Orbit size={17} />
-                    <span class="hidden sm:inline">{currentGame.label}</span>
-                    <span class="sm:hidden">{currentGame.shortLabel}</span>
-                    <ChevronDown size={15} class="opacity-75" />
-                </button>
-
-                <div
-                    id={gamePopoverId}
-                    popover="auto"
-                    class="surface-panel game-switcher-popover fixed z-50 m-0 w-56 space-y-1 p-2 shadow-[0_10px_20px_-15px_rgba(15,23,42,0.55)]"
-                >
-                    {
-                        gameOptions.map((option) => (
-                            <a
-                                href={option.href}
-                                class:list={[
-                                    "ui-control w-full justify-start",
-                                    option.id === currentGame.id
-                                        ? "ui-control-active"
-                                        : "ui-control-idle",
-                                ]}
-                                aria-current={
-                                    option.id === currentGame.id
-                                        ? "page"
-                                        : undefined
-                                }
-                            >
-                                {option.label}
-                            </a>
-                        ))
-                    }
-                </div>
-            </div>
+            <GameSwitcher {currentGame} options={gameOptions} />
 
             <HeaderButton href={homeHref} isActive={isHome}>
-                <House slot="before" size={17} />
+                <House slot="before" size={17} aria-hidden="true" />
                 Inicio
             </HeaderButton>
             <HeaderButton href={charactersHref} isActive={isCharacters}>
-                <Users slot="before" size={17} />
+                <Users slot="before" size={17} aria-hidden="true" />
                 Personajes
             </HeaderButton>
             <ThemeToggle>
-                <Sun slot="sun" size={18} />
-                <Moon slot="moon" size={18} />
+                <Sun slot="sun" size={18} aria-hidden="true" />
+                <Moon slot="moon" size={18} aria-hidden="true" />
             </ThemeToggle>
         </nav>
     </div>
 </header>
-
-<style is:global>
-    #game-switcher-trigger {
-        anchor-name: --game-switcher-anchor;
-    }
-
-    #game-switcher-popover {
-        position: fixed;
-        inset: auto;
-        position-anchor: --game-switcher-anchor;
-        top: anchor(bottom);
-        right: anchor(right);
-        margin-top: 0.5rem;
-        max-width: min(14rem, calc(100vw - 1rem));
-        position-try-fallbacks:
-            --game-switcher-below-left, --game-switcher-above-right,
-            --game-switcher-above-left;
-    }
-
-    @position-try --game-switcher-below-left {
-        top: anchor(bottom);
-        left: anchor(left);
-        right: auto;
-        margin-top: 0.5rem;
-    }
-
-    @position-try --game-switcher-above-right {
-        top: auto;
-        bottom: anchor(top);
-        right: anchor(right);
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-    }
-
-    @position-try --game-switcher-above-left {
-        top: auto;
-        bottom: anchor(top);
-        left: anchor(left);
-        right: auto;
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-    }
-
-    @supports not (top: anchor(bottom)) {
-        #game-switcher-popover {
-            top: 4rem;
-            right: 1rem;
-            left: auto;
-        }
-    }
-</style>

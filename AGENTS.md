@@ -18,7 +18,7 @@ This repository uses Astro, TypeScript, and Tailwind. Follow these project conve
 - Read `README.md` for project conventions and commit rules.
 - Use `pnpm` for install/check/build commands.
 - Validate with `pnpm check` and `pnpm build` before finalizing non-trivial changes.
-- The reusable agent-skills live under `.github/agent-skills`; project-local instructions are this file plus `.github/copilot-instructions.md`.
+- Codex-ready project skills live under `.agents/skills`; the full Addy Osmani upstream catalog remains under `.github/agent-skills` as a submodule. Project-local instructions are this file plus `.github/copilot-instructions.md`.
 
 ## Review/implementation workflow
 - Prefer small, focused changes.

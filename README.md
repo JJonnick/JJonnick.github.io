@@ -71,21 +71,31 @@ Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace
 
 ## Uso de agentes y skills
 
-Este repo usa dos capas de configuración:
+Este repo usa estas capas de configuración:
+
 - `AGENTS.md` en la raíz para reglas del proyecto y flujo con agentes.
 - `.github/copilot-instructions.md` para GitHub Copilot.
-- El submódulo `.github/agent-skills` aporta las skills reutilizables de `addyosmani/agent-skills` para revisión, test y quality gates.
+- `.agents/skills` contiene la selección de skills que Codex descubre en este proyecto.
+- El submódulo `.github/agent-skills` conserva el catálogo completo de `addyosmani/agent-skills` como upstream y soporte para otros agentes.
 
 ### Flujo recomendado
-1. Usa `AGENTS.md` como referencia para el contexto del proyecto.
-2. Consulta las skills del submódulo y usa `code-review-and-quality` antes de merge.
-3. Mantén cambios pequeños, verificables y con validación del proyecto.
 
-### Skill de agentes compartidas
-- Este repo incluye el submódulo `.github/agent-skills`, que apunta a `addyosmani/agent-skills`.
-- Se actualiza automáticamente con el workflow de GitHub Actions `agent-skills-sync` y también se sincroniza desde `copilot-setup-steps.yml` en los entornos de Copilot.
+1. Usa `AGENTS.md` como referencia para el contexto del proyecto.
+2. Usa `grill-with-docs` para cambios ambiguos y `tdd` para implementar comportamiento mediante ciclos red-green.
+3. Usa `code-review-and-quality` antes de merge.
+4. Mantén cambios pequeños, verificables y con validación del proyecto.
+
+### Skills compartidas
+
+- De Addy Osmani: `frontend-ui-engineering`, `source-driven-development`, `code-review-and-quality`, `security-and-hardening` y `performance-optimization`.
+- De Matt Pocock: `grill-with-docs`, `grilling`, `diagnosing-bugs`, `codebase-design`, `domain-modeling`, `tdd` y `setup-matt-pocock-skills`.
+- De Julius Brussee: `caveman`, como modo de respuesta concisa activado explícitamente.
+- `skills-lock.json` registra el origen y hash de cada skill instalada. Ejecuta `npx skills update -p -y` para comprobar y aplicar actualizaciones.
+- El submódulo de Addy se actualiza automáticamente con el workflow `agent-skills-sync` y se sincroniza desde `copilot-setup-steps.yml` en los entornos de Copilot.
 
 ### Ejemplos rápidos
 - `Usa code-review-and-quality para revisar los cambios actuales con foco en regresión.`
+- `Usa tdd para implementar este cambio con una prueba por cada slice vertical.`
+- `Activa caveman full para responder de forma concisa durante esta sesión.`
 - `Revisa el flujo de filtros y paginación con riesgo de UI y URL state.`
 - `Haz un fix seguro para restaurar el estado del listado tras cambiar filtros.`
