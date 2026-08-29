@@ -162,13 +162,18 @@ const getElementIconSrc = (element: string): string => {
                         id="character-grid"
                         class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 [content-visibility:auto] [contain-intrinsic-size:1px_1200px]"
                     >
-                        {characters.map((item) => (
+                        {characters.map((item, index) => (
                             <div
                                 data-filter-card
                                 data-element={
                                     item.element?.trim().toLowerCase() ?? ""
                                 }
                                 data-rarity={item.rarity ?? ""}
+                                hidden={
+                                    pagination &&
+                                    (index < (pagination.currentPage - 1) * 24 ||
+                                        index >= pagination.currentPage * 24)
+                                }
                             >
                                 <CardCharacter
                                     href={`${basePath}/${item.id}`}
