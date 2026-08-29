@@ -2,16 +2,11 @@
 import Layout from "@/layouts/Layout.astro";
 import Content from "@/layouts/Content.astro";
 import CardCharacter from "@/components/CardCharacter.astro";
+import CharacterFilters from "@/components/CharacterFilters.astro";
 import Pagination from "@/components/Pagination.astro";
+import { CHARACTER_PAGE_SIZE } from "@/services/character-list";
+import type { CharacterSummary } from "@/types";
 import type { ElementVisual } from "@/utils/elements";
-
-interface CharacterItem {
-    id: number | string;
-    icon: string;
-    name: string;
-    element?: string;
-    rarity?: number;
-}
 
 interface PaginationData {
     currentPage: number;
@@ -25,7 +20,7 @@ interface Props {
     heading: string;
     description: string;
     emptyMessage: string;
-    characters: CharacterItem[];
+    characters: CharacterSummary[];
     basePath: string;
     presentElements: string[];
     rarities: number[];
@@ -57,13 +52,6 @@ const {
     imageClass,
     pagination,
 } = Astro.props;
-
-const getElementIconSrc = (element: string): string => {
-    const iconPath = elementVisuals?.[element]?.iconPath;
-
-    if (!iconPath) return `/elements/${element}.svg`;
-    return typeof iconPath === "string" ? iconPath : iconPath.src;
-};
 ---
 
 <Layout title={title}>
@@ -78,85 +66,14 @@ const getElementIconSrc = (element: string): string => {
                 </section>
             ) : (
                 <>
-                    <div
-                        id="character-filters"
-                        data-filter-ns={basePath}
-                        data-element-options={presentElements.join(",")}
-                        data-rarity-options={rarities.join(",")}
-                        data-page-size="24"
-                        class="mb-5 flex flex-wrap gap-4"
-                    >
-                        {presentElements.length > 1 && (
-                            <div
-                                class="flex flex-wrap items-center gap-1.5"
-                                role="group"
-                                aria-label="Filtrar por elemento"
-                            >
-                                <button
-                                    type="button"
-                                    data-filter-element="all"
-                                    class="ui-control ui-control-active"
-                                    aria-pressed="true"
-                                    aria-controls="character-grid"
-                                >
-                                    Todos
-                                </button>
-                                {presentElements.map((el) => (
-                                    <button
-                                        type="button"
-                                        data-filter-element={el}
-                                        class="ui-control ui-control-idle"
-                                        aria-pressed="false"
-                                        aria-controls="character-grid"
-                                        aria-label={`Filtrar por elemento: ${
-                                            elementLabels[el] ?? el
-                                        }`}
-                                    >
-                                        {showElementIcons && (
-                                            <img
-                                                src={getElementIconSrc(el)}
-                                                alt=""
-                                                aria-hidden="true"
-                                                width={16}
-                                                height={16}
-                                                class="shrink-0"
-                                            />
-                                        )}
-                                        <span>{elementLabels[el] ?? el}</span>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                        {rarities.length > 1 && (
-                            <div
-                                class="flex flex-wrap items-center gap-1.5"
-                                role="group"
-                                aria-label="Filtrar por rareza"
-                            >
-                                <button
-                                    type="button"
-                                    data-filter-rarity="all"
-                                    class="ui-control ui-control-active"
-                                    aria-pressed="true"
-                                    aria-controls="character-grid"
-                                >
-                                    Todas
-                                </button>
-                                {rarities.map((r) => (
-                                    <button
-                                        type="button"
-                                        data-filter-rarity={String(r)}
-                                        class="ui-control ui-control-idle"
-                                        aria-pressed="false"
-                                        aria-controls="character-grid"
-                                        aria-label={`Filtrar por rareza: ${r} estrellas`}
-                                    >
-                                        {r}★
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                    <CharacterFilters
+                        {basePath}
+                        {presentElements}
+                        {rarities}
+                        {elementLabels}
+                        {elementVisuals}
+                        {showElementIcons}
+                    />
 
                     <div
                         id="character-grid"
@@ -171,8 +88,11 @@ const getElementIconSrc = (element: string): string => {
                                 data-rarity={item.rarity ?? ""}
                                 hidden={
                                     pagination &&
-                                    (index < (pagination.currentPage - 1) * 24 ||
-                                        index >= pagination.currentPage * 24)
+                                    (index <
+                                        (pagination.currentPage - 1) *
+                                            CHARACTER_PAGE_SIZE ||
+                                        index >=
+                                            pagination.currentPage * CHARACTER_PAGE_SIZE)
                                 }
                             >
                                 <CardCharacter
@@ -212,7 +132,3 @@ const getElementIconSrc = (element: string): string => {
         }
     </Content>
 </Layout>
-
-<script>
-    import "@/scripts/character-filters";
-</script>

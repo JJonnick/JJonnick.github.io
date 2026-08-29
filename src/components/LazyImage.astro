@@ -22,11 +22,13 @@ const {
 } = Astro.props;
 ---
 
-<span
+<astro-lazy-image
+  data-state="loading"
   class:list={["relative inline-block", aspectRatioClass]}
   style={`width:${width}px`}
 >
   <img
+    data-lazy-image-source
     src={src}
     alt={alt}
     width={width}
@@ -39,13 +41,45 @@ const {
     transition:name={transitionName}
     loading={loading}
     decoding="async"
-    onload="this.style.opacity='1'; const skeletonOnLoad=this.nextElementSibling; if (skeletonOnLoad) skeletonOnLoad.classList.add('hidden');"
-    onerror="this.style.display='none'; const skeletonOnError=this.nextElementSibling; if (skeletonOnError) skeletonOnError.classList.remove('hidden');"
   />
   <span
+    data-lazy-image-skeleton
     aria-hidden="true"
     class:list={[
       className,
       "absolute inset-0 animate-pulse pointer-events-none bg-slate-200 dark:bg-slate-700",
     ]}></span>
-</span>
+  <span
+    data-lazy-image-error
+    hidden
+    role="img"
+    aria-label={alt ? `No se pudo cargar la imagen: ${alt}` : "No se pudo cargar la imagen"}
+    class:list={[
+      className,
+      "absolute inset-0 grid place-items-center bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400",
+    ]}
+  >
+    <span aria-hidden="true" class="text-lg font-semibold">?</span>
+  </span>
+</astro-lazy-image>
+
+<script>
+  import { initializeLazyImage } from "@/scripts/lazy-image";
+
+  class AstroLazyImage extends HTMLElement {
+    cleanup?: () => void;
+
+    connectedCallback() {
+      this.cleanup?.();
+      this.cleanup = initializeLazyImage(this);
+    }
+
+    disconnectedCallback() {
+      this.cleanup?.();
+    }
+  }
+
+  if (!customElements.get("astro-lazy-image")) {
+    customElements.define("astro-lazy-image", AstroLazyImage);
+  }
+</script>

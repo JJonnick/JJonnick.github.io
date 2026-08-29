@@ -1,3 +1,28 @@
+export const CHARACTER_PAGE_SIZE = 24;
+
+export function getVisiblePageNumbers(currentPage: number, lastPage: number): number[] {
+    const safeLastPage = Math.max(1, lastPage);
+    const safeCurrentPage = Math.min(Math.max(1, currentPage), safeLastPage);
+
+    if (safeLastPage <= 7) {
+        return Array.from({ length: safeLastPage }, (_, index) => index + 1);
+    }
+
+    if (safeCurrentPage <= 4) return [1, 2, 3, 4, 5, safeLastPage];
+    if (safeCurrentPage >= safeLastPage - 3) {
+        return [
+            1,
+            safeLastPage - 4,
+            safeLastPage - 3,
+            safeLastPage - 2,
+            safeLastPage - 1,
+            safeLastPage,
+        ];
+    }
+
+    return [1, safeCurrentPage - 1, safeCurrentPage, safeCurrentPage + 1, safeLastPage];
+}
+
 export function collectPresentElements<T extends { element?: string | null }, E extends string>(
     items: T[],
     elements: readonly E[],

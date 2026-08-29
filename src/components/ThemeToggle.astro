@@ -26,33 +26,17 @@ const { id = "theme-toggle" } = Astro.props;
 </div>
 
 <script>
+    import { initThemeToggle } from "@/scripts/theme-toggle";
+
     const runtimeWindow = window as Window & {
-        __themeTogglePageLoadBound?: boolean;
+        __themeToggleCleanup?: () => void;
     };
 
-    const syncThemeToggle = () => {
-        const input = document.querySelector("[data-theme-toggle]");
-        if (!(input instanceof HTMLInputElement)) return;
-
-        const syncFromDocument = () => {
-            input.checked = document.documentElement.classList.contains("dark");
-        };
-
-        syncFromDocument();
-
-        input.onchange = () => {
-            const isDark = input.checked;
-            document.documentElement.classList.toggle("dark", isDark);
-            try {
-                localStorage.setItem("theme", isDark ? "dark" : "light");
-            } catch (_) {
-                // Ignore storage errors and keep runtime behavior.
-            }
-        };
+    const initializeThemeToggle = () => {
+        runtimeWindow.__themeToggleCleanup?.();
+        runtimeWindow.__themeToggleCleanup = initThemeToggle(document, localStorage);
     };
 
-    if (!runtimeWindow.__themeTogglePageLoadBound) {
-        document.addEventListener("astro:page-load", syncThemeToggle);
-        runtimeWindow.__themeTogglePageLoadBound = true;
-    }
+    document.addEventListener("astro:page-load", initializeThemeToggle);
+    initializeThemeToggle();
 </script>
