@@ -49,9 +49,12 @@ function updateUrlFilters(nextState: { element: string; rarity: string }) {
         params.set("rarity", nextState.rarity);
     }
 
+    const sanitizedPath = url.pathname.replace(/\/\d+\/?$/, "") || "/";
+    url.pathname = sanitizedPath;
     url.search = params.toString();
+
     const nextUrl = `${url.pathname}${url.search}`;
-    window.history.replaceState({}, "", nextUrl);
+    window.history.pushState({}, "", nextUrl);
 }
 
 function initCharacterFilters() {
