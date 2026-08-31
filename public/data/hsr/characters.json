@@ -22,6 +22,28 @@
     }
   },
   {
+    "id": 1512,
+    "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ub3eje/d889e50b509c85f140bc0dc5a0ac5acd.png",
+    "name": "Robin • Summeretto",
+    "rarity": 5,
+    "element": "wind",
+    "level": 80,
+    "rank": 1,
+    "path": 8,
+    "equip": {
+      "id": 23063,
+      "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ub3eje/0e4b5274464f5bcaf1ce84ad04d9a92d.png",
+      "level": 80,
+      "name": "Rise and Sing",
+      "rank": 1,
+      "rarity": 5
+    },
+    "memosprite": {
+      "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ub3eje/f93bc418ff797c1031b3cf3979528b74.png",
+      "name": "Summer Songbirds"
+    }
+  },
+  {
     "id": 1510,
     "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ub3eje/de03bb447854dd1301a0a0e04dd1587c.png",
     "name": "Himeko • Nova",
@@ -769,7 +791,7 @@
     "rarity": 5,
     "element": "quantum",
     "level": 1,
-    "rank": 2,
+    "rank": 3,
     "path": 6,
     "equip": {
       "id": 24002,
