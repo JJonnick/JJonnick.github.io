@@ -1,0 +1,25 @@
+---
+import { icons } from "@lucide/astro";
+import RowData from "./RowData.astro";
+
+export interface StatRow {
+    icon: keyof typeof icons;
+    label: string;
+    value: string | number;
+}
+
+interface Props {
+    rows: StatRow[];
+    class?: string;
+}
+
+const { rows, class: className = "" } = Astro.props;
+---
+
+<section class={`surface-panel space-y-2 p-4 text-[15px] ${className}`}>
+    {
+        rows.map((row) => (
+            <RowData icon={row.icon} label={row.label} value={row.value} variant="plain" />
+        ))
+    }
+</section>

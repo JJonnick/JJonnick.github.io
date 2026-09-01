@@ -4,7 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import Chests from "@/components/Chests.astro";
 import Oculis from "@/components/Oculis.astro";
 import { getAccount } from "@/services/database";
-import RowData from "@/components/RowData.astro";
+import StatsList, { type StatRow } from "@/components/StatsList.astro";
 import { toSafeNumber } from "@/utils/numbers";
 
 const account = await getAccount();
@@ -36,6 +36,17 @@ const oculis = {
     pyro: toSafeNumber(stats?.pyroculi),
     luno: toSafeNumber(stats?.lunoculi),
 };
+
+const summaryRows: StatRow[] = [
+    { icon: "User", value: nickname, label: "Jugador" },
+    { icon: "Star", value: level, label: "Nivel" },
+    { icon: "Calendar", value: toSafeNumber(stats.days_active), label: "Días activos" },
+    { icon: "Award", value: toSafeNumber(stats.achievements), label: "Logros" },
+    { icon: "Users", value: toSafeNumber(stats.characters), label: "Personajes" },
+    { icon: "MapPin", value: toSafeNumber(stats.unlocked_waypoints), label: "Teletransportes" },
+    { icon: "Map", value: toSafeNumber(stats.unlocked_domains), label: "Dominios" },
+    { icon: "Shell", value: stats.spiral_abyss || "-", label: "Abismo" },
+];
 ---
 
 <Layout title="Estadísticas de Genshin Impact">
@@ -48,56 +59,7 @@ const oculis = {
         </p>
 
         <div class="mt-5 grid gap-6 lg:grid-cols-[minmax(0,19rem)_1fr]">
-            <section class="surface-panel space-y-2 p-4 text-[15px]">
-                <RowData
-                    icon="User"
-                    value={nickname}
-                    label="Jugador"
-                    variant="plain"
-                />
-                <RowData
-                    icon="Star"
-                    value={level}
-                    label="Nivel"
-                    variant="plain"
-                />
-                <RowData
-                    icon="Calendar"
-                    value={toSafeNumber(stats?.days_active)}
-                    label="Días activos"
-                    variant="plain"
-                />
-                <RowData
-                    icon="Award"
-                    value={toSafeNumber(stats?.achievements)}
-                    label="Logros"
-                    variant="plain"
-                />
-                <RowData
-                    icon="Users"
-                    value={toSafeNumber(stats?.characters)}
-                    label="Personajes"
-                    variant="plain"
-                />
-                <RowData
-                    icon="MapPin"
-                    value={toSafeNumber(stats?.unlocked_waypoints)}
-                    label="Teletransportes"
-                    variant="plain"
-                />
-                <RowData
-                    icon="Map"
-                    value={toSafeNumber(stats?.unlocked_domains)}
-                    label="Dominios"
-                    variant="plain"
-                />
-                <RowData
-                    icon="Shell"
-                    value={String(stats?.spiral_abyss ?? "-")}
-                    label="Abismo"
-                    variant="plain"
-                />
-            </section>
+            <StatsList rows={summaryRows} />
 
             <section class="space-y-3">
                 <h2 class="text-heading-section">Cofres</h2>
