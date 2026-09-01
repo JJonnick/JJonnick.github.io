@@ -1,4 +1,10 @@
 import { type Account, type Character, type HsrAccount, type HsrCharacter } from "@/types";
+import {
+    GenshinAccountSchema,
+    GenshinCharactersSchema,
+    HsrAccountSchema,
+    HsrCharactersSchema,
+} from "@/schemas/datasets";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -16,6 +22,13 @@ const DATASET_FILE_MAP: Record<DatasetName, { folder: string; filename: string }
     account: { folder: "", filename: "account.json" },
     hsrCharacters: { folder: "hsr", filename: "characters.json" },
     hsrAccount: { folder: "hsr", filename: "account.json" },
+};
+
+const DATASET_SCHEMA_MAP = {
+    characters: GenshinCharactersSchema,
+    account: GenshinAccountSchema,
+    hsrCharacters: HsrCharactersSchema,
+    hsrAccount: HsrAccountSchema,
 };
 
 const jsonCache = new Map<DatasetName, DatasetValueMap[DatasetName]>();
@@ -37,9 +50,19 @@ function readDataset<K extends DatasetName>(datasetName: K): DatasetValueMap[K] 
 
     try {
         const fileContent = fs.readFileSync(filePath, "utf-8");
-        const parsed = JSON.parse(fileContent) as DatasetValueMap[K];
-        jsonCache.set(datasetName, parsed);
-        return parsed;
+        const parsed = DATASET_SCHEMA_MAP[datasetName].safeParse(JSON.parse(fileContent));
+
+        if (!parsed.success) {
+            console.error(
+                `Error reading dataset ${datasetName}: invalid data`,
+                parsed.error.issues,
+            );
+            return null;
+        }
+
+        const dataset = parsed.data as DatasetValueMap[K];
+        jsonCache.set(datasetName, dataset);
+        return dataset;
     } catch (error) {
         console.error(`Error reading dataset ${datasetName}:`, error);
         return null;
