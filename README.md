@@ -64,10 +64,6 @@ pnpm format:check  # Comprueba el formato sin aplicar cambios
 
 Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) para obtener diagnósticos en tiempo real y formateo automático al guardar.
 
-## Gestor de paquetes
-
-El proyecto usa la versión exacta de pnpm declarada en `packageManager` de `package.json`. Los workflows usan `pnpm/action-setup` sin `version` para que la detecte automáticamente; no dupliques ese pin en CI para evitar `ERR_PNPM_BAD_PM_VERSION`.
-
 ## Benchmarks de rendimiento
 
 Las mediciones de rendimiento se ejecutan con [vitest bench](https://vitest.dev/guide/features.html#benchmarking) y se publican en [CodSpeed](https://app.codspeed.io/JJonnick/JJonnick.github.io).
