@@ -66,7 +66,7 @@ Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace
 
 ## Gestor de paquetes
 
-El proyecto usa la versión exacta de pnpm declarada en `packageManager` de `package.json`. Los workflows que usen `pnpm/action-setup` deben declarar la misma versión; actualiza ambos valores en el mismo cambio para evitar `ERR_PNPM_BAD_PM_VERSION` en CI.
+El proyecto usa la versión exacta de pnpm declarada en `packageManager` de `package.json`. Los workflows usan `pnpm/action-setup` sin `version` para que la detecte automáticamente; no dupliques ese pin en CI para evitar `ERR_PNPM_BAD_PM_VERSION`.
 
 ## Benchmarks de rendimiento
 
