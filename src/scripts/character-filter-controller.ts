@@ -1,5 +1,4 @@
 import { createLoader, parseAsStringLiteral } from "nuqs";
-import { z } from "zod";
 import {
     CHARACTER_PAGE_SIZE,
     getFilteredCharacterPage,
@@ -43,13 +42,8 @@ function readFilterState(filtersBar: HTMLElement, search: string): CharacterFilt
         element: parseAsStringLiteral(["all", ...elements]).withDefault("all"),
         rarity: parseAsStringLiteral(["all", ...rarities]).withDefault("all"),
     };
-    const schema = z.object({
-        element: z.enum(["all", ...elements] as ["all", ...string[]]).default("all"),
-        rarity: z.enum(["all", ...rarities] as ["all", ...string[]]).default("all"),
-    });
-    const validated = schema.safeParse(createLoader(filterParsers)(search));
 
-    return validated.success ? validated.data : { element: "all", rarity: "all" };
+    return createLoader(filterParsers)(search);
 }
 
 function findFilterButton(
