@@ -43,8 +43,6 @@ function readFilterState(filtersBar: HTMLElement, search: string): CharacterFilt
         rarity: parseAsStringLiteral(["all", ...rarities]).withDefault("all"),
     };
 
-    // nuqs already clamps each param to its allowed literals (or "all"),
-    // so the loader output is the validated state — no schema needed.
     return createLoader(filterParsers)(search);
 }
 
