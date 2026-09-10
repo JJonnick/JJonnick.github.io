@@ -1,9 +1,7 @@
 import { fileURLToPath } from "node:url";
-import codspeedPlugin from "@codspeed/vitest-plugin";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-    plugins: [codspeedPlugin()],
     resolve: {
         alias: {
             "@assets": fileURLToPath(new URL("./src/assets", import.meta.url)),

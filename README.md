@@ -1,7 +1,5 @@
 # Genshin web
 
-[![CodSpeed](https://img.shields.io/endpoint?url=https://codspeed.io/badge.json)](https://app.codspeed.io/JJonnick/JJonnick.github.io?utm_source=badge)
-
 Proyecto para aprender el uso de Astro con Tailwind CSS
 
 ## Conventional Commits
@@ -66,13 +64,13 @@ Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace
 
 ## Benchmarks de rendimiento
 
-Las mediciones de rendimiento se ejecutan con [vitest bench](https://vitest.dev/guide/features.html#benchmarking) y se publican en [CodSpeed](https://app.codspeed.io/JJonnick/JJonnick.github.io).
+Las mediciones de rendimiento se ejecutan localmente con [vitest bench](https://vitest.dev/guide/features.html#benchmarking).
 
 ```bash
 pnpm bench   # Ejecuta los benchmarks de bench/*.bench.ts
 ```
 
-Los benchmarks cubren el filtrado y la paginación de personajes, la lectura de los datasets JSON y los helpers de elementos. El workflow `CodSpeed` los ejecuta en cada Pull Request hacia `main` y compara los resultados con la rama base.
+Los benchmarks cubren el filtrado y la paginación de personajes, la lectura de los datasets JSON y los helpers de elementos.
 
 ## Decisiones de arquitectura para mantenibilidad
 
