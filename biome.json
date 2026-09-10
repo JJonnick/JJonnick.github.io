@@ -9,7 +9,6 @@
         "ignoreUnknown": false,
         "includes": [
             "src/**",
-            "bench/**",
             "*.astro",
             "*.ts",
             "*.js",

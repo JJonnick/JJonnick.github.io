@@ -62,16 +62,6 @@ pnpm format:check  # Comprueba el formato sin aplicar cambios
 
 Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) para obtener diagnósticos en tiempo real y formateo automático al guardar.
 
-## Benchmarks de rendimiento
-
-Las mediciones de rendimiento se ejecutan localmente con [vitest bench](https://vitest.dev/guide/features.html#benchmarking).
-
-```bash
-pnpm bench   # Ejecuta los benchmarks de bench/*.bench.ts
-```
-
-Los benchmarks cubren el filtrado y la paginación de personajes, la lectura de los datasets JSON y los helpers de elementos.
-
 ## Decisiones de arquitectura para mantenibilidad
 
 - Los listados paginados de personajes (Genshin y HSR) comparten lógica de filtros en `src/services/character-list.ts` para evitar duplicación en `getStaticPaths`.
