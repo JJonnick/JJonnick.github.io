@@ -1,27 +1,38 @@
 # AGENTS.md
 
-This repository uses Astro, TypeScript, and Tailwind. Follow these project conventions for all changes.
+Astro 7 + TypeScript + Tailwind 4 static site showing Genshin Impact and Honkai: Star Rail account data. Use the domain terms in `CONTEXT.md` (Game, Dataset, Character list…) in code, issues and PRs.
 
-## Required project rules
-- Prefer server-first rendering and keep page-level files focused on routing/rendering.
-- Use Tailwind utilities before inline styles.
-- Preserve dark mode classes and theme behavior.
-- Keep TypeScript strict; avoid `any`.
-- Prefer repo aliases like `@/*` and `@assets/*`.
-- Do not add unnecessary client-state libraries for simple query-driven UI. Use URL state for filters/search when it reflects user intent.
-- Validate external and user-provided data with Zod when the values are constrained or parsed.
-- Keep reusable logic in services/components instead of bloating page files.
-- Follow accessibility basics on interactive elements.
-- Use Conventional Commits for commit messages.
+## Commands
 
-## Repo-specific guidance
-- Read `README.md` for project conventions and commit rules.
-- Use `pnpm` for install/check/build commands.
-- Validate with `pnpm check` and `pnpm build` before finalizing non-trivial changes.
-- Codex-ready project skills live under `.agents/skills`; the full Addy Osmani upstream catalog remains under `.github/agent-skills` as a submodule. Project-local instructions are this file plus `.github/copilot-instructions.md`.
+- `pnpm` only.
+- `pnpm test`: unit tests on `node --test` (`src/**/*.test.ts`).
+- `pnpm lint` / `pnpm format`: Biome.
+- `pnpm build`: runs `astro check` + build. Finish every non-trivial change with `pnpm test` and `pnpm build` green.
 
-## Review/implementation workflow
-- Prefer small, focused changes.
-- Review risks before merge.
-- Keep filters/search state in the URL when it changes user-visible state and should be shareable.
-- When changing list filters, reset to the first page so the URL remains consistent with the static route structure.
+## Architecture
+
+- Game-specific facts (routes, elements, labels, icons, copy) live in `src/games/{genshin,hsr}` as a `Game`; pages and components receive the `Game`.
+- Page files only route and render. Derived values come from `src/services` or `src/games/*/detail.ts`, covered by tests.
+- Read `public/data` through `loadDataset` (`src/services/dataset-loader.ts`): it validates with Zod and throws, so a broken sync fails the build.
+- Parse constrained external or user input with Zod; model unknown shapes as `unknown` + narrowing, keeping TypeScript strict.
+- Import through `@/*` and `@assets/*`.
+
+## UI
+
+- Tailwind utilities first. Shared controls (`ui-control`, `ui-segmented`, `surface-*`) and the easing tokens (`ease-out-strong`, `ease-in-out-strong`) live in `src/styles/global.css`; reuse them before styling a new button or card.
+- Every visual change ships in both themes: dark mode is class-based (`dark:`), toggled by `ThemeToggle`.
+- Navigation uses Astro `ClientRouter`: bundled scripts initialise on `astro:page-load`; inline scripts that must rerun need `data-astro-rerun="true"`.
+- Interactive elements carry an accessible name (`aria-label`, `sr-only` text) and state (`aria-current`, `aria-pressed`, `aria-controls`).
+- Motion: before adding or changing any transition, animation or hover/press effect, read `.agents/skills/emil-design-eng/SKILL.md`; use `review-animations` to audit a diff.
+
+## URL state
+
+Filters, search and pagination live in the URL, with no client-state library. Changing a filter resets to page 1 so the URL matches the static page routes.
+
+## Skills
+
+Project skills live in `.agents/skills`, pinned in `skills-lock.json` (`npx skills update -p -y`). The full Addy Osmani catalog is the `.github/agent-skills` submodule.
+
+## Git
+
+Conventional Commits (types listed in `README.md`). Small, focused PRs.
