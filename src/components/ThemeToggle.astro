@@ -9,7 +9,8 @@ const { id = "theme-toggle" } = Astro.props;
 <div class="flex items-center">
     <label
         for={id}
-        class="ui-control ui-control-idle cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-400/80 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 dark:focus-within:ring-offset-slate-950"
+        title="Cambiar tema"
+        class="ui-control ui-control-idle ui-control-icon relative grid cursor-pointer place-items-center focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-400/80 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 dark:focus-within:ring-offset-slate-950"
     >
         <input
             id={id}
@@ -19,11 +20,31 @@ const { id = "theme-toggle" } = Astro.props;
             data-theme-toggle
             aria-label="Cambiar entre tema claro y oscuro"
         />
-        <span class="peer-checked:hidden"><slot name="moon" /></span>
-        <span class="hidden peer-checked:inline-flex"><slot name="sun" /></span>
-        <span class="hidden sm:inline">Tema</span>
+        <span class="theme-icon peer-checked:scale-50 peer-checked:opacity-0 peer-checked:blur-[2px]">
+            <slot name="moon" />
+        </span>
+        <span class="theme-icon scale-50 opacity-0 blur-[2px] peer-checked:scale-100 peer-checked:opacity-100 peer-checked:blur-none">
+            <slot name="sun" />
+        </span>
     </label>
 </div>
+
+<style>
+    /* Both icons share one grid cell so they crossfade in place. */
+    .theme-icon {
+        grid-area: 1 / 1;
+        display: flex;
+        transition-property: opacity, scale, filter;
+        transition-duration: 200ms;
+        transition-timing-function: var(--ease-out-strong);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .theme-icon {
+            transition-property: opacity;
+        }
+    }
+</style>
 
 <script>
     import { initThemeToggle } from "@/scripts/theme-toggle";

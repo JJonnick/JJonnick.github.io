@@ -90,6 +90,7 @@ Este repo usa estas capas de configuración:
 - De Addy Osmani: `frontend-ui-engineering`, `source-driven-development`, `code-review-and-quality`, `security-and-hardening` y `performance-optimization`.
 - De Matt Pocock: `grill-with-docs`, `grilling`, `diagnosing-bugs`, `codebase-design`, `domain-modeling`, `tdd` y `setup-matt-pocock-skills`.
 - De Julius Brussee: `caveman`, como modo de respuesta concisa activado explícitamente.
+- De Emil Kowalski: `emil-design-eng`, `animate`, `review-animations`, `improve-animations` y `find-animation-opportunities`, para animaciones e interacciones pulidas.
 - `skills-lock.json` registra el origen y hash de cada skill instalada. Ejecuta `npx skills update -p -y` para comprobar y aplicar actualizaciones.
 - El submódulo de Addy se actualiza automáticamente con el workflow `agent-skills-sync` y se sincroniza desde `copilot-setup-steps.yml` en los entornos de Copilot.
 
