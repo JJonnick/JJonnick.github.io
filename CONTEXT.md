@@ -43,3 +43,10 @@ lowercase) via `normalizeElement`.
 
 A character's star count (4 or 5 in practice). Compared as text in URLs and filters.
 _Avoid_: stars.
+
+## Character detail
+
+One character's page at `<charactersPath>/<id>`, and the ready-to-render values it is built from:
+`toCharacterDetail` in `src/games/<game>/detail.ts` resolves fallbacks, labels and number
+formatting, so the page file only renders. Each Game keeps its own markup.
+_Avoid_: profile.
