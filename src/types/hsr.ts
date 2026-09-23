@@ -1,6 +1,8 @@
 export type {
     HsrAccount,
     HsrAccountStats,
+    HsrActivity,
+    HsrChallenge,
     HsrCharacter,
     HsrLightCone,
     HsrMemosprite,

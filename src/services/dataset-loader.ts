@@ -9,16 +9,18 @@ import {
     GenshinCharactersSchema,
     type HsrAccount,
     HsrAccountSchema,
+    type HsrActivity,
+    HsrActivitySchema,
     type HsrCharacter,
     HsrCharactersSchema,
 } from "../schemas/datasets.ts";
 
-export type DatasetKind = "characters" | "account";
-
 type DatasetValueMap = {
     genshin: { characters: Character[]; account: Account };
-    hsr: { characters: HsrCharacter[]; account: HsrAccount };
+    hsr: { characters: HsrCharacter[]; account: HsrAccount; activity: HsrActivity };
 };
+
+export type DatasetKind<G extends GameId = GameId> = keyof DatasetValueMap[G] & string;
 
 const DATASETS = {
     genshin: {
@@ -27,11 +29,15 @@ const DATASETS = {
     },
     hsr: {
         folder: "hsr",
-        schemas: { characters: HsrCharactersSchema, account: HsrAccountSchema },
+        schemas: {
+            characters: HsrCharactersSchema,
+            account: HsrAccountSchema,
+            activity: HsrActivitySchema,
+        },
     },
 } as const;
 
-export type LoadDataset = <G extends GameId, K extends DatasetKind>(
+export type LoadDataset = <G extends GameId, K extends DatasetKind<G>>(
     game: G,
     kind: K,
 ) => DatasetValueMap[G][K];
@@ -44,8 +50,9 @@ export type LoadDataset = <G extends GameId, K extends DatasetKind>(
 export function createDatasetLoader(dataRoot: string): LoadDataset {
     const cache = new Map<string, unknown>();
 
-    return <G extends GameId, K extends DatasetKind>(game: G, kind: K) => {
-        const { folder, schemas } = DATASETS[game];
+    return <G extends GameId, K extends DatasetKind<G>>(game: G, kind: K) => {
+        const { folder } = DATASETS[game];
+        const schemas: Record<string, z.ZodType> = DATASETS[game].schemas;
         const relativePath = path.posix.join(folder, `${kind}.json`);
         const cached = cache.get(relativePath);
         if (cached !== undefined) return cached as DatasetValueMap[G][K];
