@@ -1,4 +1,4 @@
-import { elementBadgeBg, type ElementVisual, type Game } from "@/games/game";
+import { type ElementVisual, elementBadgeBg, type Game } from "@/games/game";
 
 export const GENSHIN_ELEMENTS = [
     "anemo",

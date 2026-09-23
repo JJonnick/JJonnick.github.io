@@ -64,9 +64,9 @@ Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace
 
 ## Decisiones de arquitectura para mantenibilidad
 
-- Los listados paginados de personajes (Genshin y HSR) comparten lógica de filtros en `src/services/character-list.ts` para evitar duplicación en `getStaticPaths`.
+- La vista del listado de personajes (filtros, página y paginación) se calcula en `getCharacterListView` (`src/services/character-list.ts`), igual en servidor y cliente. Ver `CONTEXT.md`.
 - Los mapeos de dominio de Genshin (por ejemplo tipo de arma) se mantienen fuera de páginas en `src/constants/genshin.ts`.
-- Los labels e íconos de elementos de Genshin se centralizan en `src/utils/elements.ts` para reutilización consistente entre páginas y componentes.
+- Todo lo que distingue a cada juego (rutas, elementos, labels, íconos, textos) vive en `src/games/{genshin,hsr}` como un `Game`; páginas y componentes reciben el `Game`.
 - El acceso a JSON público se resuelve desde un mapa tipado en `src/services/database.ts` y una caché por dataset, reduciendo lógica repetida de lectura/parsing.
 
 ## Uso de agentes y skills

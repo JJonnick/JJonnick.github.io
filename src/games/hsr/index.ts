@@ -5,7 +5,7 @@ import hsrLightning from "@assets/elements/hsr/lightning.png";
 import hsrPhysical from "@assets/elements/hsr/physical.png";
 import hsrQuantum from "@assets/elements/hsr/quantum.png";
 import hsrWind from "@assets/elements/hsr/wind.png";
-import { elementBadgeBg, type ElementVisual, type Game } from "@/games/game";
+import { type ElementVisual, elementBadgeBg, type Game } from "@/games/game";
 import { getHsrLocale, HSR_ELEMENT_LABELS } from "@/games/hsr/i18n";
 
 export const HSR_ELEMENTS = [
