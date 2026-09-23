@@ -67,7 +67,7 @@ Se recomienda instalar la [extensión de Biome para VS Code](https://marketplace
 - La vista del listado de personajes (filtros, página y paginación) se calcula en `getCharacterListView` (`src/services/character-list.ts`), igual en servidor y cliente. Ver `CONTEXT.md`.
 - Los mapeos de dominio de Genshin (por ejemplo tipo de arma) se mantienen fuera de páginas en `src/constants/genshin.ts`.
 - Todo lo que distingue a cada juego (rutas, elementos, labels, íconos, textos) vive en `src/games/{genshin,hsr}` como un `Game`; páginas y componentes reciben el `Game`.
-- El acceso a JSON público se resuelve desde un mapa tipado en `src/services/database.ts` y una caché por dataset, reduciendo lógica repetida de lectura/parsing.
+- Los datasets (`public/data`) se cargan con `loadDataset(juego, "characters" | "account")` de `src/services/dataset-loader.ts`: valida con Zod, cachea y lanza un error si falta el archivo o no cumple el esquema, así una sincronización rota falla el build.
 
 ## Uso de agentes y skills
 

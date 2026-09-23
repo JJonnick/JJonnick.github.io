@@ -2,16 +2,10 @@
 import Content from "@/layouts/Content.astro";
 import Layout from "@/layouts/Layout.astro";
 import StatsList, { type StatRow } from "@/components/StatsList.astro";
-import { getHsrAccount } from "@/services/database";
+import { loadDataset } from "@/services/dataset-loader";
 import { toSafeNumber } from "@/utils/numbers";
 
-const account = await getHsrAccount();
-
-if (!account) {
-    throw new Error(
-        "Falta public/data/hsr/account.json. Los datos de cuenta de HSR son obligatorios para construir esta página.",
-    );
-}
+const account = loadDataset("hsr", "account");
 
 const stats = account.stats;
 const nickname = account.nickname?.trim() || "Trailblazer";
