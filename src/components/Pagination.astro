@@ -1,39 +1,28 @@
 ---
-import { getVisiblePageNumbers } from "@/services/character-list";
+import type { CharacterListPagination } from "@/services/character-list";
 
 interface Props {
-    currentPage: number;
-    lastPage: number;
-    prevUrl?: string | undefined;
-    nextUrl?: string | undefined;
-    basePath: string;
+    pagination: CharacterListPagination;
 }
 
-const { currentPage, lastPage, prevUrl, nextUrl, basePath } = Astro.props;
-const visiblePages = new Set(getVisiblePageNumbers(currentPage, lastPage));
-const pageNumbers = Array.from({ length: lastPage }, (_, index) => index + 1);
-const visiblePageList = [...visiblePages];
-const showStartEllipsis = (visiblePageList[1] ?? 0) > 2;
-const showEndEllipsis = (visiblePageList.at(-2) ?? lastPage) < lastPage - 1;
-
-function pageUrl(page: number): string {
-    return page === 1 ? basePath : `${basePath}/${page}`;
-}
+const { pagination } = Astro.props;
+const { links, prev, next, totalPages } = pagination;
 ---
 
 {
-    lastPage > 1 && (
+    totalPages > 1 && (
         <nav
             aria-label="Paginación"
             data-pagination-nav
+            hidden={pagination.isHidden}
             class="mt-6 flex flex-wrap items-center justify-center gap-2"
         >
             <a
-                href={prevUrl ?? pageUrl(Math.max(1, currentPage - 1))}
+                href={prev.href}
                 data-page-prev-link
                 class="ui-control ui-control-idle"
                 aria-label="Página anterior"
-                hidden={!prevUrl}
+                hidden={prev.isDisabled}
             >
                 ← Anterior
             </a>
@@ -41,39 +30,39 @@ function pageUrl(page: number): string {
                 data-page-prev-disabled
                 class="ui-control ui-control-idle cursor-not-allowed opacity-40"
                 aria-disabled="true"
-                hidden={Boolean(prevUrl)}
+                hidden={!prev.isDisabled}
             >
                 ← Anterior
             </span>
 
             <div class="flex items-center gap-1" data-page-links>
-                {pageNumbers.map((p) => (
+                {links.map((link) => (
                     <>
-                        {p === lastPage && (
+                        {link.page === totalPages && (
                             <span
                                 data-page-end-ellipsis
                                 aria-hidden="true"
-                                hidden={!showEndEllipsis}
+                                hidden={!pagination.showEndEllipsis}
                                 class="px-1 text-slate-500 dark:text-slate-400"
                             >
                                 …
                             </span>
                         )}
                         <a
-                            href={pageUrl(p)}
-                            data-page-number={String(p)}
-                            class={`ui-control ${p === currentPage ? "ui-control-active" : "ui-control-idle"}`}
-                            aria-current={p === currentPage ? "page" : undefined}
-                            aria-label={`Página ${p}`}
-                            hidden={!visiblePages.has(p)}
+                            href={link.href}
+                            data-page-number={String(link.page)}
+                            class={`ui-control ${link.isCurrent ? "ui-control-active" : "ui-control-idle"}`}
+                            aria-current={link.isCurrent ? "page" : undefined}
+                            aria-label={`Página ${link.page}`}
+                            hidden={!link.isVisible}
                         >
-                            {p}
+                            {link.page}
                         </a>
-                        {p === 1 && (
+                        {link.page === 1 && (
                             <span
                                 data-page-start-ellipsis
                                 aria-hidden="true"
-                                hidden={!showStartEllipsis}
+                                hidden={!pagination.showStartEllipsis}
                                 class="px-1 text-slate-500 dark:text-slate-400"
                             >
                                 …
@@ -84,11 +73,11 @@ function pageUrl(page: number): string {
             </div>
 
             <a
-                href={nextUrl ?? pageUrl(Math.min(lastPage, currentPage + 1))}
+                href={next.href}
                 data-page-next-link
                 class="ui-control ui-control-idle"
                 aria-label="Página siguiente"
-                hidden={!nextUrl}
+                hidden={next.isDisabled}
             >
                 Siguiente →
             </a>
@@ -96,7 +85,7 @@ function pageUrl(page: number): string {
                 data-page-next-disabled
                 class="ui-control ui-control-idle cursor-not-allowed opacity-40"
                 aria-disabled="true"
-                hidden={Boolean(nextUrl)}
+                hidden={!next.isDisabled}
             >
                 Siguiente →
             </span>

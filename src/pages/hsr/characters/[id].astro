@@ -8,6 +8,7 @@ import { getHsrCharacters } from "@/services/database";
 import { type HsrCharacter } from "@/types";
 import { Star } from "@lucide/astro";
 import { toSafeNumber } from "@/utils/numbers";
+import { normalizeElement } from "@/services/character-list";
 import { getHsrLocale, HSR_LABELS, HSR_PATH_LABELS, HSR_ELEMENT_LABELS } from "@/i18n/hsr";
 
 interface Props {
@@ -45,7 +46,7 @@ const safePath =
     typeof rawPath === "number"
         ? (pathMap[preferredLocale][rawPath] ?? `${pathPrefix} ${rawPath}`)
         : rawPath?.trim() || unknownPathLabel;
-const rawElement = char.element?.trim().toLowerCase() || "";
+const rawElement = normalizeElement(char.element);
 const safeElement =
     (HSR_ELEMENT_LABELS[preferredLocale] as Record<string, string>)[rawElement] ??
     (rawElement ? rawElement[0].toUpperCase() + rawElement.slice(1) : unknownElementLabel);

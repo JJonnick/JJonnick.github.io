@@ -1,15 +1,9 @@
-import { createLoader, parseAsStringLiteral } from "nuqs";
 import {
     CHARACTER_PAGE_SIZE,
-    getFilteredCharacterPage,
-    getVisiblePageNumbers,
+    type CharacterListView,
+    getCharacterListView,
+    getFilteredListUrl,
 } from "../services/character-list.ts";
-
-interface CharacterFilterLocation {
-    href: string;
-    pathname: string;
-    search: string;
-}
 
 interface CharacterFilterHistory {
     pushState(data: unknown, unused: string, url?: string | URL | null): void;
@@ -17,45 +11,59 @@ interface CharacterFilterHistory {
 }
 
 interface CharacterFilterWindow extends EventTarget {
-    location: CharacterFilterLocation;
+    location: { href: string };
     history: CharacterFilterHistory;
 }
 
-interface CharacterFilterState {
-    element: string;
-    rarity: string;
+type FilterKey = "element" | "rarity";
+
+const FILTER_ATTRIBUTE: Record<FilterKey, string> = {
+    element: "data-filter-element",
+    rarity: "data-filter-rarity",
+};
+
+function setActive(element: HTMLElement, isActive: boolean) {
+    element.classList.toggle("ui-control-active", isActive);
+    element.classList.toggle("ui-control-idle", !isActive);
 }
 
-type FilterSelector = "[data-filter-element]" | "[data-filter-rarity]";
-
-function readOptions(filtersBar: HTMLElement, key: "elementOptions" | "rarityOptions") {
-    return (filtersBar.dataset[key] ?? "")
-        .split(",")
-        .map((value) => value.trim().toLowerCase())
-        .filter(Boolean);
+function setLink(
+    document: Document,
+    linkSelector: string,
+    disabledSelector: string,
+    { href, isDisabled }: { href: string; isDisabled: boolean },
+) {
+    const link = document.querySelector<HTMLAnchorElement>(linkSelector);
+    const disabled = document.querySelector<HTMLElement>(disabledSelector);
+    if (link) {
+        link.hidden = isDisabled;
+        link.href = href;
+    }
+    if (disabled) disabled.hidden = !isDisabled;
 }
 
-function readFilterState(filtersBar: HTMLElement, search: string): CharacterFilterState {
-    const elements = readOptions(filtersBar, "elementOptions");
-    const rarities = readOptions(filtersBar, "rarityOptions");
-    const filterParsers = {
-        element: parseAsStringLiteral(["all", ...elements]).withDefault("all"),
-        rarity: parseAsStringLiteral(["all", ...rarities]).withDefault("all"),
-    };
+function applyPagination(document: Document, { pagination }: CharacterListView<unknown>) {
+    const nav = document.querySelector<HTMLElement>("[data-pagination-nav]");
+    if (nav) nav.hidden = pagination.isHidden;
 
-    return createLoader(filterParsers)(search);
-}
+    setLink(document, "[data-page-prev-link]", "[data-page-prev-disabled]", pagination.prev);
+    setLink(document, "[data-page-next-link]", "[data-page-next-disabled]", pagination.next);
 
-function findFilterButton(
-    filtersBar: HTMLElement,
-    selector: FilterSelector,
-    value: string,
-): HTMLElement | undefined {
-    const datasetKey = selector === "[data-filter-element]" ? "filterElement" : "filterRarity";
+    const links = new Map(pagination.links.map((link) => [link.page, link]));
+    document.querySelectorAll<HTMLAnchorElement>("[data-page-number]").forEach((anchor) => {
+        const link = links.get(Number(anchor.dataset.pageNumber ?? "0"));
+        anchor.hidden = !link?.isVisible;
+        anchor.toggleAttribute("aria-hidden", anchor.hidden);
+        setActive(anchor, Boolean(link?.isCurrent));
+        if (link?.isCurrent) anchor.setAttribute("aria-current", "page");
+        else anchor.removeAttribute("aria-current");
+        if (link) anchor.href = link.href;
+    });
 
-    return Array.from(filtersBar.querySelectorAll<HTMLElement>(selector)).find(
-        (button) => button.dataset[datasetKey] === value,
-    );
+    const startEllipsis = document.querySelector<HTMLElement>("[data-page-start-ellipsis]");
+    const endEllipsis = document.querySelector<HTMLElement>("[data-page-end-ellipsis]");
+    if (startEllipsis) startEllipsis.hidden = !pagination.showStartEllipsis;
+    if (endEllipsis) endEllipsis.hidden = !pagination.showEndEllipsis;
 }
 
 export function initCharacterFilters(
@@ -67,162 +75,63 @@ export function initCharacterFilters(
     const filtersBar = document.getElementById("character-filters");
     if (!grid || !filtersBar) return () => undefined;
 
-    const pageSize =
-        Number(filtersBar.dataset.pageSize ?? String(CHARACTER_PAGE_SIZE)) || CHARACTER_PAGE_SIZE;
-    const basePath = filtersBar.dataset.filterNs ?? "/";
-    let activeElement = "all";
-    let activeRarity = "all";
+    const basePath = filtersBar.dataset.basePath ?? "/";
+    const pageSize = Number(filtersBar.dataset.pageSize) || CHARACTER_PAGE_SIZE;
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>("[data-filter-card]"), (card) => ({
+        card,
+        element: card.dataset.element,
+        rarity: card.dataset.rarity,
+    }));
     const cleanupCallbacks: Array<() => void> = [];
 
-    const pageUrl = (page: number): string => {
-        const url = new URL(window.location.href);
-        url.pathname = page === 1 ? basePath : `${basePath}/${page}`;
-        return `${url.pathname}${url.search}`;
-    };
-
-    const currentPathPage = (): number => {
-        const escapedBasePath = basePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const match = window.location.pathname.match(new RegExp(`^${escapedBasePath}/(\\d+)/?$`));
-        return Number(match?.[1] ?? "1");
-    };
-
-    const updateUrl = (state: CharacterFilterState) => {
-        const url = new URL(window.location.href);
-        const params = new URLSearchParams(url.search);
-
-        state.element === "all" ? params.delete("element") : params.set("element", state.element);
-        state.rarity === "all" ? params.delete("rarity") : params.set("rarity", state.rarity);
-
-        url.pathname = url.pathname.replace(/\/\d+\/?$/, "") || "/";
-        url.search = params.toString();
-        window.history.pushState({}, "", `${url.pathname}${url.search}`);
-    };
-
-    const activateButtons = (selector: FilterSelector, value: string): string => {
-        const selected =
-            findFilterButton(filtersBar, selector, value) ??
-            findFilterButton(filtersBar, selector, "all");
-
-        filtersBar.querySelectorAll<HTMLElement>(selector).forEach((button) => {
-            const isActive = button === selected;
-            button.classList.toggle("ui-control-active", isActive);
-            button.classList.toggle("ui-control-idle", !isActive);
-            button.setAttribute("aria-pressed", String(isActive));
-        });
-
-        return selector === "[data-filter-element]"
-            ? (selected?.dataset.filterElement ?? "all")
-            : (selected?.dataset.filterRarity ?? "all");
-    };
-
-    const syncPagination = (totalItems: number, currentPage: number, totalPages: number) => {
-        const nav = document.querySelector<HTMLElement>("[data-pagination-nav]");
-        const pageLinks = document.querySelectorAll<HTMLAnchorElement>("[data-page-number]");
-        const prevLink = document.querySelector<HTMLAnchorElement>("[data-page-prev-link]");
-        const prevDisabled = document.querySelector<HTMLElement>("[data-page-prev-disabled]");
-        const nextLink = document.querySelector<HTMLAnchorElement>("[data-page-next-link]");
-        const nextDisabled = document.querySelector<HTMLElement>("[data-page-next-disabled]");
-        const startEllipsis = document.querySelector<HTMLElement>("[data-page-start-ellipsis]");
-        const endEllipsis = document.querySelector<HTMLElement>("[data-page-end-ellipsis]");
-        const visiblePages = getVisiblePageNumbers(currentPage, totalPages);
-        const visiblePageSet = new Set(visiblePages);
-
-        if (nav) nav.hidden = totalItems === 0 || totalPages <= 1;
-        if (prevLink) {
-            prevLink.hidden = currentPage <= 1;
-            prevLink.href = pageUrl(Math.max(1, currentPage - 1));
-        }
-        if (prevDisabled) prevDisabled.hidden = currentPage > 1;
-        if (nextLink) {
-            nextLink.hidden = currentPage >= totalPages;
-            nextLink.href = pageUrl(Math.min(totalPages, currentPage + 1));
-        }
-        if (nextDisabled) nextDisabled.hidden = currentPage < totalPages;
-
-        pageLinks.forEach((link) => {
-            const pageNumber = Number(link.dataset.pageNumber ?? "0");
-            link.hidden = pageNumber > totalPages || !visiblePageSet.has(pageNumber);
-            link.toggleAttribute("aria-hidden", link.hidden);
-            link.classList.toggle("ui-control-active", pageNumber === currentPage);
-            link.classList.toggle("ui-control-idle", pageNumber !== currentPage);
-            if (pageNumber === currentPage) {
-                link.setAttribute("aria-current", "page");
-            } else {
-                link.removeAttribute("aria-current");
-            }
-            link.href = pageUrl(pageNumber);
-        });
-
-        if (startEllipsis) startEllipsis.hidden = (visiblePages[1] ?? 0) <= 2;
-        if (endEllipsis) {
-            endEllipsis.hidden = (visiblePages.at(-2) ?? totalPages) >= totalPages - 1;
-        }
-    };
-
-    const applyFilters = () => {
-        const cards = Array.from(
-            grid.querySelectorAll<HTMLElement>("[data-filter-card]"),
-            (card) => ({
-                card,
-                element: card.dataset.element,
-                rarity: card.dataset.rarity,
-            }),
-        );
-        const requestedPage = currentPathPage();
-        const page = getFilteredCharacterPage(
-            cards,
-            { element: activeElement, rarity: activeRarity },
-            requestedPage,
+    const render = () => {
+        const view = getCharacterListView(cards, new URL(window.location.href), {
+            basePath,
             pageSize,
-        );
-        const visibleCards = new Set(page.items.map(({ card }) => card));
+        });
 
-        if (page.currentPage !== requestedPage && page.totalItems > 0) {
-            window.history.replaceState({}, "", pageUrl(page.currentPage));
+        if (view.canonicalUrl) window.history.replaceState({}, "", view.canonicalUrl);
+
+        const visibleCards = new Set(view.items.map(({ card }) => card));
+        for (const { card } of cards) card.hidden = !visibleCards.has(card);
+        if (noResults) noResults.hidden = !view.isEmpty;
+
+        for (const key of ["element", "rarity"] as const) {
+            const attribute = FILTER_ATTRIBUTE[key];
+            filtersBar.querySelectorAll<HTMLElement>(`[${attribute}]`).forEach((button) => {
+                const isActive = button.getAttribute(attribute) === view.filters[key];
+                setActive(button, isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
         }
 
-        cards.forEach(({ card }) => {
-            card.hidden = !visibleCards.has(card);
-        });
-        if (noResults) noResults.hidden = page.totalItems > 0;
-        syncPagination(page.totalItems, page.currentPage, page.totalPages);
+        applyPagination(document, view);
+        return view;
     };
 
-    const syncFromUrl = () => {
-        const state = readFilterState(filtersBar, window.location.search);
-        activeElement = activateButtons("[data-filter-element]", state.element);
-        activeRarity = activateButtons("[data-filter-rarity]", state.rarity);
-        applyFilters();
-    };
+    let view = render();
 
-    const bindFilterButtons = (selector: FilterSelector) => {
-        filtersBar.querySelectorAll<HTMLElement>(selector).forEach((button) => {
+    for (const key of ["element", "rarity"] as const) {
+        const attribute = FILTER_ATTRIBUTE[key];
+        filtersBar.querySelectorAll<HTMLElement>(`[${attribute}]`).forEach((button) => {
             const onClick = () => {
-                if (selector === "[data-filter-element]") {
-                    activeElement = activateButtons(
-                        selector,
-                        button.dataset.filterElement ?? "all",
-                    );
-                } else {
-                    activeRarity = activateButtons(selector, button.dataset.filterRarity ?? "all");
-                }
-                updateUrl({ element: activeElement, rarity: activeRarity });
-                applyFilters();
+                const filters = { ...view.filters, [key]: button.getAttribute(attribute) ?? "all" };
+                const url = new URL(window.location.href);
+                window.history.pushState({}, "", getFilteredListUrl(url, basePath, filters));
+                view = render();
             };
             button.addEventListener("click", onClick);
             cleanupCallbacks.push(() => button.removeEventListener("click", onClick));
         });
-    };
+    }
 
-    bindFilterButtons("[data-filter-element]");
-    bindFilterButtons("[data-filter-rarity]");
-    window.addEventListener("popstate", syncFromUrl);
-    cleanupCallbacks.push(() => window.removeEventListener("popstate", syncFromUrl));
-    syncFromUrl();
+    const onPopState = () => {
+        view = render();
+    };
+    window.addEventListener("popstate", onPopState);
+    cleanupCallbacks.push(() => window.removeEventListener("popstate", onPopState));
 
     return () => {
-        cleanupCallbacks.forEach((cleanup) => {
-            cleanup();
-        });
+        for (const cleanup of cleanupCallbacks) cleanup();
     };
 }

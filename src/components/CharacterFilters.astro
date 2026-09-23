@@ -1,11 +1,10 @@
 ---
-import { CHARACTER_PAGE_SIZE } from "@/services/character-list";
+import { CHARACTER_PAGE_SIZE, type CharacterListFilters } from "@/services/character-list";
 import type { ElementVisual } from "@/utils/elements";
 
 interface Props {
     basePath: string;
-    presentElements: string[];
-    rarities: number[];
+    filters: CharacterListFilters;
     elementLabels: Record<string, string>;
     elementVisuals?: Partial<Record<string, ElementVisual>>;
     showElementIcons?: boolean;
@@ -13,12 +12,15 @@ interface Props {
 
 const {
     basePath,
-    presentElements,
-    rarities,
+    filters,
     elementLabels,
     elementVisuals,
     showElementIcons = false,
 } = Astro.props;
+const { elementOptions, rarityOptions } = filters;
+
+const controlClass = (isActive: boolean) =>
+    `ui-control ${isActive ? "ui-control-active" : "ui-control-idle"}`;
 
 const getElementIconSrc = (element: string): string => {
     const iconPath = elementVisuals?.[element]?.iconPath;
@@ -29,14 +31,12 @@ const getElementIconSrc = (element: string): string => {
 
 <div
     id="character-filters"
-    data-filter-ns={basePath}
-    data-element-options={presentElements.join(",")}
-    data-rarity-options={rarities.join(",")}
+    data-base-path={basePath}
     data-page-size={CHARACTER_PAGE_SIZE}
     class="mb-5 flex flex-wrap gap-4"
 >
     {
-        presentElements.length > 1 && (
+        elementOptions.length > 1 && (
             <div
                 class="flex flex-wrap items-center gap-1.5"
                 role="group"
@@ -45,18 +45,18 @@ const getElementIconSrc = (element: string): string => {
                 <button
                     type="button"
                     data-filter-element="all"
-                    class="ui-control ui-control-active"
-                    aria-pressed="true"
+                    class={controlClass(filters.element === "all")}
+                    aria-pressed={filters.element === "all"}
                     aria-controls="character-grid"
                 >
                     Todos
                 </button>
-                {presentElements.map((element) => (
+                {elementOptions.map((element) => (
                     <button
                         type="button"
                         data-filter-element={element}
-                        class="ui-control ui-control-idle"
-                        aria-pressed="false"
+                        class={controlClass(filters.element === element)}
+                        aria-pressed={filters.element === element}
                         aria-controls="character-grid"
                         aria-label={`Filtrar por elemento: ${elementLabels[element] ?? element}`}
                     >
@@ -77,7 +77,7 @@ const getElementIconSrc = (element: string): string => {
         )
     }
     {
-        rarities.length > 1 && (
+        rarityOptions.length > 1 && (
             <div
                 class="flex flex-wrap items-center gap-1.5"
                 role="group"
@@ -86,18 +86,18 @@ const getElementIconSrc = (element: string): string => {
                 <button
                     type="button"
                     data-filter-rarity="all"
-                    class="ui-control ui-control-active"
-                    aria-pressed="true"
+                    class={controlClass(filters.rarity === "all")}
+                    aria-pressed={filters.rarity === "all"}
                     aria-controls="character-grid"
                 >
                     Todas
                 </button>
-                {rarities.map((rarity) => (
+                {rarityOptions.map((rarity) => (
                     <button
                         type="button"
-                        data-filter-rarity={String(rarity)}
-                        class="ui-control ui-control-idle"
-                        aria-pressed="false"
+                        data-filter-rarity={rarity}
+                        class={controlClass(filters.rarity === rarity)}
+                        aria-pressed={filters.rarity === rarity}
                         aria-controls="character-grid"
                         aria-label={`Filtrar por rareza: ${rarity} estrellas`}
                     >

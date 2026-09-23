@@ -4,16 +4,13 @@ import Content from "@/layouts/Content.astro";
 import CardCharacter from "@/components/CardCharacter.astro";
 import CharacterFilters from "@/components/CharacterFilters.astro";
 import Pagination from "@/components/Pagination.astro";
-import { CHARACTER_PAGE_SIZE } from "@/services/character-list";
+import {
+    CHARACTER_PAGE_SIZE,
+    getCharacterListView,
+    normalizeElement,
+} from "@/services/character-list";
 import type { CharacterSummary } from "@/types";
 import type { ElementVisual } from "@/utils/elements";
-
-interface PaginationData {
-    currentPage: number;
-    lastPage: number;
-    prevUrl?: string | undefined;
-    nextUrl?: string | undefined;
-}
 
 interface Props {
     title: string;
@@ -22,8 +19,7 @@ interface Props {
     emptyMessage: string;
     characters: CharacterSummary[];
     basePath: string;
-    presentElements: string[];
-    rarities: number[];
+    elements: readonly string[];
     elementLabels: Record<string, string>;
     elementVisuals?: Partial<Record<string, ElementVisual>>;
     showElementIcons?: boolean;
@@ -31,7 +27,6 @@ interface Props {
     imageHeight?: number;
     imageAspectRatioClass?: string;
     imageClass?: string;
-    pagination?: PaginationData;
 }
 
 const {
@@ -41,8 +36,7 @@ const {
     emptyMessage,
     characters,
     basePath,
-    presentElements,
-    rarities,
+    elements,
     elementLabels,
     elementVisuals,
     showElementIcons = false,
@@ -50,8 +44,14 @@ const {
     imageHeight,
     imageAspectRatioClass,
     imageClass,
-    pagination,
 } = Astro.props;
+
+const view = getCharacterListView(characters, Astro.url, {
+    basePath,
+    pageSize: CHARACTER_PAGE_SIZE,
+    elementOrder: elements,
+});
+const visibleCharacters = new Set(view.items);
 ---
 
 <Layout title={title}>
@@ -68,8 +68,7 @@ const {
                 <>
                     <CharacterFilters
                         {basePath}
-                        {presentElements}
-                        {rarities}
+                        filters={view.filters}
                         {elementLabels}
                         {elementVisuals}
                         {showElementIcons}
@@ -79,21 +78,12 @@ const {
                         id="character-grid"
                         class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 [content-visibility:auto] [contain-intrinsic-size:1px_1200px]"
                     >
-                        {characters.map((item, index) => (
+                        {characters.map((item) => (
                             <div
                                 data-filter-card
-                                data-element={
-                                    item.element?.trim().toLowerCase() ?? ""
-                                }
+                                data-element={normalizeElement(item.element)}
                                 data-rarity={item.rarity ?? ""}
-                                hidden={
-                                    pagination &&
-                                    (index <
-                                        (pagination.currentPage - 1) *
-                                            CHARACTER_PAGE_SIZE ||
-                                        index >=
-                                            pagination.currentPage * CHARACTER_PAGE_SIZE)
-                                }
+                                hidden={!visibleCharacters.has(item)}
                             >
                                 <CardCharacter
                                     href={`${basePath}/${item.id}`}
@@ -110,7 +100,7 @@ const {
 
                     <p
                         id="no-results"
-                        hidden
+                        hidden={!view.isEmpty}
                         class="surface-panel p-5 text-center text-sm text-slate-600 dark:text-slate-300"
                         aria-live="polite"
                     >
@@ -118,15 +108,7 @@ const {
                         seleccionados.
                     </p>
 
-                    {pagination && (
-                        <Pagination
-                            currentPage={pagination.currentPage}
-                            lastPage={pagination.lastPage}
-                            prevUrl={pagination.prevUrl}
-                            nextUrl={pagination.nextUrl}
-                            basePath={basePath}
-                        />
-                    )}
+                    <Pagination pagination={view.pagination} />
                 </>
             )
         }
