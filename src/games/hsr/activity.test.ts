@@ -24,20 +24,6 @@ const activity = {
         last_hcoin: 12400,
         last_rails_pass: 6,
     },
-    notes: {
-        fetched_at: "2026-09-20T01:30:00+00:00",
-        current_stamina: 180,
-        max_stamina: 300,
-        current_reserve_stamina: 2400,
-        current_train_score: 500,
-        max_train_score: 500,
-        current_rogue_score: 14000,
-        max_rogue_score: 14000,
-        accepted_expedition_num: 4,
-        total_expedition_num: 4,
-        remaining_weekly_discounts: 1,
-        max_weekly_discounts: 3,
-    },
 };
 
 test("lists every endgame mode and marks the ones without data", () => {
@@ -55,12 +41,8 @@ test("lists every endgame mode and marks the ones without data", () => {
     assert.equal(endgame[2]?.rows[0]?.value, "Sin datos");
 });
 
-test("names the diary month and shows notes as ratios with their snapshot time", () => {
-    const view = toActivityView(activity);
-
-    assert.equal(view.diary?.title, "Ingresos de septiembre");
-    assert.equal(view.notes?.rows[0]?.value, "180 / 300");
-    assert.match(view.notes?.updatedText ?? "", /20 de septiembre de 2026.*3:30/);
+test("names the diary month", () => {
+    assert.equal(toActivityView(activity).diary?.title, "Ingresos de septiembre");
 });
 
 test("drops sections that were not synced", () => {
@@ -68,10 +50,8 @@ test("drops sections that were not synced", () => {
         ...activity,
         simulated_universe: null,
         diary: null,
-        notes: null,
     });
 
     assert.equal(view.simulatedUniverse, null);
     assert.equal(view.diary, null);
-    assert.equal(view.notes, null);
 });
