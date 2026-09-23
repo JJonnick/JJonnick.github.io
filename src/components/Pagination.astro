@@ -15,7 +15,7 @@ const { links, prev, next, totalPages } = pagination;
             aria-label="Paginación"
             data-pagination-nav
             hidden={pagination.isHidden}
-            class="mt-6 flex flex-wrap items-center justify-center gap-2"
+            class="mt-6 flex flex-wrap items-center justify-center gap-1"
         >
             <a
                 href={prev.href}
@@ -35,7 +35,7 @@ const { links, prev, next, totalPages } = pagination;
                 ← Anterior
             </span>
 
-            <div class="flex items-center gap-1" data-page-links>
+            <div class="flex items-center gap-0.5" data-page-links>
                 {links.map((link) => (
                     <>
                         {link.page === totalPages && (
@@ -51,7 +51,7 @@ const { links, prev, next, totalPages } = pagination;
                         <a
                             href={link.href}
                             data-page-number={String(link.page)}
-                            class={`ui-control ${link.isCurrent ? "ui-control-active" : "ui-control-idle"}`}
+                            class={`ui-control min-w-9 justify-center px-2 ${link.isCurrent ? "ui-control-active" : "ui-control-idle"}`}
                             aria-current={link.isCurrent ? "page" : undefined}
                             aria-label={`Página ${link.page}`}
                             hidden={!link.isVisible}

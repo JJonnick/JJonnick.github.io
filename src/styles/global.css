@@ -5,6 +5,9 @@
 @theme {
     --font-sans: var(--font-quicksand), system-ui;
     --font-display: Georgia, "Palatino Linotype", serif;
+    /* Strong custom curves: the built-in CSS easings feel weak for UI motion. */
+    --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @layer components {
@@ -21,19 +24,30 @@
     }
 
     .ui-control {
-        @apply inline-flex min-h-11 items-center gap-2 rounded-md border px-3 py-2 text-sm font-medium transition-colors duration-150;
-        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/80 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950;
+        @apply inline-flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm font-medium whitespace-nowrap select-none;
+        @apply transition-[background-color,color,box-shadow,transform] duration-150 ease-out-strong;
+        @apply active:scale-[0.97] motion-reduce:active:scale-100;
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950;
     }
 
     .ui-control-idle {
-        @apply border-transparent bg-slate-100/80 text-slate-700;
-        @apply hover:bg-slate-200/75 active:bg-slate-200;
-        @apply dark:border-transparent dark:bg-slate-800/75 dark:text-slate-100 dark:hover:bg-slate-700/80 dark:active:bg-slate-700;
+        @apply text-slate-600 hover:bg-slate-900/5 hover:text-slate-900;
+        @apply dark:text-slate-400 dark:hover:bg-white/8 dark:hover:text-slate-100;
     }
 
     .ui-control-active {
-        @apply border-transparent bg-slate-200 text-slate-900;
-        @apply dark:border-transparent dark:bg-slate-700 dark:text-slate-50;
+        @apply bg-white text-slate-900 shadow-sm ring-1 ring-slate-900/8;
+        @apply dark:bg-slate-800 dark:text-slate-50 dark:shadow-none dark:ring-white/10;
+    }
+
+    .ui-control-icon {
+        @apply w-9 justify-center px-0;
+    }
+
+    /* Compact track that groups related controls (filters, pagination). */
+    .ui-segmented {
+        @apply inline-flex flex-wrap items-center gap-0.5 rounded-xl bg-slate-200/60 p-0.5;
+        @apply dark:bg-slate-900 dark:ring-1 dark:ring-white/5;
     }
 
     .surface-panel {
@@ -41,7 +55,9 @@
     }
 
     .surface-card-interactive {
-        @apply rounded-lg border border-slate-200 bg-white/95 transition-colors duration-150;
+        @apply rounded-lg border border-slate-200 bg-white/95;
+        @apply transition-[background-color,transform] duration-150 ease-out-strong;
+        @apply active:scale-[0.98] motion-reduce:active:scale-100;
         @apply dark:border-slate-800 dark:bg-slate-900;
         @apply hover:bg-slate-50 active:bg-slate-100;
         @apply dark:hover:bg-slate-800 dark:active:bg-slate-700;
@@ -49,14 +65,12 @@
     }
 
     .surface-lift-soft {
-        @apply transition-transform duration-300 motion-reduce:transition-none;
-        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        @apply transition-transform duration-200 ease-out-strong motion-reduce:transition-none;
         @apply hover:-translate-y-0.5 motion-reduce:hover:translate-y-0;
     }
 
     .surface-media-pop {
-        @apply transition-transform duration-300 motion-reduce:transition-none;
-        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        @apply transition-transform duration-200 ease-out-strong motion-reduce:transition-none;
         @apply group-hover:scale-[1.03] motion-reduce:group-hover:scale-100;
     }
 }

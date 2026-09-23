@@ -2,22 +2,21 @@
 import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
 import Header from "@/components/Header.astro";
+import { getGameForPath } from "@/games";
 import "@/styles/global.css";
 interface Props {
     title: string;
 }
 
 const { title } = Astro.props;
+const description = getGameForPath(Astro.url.pathname).copy.tagline;
 ---
 
 <!doctype html>
 <html lang="es" class="font-sans tabular-nums">
 	<head>
 		<meta charset="UTF-8" />
-		<meta
-			name="description"
-			content="Consulta el progreso de tu cuenta y revisa estadísticas de personajes de Genshin Impact y Honkai: Star Rail."
-		/>
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -99,34 +98,37 @@ const { title } = Astro.props;
 					Courier New,
 					monospace;
 			}
+			/* Page changes happen often: keep them short, exit faster than enter. */
 			::view-transition-old(page),
 			::view-transition-new(page) {
-				animation-duration: 320ms;
-				animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+				animation-timing-function: var(--ease-out-strong);
 			}
 			::view-transition-old(page) {
 				animation-name: page-out;
+				animation-duration: 140ms;
 			}
 			::view-transition-new(page) {
 				animation-name: page-in;
+				animation-duration: 220ms;
 			}
 			::view-transition-group(*) {
-				animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+				animation-duration: 240ms;
+				animation-timing-function: var(--ease-out-strong);
 			}
 			@keyframes page-out {
 				from {
 					opacity: 1;
-					transform: translateY(0) scale(1);
+					transform: translateY(0);
 				}
 				to {
 					opacity: 0;
-					transform: translateY(-10px) scale(0.99);
+					transform: translateY(-4px);
 				}
 			}
 			@keyframes page-in {
 				from {
 					opacity: 0;
-					transform: translateY(14px) scale(0.99);
+					transform: translateY(8px) scale(0.995);
 				}
 				to {
 					opacity: 1;

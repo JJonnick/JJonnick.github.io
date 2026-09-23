@@ -12,8 +12,6 @@ const isCharacters = isInCharacterSection(currentGame, pathname);
 const homeHref = currentGame.homePath;
 const charactersHref = currentGame.charactersPath;
 const isHome = pathname === homeHref;
-const brandTitle = currentGame.label;
-const brandDescription = currentGame.copy.tagline;
 
 const gameOptions = GAMES.map((game) => ({
     id: game.id,
@@ -23,43 +21,38 @@ const gameOptions = GAMES.map((game) => ({
 ---
 
 <header
-    class="sticky top-0 z-40 border-b border-slate-200/80 bg-slate-50/92 dark:border-slate-800 dark:bg-slate-950/88"
+    class="sticky top-0 z-40 border-b border-slate-900/5 bg-slate-100/75 backdrop-blur-lg dark:border-white/5 dark:bg-slate-950/75"
 >
-    <div
-        class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3"
-    >
-        <div class="min-w-0">
-            <a
-                href={homeHref}
-                class="text-lg font-semibold text-slate-900 dark:text-slate-100"
-            >
-                {brandTitle}
-            </a>
-            <p
-                class="hidden text-xs text-slate-600 dark:text-slate-300 sm:block"
-            >
-                {brandDescription}
-            </p>
-        </div>
-
-        <nav
-            class="flex w-full flex-wrap items-center gap-2 max-[400px]:gap-1.5 sm:w-auto"
-            aria-label="Navegación principal"
+    <div class="mx-auto flex h-14 w-full max-w-6xl items-center gap-1 px-4">
+        <a
+            href={homeHref}
+            class="mr-auto flex min-w-0 items-center gap-2 rounded-md text-[15px] font-semibold tracking-tight text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/80 dark:text-slate-100"
         >
-            <GameSwitcher {currentGame} options={gameOptions} />
+            <span
+                class="size-2 shrink-0 rounded-full bg-sky-500 dark:bg-sky-400"
+                aria-hidden="true"></span>
+            <span class="truncate">{currentGame.label}</span>
+        </a>
 
+        <nav class="flex items-center gap-0.5" aria-label="Navegación principal">
             <HeaderButton href={homeHref} isActive={isHome}>
-                <House slot="before" size={17} aria-hidden="true" />
+                <House slot="before" size={16} aria-hidden="true" />
                 Inicio
             </HeaderButton>
             <HeaderButton href={charactersHref} isActive={isCharacters}>
-                <Users slot="before" size={17} aria-hidden="true" />
+                <Users slot="before" size={16} aria-hidden="true" />
                 Personajes
             </HeaderButton>
-            <ThemeToggle>
-                <Sun slot="sun" size={18} aria-hidden="true" />
-                <Moon slot="moon" size={18} aria-hidden="true" />
-            </ThemeToggle>
         </nav>
+
+        <span
+            class="mx-1 h-5 w-px shrink-0 bg-slate-900/10 dark:bg-white/10"
+            aria-hidden="true"></span>
+
+        <GameSwitcher {currentGame} options={gameOptions} />
+        <ThemeToggle>
+            <Sun slot="sun" size={16} aria-hidden="true" />
+            <Moon slot="moon" size={16} aria-hidden="true" />
+        </ThemeToggle>
     </div>
 </header>
