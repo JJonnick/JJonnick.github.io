@@ -70,15 +70,5 @@ const progressGroups = [activity.simulatedUniverse, activity.diary].filter(
                 </div>
             )
         }
-
-        {
-            activity.notes && (
-                <section class="mt-8 space-y-3">
-                    <h2 class="text-heading-section">{activity.notes.title}</h2>
-                    <p class="text-muted-body">Actualizado el {activity.notes.updatedText}.</p>
-                    <StatsList rows={activity.notes.rows} />
-                </section>
-            )
-        }
     </Content>
 </Layout>

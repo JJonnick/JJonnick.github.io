@@ -29,19 +29,5 @@
     "current_rails_pass": 27,
     "last_hcoin": 9739,
     "last_rails_pass": 26
-  },
-  "notes": {
-    "fetched_at": "2026-09-23T22:29:15+00:00",
-    "current_stamina": 250,
-    "max_stamina": 300,
-    "current_reserve_stamina": 0,
-    "current_train_score": 0,
-    "max_train_score": 500,
-    "current_rogue_score": 0,
-    "max_rogue_score": 18000,
-    "accepted_expedition_num": 0,
-    "total_expedition_num": 4,
-    "remaining_weekly_discounts": 3,
-    "max_weekly_discounts": 3
   }
 }

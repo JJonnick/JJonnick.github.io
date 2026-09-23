@@ -34,7 +34,6 @@ test("loads HSR activity with sections that were not synced as null", () => {
         apocalyptic_shadow: null,
         simulated_universe: null,
         diary: null,
-        notes: null,
     };
     const loadDataset = createDatasetLoader(
         dataRoot({ "hsr/activity.json": JSON.stringify(activity) }),

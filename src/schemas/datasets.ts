@@ -140,22 +140,6 @@ const hsrActivitySchema = z.object({
             last_rails_pass: nonNegativeInteger,
         })
         .nullable(),
-    notes: z
-        .object({
-            fetched_at: z.iso.datetime({ offset: true }),
-            current_stamina: nonNegativeInteger,
-            max_stamina: nonNegativeInteger,
-            current_reserve_stamina: nonNegativeInteger,
-            current_train_score: nonNegativeInteger,
-            max_train_score: nonNegativeInteger,
-            current_rogue_score: nonNegativeInteger,
-            max_rogue_score: nonNegativeInteger,
-            accepted_expedition_num: nonNegativeInteger,
-            total_expedition_num: nonNegativeInteger,
-            remaining_weekly_discounts: nonNegativeInteger,
-            max_weekly_discounts: nonNegativeInteger,
-        })
-        .nullable(),
 });
 
 export const GenshinAccountSchema = z.compile(genshinAccountSchema, { strict: true });

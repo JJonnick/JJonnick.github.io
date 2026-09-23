@@ -11,18 +11,13 @@ export interface ActivityView {
     endgame: ActivityGroup[];
     simulatedUniverse: ActivityGroup | null;
     diary: ActivityGroup | null;
-    notes: (ActivityGroup & { updatedText: string }) | null;
 }
-
-const TIME_ZONE = "Europe/Madrid";
 
 const ENDGAME_MODES = [
     ["memory_of_chaos", "Memoria del Caos"],
     ["pure_fiction", "Ficción Pura"],
     ["apocalyptic_shadow", "Sombra Apocalíptica"],
 ] as const;
-
-const ratio = (current: number, max: number) => `${current} / ${max}`;
 
 function challengeRows(challenge: HsrChallenge | null): StatRow[] {
     if (!challenge?.has_data)
@@ -43,7 +38,7 @@ function monthName(month: number): string {
 
 /** Turns the HSR activity Dataset into ready-to-render groups; missing sections become null. */
 export function toActivityView(activity: HsrActivity): ActivityView {
-    const { simulated_universe: universe, diary, notes } = activity;
+    const { simulated_universe: universe, diary } = activity;
 
     return {
         endgame: ENDGAME_MODES.map(([key, title]) => ({
@@ -89,46 +84,6 @@ export function toActivityView(activity: HsrActivity): ActivityView {
                     icon: "CalendarClock",
                     value: diary.last_rails_pass,
                     label: "Pases el mes pasado",
-                },
-            ],
-        },
-        notes: notes && {
-            title: "Notas en tiempo real",
-            updatedText: new Intl.DateTimeFormat("es-ES", {
-                dateStyle: "long",
-                timeStyle: "short",
-                timeZone: TIME_ZONE,
-            }).format(new Date(notes.fetched_at)),
-            rows: [
-                {
-                    icon: "BatteryCharging",
-                    value: ratio(notes.current_stamina, notes.max_stamina),
-                    label: "Poder de Trazacaminos",
-                },
-                {
-                    icon: "BatteryFull",
-                    value: notes.current_reserve_stamina,
-                    label: "Poder de reserva",
-                },
-                {
-                    icon: "ListChecks",
-                    value: ratio(notes.current_train_score, notes.max_train_score),
-                    label: "Entrenamiento diario",
-                },
-                {
-                    icon: "Orbit",
-                    value: ratio(notes.current_rogue_score, notes.max_rogue_score),
-                    label: "Puntos semanales del Universo",
-                },
-                {
-                    icon: "Send",
-                    value: ratio(notes.accepted_expedition_num, notes.total_expedition_num),
-                    label: "Encargos",
-                },
-                {
-                    icon: "Percent",
-                    value: ratio(notes.remaining_weekly_discounts, notes.max_weekly_discounts),
-                    label: "Descuentos de Eco de la Guerra",
                 },
             ],
         },
