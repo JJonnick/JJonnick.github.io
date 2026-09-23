@@ -1,8 +1,47 @@
 {
-  "memory_of_chaos": null,
-  "pure_fiction": null,
-  "apocalyptic_shadow": null,
-  "simulated_universe": null,
-  "diary": null,
-  "notes": null
+  "memory_of_chaos": {
+    "has_data": true,
+    "total_stars": 36,
+    "max_floor": "Stormcleanse (XII)",
+    "total_battles": 3
+  },
+  "pure_fiction": {
+    "has_data": true,
+    "total_stars": 12,
+    "max_floor": "Domain Genesis (IV)",
+    "total_battles": 2
+  },
+  "apocalyptic_shadow": {
+    "has_data": true,
+    "total_stars": 12,
+    "max_floor": "Celestial Lupine: Difficulty 4",
+    "total_battles": 2
+  },
+  "simulated_universe": {
+    "unlocked_buff_num": 210,
+    "unlocked_miracle_num": 61,
+    "unlocked_skill_points": 42,
+    "finish_cnt": 0
+  },
+  "diary": {
+    "month": 9,
+    "current_hcoin": 8370,
+    "current_rails_pass": 27,
+    "last_hcoin": 9739,
+    "last_rails_pass": 26
+  },
+  "notes": {
+    "fetched_at": "2026-09-23T22:29:15+00:00",
+    "current_stamina": 250,
+    "max_stamina": 300,
+    "current_reserve_stamina": 0,
+    "current_train_score": 0,
+    "max_train_score": 500,
+    "current_rogue_score": 0,
+    "max_rogue_score": 18000,
+    "accepted_expedition_num": 0,
+    "total_expedition_num": 4,
+    "remaining_weekly_discounts": 3,
+    "max_weekly_discounts": 3
+  }
 }
