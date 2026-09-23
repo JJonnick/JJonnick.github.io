@@ -1,37 +1,24 @@
 ---
 import { CHARACTER_PAGE_SIZE, type CharacterListFilters } from "@/services/character-list";
-import type { ElementVisual } from "@/utils/elements";
+import type { Game } from "@/games";
+import { getElementIconSrc } from "@/games/game";
 
 interface Props {
-    basePath: string;
+    game: Game;
     filters: CharacterListFilters;
-    elementLabels: Record<string, string>;
-    elementVisuals?: Partial<Record<string, ElementVisual>>;
-    showElementIcons?: boolean;
 }
 
-const {
-    basePath,
-    filters,
-    elementLabels,
-    elementVisuals,
-    showElementIcons = false,
-} = Astro.props;
+const { game, filters } = Astro.props;
 const { elementOptions, rarityOptions } = filters;
+const elementLabels: Record<string, string> = game.elementLabels;
 
 const controlClass = (isActive: boolean) =>
     `ui-control ${isActive ? "ui-control-active" : "ui-control-idle"}`;
-
-const getElementIconSrc = (element: string): string => {
-    const iconPath = elementVisuals?.[element]?.iconPath;
-    if (!iconPath) return `/elements/${element}.svg`;
-    return typeof iconPath === "string" ? iconPath : iconPath.src;
-};
 ---
 
 <div
     id="character-filters"
-    data-base-path={basePath}
+    data-base-path={game.charactersPath}
     data-page-size={CHARACTER_PAGE_SIZE}
     class="mb-5 flex flex-wrap gap-4"
 >
@@ -60,9 +47,9 @@ const getElementIconSrc = (element: string): string => {
                         aria-controls="character-grid"
                         aria-label={`Filtrar por elemento: ${elementLabels[element] ?? element}`}
                     >
-                        {showElementIcons && (
+                        {getElementIconSrc(game, element) && (
                             <img
-                                src={getElementIconSrc(element)}
+                                src={getElementIconSrc(game, element)}
                                 alt=""
                                 aria-hidden="true"
                                 width={16}

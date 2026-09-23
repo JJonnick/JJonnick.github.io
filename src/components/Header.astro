@@ -3,52 +3,23 @@ import HeaderButton from "./HeaderButton.astro";
 import GameSwitcher from "./GameSwitcher.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 import { House, Moon, Sun, Users } from "@lucide/astro";
+import { GAMES, getGameForPath, isInCharacterSection } from "@/games";
 
 const pathname = Astro.url.pathname;
-const isHsrContext = pathname.startsWith("/hsr");
-const isInCharactersSection = isHsrContext
-    ? pathname.startsWith("/hsr/characters")
-    : pathname.startsWith("/characters");
+const currentGame = getGameForPath(pathname);
+const isCharacters = isInCharacterSection(currentGame, pathname);
 
-const currentGame = isHsrContext
-    ? {
-          id: "hsr",
-          label: "Honkai: Star Rail",
-          shortLabel: "Honkai",
-          homeHref: "/hsr",
-          charactersHref: "/hsr/characters",
-      }
-    : {
-          id: "genshin",
-          label: "Genshin Impact",
-          shortLabel: "Genshin",
-          homeHref: "/",
-          charactersHref: "/characters",
-      };
-
-const homeHref = currentGame.homeHref;
-const charactersHref = currentGame.charactersHref;
+const homeHref = currentGame.homePath;
+const charactersHref = currentGame.charactersPath;
 const isHome = pathname === homeHref;
-const isCharacters = pathname.startsWith(charactersHref);
 const brandTitle = currentGame.label;
-const brandDescription = isHsrContext
-    ? "Consulta tu progreso y personajes en Honkai: Star Rail."
-    : "Consulta tu progreso y personajes en Genshin Impact.";
+const brandDescription = currentGame.copy.tagline;
 
-const gameOptions = [
-    {
-        id: "genshin",
-        label: "Genshin Impact",
-        shortLabel: "Genshin",
-        href: isInCharactersSection ? "/characters" : "/",
-    },
-    {
-        id: "hsr",
-        label: "Honkai: Star Rail",
-        shortLabel: "Honkai",
-        href: isInCharactersSection ? "/hsr/characters" : "/hsr",
-    },
-];
+const gameOptions = GAMES.map((game) => ({
+    id: game.id,
+    label: game.label,
+    href: isCharacters ? game.charactersPath : game.homePath,
+}));
 ---
 
 <header
