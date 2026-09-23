@@ -7,7 +7,7 @@ export function getHsrLocale(): HsrLocale {
     return typeof raw === "string" && raw.toLowerCase().startsWith("en") ? "en" : "es";
 }
 
-type HsrLabels = {
+export type HsrLabels = {
     unknownPath: string;
     unknownElement: string;
     unknownCharacter: string;

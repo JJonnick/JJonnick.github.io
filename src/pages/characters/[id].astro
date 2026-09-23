@@ -4,13 +4,10 @@ import Layout from "@/layouts/Layout.astro";
 import Stars from "@/components/Stars.astro";
 import LazyImage from "@/components/LazyImage.astro";
 import { Gauge, Sparkles, Heart, Swords } from "@lucide/astro";
-import { GENSHIN_WEAPON_TYPE_LABELS } from "@/constants/genshin";
-import { loadDataset } from "@/services/dataset-loader";
-import { type Character } from "@/types/character";
-import { toSafeNumber } from "@/utils/numbers";
 import { genshin } from "@/games";
-import { getElementIconSrc } from "@/games/game";
-import { normalizeElement } from "@/services/character-list";
+import { toCharacterDetail } from "@/games/genshin/detail";
+import { loadDataset } from "@/services/dataset-loader";
+import type { Character } from "@/types";
 
 interface Props {
     char: Character;
@@ -25,32 +22,17 @@ export function getStaticPaths() {
     }));
 }
 
-const { char } = Astro.props;
-const { id, icon, name, rarity, element, level, constellation, friendship, weapon_type } = char;
-
-const safeName = name?.trim() || "Personaje desconocido";
-const safeElement = element?.trim() || "Elemento desconocido";
-const safeIcon = icon || "/fallbacks/icon.svg";
-const safeRarity = Math.min(5, Math.max(1, toSafeNumber(rarity) || 1));
-const safeLevel = toSafeNumber(level);
-const safeConstellation = toSafeNumber(constellation);
-const safeFriendship = toSafeNumber(friendship);
-const safeElementIcon =
-    getElementIconSrc(genshin, normalizeElement(safeElement)) ?? "/fallbacks/icon.svg";
-const weaponName = GENSHIN_WEAPON_TYPE_LABELS[weapon_type] ?? "Desconocido";
+const detail = toCharacterDetail(Astro.props.char, genshin);
+const { id, name, icon, element, elementIcon, rarity } = detail;
+const STAT_ICONS = { level: Gauge, constellation: Sparkles, friendship: Heart, weapon: Swords };
+const statItems = detail.stats.map((stat) => ({ ...stat, Icon: STAT_ICONS[stat.key] }));
 const statCardClass = "surface-panel p-3";
 const statLabelClass = "text-muted-body text-xs";
 const statValueClass = "text-lg font-semibold text-slate-900 dark:text-slate-100";
-const statItems = [
-    { Icon: Gauge, label: "Nivel", value: safeLevel },
-    { Icon: Sparkles, label: "Constelación", value: `C${safeConstellation}` },
-    { Icon: Heart, label: "Amistad", value: safeFriendship },
-    { Icon: Swords, label: "Arma", value: weaponName },
-] as const;
 ---
 
-<Layout title={safeName}>
-    <link slot="head" rel="preload" as="image" href={safeIcon} />
+<Layout title={name}>
+    <link slot="head" rel="preload" as="image" href={icon} />
     <Content>
         <article class="mx-auto w-full max-w-4xl space-y-5">
             <header
@@ -59,8 +41,8 @@ const statItems = [
                 <LazyImage
                     transitionName={`char-icon-${id}`}
                     class="rounded-full bg-slate-100 p-1 ring-1 ring-slate-300 dark:bg-slate-800 dark:ring-slate-700"
-                    src={safeIcon}
-                    alt={`${safeName} avatar`}
+                    src={icon}
+                    alt={`${name} avatar`}
                     width={120}
                     height={120}
                     loading="eager"
@@ -71,18 +53,18 @@ const statItems = [
                         class="text-heading-page"
                         transition:name={`char-name-${id}`}
                     >
-                        {safeName}
+                        {name}
                     </h1>
                     <img
                         class="rounded-full bg-slate-100 p-1 dark:bg-slate-800"
-                        src={safeElementIcon}
-                        alt={safeElement}
+                        src={elementIcon}
+                        alt={element}
                         width={28}
                         height={28}
                     />
                 </div>
 
-                <Stars quantity={safeRarity} />
+                <Stars quantity={rarity} />
             </header>
 
             <section class="grid grid-cols-2 gap-3 sm:grid-cols-4">

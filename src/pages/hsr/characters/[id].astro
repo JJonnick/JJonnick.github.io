@@ -4,12 +4,11 @@ import Layout from "@/layouts/Layout.astro";
 import Stars from "@/components/Stars.astro";
 import LazyImage from "@/components/LazyImage.astro";
 import RowData from "@/components/RowData.astro";
-import { loadDataset } from "@/services/dataset-loader";
-import { type HsrCharacter } from "@/types";
 import { Star } from "@lucide/astro";
-import { toSafeNumber } from "@/utils/numbers";
-import { normalizeElement } from "@/services/character-list";
-import { getHsrLocale, HSR_LABELS, HSR_PATH_LABELS, HSR_ELEMENT_LABELS } from "@/games/hsr/i18n";
+import { toCharacterDetail } from "@/games/hsr/detail";
+import { getHsrLocale } from "@/games/hsr/i18n";
+import { loadDataset } from "@/services/dataset-loader";
+import type { HsrCharacter } from "@/types";
 
 interface Props {
     char: HsrCharacter;
@@ -24,66 +23,22 @@ export function getStaticPaths() {
     }));
 }
 
-const { char } = Astro.props;
-
-const preferredLocale = getHsrLocale();
-const labels = HSR_LABELS[preferredLocale];
-const formatter = new Intl.NumberFormat(preferredLocale === "en" ? "en-US" : "es-ES");
-
-const safeName = char.name?.trim() || labels.unknownCharacter;
-const safeIcon = char.icon || "/fallbacks/icon.svg";
-const safeRarity = Math.min(5, Math.max(1, toSafeNumber(char.rarity) || 1));
-const safeLevel = toSafeNumber(char.level);
-const safeRank = toSafeNumber(char.rank);
-
-const unknownPathLabel = labels.unknownPath;
-const unknownElementLabel = labels.unknownElement;
-const pathPrefix = labels.pathPrefix;
-
-const pathMap = HSR_PATH_LABELS;
-const rawPath = char.path;
-const safePath =
-    typeof rawPath === "number"
-        ? (pathMap[preferredLocale][rawPath] ?? `${pathPrefix} ${rawPath}`)
-        : rawPath?.trim() || unknownPathLabel;
-const rawElement = normalizeElement(char.element);
-const safeElement =
-    (HSR_ELEMENT_LABELS[preferredLocale] as Record<string, string>)[rawElement] ??
-    (rawElement ? rawElement[0].toUpperCase() + rawElement.slice(1) : unknownElementLabel);
-const hasLightCone = Boolean(
-    char.equip?.name ||
-        char.equip?.icon ||
-        char.equip?.level ||
-        char.equip?.rank ||
-        char.equip?.rarity,
-);
-const lightConeName = char.equip?.name?.trim() || labels.noLightCone;
-const lightConeIcon = char.equip?.icon || "/fallbacks/icon.svg";
-const lightConeLevel = toSafeNumber(char.equip?.level);
-const lightConeRank = toSafeNumber(char.equip?.rank);
-const lightConeRarity = Math.min(5, Math.max(0, toSafeNumber(char.equip?.rarity) || 0));
-const memospriteName = char.memosprite?.name?.trim() || labels.memospriteFallback;
-const memospriteIcon = char.memosprite?.icon || "/fallbacks/icon.svg";
-const levelText = formatter.format(safeLevel);
-const rankText = formatter.format(safeRank);
-const lightConeLevelText =
-    lightConeLevel > 0 ? formatter.format(lightConeLevel) : labels.notAvailableShort;
-const lightConeRankText =
-    lightConeRank > 0 ? `S${formatter.format(lightConeRank)}` : labels.notAvailableShort;
+const detail = toCharacterDetail(Astro.props.char, getHsrLocale());
+const { lightCone, memosprite, labels } = detail;
 ---
 
-<Layout title={safeName}>
-    <link slot="head" rel="preload" as="image" href={safeIcon} />
+<Layout title={detail.name}>
+    <link slot="head" rel="preload" as="image" href={detail.icon} />
     <Content>
         <article class="mx-auto w-full max-w-4xl space-y-5">
             <header
                 class="surface-panel flex flex-col items-center gap-3 p-5 text-center dark:text-slate-100"
             >
                 <LazyImage
-                    transitionName={`char-icon-${char.id}`}
+                    transitionName={`char-icon-${detail.id}`}
                     class="rounded-2xl bg-slate-100 p-1 ring-1 ring-slate-300 dark:bg-slate-800 dark:ring-slate-700"
-                    src={safeIcon}
-                    alt={`${safeName} ${labels.avatarSuffix}`}
+                    src={detail.icon}
+                    alt={`${detail.name} ${labels.avatarSuffix}`}
                     width={120}
                     height={141}
                     aspectRatioClass="aspect-[40/47]"
@@ -93,40 +48,40 @@ const lightConeRankText =
                 <div class="flex flex-col items-center gap-1">
                     <h1
                         class="text-heading-page"
-                        transition:name={`char-name-${char.id}`}
+                        transition:name={`char-name-${detail.id}`}
                     >
-                        {safeName}
+                        {detail.name}
                     </h1>
                     <p class="text-muted-body text-sm">
-                        {safeElement}
+                        {detail.element}
                     </p>
                 </div>
 
-                <Stars quantity={safeRarity} />
+                <Stars quantity={detail.rarity} />
             </header>
 
             <section class="surface-panel space-y-2 p-4 text-[15px]">
                 <RowData
                     icon="Gauge"
-                    value={levelText}
+                    value={detail.levelText}
                     label={labels.level}
                     variant="plain"
                 />
                 <RowData
                     icon="Sparkles"
-                    value={`E${rankText}`}
+                    value={`E${detail.rankText}`}
                     label={labels.eidolon}
                     variant="plain"
                 />
                 <RowData
                     icon="Map"
-                    value={safePath}
+                    value={detail.path}
                     label={labels.path}
                     variant="plain"
                 />
                 <RowData
                     icon="Swords"
-                    value={`${labels.level} ${lightConeLevelText}`}
+                    value={`${labels.level} ${lightCone.levelText}`}
                     label={labels.lightCone}
                     variant="plain"
                 />
@@ -141,8 +96,8 @@ const lightConeRankText =
                 >
                     <LazyImage
                         class="h-14 w-14 shrink-0 rounded-lg bg-slate-100 p-1 ring-1 ring-slate-300 dark:bg-slate-800 dark:ring-slate-700"
-                        src={lightConeIcon}
-                        alt={`${lightConeName} ${labels.iconSuffix}`}
+                        src={lightCone.icon}
+                        alt={`${lightCone.name} ${labels.iconSuffix}`}
                         width={56}
                         height={56}
                     />
@@ -150,17 +105,17 @@ const lightConeRankText =
                         <p
                             class="text-sm font-semibold text-slate-900 dark:text-slate-100 wrap-break-word"
                         >
-                            {lightConeName}
+                            {lightCone.name}
                         </p>
                         {
-                            hasLightCone && lightConeRarity > 0 && (
+                            lightCone.isEquipped && lightCone.rarity > 0 && (
                                 <div
                                     class="mt-1 flex items-center gap-0.5"
                                     role="img"
-                                    aria-label={labels.lightConeRarity(lightConeRarity)}
+                                    aria-label={labels.lightConeRarity(lightCone.rarity)}
                                 >
                                     {Array.from(
-                                        { length: lightConeRarity },
+                                        { length: lightCone.rarity },
                                         () => (
                                             <Star
                                                 size={14}
@@ -174,14 +129,14 @@ const lightConeRankText =
                         }
                         <p class="text-muted-body text-xs">
                             {labels.level}
-                            {lightConeLevelText} · {lightConeRankText}
+                            {lightCone.levelText} · {lightCone.rankText}
                         </p>
                     </div>
                 </div>
             </section>
 
             {
-                char.memosprite && (
+                memosprite && (
                     <section class="surface-panel p-4">
                         <p class="text-muted-body text-sm">
                             {labels.memosprite}
@@ -189,13 +144,13 @@ const lightConeRankText =
                         <div class="mt-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
                             <LazyImage
                                 class="h-12 w-12 shrink-0 rounded-lg bg-slate-100 p-1 ring-1 ring-slate-300 dark:bg-slate-800 dark:ring-slate-700"
-                                src={memospriteIcon}
-                                alt={`${memospriteName} ${labels.iconSuffix}`}
+                                src={memosprite.icon}
+                                alt={`${memosprite.name} ${labels.iconSuffix}`}
                                 width={48}
                                 height={48}
                             />
                             <p class="min-w-0 text-sm font-semibold text-slate-900 dark:text-slate-100 wrap-break-word">
-                                {memospriteName}
+                                {memosprite.name}
                             </p>
                         </div>
                     </section>
