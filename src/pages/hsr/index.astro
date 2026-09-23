@@ -2,10 +2,12 @@
 import Content from "@/layouts/Content.astro";
 import Layout from "@/layouts/Layout.astro";
 import StatsList, { type StatRow } from "@/components/StatsList.astro";
+import { toActivityView } from "@/games/hsr/activity";
 import { loadDataset } from "@/services/dataset-loader";
 import { toSafeNumber } from "@/utils/numbers";
 
 const account = loadDataset("hsr", "account");
+const activity = toActivityView(loadDataset("hsr", "activity"));
 
 const stats = account.stats;
 const nickname = account.nickname?.trim() || "Trailblazer";
@@ -24,6 +26,9 @@ const summaryRows: StatRow[] = [
     },
     { icon: "Shell", value: stats?.abyss_process || "-", label: "Progreso de abismo" },
 ];
+const progressGroups = [activity.simulatedUniverse, activity.diary].filter(
+    (group) => group !== null,
+);
 ---
 
 <Layout title="Estadísticas de Honkai: Star Rail">
@@ -36,5 +41,44 @@ const summaryRows: StatRow[] = [
         </p>
 
         <StatsList rows={summaryRows} class="mt-5" />
+
+        <section class="mt-8 space-y-3">
+            <h2 class="text-heading-section">Contenido endgame</h2>
+            <div class="grid gap-4 md:grid-cols-3">
+                {
+                    activity.endgame.map((group) => (
+                        <div class="space-y-2">
+                            <h3 class="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                {group.title}
+                            </h3>
+                            <StatsList rows={group.rows} />
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+
+        {
+            progressGroups.length > 0 && (
+                <div class="mt-8 grid gap-6 md:grid-cols-2">
+                    {progressGroups.map((group) => (
+                        <section class="space-y-3">
+                            <h2 class="text-heading-section">{group.title}</h2>
+                            <StatsList rows={group.rows} />
+                        </section>
+                    ))}
+                </div>
+            )
+        }
+
+        {
+            activity.notes && (
+                <section class="mt-8 space-y-3">
+                    <h2 class="text-heading-section">{activity.notes.title}</h2>
+                    <p class="text-muted-body">Actualizado el {activity.notes.updatedText}.</p>
+                    <StatsList rows={activity.notes.rows} />
+                </section>
+            )
+        }
     </Content>
 </Layout>

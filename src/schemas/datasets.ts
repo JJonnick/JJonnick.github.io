@@ -110,17 +110,68 @@ const hsrCharacterSchema = z.object({
         .transform((value) => value ?? undefined),
 });
 
+const hsrChallengeSchema = z
+    .object({
+        has_data: z.boolean(),
+        total_stars: nonNegativeInteger,
+        max_floor: z.string(),
+        total_battles: nonNegativeInteger,
+    })
+    .nullable();
+
+const hsrActivitySchema = z.object({
+    memory_of_chaos: hsrChallengeSchema,
+    pure_fiction: hsrChallengeSchema,
+    apocalyptic_shadow: hsrChallengeSchema,
+    simulated_universe: z
+        .object({
+            unlocked_buff_num: nonNegativeInteger,
+            unlocked_miracle_num: nonNegativeInteger,
+            unlocked_skill_points: nonNegativeInteger,
+            finish_cnt: nonNegativeInteger,
+        })
+        .nullable(),
+    diary: z
+        .object({
+            month: z.number().int().min(1).max(12),
+            current_hcoin: nonNegativeInteger,
+            current_rails_pass: nonNegativeInteger,
+            last_hcoin: nonNegativeInteger,
+            last_rails_pass: nonNegativeInteger,
+        })
+        .nullable(),
+    notes: z
+        .object({
+            fetched_at: z.iso.datetime({ offset: true }),
+            current_stamina: nonNegativeInteger,
+            max_stamina: nonNegativeInteger,
+            current_reserve_stamina: nonNegativeInteger,
+            current_train_score: nonNegativeInteger,
+            max_train_score: nonNegativeInteger,
+            current_rogue_score: nonNegativeInteger,
+            max_rogue_score: nonNegativeInteger,
+            accepted_expedition_num: nonNegativeInteger,
+            total_expedition_num: nonNegativeInteger,
+            remaining_weekly_discounts: nonNegativeInteger,
+            max_weekly_discounts: nonNegativeInteger,
+        })
+        .nullable(),
+});
+
 export const GenshinAccountSchema = z.compile(genshinAccountSchema, { strict: true });
 export const GenshinCharactersSchema = z.compile(z.array(genshinCharacterSchema), {
     strict: true,
 });
 export const HsrAccountSchema = z.compile(hsrAccountSchema, { strict: true });
 export const HsrCharactersSchema = z.compile(z.array(hsrCharacterSchema), { strict: true });
+export const HsrActivitySchema = z.compile(hsrActivitySchema, { strict: true });
 
 export type Account = z.infer<typeof GenshinAccountSchema>;
 export type Character = z.infer<typeof genshinCharacterSchema>;
 export type HsrAccount = z.infer<typeof HsrAccountSchema>;
 export type HsrCharacter = z.infer<typeof hsrCharacterSchema>;
+export type HsrActivity = z.infer<typeof HsrActivitySchema>;
+export type HsrChallenge = NonNullable<HsrActivity["memory_of_chaos"]>;
 export type HsrAccountStats = NonNullable<HsrAccount["stats"]>;
 export type HsrLightCone = NonNullable<HsrCharacter["equip"]>;
 export type HsrMemosprite = NonNullable<HsrCharacter["memosprite"]>;

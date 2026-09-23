@@ -27,6 +27,22 @@ test("loads and validates a game's dataset from its folder", () => {
     assert.equal(character?.equip, undefined);
 });
 
+test("loads HSR activity with sections that were not synced as null", () => {
+    const activity = {
+        memory_of_chaos: null,
+        pure_fiction: null,
+        apocalyptic_shadow: null,
+        simulated_universe: null,
+        diary: null,
+        notes: null,
+    };
+    const loadDataset = createDatasetLoader(
+        dataRoot({ "hsr/activity.json": JSON.stringify(activity) }),
+    );
+
+    assert.deepEqual(loadDataset("hsr", "activity"), activity);
+});
+
 test("caches datasets after the first read", () => {
     const root = dataRoot({ "hsr/characters.json": JSON.stringify([hsrCharacter]) });
     const loadDataset = createDatasetLoader(root);
