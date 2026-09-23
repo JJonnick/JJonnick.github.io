@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import LazyImage from "./LazyImage.astro";
 import type { CharacterSummary } from "@/types";
+import { normalizeElement } from "@/services/character-list";
 import { GENSHIN_ELEMENT_VISUALS, type ElementVisual } from "@/utils/elements";
 
 interface Props {
@@ -24,7 +25,7 @@ const {
     elementVisuals = GENSHIN_ELEMENT_VISUALS as Partial<Record<string, ElementVisual>>,
 } = Astro.props;
 
-const elementKey = typeof char.element === "string" ? char.element.trim().toLowerCase() : "";
+const elementKey = normalizeElement(char.element);
 const elementVisual = elementKey ? elementVisuals[elementKey] : undefined;
 ---
 
