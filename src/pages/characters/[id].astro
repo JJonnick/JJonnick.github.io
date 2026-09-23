@@ -5,7 +5,7 @@ import Stars from "@/components/Stars.astro";
 import LazyImage from "@/components/LazyImage.astro";
 import { Gauge, Sparkles, Heart, Swords } from "@lucide/astro";
 import { GENSHIN_WEAPON_TYPE_LABELS } from "@/constants/genshin";
-import { getCharacters } from "@/services/database";
+import { loadDataset } from "@/services/dataset-loader";
 import { type Character } from "@/types/character";
 import { toSafeNumber } from "@/utils/numbers";
 import { genshin } from "@/games";
@@ -16,8 +16,8 @@ interface Props {
     char: Character;
 }
 
-export async function getStaticPaths() {
-    const characters = await getCharacters();
+export function getStaticPaths() {
+    const characters = loadDataset("genshin", "characters");
 
     return characters.map((char) => ({
         params: { id: String(char.id) },

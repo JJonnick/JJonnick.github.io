@@ -4,7 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import Stars from "@/components/Stars.astro";
 import LazyImage from "@/components/LazyImage.astro";
 import RowData from "@/components/RowData.astro";
-import { getHsrCharacters } from "@/services/database";
+import { loadDataset } from "@/services/dataset-loader";
 import { type HsrCharacter } from "@/types";
 import { Star } from "@lucide/astro";
 import { toSafeNumber } from "@/utils/numbers";
@@ -15,8 +15,8 @@ interface Props {
     char: HsrCharacter;
 }
 
-export async function getStaticPaths() {
-    const characters = await getHsrCharacters();
+export function getStaticPaths() {
+    const characters = loadDataset("hsr", "characters");
 
     return characters.map((char) => ({
         params: { id: String(char.id) },

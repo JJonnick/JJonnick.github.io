@@ -10,6 +10,14 @@ labels and icons, portrait shape and page copy. Game-specific facts used by only
 that game's folder.
 _Avoid_: profile, config.
 
+## Dataset
+
+A Game's validated JSON data synced from genshinStats into `public/data` (`characters` or
+`account`). Loaded with `loadDataset(gameId, kind)` in `src/services/dataset-loader.ts`, which
+throws on a missing, malformed or off-schema file so the build fails instead of publishing empty
+pages.
+_Avoid_: database, db.
+
 ## Character list
 
 The paginated, filterable grid of a Game's characters, at `<charactersPath>` (page 1) and
