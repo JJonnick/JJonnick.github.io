@@ -1,9 +1,9 @@
-import { type HsrElement } from "@/utils/elements";
+import type { HsrElement } from "@/games/hsr";
 
 export type HsrLocale = "es" | "en";
 
 export function getHsrLocale(): HsrLocale {
-    const raw = import.meta.env.PUBLIC_HSR_TERMS_LOCALE;
+    const raw = import.meta.env?.PUBLIC_HSR_TERMS_LOCALE;
     return typeof raw === "string" && raw.toLowerCase().startsWith("en") ? "en" : "es";
 }
 

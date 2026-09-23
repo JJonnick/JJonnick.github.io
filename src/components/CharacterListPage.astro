@@ -9,70 +9,38 @@ import {
     getCharacterListView,
     normalizeElement,
 } from "@/services/character-list";
+import type { Game } from "@/games";
 import type { CharacterSummary } from "@/types";
-import type { ElementVisual } from "@/utils/elements";
 
 interface Props {
-    title: string;
-    heading: string;
-    description: string;
-    emptyMessage: string;
+    game: Game;
     characters: CharacterSummary[];
-    basePath: string;
-    elements: readonly string[];
-    elementLabels: Record<string, string>;
-    elementVisuals?: Partial<Record<string, ElementVisual>>;
-    showElementIcons?: boolean;
-    imageWidth?: number;
-    imageHeight?: number;
-    imageAspectRatioClass?: string;
-    imageClass?: string;
 }
 
-const {
-    title,
-    heading,
-    description,
-    emptyMessage,
-    characters,
-    basePath,
-    elements,
-    elementLabels,
-    elementVisuals,
-    showElementIcons = false,
-    imageWidth,
-    imageHeight,
-    imageAspectRatioClass,
-    imageClass,
-} = Astro.props;
+const { game, characters } = Astro.props;
+const { copy } = game;
 
 const view = getCharacterListView(characters, Astro.url, {
-    basePath,
+    basePath: game.charactersPath,
     pageSize: CHARACTER_PAGE_SIZE,
-    elementOrder: elements,
+    elementOrder: game.elements,
 });
 const visibleCharacters = new Set(view.items);
 ---
 
-<Layout title={title}>
+<Layout title={copy.listTitle}>
     <Content>
-        <h1 class="text-heading-page mb-1 text-xl">{heading}</h1>
-        <p class="text-muted-body mb-5 max-w-2xl">{description}</p>
+        <h1 class="text-heading-page mb-1 text-xl">{copy.listHeading}</h1>
+        <p class="text-muted-body mb-5 max-w-2xl">{copy.listDescription}</p>
 
         {
             characters.length === 0 ? (
                 <section class="surface-panel p-5 text-sm text-slate-700 dark:text-slate-200">
-                    {emptyMessage}
+                    {copy.emptyMessage}
                 </section>
             ) : (
                 <>
-                    <CharacterFilters
-                        {basePath}
-                        filters={view.filters}
-                        {elementLabels}
-                        {elementVisuals}
-                        {showElementIcons}
-                    />
+                    <CharacterFilters {game} filters={view.filters} />
 
                     <div
                         id="character-grid"
@@ -85,15 +53,7 @@ const visibleCharacters = new Set(view.items);
                                 data-rarity={item.rarity ?? ""}
                                 hidden={!visibleCharacters.has(item)}
                             >
-                                <CardCharacter
-                                    href={`${basePath}/${item.id}`}
-                                    char={item}
-                                    elementVisuals={elementVisuals}
-                                    imageWidth={imageWidth}
-                                    imageHeight={imageHeight}
-                                    imageAspectRatioClass={imageAspectRatioClass}
-                                    imageClass={imageClass}
-                                />
+                                <CardCharacter {game} char={item} />
                             </div>
                         ))}
                     </div>

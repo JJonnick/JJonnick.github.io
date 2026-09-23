@@ -3,30 +3,22 @@ import { Image } from "astro:assets";
 import LazyImage from "./LazyImage.astro";
 import type { CharacterSummary } from "@/types";
 import { normalizeElement } from "@/services/character-list";
-import { GENSHIN_ELEMENT_VISUALS, type ElementVisual } from "@/utils/elements";
+import type { Game } from "@/games";
 
 interface Props {
-    href: string;
+    game: Game;
     char: CharacterSummary;
-    imageWidth?: number;
-    imageHeight?: number;
-    imageAspectRatioClass?: string;
-    imageClass?: string;
-    elementVisuals?: Partial<Record<string, ElementVisual>>;
 }
 
+const { game, char } = Astro.props;
+const href = `${game.charactersPath}/${char.id}`;
 const {
-    href,
-    char,
-    imageWidth = 120,
-    imageHeight = 120,
-    imageAspectRatioClass = "aspect-square",
-    imageClass = "min-h-25 rounded-full",
-    elementVisuals = GENSHIN_ELEMENT_VISUALS as Partial<Record<string, ElementVisual>>,
-} = Astro.props;
-
-const elementKey = normalizeElement(char.element);
-const elementVisual = elementKey ? elementVisuals[elementKey] : undefined;
+    width: imageWidth,
+    height: imageHeight,
+    aspectClass: imageAspectRatioClass,
+    imageClass,
+} = game.portrait;
+const elementVisual = game.elementVisuals[normalizeElement(char.element)];
 ---
 
 <a

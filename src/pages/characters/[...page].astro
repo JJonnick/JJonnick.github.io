@@ -1,8 +1,8 @@
 ---
 import CharacterListPage from "@/components/CharacterListPage.astro";
+import { genshin } from "@/games";
 import { getCharacters } from "@/services/database";
 import { CHARACTER_PAGE_SIZE } from "@/services/character-list";
-import { GENSHIN_ELEMENT_LABELS, GENSHIN_ELEMENTS } from "@/utils/elements";
 import type { Character } from "@/types";
 import type { GetStaticPaths } from "astro";
 
@@ -22,14 +22,4 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 const { allCharacters } = Astro.props;
 ---
 
-<CharacterListPage
-    title="Lista de personajes"
-    heading="Tus personajes"
-    description="Selecciona uno para ver nivel, constelación, amistad y arma."
-    emptyMessage="No encontramos personajes en tus datos todavía. Actualiza el archivo e inténtalo de nuevo."
-    characters={allCharacters}
-    basePath="/characters"
-    elements={GENSHIN_ELEMENTS}
-    elementLabels={GENSHIN_ELEMENT_LABELS}
-    showElementIcons={true}
-/>
+<CharacterListPage game={genshin} characters={allCharacters} />

@@ -8,7 +8,9 @@ import { GENSHIN_WEAPON_TYPE_LABELS } from "@/constants/genshin";
 import { getCharacters } from "@/services/database";
 import { type Character } from "@/types/character";
 import { toSafeNumber } from "@/utils/numbers";
-import { getGenshinElementIconPath } from "@/utils/elements";
+import { genshin } from "@/games";
+import { getElementIconSrc } from "@/games/game";
+import { normalizeElement } from "@/services/character-list";
 
 interface Props {
     char: Character;
@@ -33,7 +35,8 @@ const safeRarity = Math.min(5, Math.max(1, toSafeNumber(rarity) || 1));
 const safeLevel = toSafeNumber(level);
 const safeConstellation = toSafeNumber(constellation);
 const safeFriendship = toSafeNumber(friendship);
-const safeElementIcon = getGenshinElementIconPath(safeElement);
+const safeElementIcon =
+    getElementIconSrc(genshin, normalizeElement(safeElement)) ?? "/fallbacks/icon.svg";
 const weaponName = GENSHIN_WEAPON_TYPE_LABELS[weapon_type] ?? "Desconocido";
 const statCardClass = "surface-panel p-3";
 const statLabelClass = "text-muted-body text-xs";
