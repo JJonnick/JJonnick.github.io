@@ -79,4 +79,23 @@ export function createDatasetLoader(dataRoot: string): LoadDataset {
     };
 }
 
+/**
+ * Loads every Dataset of every Game from `dataRoot` and returns the error message of each invalid
+ * one, so a data sync can reject all broken files at once before they reach the build.
+ */
+export function validateDatasets(dataRoot: string): string[] {
+    const load = createDatasetLoader(dataRoot);
+    const errors: string[] = [];
+    for (const [game, { schemas }] of Object.entries(DATASETS)) {
+        for (const kind of Object.keys(schemas)) {
+            try {
+                load(game as GameId, kind as DatasetKind);
+            } catch (error) {
+                errors.push((error as Error).message);
+            }
+        }
+    }
+    return errors;
+}
+
 export const loadDataset = createDatasetLoader(path.resolve(process.cwd(), "public", "data"));

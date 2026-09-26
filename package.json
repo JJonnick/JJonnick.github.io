@@ -13,6 +13,7 @@
         "start": "astro dev",
         "test": "node --test src/**/*.test.ts",
         "check": "astro check",
+        "validate:data": "node scripts/validate-data.ts",
         "build": "astro check && astro build",
         "preview": "astro preview",
         "astro": "astro",
