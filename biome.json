@@ -9,6 +9,7 @@
         "ignoreUnknown": false,
         "includes": [
             "src/**",
+            "scripts/**",
             "*.astro",
             "*.ts",
             "*.js",

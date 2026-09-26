@@ -3,7 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { createDatasetLoader } from "./dataset-loader.ts";
+import { createDatasetLoader, validateDatasets } from "./dataset-loader.ts";
 
 function dataRoot(files: Record<string, string>): string {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "datasets-"));
@@ -75,4 +75,22 @@ test("throws with the schema issues when the dataset does not match", () => {
             error.message.includes("hsr/characters.json no válido: no cumple el esquema") &&
             error.message.includes("name"),
     );
+});
+
+test("validates every dataset of every game and reports each invalid one", () => {
+    const errors = validateDatasets(
+        dataRoot({
+            "characters.json": "{ nope",
+            "hsr/characters.json": JSON.stringify([hsrCharacter]),
+        }),
+    );
+
+    assert.ok(errors.some((message) => message.includes("characters.json no válido: no es JSON")));
+    assert.ok(errors.some((message) => message.includes("hsr/account.json no válido: falta")));
+    assert.ok(errors.some((message) => message.includes("hsr/activity.json no válido: falta")));
+    assert.ok(!errors.some((message) => message.startsWith("Dataset hsr/characters.json")));
+});
+
+test("the synced data in public/data is valid", () => {
+    assert.deepEqual(validateDatasets(path.resolve("public", "data")), []);
 });
