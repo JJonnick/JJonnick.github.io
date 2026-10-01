@@ -2,7 +2,7 @@
   "memory_of_chaos": {
     "has_data": true,
     "total_stars": 36,
-    "max_floor": "Stormcleanse (XII)",
+    "max_floor": "Crossing the Afterlife (XII)",
     "total_battles": 3
   },
   "pure_fiction": {
@@ -24,10 +24,10 @@
     "finish_cnt": 0
   },
   "diary": {
-    "month": 9,
-    "current_hcoin": 8670,
-    "current_rails_pass": 27,
-    "last_hcoin": 9739,
-    "last_rails_pass": 26
+    "month": 10,
+    "current_hcoin": 0,
+    "current_rails_pass": 0,
+    "last_hcoin": 12630,
+    "last_rails_pass": 35
   }
 }
