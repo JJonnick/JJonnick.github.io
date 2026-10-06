@@ -14,7 +14,7 @@
   "apocalyptic_shadow": {
     "has_data": true,
     "total_stars": 12,
-    "max_floor": "Celestial Lupine: Difficulty 4",
+    "max_floor": "Dominance of Oblivion: Difficulty 04",
     "total_battles": 2
   },
   "simulated_universe": {
@@ -25,8 +25,8 @@
   },
   "diary": {
     "month": 10,
-    "current_hcoin": 1432,
-    "current_rails_pass": 13,
+    "current_hcoin": 5402,
+    "current_rails_pass": 18,
     "last_hcoin": 12630,
     "last_rails_pass": 35
   }
