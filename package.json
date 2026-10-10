@@ -23,17 +23,17 @@
     },
     "dependencies": {
         "@astrojs/check": "^0.9.10",
-        "@lucide/astro": "^1.49.0",
-        "astro": "^7.3.5",
+        "@lucide/astro": "^1.52.0",
+        "astro": "^7.3.6",
         "nuqs": "^2.10.1",
         "tailwindcss": "^4.3.3",
         "typescript": "^6.0.0",
         "zod": "4.6.5"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.5.14",
+        "@biomejs/biome": "2.5.15",
         "@tailwindcss/vite": "^4.3.3",
-        "@types/node": "^26.6.3",
+        "@types/node": "^26.6.4",
         "happy-dom": "20.14.5",
         "sharp": "^0.35.5"
     }
