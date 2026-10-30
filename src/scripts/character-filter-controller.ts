@@ -81,7 +81,9 @@ export function initCharacterFilters(
         card,
         element: card.dataset.element,
         rarity: card.dataset.rarity,
+        name: card.dataset.name,
     }));
+    const searchInput = filtersBar.querySelector<HTMLInputElement>("[data-filter-search]");
     const cleanupCallbacks: Array<() => void> = [];
 
     const render = () => {
@@ -105,6 +107,10 @@ export function initCharacterFilters(
             });
         }
 
+        if (searchInput && searchInput.value.trim() !== view.filters.query) {
+            searchInput.value = view.filters.query;
+        }
+
         applyPagination(document, view);
         return view;
     };
@@ -122,6 +128,39 @@ export function initCharacterFilters(
             };
             button.addEventListener("click", onClick);
             cleanupCallbacks.push(() => button.removeEventListener("click", onClick));
+        });
+    }
+
+    if (searchInput) {
+        // Typing replaces the entry instead of pushing one per keystroke.
+        const onInput = () => {
+            const url = new URL(window.location.href);
+            const next = getFilteredListUrl(url, basePath, { ...view.filters, query: searchInput.value });
+            window.history.replaceState({}, "", next);
+            view = render();
+        };
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape" && searchInput.value !== "") {
+                event.preventDefault();
+                searchInput.value = "";
+                onInput();
+            } else if (event.key === "Escape") {
+                searchInput.blur();
+            } else if (event.key === "ArrowDown") {
+                const firstCard = grid.querySelector<HTMLElement>(
+                    "[data-filter-card]:not([hidden]) a[href]",
+                );
+                if (firstCard) {
+                    event.preventDefault();
+                    firstCard.focus();
+                }
+            }
+        };
+        searchInput.addEventListener("input", onInput);
+        searchInput.addEventListener("keydown", onKeyDown);
+        cleanupCallbacks.push(() => {
+            searchInput.removeEventListener("input", onInput);
+            searchInput.removeEventListener("keydown", onKeyDown);
         });
     }
 

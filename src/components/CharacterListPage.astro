@@ -44,6 +44,7 @@ const visibleCharacters = new Set(view.items);
 
                     <div
                         id="character-grid"
+                        data-arrow-nav="grid"
                         class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 [content-visibility:auto] [contain-intrinsic-size:1px_1200px]"
                     >
                         {characters.map((item) => (
@@ -51,6 +52,7 @@ const visibleCharacters = new Set(view.items);
                                 data-filter-card
                                 data-element={normalizeElement(item.element)}
                                 data-rarity={item.rarity ?? ""}
+                                data-name={item.name}
                                 hidden={!visibleCharacters.has(item)}
                             >
                                 <CardCharacter {game} char={item} />

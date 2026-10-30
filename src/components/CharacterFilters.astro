@@ -22,10 +22,25 @@ const controlClass = (isActive: boolean) =>
     data-page-size={CHARACTER_PAGE_SIZE}
     class="mb-5 flex flex-wrap gap-2"
 >
+    <form role="search" class="w-full sm:w-56" onsubmit="return false">
+        <label class="sr-only" for="character-search">Buscar personaje por nombre</label>
+        <input
+            id="character-search"
+            type="search"
+            name="q"
+            value={filters.query}
+            placeholder="Buscar… (Ctrl+K)"
+            autocomplete="off"
+            aria-controls="character-grid"
+            data-filter-search
+            class="h-9 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/80 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-400"
+        />
+    </form>
     {
         elementOptions.length > 1 && (
             <div
                 class="ui-segmented"
+                data-arrow-nav
                 role="group"
                 aria-label="Filtrar por elemento"
             >
@@ -67,6 +82,7 @@ const controlClass = (isActive: boolean) =>
         rarityOptions.length > 1 && (
             <div
                 class="ui-segmented"
+                data-arrow-nav
                 role="group"
                 aria-label="Filtrar por rareza"
             >
