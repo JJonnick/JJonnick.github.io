@@ -3,15 +3,20 @@ import Content from "@/layouts/Content.astro";
 import Layout from "@/layouts/Layout.astro";
 import Stars from "@/components/Stars.astro";
 import LazyImage from "@/components/LazyImage.astro";
+import CharacterNav from "@/components/CharacterNav.astro";
 import RowData from "@/components/RowData.astro";
 import { Star } from "@lucide/astro";
+import { hsr } from "@/games";
 import { toCharacterDetail } from "@/games/hsr/detail";
 import { getHsrLocale } from "@/games/hsr/i18n";
+import { getCharacterNeighbors } from "@/services/character-list";
 import { loadDataset } from "@/services/dataset-loader";
+import type { CharacterNeighbors } from "@/services/character-list";
 import type { HsrCharacter } from "@/types";
 
 interface Props {
     char: HsrCharacter;
+    neighbors: CharacterNeighbors;
 }
 
 export function getStaticPaths() {
@@ -19,7 +24,7 @@ export function getStaticPaths() {
 
     return characters.map((char) => ({
         params: { id: String(char.id) },
-        props: { char },
+        props: { char, neighbors: getCharacterNeighbors(characters, char.id) },
     }));
 }
 
@@ -157,5 +162,6 @@ const { lightCone, memosprite, labels } = detail;
                 )
             }
         </article>
+        <CharacterNav game={hsr} {...Astro.props.neighbors} />
     </Content>
 </Layout>

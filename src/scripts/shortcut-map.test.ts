@@ -55,3 +55,9 @@ test("swaps modifier labels for macOS symbols only on macOS", () => {
     applyPlatformKeys(window.document as unknown as Document, true);
     assert.deepEqual(texts(), ["⌘", "⌥", "K"]);
 });
+
+test("Escape is a bare shortcut only for going back", () => {
+    assert.equal(findShortcut({ ...base, code: "Escape" })?.id, "back");
+    assert.equal(findShortcut({ ...base, code: "Escape", shiftKey: true }), undefined);
+    assert.deepEqual(comboKeys({ code: "Escape" }), ["Esc"]);
+});

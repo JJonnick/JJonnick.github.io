@@ -101,3 +101,47 @@ test("Alt+G opens the game menu and focuses the current game", () => {
     assert.equal(opened, true);
     assert.equal((window.document.activeElement as unknown as HTMLElement).textContent, "A");
 });
+
+test("Esc goes back to the list when a back link exists", () => {
+    const window = setup('<a href="#list" data-back-to-list>Todos</a>');
+    let clicks = 0;
+    window.document.querySelector("[data-back-to-list]")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        clicks++;
+    });
+
+    const event = press(window, { code: "Escape" });
+
+    assert.equal(clicks, 1);
+    assert.equal(event.defaultPrevented, true);
+});
+
+test("Esc leaves an open dialog alone", () => {
+    const window = setup('<dialog open></dialog><a href="#list" data-back-to-list>Todos</a>');
+    let clicks = 0;
+    window.document.querySelector("[data-back-to-list]")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        clicks++;
+    });
+
+    const event = press(window, { code: "Escape" });
+
+    assert.equal(clicks, 0);
+    assert.equal(event.defaultPrevented, false);
+});
+
+test("Esc does nothing on pages without a back link, or while typing", () => {
+    const window = setup('<input id="q" /><p>sin enlace</p>');
+
+    assert.equal(press(window, { code: "Escape" }).defaultPrevented, false);
+
+    window.document.body.insertAdjacentHTML("beforeend", '<a href="#l" data-back-to-list>x</a>');
+    let clicks = 0;
+    window.document.querySelector("[data-back-to-list]")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        clicks++;
+    });
+    press(window, { code: "Escape" }, window.document.getElementById("q"));
+
+    assert.equal(clicks, 0);
+});

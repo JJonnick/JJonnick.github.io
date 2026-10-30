@@ -36,6 +36,15 @@ function toggleHelp(document: Document) {
     else dialog.showModal();
 }
 
+/** Esc also closes dialogs and popovers, so it only goes back when none is open. */
+function goBackToList(document: Document): boolean {
+    if (document.querySelector("dialog[open], :popover-open")) return false;
+    const link = document.querySelector<HTMLElement>("[data-back-to-list]");
+    if (!link) return false;
+    link.click();
+    return true;
+}
+
 const ACTIONS: Record<ShortcutId, (document: Document) => boolean | undefined> = {
     search: focusSearch,
     help: (document) => void toggleHelp(document),
@@ -43,6 +52,7 @@ const ACTIONS: Record<ShortcutId, (document: Document) => boolean | undefined> =
     gameMenu: (document) => void openGameSwitcher(document),
     prevPage: (document) => void clickVisible(document, "[data-page-prev-link]"),
     nextPage: (document) => void clickVisible(document, "[data-page-next-link]"),
+    back: goBackToList,
 };
 
 /** Shortcut handler driven by `SHORTCUTS`; see `shortcut-map.ts` for the keys. */

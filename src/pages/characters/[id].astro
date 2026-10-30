@@ -3,14 +3,18 @@ import Content from "@/layouts/Content.astro";
 import Layout from "@/layouts/Layout.astro";
 import Stars from "@/components/Stars.astro";
 import LazyImage from "@/components/LazyImage.astro";
+import CharacterNav from "@/components/CharacterNav.astro";
 import { Gauge, Sparkles, Heart, Swords } from "@lucide/astro";
 import { genshin } from "@/games";
 import { toCharacterDetail } from "@/games/genshin/detail";
+import { getCharacterNeighbors } from "@/services/character-list";
 import { loadDataset } from "@/services/dataset-loader";
+import type { CharacterNeighbors } from "@/services/character-list";
 import type { Character } from "@/types";
 
 interface Props {
     char: Character;
+    neighbors: CharacterNeighbors;
 }
 
 export function getStaticPaths() {
@@ -18,7 +22,7 @@ export function getStaticPaths() {
 
     return characters.map((char) => ({
         params: { id: String(char.id) },
-        props: { char },
+        props: { char, neighbors: getCharacterNeighbors(characters, char.id) },
     }));
 }
 
@@ -77,5 +81,6 @@ const statValueClass = "text-lg font-semibold text-slate-900 dark:text-slate-100
                 ))}
             </section>
         </article>
+        <CharacterNav game={genshin} {...Astro.props.neighbors} />
     </Content>
 </Layout>
