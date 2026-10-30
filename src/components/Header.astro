@@ -2,7 +2,8 @@
 import HeaderButton from "./HeaderButton.astro";
 import GameSwitcher from "./GameSwitcher.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import { House, Moon, Sun, Users } from "@lucide/astro";
+import { House, Keyboard, Moon, Sun, Users } from "@lucide/astro";
+import { ariaKeyShortcuts } from "@/scripts/shortcut-map";
 import { GAMES, getGameForPath, isInCharacterSection } from "@/games";
 
 const pathname = Astro.url.pathname;
@@ -50,6 +51,18 @@ const gameOptions = GAMES.map((game) => ({
             aria-hidden="true"></span>
 
         <GameSwitcher {currentGame} options={gameOptions} />
+        <button
+            type="button"
+            data-shortcuts-trigger
+            aria-haspopup="dialog"
+            aria-controls="shortcuts-dialog"
+            aria-keyshortcuts={ariaKeyShortcuts("help")}
+            aria-label="Atajos de teclado"
+            title="Atajos de teclado"
+            class="ui-control ui-control-idle ui-control-icon"
+        >
+            <Keyboard size={16} aria-hidden="true" />
+        </button>
         <ThemeToggle>
             <Sun slot="sun" size={16} aria-hidden="true" />
             <Moon slot="moon" size={16} aria-hidden="true" />

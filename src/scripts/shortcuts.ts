@@ -1,7 +1,10 @@
+import { findShortcut, type ShortcutId } from "./shortcut-map.ts";
+
 const TYPING_SELECTOR = "input:not([data-theme-toggle]), textarea, select, [contenteditable]";
 
-function isVisible(element: Element | null): element is HTMLElement {
-    return element !== null && !element.closest("[hidden]");
+function clickVisible(document: Document, selector: string) {
+    const link = document.querySelector<HTMLElement>(selector);
+    if (link && !link.closest("[hidden]")) link.click();
 }
 
 function openGameSwitcher(document: Document) {
@@ -12,10 +15,12 @@ function openGameSwitcher(document: Document) {
         return;
     }
     popover.showPopover();
-    const target = popover.querySelector<HTMLElement>("[aria-current]") ?? popover.querySelector<HTMLElement>("a");
+    const target =
+        popover.querySelector<HTMLElement>("[aria-current]") ?? popover.querySelector<HTMLElement>("a");
     target?.focus();
 }
 
+/** Returns false when the page has no search box, so the key keeps its default. */
 function focusSearch(document: Document): boolean {
     const input = document.querySelector<HTMLInputElement>("[data-filter-search]");
     if (!input) return false;
@@ -24,34 +29,31 @@ function focusSearch(document: Document): boolean {
     return true;
 }
 
-const ACTIONS: Record<string, (document: Document) => void> = {
-    "[": (document) => {
-        const link = document.querySelector("[data-page-prev-link]");
-        if (isVisible(link)) link.click();
-    },
-    "]": (document) => {
-        const link = document.querySelector("[data-page-next-link]");
-        if (isVisible(link)) link.click();
-    },
-    t: (document) => document.querySelector<HTMLElement>("[data-theme-toggle]")?.click(),
-    g: openGameSwitcher,
-    "/": (document) => void focusSearch(document),
+function toggleHelp(document: Document) {
+    const dialog = document.getElementById("shortcuts-dialog") as HTMLDialogElement | null;
+    if (!dialog) return;
+    if (dialog.open) dialog.close();
+    else dialog.showModal();
+}
+
+const ACTIONS: Record<ShortcutId, (document: Document) => boolean | undefined> = {
+    search: focusSearch,
+    help: (document) => void toggleHelp(document),
+    theme: (document) => void document.querySelector<HTMLElement>("[data-theme-toggle]")?.click(),
+    gameMenu: (document) => void openGameSwitcher(document),
+    prevPage: (document) => void clickVisible(document, "[data-page-prev-link]"),
+    nextPage: (document) => void clickVisible(document, "[data-page-next-link]"),
 };
 
-/** Single-key shortcuts: `[` `]` change page, `t` toggles the theme, `g` opens the game menu. */
+/** Shortcut handler driven by `SHORTCUTS`; see `shortcut-map.ts` for the keys. */
 export function initShortcuts(document: Document): () => void {
     const onKeyDown = (event: KeyboardEvent) => {
-        if (event.defaultPrevented || event.altKey) return;
-        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-            if (focusSearch(document)) event.preventDefault();
-            return;
-        }
-        if (event.ctrlKey || event.metaKey) return;
-        const action = ACTIONS[event.key];
-        if (!action) return;
-        if ((event.target as Element | null)?.closest(TYPING_SELECTOR)) return;
-        event.preventDefault();
-        action(document);
+        if (event.defaultPrevented) return;
+        const shortcut = findShortcut(event);
+        if (!shortcut) return;
+        if (!shortcut.whileTyping && (event.target as Element | null)?.closest(TYPING_SELECTOR)) return;
+
+        if (ACTIONS[shortcut.id](document) !== false) event.preventDefault();
     };
 
     document.addEventListener("keydown", onKeyDown);

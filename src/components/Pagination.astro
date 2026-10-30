@@ -1,5 +1,6 @@
 ---
 import type { CharacterListPagination } from "@/services/character-list";
+import { ariaKeyShortcuts } from "@/scripts/shortcut-map";
 
 interface Props {
     pagination: CharacterListPagination;
@@ -21,6 +22,7 @@ const { links, prev, next, totalPages } = pagination;
             <a
                 href={prev.href}
                 data-page-prev-link
+                aria-keyshortcuts={ariaKeyShortcuts("prevPage")}
                 class="ui-control ui-control-idle"
                 aria-label="Página anterior"
                 hidden={prev.isDisabled}
@@ -76,6 +78,7 @@ const { links, prev, next, totalPages } = pagination;
             <a
                 href={next.href}
                 data-page-next-link
+                aria-keyshortcuts={ariaKeyShortcuts("nextPage")}
                 class="ui-control ui-control-idle"
                 aria-label="Página siguiente"
                 hidden={next.isDisabled}

@@ -1,4 +1,6 @@
 ---
+import { ariaKeyShortcuts } from "@/scripts/shortcut-map";
+
 interface Props {
     id?: string;
 }
@@ -18,6 +20,7 @@ const { id = "theme-toggle" } = Astro.props;
             role="switch"
             class="peer sr-only"
             data-theme-toggle
+            aria-keyshortcuts={ariaKeyShortcuts("theme")}
             aria-label="Cambiar entre tema claro y oscuro"
         />
         <span class="theme-icon peer-checked:scale-50 peer-checked:opacity-0 peer-checked:blur-[2px]">

@@ -127,3 +127,37 @@ test("ArrowDown in the search box focuses the first visible card", () => {
 
     assert.equal(document.activeElement?.id, "b");
 });
+
+test("the clear button resets the search and the hint swaps with it", () => {
+    const window = new Window({ url: "https://example.test/characters?q=aya" });
+    const document = window.document;
+    document.body.innerHTML = `
+        <div id="character-filters" data-base-path="/characters" data-page-size="24">
+            <input type="search" data-filter-search value="aya" />
+            <span data-search-hint>Ctrl K</span>
+            <button type="button" data-filter-clear hidden>x</button>
+        </div>
+        <div id="character-grid">
+            <article data-filter-card data-name="Ayaka">A</article>
+            <article data-filter-card data-name="Bennett">B</article>
+        </div>
+    `;
+    initCharacterFilters(
+        document as unknown as globalThis.Document,
+        window as unknown as Parameters<typeof initCharacterFilters>[1],
+    );
+    const clear = document.querySelector<HTMLButtonElement>("[data-filter-clear]");
+    const hint = document.querySelector<HTMLElement>("[data-search-hint]");
+
+    assert.equal(clear?.hidden, false);
+    assert.equal(hint?.hidden, true);
+    assert.deepEqual(visibleCards(document), ["A"]);
+
+    clear?.click();
+
+    assert.equal(window.location.search, "");
+    assert.equal(clear?.hidden, true);
+    assert.equal(hint?.hidden, false);
+    assert.deepEqual(visibleCards(document), ["A", "B"]);
+    assert.equal(document.activeElement, document.querySelector("[data-filter-search]"));
+});
