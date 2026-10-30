@@ -143,3 +143,33 @@ test("filtered URLs reset to the first page and drop default filters", () => {
         "/characters?lang=es",
     );
 });
+
+test("searches names ignoring case and diacritics, together with other filters", () => {
+    const items = [
+        { id: 1, name: "José", element: "fire", rarity: 5 },
+        { id: 2, name: "Jean", element: "anemo", rarity: 5 },
+        { id: 3, name: "Josephine", element: "fire", rarity: 4 },
+    ];
+    const names = (path: string) =>
+        getCharacterListView(items, new URL(path, BASE), options).items.map((item) => item.name);
+
+    assert.deepEqual(names("/characters?q=JOSE"), ["José", "Josephine"]);
+    assert.deepEqual(names("/characters?q=jos&rarity=5"), ["José"]);
+    assert.deepEqual(names("/characters?q=%20%20"), ["José", "Jean", "Josephine"]);
+    assert.equal(getCharacterListView(items, new URL("/characters?q=zzz", BASE), options).isEmpty, true);
+});
+
+test("search URLs keep or drop the query and reset to the first page", () => {
+    const url = new URL("/characters/3?q=ayaka&element=fire", BASE);
+    const filters = { element: "fire", rarity: "all" };
+
+    assert.equal(getFilteredListUrl(url, "/characters", filters), "/characters?q=ayaka&element=fire");
+    assert.equal(
+        getFilteredListUrl(url, "/characters", { ...filters, query: "kok" }),
+        "/characters?q=kok&element=fire",
+    );
+    assert.equal(
+        getFilteredListUrl(url, "/characters", { ...filters, query: "" }),
+        "/characters?element=fire",
+    );
+});

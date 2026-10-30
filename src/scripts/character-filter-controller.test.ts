@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { type Document, type HTMLButtonElement, type HTMLElement, Window } from "happy-dom";
+import {
+    type Document,
+    type HTMLButtonElement,
+    type HTMLElement,
+    type HTMLInputElement,
+    Window,
+} from "happy-dom";
 import { initCharacterFilters } from "./character-filter-controller.ts";
 
 // Filtering and pagination rules are covered by src/services/character-list.test.ts.
@@ -64,4 +70,60 @@ test("syncs cards, buttons and pagination with the URL", () => {
     assert.ok(isPressed(document, '[data-filter-element="ice"]'));
     assert.ok(isPressed(document, '[data-filter-rarity="4"]'));
     assert.ok(!isPressed(document, '[data-filter-element="fire"]'));
+});
+
+test("typing in the search box filters cards and replaces the history entry", () => {
+    const window = new Window({ url: "https://example.test/characters" });
+    const document = window.document;
+    document.body.innerHTML = `
+        <div id="character-filters" data-base-path="/characters" data-page-size="24">
+            <input type="search" data-filter-search />
+        </div>
+        <div id="character-grid">
+            <article data-filter-card data-name="Ayaka">A</article>
+            <article data-filter-card data-name="Bennett">B</article>
+        </div>
+        <p id="no-results" hidden>No hay resultados</p>
+    `;
+    initCharacterFilters(
+        document as unknown as globalThis.Document,
+        window as unknown as Parameters<typeof initCharacterFilters>[1],
+    );
+    const input = document.querySelector<HTMLInputElement>("[data-filter-search]");
+    if (!input) throw new Error("Search fixture is missing");
+
+    input.value = "benn";
+    input.dispatchEvent(new window.Event("input"));
+
+    assert.equal(window.location.search, "?q=benn");
+    assert.deepEqual(visibleCards(document), ["B"]);
+
+    window.history.pushState({}, "", "/characters");
+    window.dispatchEvent(new window.Event("popstate"));
+
+    assert.equal(input.value, "");
+    assert.deepEqual(visibleCards(document), ["A", "B"]);
+});
+
+test("ArrowDown in the search box focuses the first visible card", () => {
+    const window = new Window({ url: "https://example.test/characters?q=benn" });
+    const document = window.document;
+    document.body.innerHTML = `
+        <div id="character-filters" data-base-path="/characters" data-page-size="24">
+            <input type="search" data-filter-search />
+        </div>
+        <div id="character-grid">
+            <div data-filter-card data-name="Ayaka"><a id="a" href="/a">A</a></div>
+            <div data-filter-card data-name="Bennett"><a id="b" href="/b">B</a></div>
+        </div>
+    `;
+    initCharacterFilters(
+        document as unknown as globalThis.Document,
+        window as unknown as Parameters<typeof initCharacterFilters>[1],
+    );
+    const input = document.querySelector<HTMLInputElement>("[data-filter-search]");
+
+    input?.dispatchEvent(new window.KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+
+    assert.equal(document.activeElement?.id, "b");
 });

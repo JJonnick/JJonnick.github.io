@@ -34,7 +34,7 @@ const gameOptions = GAMES.map((game) => ({
             <span class="truncate">{currentGame.label}</span>
         </a>
 
-        <nav class="flex items-center gap-0.5" aria-label="Navegación principal">
+        <nav data-arrow-nav class="flex items-center gap-0.5" aria-label="Navegación principal">
             <HeaderButton href={homeHref} isActive={isHome}>
                 <House slot="before" size={16} aria-hidden="true" />
                 Inicio

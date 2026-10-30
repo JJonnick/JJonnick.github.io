@@ -1,10 +1,11 @@
-import { createLoader, parseAsStringLiteral } from "nuqs";
+import { createLoader, parseAsString, parseAsStringLiteral } from "nuqs";
 
 export const CHARACTER_PAGE_SIZE = 24;
 
 const ALL = "all";
 
 export interface ListableCharacter {
+    name?: string | null | undefined;
     element?: string | null | undefined;
     rarity?: number | string | null | undefined;
 }
@@ -22,6 +23,8 @@ export interface CharacterListFilters {
     element: string;
     /** Active rarity, or `"all"`. Always one of `rarityOptions` or `"all"`. */
     rarity: string;
+    /** Name search as typed in the URL (`?q=`), trimmed; empty when inactive. */
+    query: string;
     elementOptions: string[];
     rarityOptions: string[];
 }
@@ -79,15 +82,26 @@ function collectRarityOptions(items: ListableCharacter[]): string[] {
     return [...present].sort((a, b) => Number(b) - Number(a));
 }
 
+/** Lowercase and strip diacritics so "ayaka" matches "Ayaka" and "jose" matches "José". */
+function normalizeSearch(text: string | null | undefined): string {
+    return (text ?? "")
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .toLowerCase()
+        .trim();
+}
+
 function readFilters(
     search: string,
     elementOptions: string[],
     rarityOptions: string[],
-): Pick<CharacterListFilters, "element" | "rarity"> {
-    return createLoader({
+): Pick<CharacterListFilters, "element" | "rarity" | "query"> {
+    const { q, ...rest } = createLoader({
         element: parseAsStringLiteral([ALL, ...elementOptions]).withDefault(ALL),
         rarity: parseAsStringLiteral([ALL, ...rarityOptions]).withDefault(ALL),
+        q: parseAsString.withDefault(""),
     })(search);
+    return { ...rest, query: q.trim() };
 }
 
 function readRequestedPage(pathname: string, basePath: string): number {
@@ -125,12 +139,14 @@ export function getCharacterListView<T extends ListableCharacter>(
 ): CharacterListView<T> {
     const elementOptions = collectElementOptions(items, elementOrder);
     const rarityOptions = collectRarityOptions(items);
-    const { element, rarity } = readFilters(url.search, elementOptions, rarityOptions);
+    const { element, rarity, query } = readFilters(url.search, elementOptions, rarityOptions);
+    const needle = normalizeSearch(query);
 
     const filteredItems = items.filter(
         (item) =>
             (element === ALL || normalizeElement(item.element) === element) &&
-            (rarity === ALL || normalizeRarity(item.rarity) === rarity),
+            (rarity === ALL || normalizeRarity(item.rarity) === rarity) &&
+            (needle === "" || normalizeSearch(item.name).includes(needle)),
     );
 
     const safePageSize = Math.max(1, pageSize);
@@ -146,7 +162,7 @@ export function getCharacterListView<T extends ListableCharacter>(
 
     return {
         items: filteredItems.slice(pageStart, pageStart + safePageSize),
-        filters: { element, rarity, elementOptions, rarityOptions },
+        filters: { element, rarity, query, elementOptions, rarityOptions },
         pagination: {
             isHidden: isEmpty || totalPages <= 1,
             currentPage,
@@ -180,12 +196,16 @@ export function getCharacterListView<T extends ListableCharacter>(
 export function getFilteredListUrl(
     url: URL,
     basePath: string,
-    filters: Pick<CharacterListFilters, "element" | "rarity">,
+    filters: Pick<CharacterListFilters, "element" | "rarity"> & { query?: string },
 ): string {
     const params = new URLSearchParams(url.search);
     for (const key of ["element", "rarity"] as const) {
         if (filters[key] === ALL) params.delete(key);
         else params.set(key, filters[key]);
+    }
+    if (filters.query !== undefined) {
+        if (filters.query.trim() === "") params.delete("q");
+        else params.set("q", filters.query);
     }
     const search = params.toString();
     return `${basePath}${search ? `?${search}` : ""}`;
