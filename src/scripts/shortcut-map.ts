@@ -5,7 +5,14 @@
  * Every shortcut needs a modifier or a non-printable key (WCAG 2.1.4). Letters
  * match on `event.code` so Option+letter on macOS and non-US layouts still work.
  */
-export type ShortcutId = "search" | "help" | "theme" | "gameMenu" | "prevPage" | "nextPage";
+export type ShortcutId =
+    | "search"
+    | "help"
+    | "theme"
+    | "gameMenu"
+    | "prevPage"
+    | "nextPage"
+    | "back";
 
 export interface KeyCombo {
     /** `KeyboardEvent.code`, e.g. `KeyK` or `ArrowLeft`. */
@@ -29,8 +36,9 @@ export const SHORTCUTS: readonly Shortcut[] = [
     { id: "help", combo: { code: "KeyH", alt: true }, label: "Ver atajos de teclado", whileTyping: true },
     { id: "theme", combo: { code: "KeyT", alt: true }, label: "Cambiar tema", whileTyping: true },
     { id: "gameMenu", combo: { code: "KeyG", alt: true }, label: "Cambiar de juego", whileTyping: true },
-    { id: "prevPage", combo: { code: "ArrowLeft", shift: true }, label: "Página anterior", whileTyping: false },
-    { id: "nextPage", combo: { code: "ArrowRight", shift: true }, label: "Página siguiente", whileTyping: false },
+    { id: "prevPage", combo: { code: "ArrowLeft", shift: true }, label: "Página o personaje anterior", whileTyping: false },
+    { id: "nextPage", combo: { code: "ArrowRight", shift: true }, label: "Página o personaje siguiente", whileTyping: false },
+    { id: "back", combo: { code: "Escape" }, label: "Volver al listado", whileTyping: false },
 ];
 
 type ModifierState = Pick<KeyboardEvent, "code" | "ctrlKey" | "metaKey" | "altKey" | "shiftKey">;

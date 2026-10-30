@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getCharacterListView, getFilteredListUrl } from "./character-list.ts";
+import { getCharacterListView, getCharacterNeighbors, getFilteredListUrl } from "./character-list.ts";
 
 const BASE = "https://example.test";
 const options = { basePath: "/characters", pageSize: 24 };
@@ -172,4 +172,20 @@ test("search URLs keep or drop the query and reset to the first page", () => {
         getFilteredListUrl(url, "/characters", { ...filters, query: "" }),
         "/characters?element=fire",
     );
+});
+
+test("neighbours follow the list order and stop at the ends", () => {
+    const items = [
+        { id: 1, name: "A" },
+        { id: 2, name: "B" },
+        { id: "3", name: "C" },
+    ];
+
+    assert.deepEqual(getCharacterNeighbors(items, 2), {
+        prev: { id: 1, name: "A" },
+        next: { id: "3", name: "C" },
+    });
+    assert.deepEqual(getCharacterNeighbors(items, 1), { next: { id: 2, name: "B" } });
+    assert.deepEqual(getCharacterNeighbors(items, "3"), { prev: { id: 2, name: "B" } });
+    assert.deepEqual(getCharacterNeighbors(items, 99), {});
 });

@@ -210,3 +210,32 @@ export function getFilteredListUrl(
     const search = params.toString();
     return `${basePath}${search ? `?${search}` : ""}`;
 }
+
+export interface CharacterNeighbor {
+    id: number | string;
+    name: string;
+}
+
+export interface CharacterNeighbors {
+    prev?: CharacterNeighbor;
+    next?: CharacterNeighbor;
+}
+
+/**
+ * The Characters before and after one in the Character list order, without
+ * wrapping around. Filters are not applied: a detail URL carries none.
+ */
+export function getCharacterNeighbors(
+    items: readonly CharacterNeighbor[],
+    id: number | string,
+): CharacterNeighbors {
+    const index = items.findIndex((item) => String(item.id) === String(id));
+    if (index === -1) return {};
+
+    const pick = (item: CharacterNeighbor | undefined) =>
+        item && { id: item.id, name: item.name };
+    return {
+        ...(index > 0 && { prev: pick(items[index - 1]) }),
+        ...(index < items.length - 1 && { next: pick(items[index + 1]) }),
+    };
+}

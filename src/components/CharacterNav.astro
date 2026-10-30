@@ -1,0 +1,61 @@
+---
+import type { Game } from "@/games";
+import type { CharacterNeighbors } from "@/services/character-list";
+import { ariaKeyShortcuts } from "@/scripts/shortcut-map";
+import { ArrowLeft, ArrowRight, Users } from "@lucide/astro";
+
+interface Props extends CharacterNeighbors {
+    game: Game;
+}
+
+const { game, prev, next } = Astro.props;
+const href = (id: number | string) => `${game.charactersPath}/${id}`;
+---
+
+<nav
+    aria-label="Navegación entre personajes"
+    data-arrow-nav
+    class="mx-auto mt-5 grid w-full max-w-4xl grid-cols-[1fr_auto_1fr] items-center gap-2"
+>
+    {
+        prev ? (
+            <a
+                href={href(prev.id)}
+                rel="prev"
+                data-page-prev-link
+                aria-keyshortcuts={ariaKeyShortcuts("prevPage")}
+                class="ui-control ui-control-idle min-w-0 max-w-full justify-self-start"
+            >
+                <ArrowLeft size={16} aria-hidden="true" class="shrink-0" />
+                <span class="truncate">{prev.name}</span>
+            </a>
+        ) : (
+            <span aria-hidden="true"></span>
+        )
+    }
+    <a
+        href={game.charactersPath}
+        data-back-to-list
+        aria-keyshortcuts="Escape"
+        class="ui-control ui-control-idle shrink-0"
+    >
+        <Users size={16} aria-hidden="true" />
+        <span class="max-sm:sr-only">Todos los personajes</span>
+    </a>
+    {
+        next ? (
+            <a
+                href={href(next.id)}
+                rel="next"
+                data-page-next-link
+                aria-keyshortcuts={ariaKeyShortcuts("nextPage")}
+                class="ui-control ui-control-idle min-w-0 max-w-full justify-self-end"
+            >
+                <span class="truncate">{next.name}</span>
+                <ArrowRight size={16} aria-hidden="true" class="shrink-0" />
+            </a>
+        ) : (
+            <span aria-hidden="true"></span>
+        )
+    }
+</nav>
