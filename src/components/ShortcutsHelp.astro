@@ -1,0 +1,41 @@
+---
+import { SHORTCUTS } from "@/scripts/shortcut-map";
+import Kbd from "./Kbd.astro";
+
+const navigation = [
+    { label: "Moverse dentro de un grupo", keys: ["←", "→", "↑", "↓"] },
+    { label: "Primer / último elemento del grupo", keys: ["Home", "End"] },
+];
+---
+
+<dialog
+    id="shortcuts-dialog"
+    aria-labelledby="shortcuts-title"
+    class="surface-panel m-auto w-[min(26rem,calc(100vw-2rem))] p-5 text-slate-900 shadow-lg backdrop:bg-slate-950/40 dark:text-slate-100"
+>
+    <div class="mb-3 flex items-center justify-between gap-3">
+        <h2 id="shortcuts-title" class="text-base font-semibold">Atajos de teclado</h2>
+        <form method="dialog">
+            <button type="submit" class="ui-control ui-control-idle" autofocus>Cerrar</button>
+        </form>
+    </div>
+
+    <dl class="space-y-2 text-sm">
+        {
+            SHORTCUTS.map((shortcut) => (
+                <div class="flex items-center justify-between gap-4">
+                    <dt class="text-slate-600 dark:text-slate-300">{shortcut.label}</dt>
+                    <dd><Kbd shortcut={shortcut.id} /></dd>
+                </div>
+            ))
+        }
+        {
+            navigation.map((item) => (
+                <div class="flex items-center justify-between gap-4">
+                    <dt class="text-slate-600 dark:text-slate-300">{item.label}</dt>
+                    <dd><Kbd keys={item.keys} /></dd>
+                </div>
+            ))
+        }
+    </dl>
+</dialog>

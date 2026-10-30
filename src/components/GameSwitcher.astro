@@ -1,5 +1,6 @@
 ---
 import { ChevronDown } from "@lucide/astro";
+import { ariaKeyShortcuts } from "@/scripts/shortcut-map";
 
 interface GameOption {
     id: string;
@@ -28,6 +29,7 @@ const triggerId = "game-switcher-trigger";
         popovertarget={popoverId}
         aria-controls={popoverId}
         aria-haspopup="true"
+        aria-keyshortcuts={ariaKeyShortcuts("gameMenu")}
         class="ui-control ui-control-idle pr-2"
         aria-label={`Juego actual: ${currentGame.label}. Cambiar de juego`}
     >

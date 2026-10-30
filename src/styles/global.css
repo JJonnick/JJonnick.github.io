@@ -50,6 +50,11 @@
         outline: none;
     }
 
+    /* The clear button is our own; hide the browser's second ×. */
+    .character-search::-webkit-search-cancel-button {
+        appearance: none;
+    }
+
     .ui-segmented {
         @apply inline-flex flex-wrap items-center gap-0.5 rounded-xl bg-slate-200/60 p-0.5;
         @apply dark:bg-slate-900 dark:ring-1 dark:ring-white/5;

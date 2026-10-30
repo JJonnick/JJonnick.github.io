@@ -1,0 +1,31 @@
+---
+import { comboKeys, SHORTCUTS, type ShortcutId } from "@/scripts/shortcut-map";
+
+interface Props {
+    /** Shortcut from the shortcut map; its keys are derived from it. */
+    shortcut?: ShortcutId;
+    /** Literal keys, for hints that are not in the shortcut map. */
+    keys?: string[];
+    class?: string;
+    [attribute: `data-${string}`]: string | boolean | undefined;
+}
+
+const { shortcut, keys: literalKeys, class: className, ...attributes } = Astro.props;
+const combo = SHORTCUTS.find((item) => item.id === shortcut)?.combo;
+// Modifiers carry `data-key` so the page can swap them for ⌘ / ⌥ on macOS.
+const keys = literalKeys ?? (combo ? comboKeys(combo) : []);
+const modifiers = new Set(["Mod", "Alt", "Shift"]);
+---
+
+<span class:list={["inline-flex items-center gap-0.5", className]} {...attributes}>
+    {
+        keys.map((key) => (
+            <kbd
+                data-key={modifiers.has(key) ? key : undefined}
+                class="inline-flex min-w-5 items-center justify-center rounded border border-slate-300 bg-slate-100 px-1 font-sans text-[11px] leading-5 font-medium text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+            >
+                {key === "Mod" ? "Ctrl" : key}
+            </kbd>
+        ))
+    }
+</span>

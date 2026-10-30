@@ -84,6 +84,8 @@ export function initCharacterFilters(
         name: card.dataset.name,
     }));
     const searchInput = filtersBar.querySelector<HTMLInputElement>("[data-filter-search]");
+    const clearButton = filtersBar.querySelector<HTMLElement>("[data-filter-clear]");
+    const searchHint = filtersBar.querySelector<HTMLElement>("[data-search-hint]");
     const cleanupCallbacks: Array<() => void> = [];
 
     const render = () => {
@@ -110,6 +112,9 @@ export function initCharacterFilters(
         if (searchInput && searchInput.value.trim() !== view.filters.query) {
             searchInput.value = view.filters.query;
         }
+        const hasQuery = view.filters.query !== "";
+        if (clearButton) clearButton.hidden = !hasQuery;
+        if (searchHint) searchHint.hidden = hasQuery;
 
         applyPagination(document, view);
         return view;
@@ -156,11 +161,18 @@ export function initCharacterFilters(
                 }
             }
         };
+        const onClear = () => {
+            searchInput.value = "";
+            onInput();
+            searchInput.focus();
+        };
         searchInput.addEventListener("input", onInput);
         searchInput.addEventListener("keydown", onKeyDown);
+        clearButton?.addEventListener("click", onClear);
         cleanupCallbacks.push(() => {
             searchInput.removeEventListener("input", onInput);
             searchInput.removeEventListener("keydown", onKeyDown);
+            clearButton?.removeEventListener("click", onClear);
         });
     }
 

@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
 import Header from "@/components/Header.astro";
+import ShortcutsHelp from "@/components/ShortcutsHelp.astro";
 import { getGameForPath } from "@/games";
 import "@/styles/global.css";
 interface Props {
@@ -81,6 +82,7 @@ const description = getGameForPath(Astro.url.pathname).copy.tagline;
 		<main id="main-content" tabindex="-1" class="focus:outline-none" transition:name="page">
 			<slot />
 		</main>
+		<ShortcutsHelp />
 		<style is:global>
 			:root {
 				--accent: 3, 105, 161;
