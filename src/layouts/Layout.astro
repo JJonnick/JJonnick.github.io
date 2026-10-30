@@ -71,8 +71,14 @@ const description = getGameForPath(Astro.url.pathname).copy.tagline;
 		<slot name="head" />
 	</head>
 	<body class="relative bg-slate-100 dark:bg-slate-950 min-h-dvh">
+		<a
+			href="#main-content"
+			class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-2 focus-visible:left-2 focus-visible:z-50 focus-visible:rounded-lg focus-visible:bg-white focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-medium focus-visible:text-slate-900 focus-visible:ring-2 focus-visible:ring-sky-400/80 focus-visible:outline-none dark:focus-visible:bg-slate-900 dark:focus-visible:text-slate-100"
+		>
+			Saltar al contenido
+		</a>
 		<Header />
-		<main transition:name="page">
+		<main id="main-content" tabindex="-1" class="focus:outline-none" transition:name="page">
 			<slot />
 		</main>
 		<style is:global>
