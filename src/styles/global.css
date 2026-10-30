@@ -45,6 +45,11 @@
     }
 
     /* Compact track that groups related controls (filters, pagination). */
+    /* Programmatic focus targets (page heading after navigation) shouldn't draw a ring. */
+    [tabindex="-1"]:focus {
+        outline: none;
+    }
+
     .ui-segmented {
         @apply inline-flex flex-wrap items-center gap-0.5 rounded-xl bg-slate-200/60 p-0.5;
         @apply dark:bg-slate-900 dark:ring-1 dark:ring-white/5;
