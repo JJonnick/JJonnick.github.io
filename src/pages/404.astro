@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Content from "@/layouts/Content.astro";
+import { House } from "@lucide/astro";
 ---
 
 <Layout title="404 - Página no encontrada">
@@ -9,5 +10,9 @@ import Content from "@/layouts/Content.astro";
         <p class="text-muted-body mt-2 max-w-2xl">
             La ruta que intentaste abrir no existe o ya no está disponible.
         </p>
+        <a href="/" class="ui-control ui-control-active mt-5">
+            <House size={16} aria-hidden="true" />
+            Volver al inicio
+        </a>
     </Content>
 </Layout>
