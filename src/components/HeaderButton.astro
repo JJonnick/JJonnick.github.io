@@ -10,7 +10,7 @@ const { href, isActive = false, className = "" } = Astro.props;
 
 <a
   href={href}
-  class:list={["ui-control max-sm:w-9 max-sm:justify-center max-sm:px-0", isActive ? "ui-control-active" : "ui-control-idle", className]}
+  class:list={["ui-control max-sm:w-9 max-sm:justify-center max-sm:px-0 max-sm:pointer-coarse:w-11", isActive ? "ui-control-active" : "ui-control-idle", className]}
   aria-current={isActive ? "page" : undefined}
 >
     <span class="flex shrink-0">
