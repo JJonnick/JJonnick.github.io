@@ -24,7 +24,7 @@
     }
 
     .ui-control {
-        @apply inline-flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm font-medium whitespace-nowrap select-none;
+        @apply inline-flex h-9 items-center gap-1.5 rounded-lg px-3 pointer-coarse:h-11 text-sm font-medium whitespace-nowrap select-none;
         @apply transition-[background-color,color,box-shadow,transform] duration-150 ease-out-strong;
         @apply active:scale-[0.97] motion-reduce:active:scale-100;
         @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950;
@@ -41,7 +41,7 @@
     }
 
     .ui-control-icon {
-        @apply w-9 justify-center px-0;
+        @apply w-9 justify-center px-0 pointer-coarse:w-11;
     }
 
     /* Compact track that groups related controls (filters, pagination). */
