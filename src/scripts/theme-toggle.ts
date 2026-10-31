@@ -21,3 +21,15 @@ export function initThemeToggle(document: Document, storage: ThemeStorage): () =
     input.addEventListener("change", onChange);
     return () => input.removeEventListener("change", onChange);
 }
+
+/**
+ * The ClientRouter replaces the <html> attributes with the incoming document's, which has no
+ * `dark` class, so dark mode would flash light until the inline script re-adds it. Carry the
+ * current theme onto the incoming document before the swap.
+ */
+export function carryThemeToDocument(incoming: Document, current: Document): void {
+    incoming.documentElement.classList.toggle(
+        "dark",
+        current.documentElement.classList.contains("dark"),
+    );
+}

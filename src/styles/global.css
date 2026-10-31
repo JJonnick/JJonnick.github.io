@@ -92,7 +92,7 @@
 }
 
 .counter-num {
-    animation: count-up 1.5s ease-out forwards;
+    animation: count-up 700ms var(--ease-out-strong) forwards;
     counter-reset: num var(--num);
 }
 
