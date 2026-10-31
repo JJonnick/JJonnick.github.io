@@ -36,3 +36,7 @@ Project skills live in `.agents/skills`, pinned in `skills-lock.json` (`npx skil
 ## Git
 
 Conventional Commits (types listed in `README.md`). Small, focused PRs.
+
+## Decisions
+
+Why-we-did-it records live in `docs/adr/`. Read them before proposing to swap a library or change a pattern they cover; add one only for decisions that are hard to reverse, surprising and a real trade-off.
