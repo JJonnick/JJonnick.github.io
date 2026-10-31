@@ -106,18 +106,21 @@ const description = getGameForPath(Astro.url.pathname).copy.tagline;
 					Courier New,
 					monospace;
 			}
-			/* Page changes happen often: keep them short, exit faster than enter. */
+			/*
+			 * Page changes happen often: keep them short. The UA blends old and new with
+			 * plus-lighter, so both sides must share duration and curve: their opacities then sum
+			 * to 1 and the content never dips mid-transition.
+			 */
 			::view-transition-old(page),
 			::view-transition-new(page) {
+				animation-duration: 180ms;
 				animation-timing-function: var(--ease-out-strong);
 			}
 			::view-transition-old(page) {
 				animation-name: page-out;
-				animation-duration: 140ms;
 			}
 			::view-transition-new(page) {
 				animation-name: page-in;
-				animation-duration: 220ms;
 			}
 			::view-transition-group(*) {
 				animation-duration: 240ms;
@@ -126,37 +129,50 @@ const description = getGameForPath(Astro.url.pathname).copy.tagline;
 			@keyframes page-out {
 				from {
 					opacity: 1;
-					transform: translateY(0);
 				}
 				to {
 					opacity: 0;
-					transform: translateY(-4px);
 				}
 			}
 			@keyframes page-in {
 				from {
 					opacity: 0;
-					transform: translateY(8px) scale(0.995);
+					transform: translateY(6px);
 				}
 				to {
 					opacity: 1;
-					transform: translateY(0) scale(1);
+					transform: translateY(0);
 				}
 			}
+			/* Reduced motion drops movement, not feedback: keep a plain crossfade so nothing cuts. */
 			@media (prefers-reduced-motion: reduce) {
 				::view-transition-old(page),
 				::view-transition-new(page) {
-					animation-name: none;
-					transform: none;
-					filter: none;
+					animation-duration: 150ms;
+					animation-timing-function: ease;
+				}
+				::view-transition-old(page) {
+					animation-name: page-out;
+				}
+				::view-transition-new(page) {
+					animation-name: page-fade-in;
 				}
 				::view-transition-group(*) {
 					animation-name: none;
+				}
+				@keyframes page-fade-in {
+					from {
+						opacity: 0;
+					}
+					to {
+						opacity: 1;
+					}
 				}
 			}
 		</style>
 		<script>
 			import "@/scripts/keyboard-init";
+			import "@/scripts/theme-persist";
 		</script>
 	</body>
 </html>

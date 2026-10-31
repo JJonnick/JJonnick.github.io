@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { type HTMLInputElement, Window } from "happy-dom";
-import { initThemeToggle } from "./theme-toggle.ts";
+import { carryThemeToDocument, initThemeToggle } from "./theme-toggle.ts";
 
 test("syncs the switch with the document theme", () => {
     const window = new Window({ url: "https://example.test/" });
@@ -26,4 +26,24 @@ test("persists theme changes", () => {
 
     assert.equal(window.document.documentElement.classList.contains("dark"), true);
     assert.equal(window.localStorage.getItem("theme"), "dark");
+});
+
+test("carries the dark theme onto the incoming document", () => {
+    const current = new Window({ url: "https://example.test/" });
+    const incoming = new Window({ url: "https://example.test/next" });
+    current.document.documentElement.classList.add("dark");
+
+    carryThemeToDocument(incoming.document as unknown as Document, current.document as unknown as Document);
+
+    assert.equal(incoming.document.documentElement.classList.contains("dark"), true);
+});
+
+test("carries the light theme onto the incoming document", () => {
+    const current = new Window({ url: "https://example.test/" });
+    const incoming = new Window({ url: "https://example.test/next" });
+    incoming.document.documentElement.classList.add("dark");
+
+    carryThemeToDocument(incoming.document as unknown as Document, current.document as unknown as Document);
+
+    assert.equal(incoming.document.documentElement.classList.contains("dark"), false);
 });
