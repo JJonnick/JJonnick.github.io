@@ -24,10 +24,10 @@
     "finish_cnt": 0
   },
   "diary": {
-    "month": 10,
-    "current_hcoin": 9362,
-    "current_rails_pass": 18,
-    "last_hcoin": 12630,
-    "last_rails_pass": 35
+    "month": 11,
+    "current_hcoin": 0,
+    "current_rails_pass": 0,
+    "last_hcoin": 9812,
+    "last_rails_pass": 18
   }
 }
