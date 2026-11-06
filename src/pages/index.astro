@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import Chests from "@/components/Chests.astro";
 import Oculis from "@/components/Oculis.astro";
 import { loadDataset } from "@/services/dataset-loader";
+import KpiStrip, { type Kpi } from "@/components/KpiStrip.astro";
 import StatsList, { type StatRow } from "@/components/StatsList.astro";
 import { toSafeNumber } from "@/utils/numbers";
 
@@ -31,15 +32,18 @@ const oculis = {
     luno: toSafeNumber(stats?.lunoculi),
 };
 
+const kpis: Kpi[] = [
+    { label: "Nivel", value: level },
+    { label: "Días activos", value: toSafeNumber(stats.days_active) },
+    { label: "Logros", value: toSafeNumber(stats.achievements) },
+    { label: "Abismo", value: stats.spiral_abyss || "-" },
+];
+
 const summaryRows: StatRow[] = [
     { icon: "User", value: nickname, label: "Jugador" },
-    { icon: "Star", value: level, label: "Nivel" },
-    { icon: "Calendar", value: toSafeNumber(stats.days_active), label: "Días activos" },
-    { icon: "Award", value: toSafeNumber(stats.achievements), label: "Logros" },
     { icon: "Users", value: toSafeNumber(stats.characters), label: "Personajes" },
     { icon: "MapPin", value: toSafeNumber(stats.unlocked_waypoints), label: "Teletransportes" },
     { icon: "Map", value: toSafeNumber(stats.unlocked_domains), label: "Dominios" },
-    { icon: "Shell", value: stats.spiral_abyss || "-", label: "Abismo" },
 ];
 ---
 
@@ -52,7 +56,9 @@ const summaryRows: StatRow[] = [
             Datos principales, cofres y oculus en una sola vista.
         </p>
 
-        <div class="mt-5 grid gap-6 lg:grid-cols-[minmax(0,19rem)_1fr]">
+        <KpiStrip items={kpis} class="mt-5" />
+
+        <div class="mt-6 grid gap-6 lg:grid-cols-[minmax(0,19rem)_1fr]">
             <StatsList rows={summaryRows} />
 
             <section class="space-y-3">
