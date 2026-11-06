@@ -56,6 +56,11 @@ test("swaps modifier labels for macOS symbols only on macOS", () => {
     assert.deepEqual(texts(), ["⌘", "⌥", "K"]);
 });
 
+test("Alt+B toggles the sidebar", () => {
+    assert.equal(findShortcut({ ...base, code: "KeyB", altKey: true })?.id, "sidebar");
+    assert.equal(ariaKeyShortcuts("sidebar"), "Alt+B");
+});
+
 test("Escape is a bare shortcut only for going back", () => {
     assert.equal(findShortcut({ ...base, code: "Escape" })?.id, "back");
     assert.equal(findShortcut({ ...base, code: "Escape", shiftKey: true }), undefined);

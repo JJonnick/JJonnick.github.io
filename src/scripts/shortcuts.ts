@@ -1,4 +1,5 @@
 import { findShortcut, type ShortcutId } from "./shortcut-map.ts";
+import { toggleSidebar } from "./sidebar.ts";
 
 const TYPING_SELECTOR = "input:not([data-theme-toggle]), textarea, select, [contenteditable]";
 
@@ -18,6 +19,15 @@ function openGameSwitcher(document: Document) {
     const target =
         popover.querySelector<HTMLElement>("[aria-current]") ?? popover.querySelector<HTMLElement>("a");
     target?.focus();
+}
+
+/** Returns false when the sidebar isn't shown (below `lg` it is hidden), so the key keeps its default. */
+function toggleSidebarShortcut(document: Document): boolean {
+    const toggle = document.querySelector<HTMLElement>("[data-sidebar-toggle]");
+    const storage = document.defaultView?.localStorage;
+    if (!toggle || !storage || toggle.offsetParent === null) return false;
+    toggleSidebar(document, storage, { instant: true });
+    return true;
 }
 
 /** Returns false when the page has no search box, so the key keeps its default. */
@@ -50,6 +60,7 @@ const ACTIONS: Record<ShortcutId, (document: Document) => boolean | undefined> =
     help: (document) => void toggleHelp(document),
     theme: (document) => void document.querySelector<HTMLElement>("[data-theme-toggle]")?.click(),
     gameMenu: (document) => void openGameSwitcher(document),
+    sidebar: toggleSidebarShortcut,
     prevPage: (document) => void clickVisible(document, "[data-page-prev-link]"),
     nextPage: (document) => void clickVisible(document, "[data-page-next-link]"),
     back: goBackToList,
