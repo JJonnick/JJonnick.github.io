@@ -1,0 +1,47 @@
+---
+import { House, PanelLeft, Users } from "@lucide/astro";
+import { ariaKeyShortcuts } from "@/scripts/shortcut-map";
+import { getGameForPath, isInCharacterSection } from "@/games";
+
+const pathname = Astro.url.pathname;
+const game = getGameForPath(pathname);
+const isCharacters = isInCharacterSection(game, pathname);
+
+const items = [
+    { href: game.homePath, label: "Inicio", Icon: House, isActive: pathname === game.homePath },
+    { href: game.charactersPath, label: "Personajes", Icon: Users, isActive: isCharacters },
+];
+---
+
+<aside
+    class="sidebar sticky top-14 hidden h-[calc(100dvh-3.5rem)] flex-col overflow-hidden border-r border-slate-900/5 p-2 lg:flex dark:border-white/5"
+>
+    <nav id="sidebar-nav" data-arrow-nav aria-label="Menú lateral" class="flex flex-col gap-0.5">
+        {
+            items.map(({ href, label, Icon, isActive }) => (
+                <a
+                    href={href}
+                    title={label}
+                    aria-current={isActive ? "page" : undefined}
+                    class:list={["ui-control", isActive ? "ui-control-active" : "ui-control-idle"]}
+                >
+                    <Icon size={16} class="shrink-0" aria-hidden="true" />
+                    <span class="sidebar-label">{label}</span>
+                </a>
+            ))
+        }
+    </nav>
+
+    <button
+        type="button"
+        data-sidebar-toggle
+        aria-controls="sidebar-nav"
+        aria-expanded="true"
+        aria-label="Contraer menú"
+        aria-keyshortcuts={ariaKeyShortcuts("sidebar")}
+        class="ui-control ui-control-idle mt-auto"
+    >
+        <PanelLeft size={16} class="shrink-0" aria-hidden="true" />
+        <span class="sidebar-label">Ocultar menú</span>
+    </button>
+</aside>

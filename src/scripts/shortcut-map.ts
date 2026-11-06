@@ -10,6 +10,7 @@ export type ShortcutId =
     | "help"
     | "theme"
     | "gameMenu"
+    | "sidebar"
     | "prevPage"
     | "nextPage"
     | "back";
@@ -36,6 +37,7 @@ export const SHORTCUTS: readonly Shortcut[] = [
     { id: "help", combo: { code: "KeyH", alt: true }, label: "Ver atajos de teclado", whileTyping: true },
     { id: "theme", combo: { code: "KeyT", alt: true }, label: "Cambiar tema", whileTyping: true },
     { id: "gameMenu", combo: { code: "KeyG", alt: true }, label: "Cambiar de juego", whileTyping: true },
+    { id: "sidebar", combo: { code: "KeyB", alt: true }, label: "Mostrar u ocultar el menú lateral", whileTyping: true },
     { id: "prevPage", combo: { code: "ArrowLeft", shift: true }, label: "Página o personaje anterior", whileTyping: false },
     { id: "nextPage", combo: { code: "ArrowRight", shift: true }, label: "Página o personaje siguiente", whileTyping: false },
     { id: "back", combo: { code: "Escape" }, label: "Volver al listado", whileTyping: false },

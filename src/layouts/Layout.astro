@@ -3,6 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
 import Header from "@/components/Header.astro";
 import ShortcutsHelp from "@/components/ShortcutsHelp.astro";
+import Sidebar from "@/components/Sidebar.astro";
 import { getGameForPath } from "@/games";
 import "@/styles/global.css";
 interface Props {
@@ -28,6 +29,13 @@ const description = getGameForPath(Astro.url.pathname).copy.tagline;
 		<ClientRouter />
 		<script is:inline data-astro-rerun="true">
 			(function () {
+				// Sidebar width must be known before first paint; the toggle logic lives in sidebar.ts.
+				try {
+					if (localStorage.getItem("sidebar") === "collapsed") {
+						document.documentElement.dataset.sidebar = "collapsed";
+					}
+				} catch (_) {}
+
 				try {
 					var theme = localStorage.getItem("theme");
 					var isDark = false;
@@ -79,9 +87,12 @@ const description = getGameForPath(Astro.url.pathname).copy.tagline;
 			Saltar al contenido
 		</a>
 		<Header />
-		<main id="main-content" tabindex="-1" class="focus:outline-none" transition:name="page">
-			<slot />
-		</main>
+		<div class="app-shell">
+			<Sidebar />
+			<main id="main-content" tabindex="-1" class="min-w-0 focus:outline-none" transition:name="page">
+				<slot />
+			</main>
+		</div>
 		<ShortcutsHelp />
 		<style is:global>
 			:root {

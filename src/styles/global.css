@@ -60,6 +60,48 @@
         @apply dark:bg-slate-900 dark:ring-1 dark:ring-white/5;
     }
 
+    /*
+     * Sidebar shell. The column is the only thing that animates (pointer toggles, 200ms): content
+     * reflows in the same frame, and labels just fade, so icons never move. Keyboard toggles set
+     * `data-sidebar-instant` and skip the transition.
+     */
+    .app-shell {
+        --sidebar-w: 14rem;
+    }
+
+    html[data-sidebar="collapsed"] .app-shell {
+        --sidebar-w: 3.5rem;
+    }
+
+    @media (min-width: 64rem) {
+        .app-shell {
+            display: grid;
+            grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+            transition: grid-template-columns 200ms var(--ease-out-strong);
+        }
+    }
+
+    .sidebar-label {
+        transition: opacity 120ms var(--ease-out-strong);
+    }
+
+    html[data-sidebar="collapsed"] .sidebar-label {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    html[data-sidebar-instant] .app-shell,
+    html[data-sidebar-instant] .sidebar-label {
+        transition: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .app-shell,
+        .sidebar-label {
+            transition: none;
+        }
+    }
+
     .surface-panel {
         @apply rounded-lg border border-slate-200 bg-white/95 dark:border-slate-800 dark:bg-slate-900;
     }
