@@ -1,0 +1,37 @@
+---
+import CounterNumber from "./CounterNumber.astro";
+
+export interface Kpi {
+    label: string;
+    /** Numbers count up; strings (e.g. the Spiral Abyss floor "12-3") render as-is. */
+    value: string | number;
+}
+
+interface Props {
+    items: Kpi[];
+    class?: string;
+}
+
+const { items, class: className = "" } = Astro.props;
+---
+
+<dl class:list={["grid grid-cols-2 gap-4 lg:grid-cols-4", className]}>
+    {
+        items.map((item) => (
+            <div class="surface-panel p-4">
+                <dt class="text-xs font-medium uppercase tracking-[0.12em] text-slate-600 dark:text-slate-400">
+                    {item.label}
+                </dt>
+                <dd class="mt-1 text-3xl font-extrabold text-slate-900 tabular-nums dark:text-slate-50">
+                    {
+                        typeof item.value === "number" ? (
+                            <CounterNumber value={item.value} />
+                        ) : (
+                            item.value
+                        )
+                    }
+                </dd>
+            </div>
+        ))
+    }
+</dl>
