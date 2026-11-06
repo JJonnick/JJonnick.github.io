@@ -2,7 +2,7 @@
   "memory_of_chaos": {
     "has_data": true,
     "total_stars": 36,
-    "max_floor": "Crossing the Afterlife (XII)",
+    "max_floor": "Survival of the Fittest (XII)",
     "total_battles": 3
   },
   "pure_fiction": {
@@ -25,8 +25,8 @@
   },
   "diary": {
     "month": 11,
-    "current_hcoin": 0,
-    "current_rails_pass": 0,
+    "current_hcoin": 1350,
+    "current_rails_pass": 19,
     "last_hcoin": 9812,
     "last_rails_pass": 18
   }
