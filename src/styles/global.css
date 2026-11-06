@@ -61,14 +61,16 @@
     }
 
     .surface-panel {
-        @apply rounded-lg border border-slate-200 bg-white/95 dark:border-slate-800 dark:bg-slate-900;
+        @apply rounded-lg border border-slate-200 bg-white/95 dark:border-white/8 dark:bg-slate-900;
+        /* Dark mode gets depth from a faint top highlight, not drop shadows. */
+        @apply dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.04)];
     }
 
     .surface-card-interactive {
         @apply rounded-lg border border-slate-200 bg-white/95;
         @apply transition-[background-color,transform] duration-150 ease-out-strong;
         @apply active:scale-[0.98] motion-reduce:active:scale-100;
-        @apply dark:border-slate-800 dark:bg-slate-900;
+        @apply dark:border-white/8 dark:bg-slate-900 dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.04)];
         @apply hover:bg-slate-50 active:bg-slate-100;
         @apply dark:hover:bg-slate-800 dark:active:bg-slate-700;
         @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-900;
