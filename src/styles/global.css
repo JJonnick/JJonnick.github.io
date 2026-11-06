@@ -85,6 +85,25 @@
     }
 }
 
+/* Progress bar fill: grows from the left with transform only (no layout work). */
+.progress-fill {
+    transform: scaleX(calc(var(--p) / 100));
+    transform-origin: left;
+    animation: progress-grow 700ms var(--ease-out-strong) both;
+}
+
+@keyframes progress-grow {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .progress-fill {
+        animation: none;
+    }
+}
+
 @property --num {
     syntax: "<integer>";
     initial-value: 0;

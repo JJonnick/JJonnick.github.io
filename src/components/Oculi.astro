@@ -1,15 +1,18 @@
 ---
 import { Image } from "astro:assets";
 import { type ImageMetadata } from "astro";
+import type { OculusProgress } from "@/games/genshin/oculi";
 import CounterNumber from "./CounterNumber.astro";
 
 interface Props {
     quantity: number;
     image: ImageMetadata;
     label: string;
+    /** Omit when the total is unknown: the tile then shows no bar. */
+    progress?: OculusProgress | null;
 }
 
-const { quantity, image, label } = Astro.props;
+const { quantity, image, label, progress } = Astro.props;
 ---
 
 <article
@@ -31,4 +34,23 @@ const { quantity, image, label } = Astro.props;
         value={quantity}
         class="text-2xl font-extrabold text-slate-900 dark:text-slate-50 tabular-nums"
     />
+    {
+        progress && (
+            <div class="mt-1 w-full space-y-1">
+                <div
+                    role="progressbar"
+                    aria-label={`${label}: ${progress.collected} de ${progress.total}`}
+                    aria-valuemin={0}
+                    aria-valuemax={progress.total}
+                    aria-valuenow={Math.min(progress.collected, progress.total)}
+                    class="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800"
+                >
+                    <div class="progress-fill h-full rounded-full bg-sky-600 dark:bg-sky-400" style={`--p:${progress.percent}`} />
+                </div>
+                <p class="text-center text-[11px] text-slate-600 tabular-nums dark:text-slate-400" aria-hidden="true">
+                    {progress.collected} / {progress.total}
+                </p>
+            </div>
+        )
+    }
 </article>

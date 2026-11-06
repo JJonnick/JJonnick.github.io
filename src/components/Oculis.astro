@@ -1,4 +1,5 @@
 ---
+import { OCULUS_TOTALS, oculusProgress } from "@/games/genshin/oculi";
 import Oculi from "./Oculi.astro";
 import anemoculiImg from "@assets/oculis/anemoculus.webp";
 import geoculiImg from "@assets/oculis/geoculus.webp";
@@ -19,14 +20,27 @@ interface Props {
 }
 
 const { anemo, dendro, electro, geo, hydro, pyro, luno } = Astro.props;
+
+const tiles = [
+    { type: "anemo", quantity: anemo, image: anemoculiImg, label: "Anemoculus" },
+    { type: "geo", quantity: geo, image: geoculiImg, label: "Geoculus" },
+    { type: "electro", quantity: electro, image: electroculiImg, label: "Electroculus" },
+    { type: "dendro", quantity: dendro, image: dendroculiImg, label: "Dendroculus" },
+    { type: "hydro", quantity: hydro, image: hydroculiImg, label: "Hydroculus" },
+    { type: "pyro", quantity: pyro, image: pyroculiImg, label: "Pyroculus" },
+    { type: "luno", quantity: luno, image: lunoculiImg, label: "Lunoculus" },
+] as const;
 ---
 
 <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
-    <Oculi quantity={anemo} image={anemoculiImg} label="Anemoculus" />
-    <Oculi quantity={geo} image={geoculiImg} label="Geoculus" />
-    <Oculi quantity={electro} image={electroculiImg} label="Electroculus" />
-    <Oculi quantity={dendro} image={dendroculiImg} label="Dendroculus" />
-    <Oculi quantity={hydro} image={hydroculiImg} label="Hydroculus" />
-    <Oculi quantity={pyro} image={pyroculiImg} label="Pyroculus" />
-    <Oculi quantity={luno} image={lunoculiImg} label="Lunoculus" />
+    {
+        tiles.map((tile) => (
+            <Oculi
+                quantity={tile.quantity}
+                image={tile.image}
+                label={tile.label}
+                progress={oculusProgress(tile.quantity, OCULUS_TOTALS[tile.type])}
+            />
+        ))
+    }
 </div>
