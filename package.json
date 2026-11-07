@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@astrojs/check": "^0.9.12",
+        "@astrojs/sitemap": "^3.7.4",
         "@lucide/astro": "^1.68.0",
         "astro": "^7.4.5",
         "nuqs": "^2.10.2",
