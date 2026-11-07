@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import type { Game } from "@/games";
+
+interface Props {
+    game: Game;
+    /** Normalised element key, as in `game.elementVisuals`. */
+    element: string;
+    size: number;
+    class?: string;
+    style?: string;
+}
+
+const { game, element, size, class: className, style } = Astro.props;
+const iconPath = game.elementVisuals[element]?.iconPath;
+---
+
+{
+    typeof iconPath === "string" ? (
+        // Plain paths point at SVGs in `public/`, which Astro cannot optimise.
+        <img
+            src={iconPath}
+            alt=""
+            aria-hidden="true"
+            width={size}
+            height={size}
+            class={className}
+            style={style}
+        />
+    ) : (
+        iconPath && (
+            <Image
+                src={iconPath}
+                alt=""
+                aria-hidden="true"
+                width={size}
+                height={size}
+                densities={[1, 2]}
+                class={className}
+                style={style}
+            />
+        )
+    )
+}
