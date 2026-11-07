@@ -23,17 +23,17 @@
     },
     "dependencies": {
         "@astrojs/check": "^0.9.12",
-        "@lucide/astro": "^1.63.0",
-        "astro": "^7.4.2",
+        "@lucide/astro": "^1.68.0",
+        "astro": "^7.4.5",
         "nuqs": "^2.10.2",
-        "tailwindcss": "^4.3.3",
+        "tailwindcss": "^4.3.4",
         "typescript": "^6.0.0",
         "zod": "4.6.7"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.6.3",
-        "@tailwindcss/vite": "^4.3.3",
-        "@types/node": "^26.6.5",
+        "@biomejs/biome": "2.6.4",
+        "@tailwindcss/vite": "^4.3.4",
+        "@types/node": "^26.6.6",
         "happy-dom": "21.0.4",
         "sharp": "^0.35.5"
     }
