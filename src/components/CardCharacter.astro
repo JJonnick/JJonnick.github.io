@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import ElementIcon from "./ElementIcon.astro";
 import LazyImage from "./LazyImage.astro";
 import type { CharacterSummary } from "@/types";
 import { normalizeElement } from "@/services/character-list";
@@ -38,27 +38,13 @@ const elementVisual = game.elementVisuals[normalizeElement(char.element)];
       />
       {
         elementVisual && (
-          typeof elementVisual.iconPath === "string" ? (
-            <img
-              src={elementVisual.iconPath}
-              alt=""
-              aria-hidden="true"
-              width={22}
-              height={22}
-              style={`background: ${elementVisual.badgeBg}`}
-              class="absolute -right-1.5 -bottom-1.5 rounded-full border border-white/60 p-0.5 dark:border-slate-900/60"
-            />
-          ) : (
-            <Image
-              src={elementVisual.iconPath}
-              alt=""
-              aria-hidden="true"
-              width={22}
-              height={22}
-              class="absolute -right-1.5 -bottom-1.5 rounded-full border border-white/60 p-0.5 dark:border-slate-900/60"
-              style={`background: ${elementVisual.badgeBg}`}
-            />
-          )
+          <ElementIcon
+            game={game}
+            element={normalizeElement(char.element)}
+            size={22}
+            style={`background: ${elementVisual.badgeBg}`}
+            class="absolute -right-1.5 -bottom-1.5 rounded-full border border-white/60 p-0.5 dark:border-slate-900/60"
+          />
         )
       }
     </div>

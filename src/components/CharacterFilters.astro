@@ -1,9 +1,9 @@
 ---
 import { CHARACTER_PAGE_SIZE, type CharacterListFilters } from "@/services/character-list";
 import type { Game } from "@/games";
-import { getElementIconSrc } from "@/games/game";
 import { ariaKeyShortcuts } from "@/scripts/shortcut-map";
 import { X } from "@lucide/astro";
+import ElementIcon from "./ElementIcon.astro";
 import Kbd from "./Kbd.astro";
 
 interface Props {
@@ -80,16 +80,7 @@ const controlClass = (isActive: boolean) =>
                         aria-controls="character-grid"
                         aria-label={`Filtrar por elemento: ${elementLabels[element] ?? element}`}
                     >
-                        {getElementIconSrc(game, element) && (
-                            <img
-                                src={getElementIconSrc(game, element)}
-                                alt=""
-                                aria-hidden="true"
-                                width={16}
-                                height={16}
-                                class="shrink-0"
-                            />
-                        )}
+                        <ElementIcon game={game} element={element} size={16} class="shrink-0" />
                         <span>{elementLabels[element] ?? element}</span>
                     </button>
                 ))}
