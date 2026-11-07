@@ -25,3 +25,24 @@ jobs:
 
       - name: Check changes
         run: pnpm install --frozen-lockfile && pnpm check
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Build
+        run: pnpm install --frozen-lockfile && pnpm build
+
+      - name: Lighthouse budgets
+        run: pnpm dlx @lhci/cli@0.15.x autorun
