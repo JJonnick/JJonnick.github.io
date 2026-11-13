@@ -40,6 +40,7 @@ const {
     ]}
     transition:name={transitionName}
     loading={loading}
+    fetchpriority={loading === "eager" ? "high" : undefined}
     decoding="async"
   />
   <span
