@@ -2,6 +2,15 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Native UI (scrollbars, form controls, dialog canvas) follows the class-based theme. */
+:root {
+    color-scheme: light;
+}
+
+:root.dark {
+    color-scheme: dark;
+}
+
 @theme {
     --font-sans: var(--font-quicksand), system-ui;
     --font-display: Georgia, "Palatino Linotype", serif;
