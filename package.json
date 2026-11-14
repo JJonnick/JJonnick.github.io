@@ -25,7 +25,7 @@
         "@astrojs/check": "^0.9.12",
         "@astrojs/sitemap": "^3.7.4",
         "@lucide/astro": "^1.68.0",
-        "astro": "^7.4.5",
+        "astro": "^7.4.7",
         "nuqs": "^2.10.2",
         "tailwindcss": "^4.3.4",
         "typescript": "^6.0.0",
