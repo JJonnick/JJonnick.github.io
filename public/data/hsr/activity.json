@@ -12,10 +12,10 @@
     "total_battles": 2
   },
   "apocalyptic_shadow": {
-    "has_data": true,
-    "total_stars": 12,
-    "max_floor": "Dominance of Oblivion: Difficulty 04",
-    "total_battles": 2
+    "has_data": false,
+    "total_stars": 0,
+    "max_floor": "",
+    "total_battles": 0
   },
   "simulated_universe": {
     "unlocked_buff_num": 210,
