@@ -1,4 +1,4 @@
-import { carryThemeToDocument } from "@/scripts/theme-toggle";
+import { carryThemeToDocument } from "@/scripts/theme-carry";
 
 const runtimeWindow = window as Window & { __themePersistBound?: boolean };
 
