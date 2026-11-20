@@ -1,0 +1,15 @@
+{
+    "hooks": {
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node .claude/hooks/verify-on-stop.mjs",
+                        "timeout": 180
+                    }
+                ]
+            }
+        ]
+    }
+}
