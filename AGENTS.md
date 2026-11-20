@@ -7,7 +7,7 @@ Astro 7 + TypeScript + Tailwind 4 static site showing Genshin Impact and Honkai:
 - `pnpm` only.
 - `pnpm test`: unit tests on `node --test` (`src/**/*.test.ts`).
 - `pnpm lint` / `pnpm format`: Biome.
-- `pnpm build`: runs `astro check` + build. Finish every non-trivial change with `pnpm test` and `pnpm build` green.
+- `pnpm build`: runs `astro check` + build. Finish every non-trivial change with `pnpm test` and `pnpm build` green. For UI, routing or data changes also run the `verify` skill (`.agents/skills/verify`) against `pnpm preview`. A Stop hook (`.claude/hooks/verify-on-stop.mjs`) blocks finishing while `pnpm test` or `pnpm lint` fail.
 
 ## Architecture
 
