@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { type HTMLInputElement, Window } from "happy-dom";
-import { carryThemeToDocument, initThemeToggle } from "./theme-toggle.ts";
+import { carryThemeToDocument } from "./theme-carry.ts";
+import { initThemeToggle } from "./theme-toggle.ts";
 
 test("syncs the switch with the document theme", () => {
     const window = new Window({ url: "https://example.test/" });
