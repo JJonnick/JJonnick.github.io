@@ -24,7 +24,7 @@ jobs:
           cache: pnpm
 
       - name: Check changes
-        run: pnpm install --frozen-lockfile && (node -e "import('@astrojs/check').then(()=>console.log('ok'),e=>{console.log('DEBUG',e.stack)})" ; pnpm check)
+        run: pnpm install --frozen-lockfile && pnpm check
 
   lighthouse:
     runs-on: ubuntu-latest
