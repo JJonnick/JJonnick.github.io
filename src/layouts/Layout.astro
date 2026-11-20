@@ -8,9 +8,11 @@ import { getGameForPath } from "@/games";
 import "@/styles/global.css";
 interface Props {
     title: string;
+    /** Origin of the above-the-fold <img>s, preconnected only on pages that actually request it. */
+    imageOrigin?: string;
 }
 
-const { title } = Astro.props;
+const { title, imageOrigin } = Astro.props;
 const description = getGameForPath(Astro.url.pathname).copy.tagline;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -32,8 +34,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 		<meta name="color-scheme" content="light dark" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="dns-prefetch" href="https://enka.network" />
-		<link rel="preconnect" href="https://enka.network" crossorigin />
+		{imageOrigin && <link rel="preconnect" href={imageOrigin} />}
 		<title>{title}</title>
 		<Font cssVariable="--font-quicksand" preload />
 		<ClientRouter />
