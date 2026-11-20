@@ -15,9 +15,10 @@ import type { CharacterSummary } from "@/types";
 interface Props {
     game: Game;
     characters: CharacterSummary[];
+    imageOrigin?: string;
 }
 
-const { game, characters } = Astro.props;
+const { game, characters, imageOrigin } = Astro.props;
 const { copy } = game;
 
 const view = getCharacterListView(characters, Astro.url, {
@@ -28,7 +29,7 @@ const view = getCharacterListView(characters, Astro.url, {
 const visibleCharacters = new Set(view.items);
 ---
 
-<Layout title={copy.listTitle}>
+<Layout title={copy.listTitle} imageOrigin={imageOrigin}>
     <Content>
         <h1 class="text-heading-page mb-1 text-xl">{copy.listHeading}</h1>
         <p class="text-muted-body mb-5 max-w-2xl">{copy.listDescription}</p>
