@@ -24,7 +24,7 @@ export function syncSidebarToggles(document: Document): void {
     const collapsed = isCollapsed(document);
     for (const button of document.querySelectorAll<HTMLElement>("[data-sidebar-toggle]")) {
         button.setAttribute("aria-expanded", String(!collapsed));
-        button.setAttribute("aria-label", collapsed ? "Expandir menú" : "Contraer menú");
+        button.setAttribute("aria-label", collapsed ? "Expandir menú" : "Ocultar menú");
     }
 }
 

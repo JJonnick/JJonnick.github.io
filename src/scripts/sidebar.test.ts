@@ -27,7 +27,7 @@ test("toggle buttons mirror the state in aria-expanded and aria-label", () => {
     const button = window.document.querySelector<HTMLElement>("[data-sidebar-toggle]");
 
     assert.equal(button?.getAttribute("aria-expanded"), "true");
-    assert.equal(button?.getAttribute("aria-label"), "Contraer menú");
+    assert.equal(button?.getAttribute("aria-label"), "Ocultar menú");
 
     button?.dispatchEvent(new window.Event("click", { bubbles: true }));
 
