@@ -1,5 +1,6 @@
 overrides:
   '@emmetio/css-parser': 0.4.1
+  '@emnapi/runtime': 1.11.3
 minimumReleaseAgeExclude:
   - zod@4.5.2 || 4.6.2
 allowBuilds:
